@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name="followMember")
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,9 +21,6 @@ public class FollowMember {
 	private Long fmno;
 	
 	private Member following;
-	
-	@ManyToMany
-	@JoinColumn(name="follower")
-	@ToString.Exclude
-	private Member mid;
+
+	private Member follower;
 }

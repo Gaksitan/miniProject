@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name="subscribeCompany")
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,16 +19,7 @@ import lombok.ToString;
 public class SubscribeCompany {
 	@Id
 	private Long sno;
-	
-	@ManyToMany
-	@JoinColumn(name="mid")
-	@ToString.Exclude
 	private Member mid;
-	
-	
-	@ManyToMany
-	@JoinColumn(name="cno")
-	@ToString.Exclude
 	private Company cno;
 	
 }

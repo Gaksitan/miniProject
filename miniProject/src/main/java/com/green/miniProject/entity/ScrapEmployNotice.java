@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name="scrapEmployNotice")
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,14 +19,8 @@ import lombok.ToString;
 public class ScrapEmployNotice {
 	@Id
 	private Long senno;
-	
-	@ManyToMany
-	@JoinColumn(name="enno")
-	@ToString.Exclude
+
 	private EmployNotice enno;
-	
-	@ManyToMany
-	@JoinColumn(name="mid")
-	@ToString.Exclude
+
 	private Member mid;
 }
