@@ -24,7 +24,7 @@ public class PreferenceEmployNotice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long pno;
+	private Long pno;
 	
 	@OneToMany
 	@JoinColumn(name = "enno")

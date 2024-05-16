@@ -28,7 +28,7 @@ public class CertificateEmployNotice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
-	private long ceno;
+	private Long ceno;
 	
 	@OneToMany
 	@NotNull
