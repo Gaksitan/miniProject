@@ -22,12 +22,7 @@ import lombok.ToString;
 public class Link {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ino;
-	
-	@ManyToOne
-	@JoinColumn(name = "rno")
-	@ToString.Exclude
 	private Resume rno;
 	private String cename;
 	

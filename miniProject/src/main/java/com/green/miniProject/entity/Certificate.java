@@ -23,12 +23,7 @@ public class Certificate {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ceno;
-	
-	@ManyToOne
-	@JoinColumn(name = "rno")
-	@ToString.Exclude
 	private Resume rno;
 	private String cename;
 	private LocalDate cedate;

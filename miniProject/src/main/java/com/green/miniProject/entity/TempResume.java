@@ -21,12 +21,7 @@ public class TempResume {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long trno;
-	
-	@ManyToOne
-	@JoinColumn(name = "mid")
-	@ToString.Exclude
 	private Member mid;
 	private String trintro;
 	private String trimgPath;

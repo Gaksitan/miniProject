@@ -22,12 +22,7 @@ import lombok.ToString;
 public class Skill {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long skno;
-	
-	@ManyToOne
-	@JoinColumn(name = "rno")
-	@ToString.Exclude
 	private Resume rno;
 	private String skname;
 	private String sklevel;

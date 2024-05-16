@@ -22,12 +22,7 @@ import lombok.ToString;
 public class Experience {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long exno;
-	
-	@ManyToOne
-	@JoinColumn(name = "rno")
-	@ToString.Exclude
 	private Resume rno;
 	private String exname;
 	private LocalDate exjoindate;

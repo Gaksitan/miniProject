@@ -20,17 +20,12 @@ import lombok.ToString;
 public class Resume {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long rno;
 	private String rintro;
 	private String rimgPath;
 	private Boolean rpublic;
 	private String rtitle;
 	private Boolean rmain;
-	
-	@ManyToOne
-	@JoinColumn(name = "mid")
-	@ToString.Exclude
 	private Member mid;
 	
 	

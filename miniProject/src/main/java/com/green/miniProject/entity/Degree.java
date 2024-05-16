@@ -22,12 +22,7 @@ import lombok.ToString;
 public class Degree {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long deno;
-	
-	@ManyToOne
-	@JoinColumn(name = "rno")
-	@ToString.Exclude
 	private Resume rno;
 	private String dename;
 	private LocalDate degraddate;
