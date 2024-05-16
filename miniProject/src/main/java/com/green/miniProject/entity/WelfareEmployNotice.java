@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +24,17 @@ public class WelfareEmployNotice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long wno;
+	@NotNull
+	private Long wno;
 	
 	@OneToMany
+	@NotNull
 	@JoinColumn(name = "enno")
 	@ToString.Exclude
 	private EmployNotice enno;
 
 	@Column(name = "wname")
+	@NotNull
 	private String wname;
+	
 }

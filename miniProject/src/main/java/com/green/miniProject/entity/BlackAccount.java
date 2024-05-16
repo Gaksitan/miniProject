@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +32,8 @@ public class BlackAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long bano;
+	@NotNull
+	private Long bano;
 	
 	@OneToMany
 	@JoinColumn(name = "mid")
@@ -46,10 +48,12 @@ public class BlackAccount {
 	@ManyToMany
 	@JoinColumn(name = "ano")
 	@ToString.Exclude
+	@NotNull
 	private Admin ano;
 	
 	@CreationTimestamp
 	@UpdateTimestamp
 	@Column(name = "bregdate")
+	@NotNull
 	private LocalDate bregdate;
 }

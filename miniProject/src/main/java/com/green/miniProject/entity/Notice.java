@@ -30,22 +30,27 @@ public class Notice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long nno;
+	@NotNull
+	private Long nno;
 	
 	@OneToMany
 	@JoinColumn(name = "ano")
 	@ToString.Exclude
+	@NotNull
 	private Admin ano;
 	
 	@Column(name = "ntitle")
+	@NotNull
 	private String ntitle;
 	
 	@Column(name = "ncontnet")
+	@NotNull
 	private String ncontent;
 	
 	@CreationTimestamp
 	@UpdateTimestamp
 	@Column(name = "nregdate")
+	@NotNull
 	private LocalDate nregdate;
 	
 }
