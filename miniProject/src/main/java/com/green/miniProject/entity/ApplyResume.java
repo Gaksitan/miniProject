@@ -1,14 +1,11 @@
 package com.green.miniProject.entity;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,24 +15,19 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
-public class Board {
+@Entity
+public class ApplyResume {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long bno;
-	@ManyToOne
-	@JoinColumn(name = "mid")
+	private Long arno;
+	@ManyToMany
+	@JoinColumn(name = "rno")
 	@ToString.Exclude
-	private Member mid; // fk 설정
-	private String btitle;
-	private String bcontent;
-	private Long blike;
-	private LocalDate bregdate;
-	private LocalDate bmoddate;
-	private String btag;
-	@ManyToOne
-	@JoinColumn(name = "cno")
+	private Resume rno;
+	@ManyToMany
+	@JoinColumn(name = "enno")
 	@ToString.Exclude
-	private Company cno; // fk 설정
+	private EmployNotice enno;
+	private int arpass;
 }
