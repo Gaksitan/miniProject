@@ -25,6 +25,5 @@ public class Skill {
 	private Long skno;
 	private Resume rno;
 	private String skname;
-	private String sklevel;
 
 }
