@@ -27,33 +27,18 @@ import lombok.ToString;
 @Table(name = "employNotice")
 public class EmployNotice {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long enno;
 	
-	@Column(nullable = false)
 	private String enintro;
-	
-	@Column(nullable = false)
 	private String entitle;
-	
-	@Column(nullable = false)
 	private String enaddr;
-	
-	@Column(nullable = false)
 	private Long ensalary;
-	
-	@Column(nullable = false)
 	private String enposition;
-	
-	@Column(nullable = false)
 	private LocalDate enenddate;
 	
 	@CreationTimestamp
 	@UpdateTimestamp
 	private LocalDate enregdate;
 	
-	@ManyToOne
-	@JoinColumn(name="cno")
-	@ToString.Exclude
 	private Company cno;
 }

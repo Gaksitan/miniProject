@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FollowCompany {
+public class CompanySector {
 	@Id
-	private Long fno;
-	private String following;
-	private String follower;
+	private Long scno;
+	private String cno;
+	private String scname;
 }

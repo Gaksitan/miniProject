@@ -23,27 +23,15 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "scoreComMem")
 public class ScoreComMem {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long scmno;
 	
-	@Column(nullable = false)
 	private int scmscore;
-	
 	private String scmreview;
 	
 	@CreatedDate
 	private LocalDateTime scmregdate;
-	
-	@ManyToMany
-	@JoinColumn(name="mid")
-	@ToString.Exclude
 	private Member mid;
-	
-	@ManyToMany
-	@JoinColumn(name="cno")
-	@ToString.Exclude
 	private Company cno;
 }
