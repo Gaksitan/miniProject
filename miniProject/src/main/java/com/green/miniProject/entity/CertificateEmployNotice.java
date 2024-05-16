@@ -2,40 +2,50 @@ package com.green.miniProject.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Entity
+@Table(name = "certificateEmployNotice")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
-public class Board {
+public class CertificateEmployNotice {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long bno;
-	@ManyToOne
-	@JoinColumn(name = "mid")
+	@NotNull
+	private long ceno;
+	
+	@OneToMany
+	@NotNull
+	@JoinColumn(name = "enno")
 	@ToString.Exclude
-	private Member mid; // fk 설정
-	private String btitle;
-	private String bcontent;
-	private Long blike;
-	private LocalDate bregdate;
-	private LocalDate bmoddate;
-	private String btag;
-	@ManyToOne
-	@JoinColumn(name = "cno")
-	@ToString.Exclude
-	private Company cno; // fk 설정
+	private EmployNotice enno;
+	
+	@NotNull
+	@Column(name = "cename")
+	private String cename;
+	
+	@NotNull
+	@Column(name = "cedate")
+	private LocalDate cedate;
+	
+	@NotNull
+	@Column(name = "celocation")
+	private String celocation;
+
 }

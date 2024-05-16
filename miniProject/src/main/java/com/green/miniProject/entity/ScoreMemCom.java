@@ -7,8 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,24 +17,22 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
-public class Board {
+@Entity
+public class ScoreMemCom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long bno;
-	@ManyToOne
+	@ToString.Exclude
+	private Long smcno;
+	@ManyToMany
 	@JoinColumn(name = "mid")
 	@ToString.Exclude
-	private Member mid; // fk 설정
-	private String btitle;
-	private String bcontent;
-	private Long blike;
-	private LocalDate bregdate;
-	private LocalDate bmoddate;
-	private String btag;
-	@ManyToOne
+	private Member mid;
+	@ManyToMany
 	@JoinColumn(name = "cno")
 	@ToString.Exclude
-	private Company cno; // fk 설정
+	private Company cno;
+	private int smcscore;
+	private String smcreview;
+	private LocalDate smcregdate;
 }
