@@ -26,7 +26,7 @@ public class SkillEmployNotice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
-	private long skno;
+	private Long skno;
 	
 	@OneToMany
 	@NotNull
