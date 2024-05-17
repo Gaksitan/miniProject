@@ -1,6 +1,7 @@
 package com.green.miniProject.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +29,7 @@ public class Board {
 	private String btitle;
 	private String bcontent;
 	private Long blike;
-	private LocalDate bregdate;
-	private LocalDate bmoddate;
-	private String btag;
+	private LocalDateTime bregdate;
+	private LocalDateTime bmoddate;
 	private String cno; // fk 설정
 }
