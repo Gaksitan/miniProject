@@ -24,18 +24,12 @@ public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bno;
-	@ManyToOne
-	@JoinColumn(name = "mid")
-	@ToString.Exclude
-	private Member mid; // fk 설정
+	private String mid; // fk 설정
 	private String btitle;
 	private String bcontent;
 	private Long blike;
 	private LocalDate bregdate;
 	private LocalDate bmoddate;
 	private String btag;
-	@ManyToOne
-	@JoinColumn(name = "cno")
-	@ToString.Exclude
-	private Company cno; // fk 설정
+	private String cno; // fk 설정
 }

@@ -24,14 +24,10 @@ public class ScoreMemCom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ToString.Exclude
 	private Long smcno;
-	@ManyToMany
-	@JoinColumn(name = "mid")
-	@ToString.Exclude
-	private Member mid;
-	@ManyToMany
-	@JoinColumn(name = "cno")
-	@ToString.Exclude
-	private Company cno;
+	
+	private String mid;
+	
+	private String cno;
 	private int smcscore;
 	private String smcreview;
 	private LocalDate smcregdate;
