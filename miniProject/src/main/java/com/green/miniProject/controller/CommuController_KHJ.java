@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/Commu")
+@RequestMapping("/commu")
 public class CommuController_KHJ {
 	
 	@RequestMapping("/")
 	public String root() {
 		
 		
-		return "";
+		return "community_KHJ";
 	}
 
 	
