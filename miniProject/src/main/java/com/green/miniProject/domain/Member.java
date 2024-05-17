@@ -9,13 +9,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-	@Id
 	private String mid;
 	
 	private String mpw;

@@ -9,14 +9,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class FollowCompany {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Long fno;
 	private String following;
 	private String follower;

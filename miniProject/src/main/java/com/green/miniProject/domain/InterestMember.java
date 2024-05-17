@@ -13,14 +13,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class InterestMember {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Long imno;
 
 	private String cno;

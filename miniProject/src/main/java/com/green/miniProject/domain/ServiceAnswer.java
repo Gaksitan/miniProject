@@ -15,14 +15,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class ServiceAnswer {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long sano;
 	
 	private String sqno;

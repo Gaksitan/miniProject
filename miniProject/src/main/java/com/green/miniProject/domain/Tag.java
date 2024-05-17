@@ -13,14 +13,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Tag {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tno;
 
 	private String tagger;

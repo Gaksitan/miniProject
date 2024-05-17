@@ -10,15 +10,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Skill {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long skno;
 	private Long rno;
 	private String skname;

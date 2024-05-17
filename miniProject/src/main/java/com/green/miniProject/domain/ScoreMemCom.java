@@ -22,7 +22,6 @@ import lombok.ToString;
 public class ScoreMemCom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ToString.Exclude
 	private Long smcno;
 	
 	private String mid;
