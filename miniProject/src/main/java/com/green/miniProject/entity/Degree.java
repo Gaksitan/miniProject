@@ -6,13 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
@@ -20,14 +17,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Degree {
-	
+
 	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long deno;
 	private Resume rno;
 	private String dename;
-	private LocalDate degraddate;
-	private String demajor;
-	private String dehighestlevel;
+    private LocalDate degraddate;
+    private String demajor;
+    private String dehighestlevel;
 	
-
 }
