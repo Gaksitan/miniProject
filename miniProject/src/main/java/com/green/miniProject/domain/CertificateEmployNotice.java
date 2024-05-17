@@ -28,25 +28,10 @@ public class CertificateEmployNotice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
 	private Long ceno;
-	
-	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "enno")
-	@ToString.Exclude
-	private EmployNotice enno;
-	
-	@NotNull
-	@Column(name = "cename")
+	private Long enno;
 	private String cename;
-	
-	@NotNull
-	@Column(name = "cedate")
 	private LocalDate cedate;
-	
-	@NotNull
-	@Column(name = "celocation")
 	private String celocation;
 
 }

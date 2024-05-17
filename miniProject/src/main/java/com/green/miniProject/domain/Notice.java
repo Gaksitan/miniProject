@@ -30,7 +30,7 @@ public class Notice {
 
 	private Long nno;
 	
-	private Long ano;
+	private String ano;
 
 	private String ntitle;
 	
