@@ -3,12 +3,13 @@ package com.green.miniProject.domain;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
+@Data
 public class ApplyResume {
 	
 	private Long arno; // 지원
