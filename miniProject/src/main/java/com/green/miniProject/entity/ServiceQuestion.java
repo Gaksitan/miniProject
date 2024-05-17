@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ServiceQuestion {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long sqno;
 	private String sqcontent;
 	private String sqtitle;
