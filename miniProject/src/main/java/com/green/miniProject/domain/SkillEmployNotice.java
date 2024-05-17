@@ -11,16 +11,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "skillEmployNotice")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class SkillEmployNotice {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long skno;
 
 	private Long enno;

@@ -12,16 +12,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "blackaccount")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class BlackAccount {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bano;
 	private String mid;
 	private String cno;

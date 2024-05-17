@@ -16,16 +16,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
-@Table(name = "welfareEmployNotice")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class WelfareEmployNotice {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long wno;
 
 	private Long enno;
