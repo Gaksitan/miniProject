@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,15 +22,15 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tno;
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "tagger")
 	@ToString.Exclude
 	private Member taggerMid;
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "tagging")
 	@ToString.Exclude
 	private Member taggingMid;
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "bno")
 	@ToString.Exclude
 	private Board bno;

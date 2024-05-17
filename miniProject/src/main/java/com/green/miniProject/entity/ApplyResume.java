@@ -18,12 +18,11 @@ import lombok.ToString;
 @Builder
 @Entity
 public class ApplyResume {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long arno;
-	
 	private String rno;
-	
 	private String enno;
 	private int arpass;
 }

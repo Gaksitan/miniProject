@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class CertificateEmployNotice {
 	@NotNull
 	private Long ceno;
 	
-	@OneToMany
+	@ManyToOne
 	@NotNull
 	@JoinColumn(name = "enno")
 	@ToString.Exclude

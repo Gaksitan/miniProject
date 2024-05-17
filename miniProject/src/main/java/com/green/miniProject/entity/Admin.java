@@ -22,14 +22,8 @@ public class Admin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
 	private Long ano;
-	
-	@Column(name = "aid")
-	@NotNull
 	private String aid;
-	
-	@Column(name = "apw")
-	@NotNull
 	private String apw;
+	
 }
