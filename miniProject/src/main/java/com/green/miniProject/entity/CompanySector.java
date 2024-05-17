@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FollowCompany {
+public class CompanySector {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long fno;
-	private String following;
-	private String follower;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long scno;
+	private String cno;
+	private String scname;
 }
