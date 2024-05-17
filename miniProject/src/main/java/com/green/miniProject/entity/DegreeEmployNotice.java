@@ -27,5 +27,5 @@ public class DegreeEmployNotice {
 	private LocalDate degraddate;
 	private String demajor;
 	private String dehighestlevel;
-	private EmployNotice enno;
+	private Long enno;
 }
