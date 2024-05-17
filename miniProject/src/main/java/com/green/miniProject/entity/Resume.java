@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,8 +24,6 @@ public class Resume {
 	private Boolean rpublic;
 	private String rtitle;
 	private Boolean rmain;
-	@OneToMany
-	@JoinColumn(name = "mid")
 	private String mid;
 	
 	
