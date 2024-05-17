@@ -15,10 +15,9 @@ import lombok.NoArgsConstructor;
 public class CompanyManager {
 	@Id
 	private String cmid;
-	
 	private String cmpw;
 	private String cmname;
 	private String cmtel;
 	private String cmemail;
-	private Company cno;
+	private String cno;
 }

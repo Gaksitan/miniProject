@@ -22,5 +22,5 @@ public class QuestionCategory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long qcno;
 	private String qcname;
-	private ServiceQuestion sqno;
+	private String sqno;
 }

@@ -24,10 +24,8 @@ public class ServiceAnswer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long sano;
-	@OneToOne
-	@JoinColumn(name = "sqno")
-	@ToString.Exclude
-	private ServiceQuestion sqno;
+	
+	private String sqno;
 	private String sacontent;
 	private LocalDate saregdate;
 }

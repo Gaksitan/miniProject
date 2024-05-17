@@ -23,7 +23,7 @@ public class ScrapEmployNotice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long senno;
 
-	private EmployNotice enno;
+	private String enno;
 
-	private Member mid;
+	private String mid;
 }

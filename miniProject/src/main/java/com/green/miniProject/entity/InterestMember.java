@@ -23,8 +23,8 @@ public class InterestMember {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long imno;
 
-	private Company cno;
+	private String cno;
 	
-	private Member mid;
+	private String mid;
 	
 }
