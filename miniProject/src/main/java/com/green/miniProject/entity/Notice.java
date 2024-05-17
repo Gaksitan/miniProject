@@ -32,7 +32,7 @@ public class Notice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long nno;
 	
-	private Long ano;
+	private String ano;
 
 	private String ntitle;
 	

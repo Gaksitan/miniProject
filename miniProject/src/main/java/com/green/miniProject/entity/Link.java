@@ -19,7 +19,7 @@ public class Link {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ino;
+	private Long lno;
 	private Long rno;
 	private String cename;
 	
