@@ -25,6 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ScoreComMem {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long scmno;
 	
 	private int scmscore;

@@ -27,6 +27,7 @@ import lombok.ToString;
 @Table(name = "employNotice")
 public class EmployNotice {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long enno;
 	
 	private String enintro;
