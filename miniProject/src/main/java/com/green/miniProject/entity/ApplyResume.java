@@ -21,8 +21,8 @@ public class ApplyResume {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long arno;
-	private String rno;
-	private String enno;
+	private Long arno; // 지원
+	private Long rno;
+	private Long enno;
 	private int arpass;
 }

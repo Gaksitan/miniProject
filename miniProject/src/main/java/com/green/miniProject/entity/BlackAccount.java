@@ -21,8 +21,8 @@ public class BlackAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bano;
-	private Member mid;
-	private Company cno;
-	private Admin ano;
+	private String mid;
+	private String cno;
+	private String ano;
 	private LocalDate bregdate;
 }
