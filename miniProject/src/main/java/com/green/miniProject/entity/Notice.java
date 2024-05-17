@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "notice")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,26 +30,14 @@ public class Notice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
 	private Long nno;
 	
-	@ManyToOne
-	@JoinColumn(name = "ano")
-	@ToString.Exclude
-	@NotNull
-	private Admin ano;
-	
-	@Column(name = "ntitle")
-	@NotNull
+	private Long ano;
+
 	private String ntitle;
 	
-	@Column(name = "ncontnet")
-	@NotNull
 	private String ncontent;
 	
-	@CreationTimestamp
-	@Column(name = "nregdate")
-	@NotNull
 	private LocalDate nregdate;
 	
 }

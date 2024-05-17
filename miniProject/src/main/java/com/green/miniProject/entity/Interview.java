@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "interview")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,17 +24,10 @@ public class Interview {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
 	private Long ino;
-	
-	@OneToOne
-	@JoinColumn(name = "arno")
-	@ToString.Exclude
-	@NotNull
-	private ApplyResume arno;
-	
-	@Column(name = "ipass")
-	@NotNull
+
+	private Long arno;
+
 	private int ipass;
 	
 }
