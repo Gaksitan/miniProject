@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +23,10 @@ public class Experience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long exno;
-	private Resume rno;
+	
+	@OneToMany
+	@JoinColumn(name = "rno")
+	private Long rno;
 	private String exname;
 	private LocalDate exjoindate;
 	private LocalDate exleavedate;
