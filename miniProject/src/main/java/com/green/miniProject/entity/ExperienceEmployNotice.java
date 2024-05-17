@@ -28,5 +28,5 @@ public class ExperienceEmployNotice {
 	private LocalDate exleavedate;
 	private String exposition;
 	private String exrank;
-	private EmployNotice enno;
+	private Long enno;
 }
