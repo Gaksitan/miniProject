@@ -10,15 +10,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Link {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long lno;
 	private Long rno;
 	private String cename;

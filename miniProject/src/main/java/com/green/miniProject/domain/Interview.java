@@ -15,15 +15,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Interview {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ino;
 
 	private Long arno;

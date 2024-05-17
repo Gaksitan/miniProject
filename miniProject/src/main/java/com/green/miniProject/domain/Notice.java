@@ -21,15 +21,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Notice {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long nno;
 	
 	private String ano;
