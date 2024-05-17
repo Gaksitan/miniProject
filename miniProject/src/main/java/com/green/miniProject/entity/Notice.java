@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -33,7 +34,7 @@ public class Notice {
 	@NotNull
 	private Long nno;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "ano")
 	@ToString.Exclude
 	@NotNull
@@ -48,7 +49,6 @@ public class Notice {
 	private String ncontent;
 	
 	@CreationTimestamp
-	@UpdateTimestamp
 	@Column(name = "nregdate")
 	@NotNull
 	private LocalDate nregdate;

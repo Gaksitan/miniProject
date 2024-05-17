@@ -2,6 +2,7 @@ package com.green.miniProject.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company {
+	
 	@Id
 	private String cno;
-	
 	private String cname;
 	private String ctel;
 	private String caddr1;

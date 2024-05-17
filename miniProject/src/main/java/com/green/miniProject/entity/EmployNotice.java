@@ -36,10 +36,6 @@ public class EmployNotice {
 	private Long ensalary;
 	private String enposition;
 	private LocalDate enenddate;
-	
-	@CreationTimestamp
-	@UpdateTimestamp
 	private LocalDate enregdate;
-	
 	private Company cno;
 }
