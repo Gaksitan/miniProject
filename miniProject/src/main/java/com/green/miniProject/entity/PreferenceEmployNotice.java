@@ -27,11 +27,9 @@ public class PreferenceEmployNotice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long pno;
 	
-	@ManyToOne
-	@JoinColumn(name = "enno")
-	@ToString.Exclude
+	
 	private EmployNotice enno;
 	
-	@Column(name = "pname")
+	
 	private String pname;
 }
