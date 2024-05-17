@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,8 +16,6 @@ import lombok.NoArgsConstructor;
 public class TempResume {
 
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long trno;
 	private String mid;
 	private String trintro;
