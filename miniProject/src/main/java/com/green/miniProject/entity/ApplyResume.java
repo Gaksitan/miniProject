@@ -21,13 +21,9 @@ public class ApplyResume {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long arno;
-	@ManyToMany
-	@JoinColumn(name = "rno")
-	@ToString.Exclude
-	private Resume rno;
-	@ManyToMany
-	@JoinColumn(name = "enno")
-	@ToString.Exclude
-	private EmployNotice enno;
+	
+	private String rno;
+	
+	private String enno;
 	private int arpass;
 }
