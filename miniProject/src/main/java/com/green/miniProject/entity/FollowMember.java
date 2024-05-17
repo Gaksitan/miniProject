@@ -23,7 +23,7 @@ public class FollowMember {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long fmno;
 	
-	private Member following;
+	private String following;
 
-	private Member follower;
+	private String follower;
 }
