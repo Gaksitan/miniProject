@@ -26,6 +26,7 @@ public class ServiceQuestion {
 	private String sqtitle;
 	private boolean sqanswertf;
 	private LocalDateTime sqregdate;
-	private Member mid;
-	private Company cno;
+	private String mid;
+	private String cno;
+	private Long qcno;
 }
