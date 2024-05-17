@@ -21,17 +21,8 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tno;
-	@OneToMany
-	@JoinColumn(name = "tagger")
-	@ToString.Exclude
-	private Member taggerMid;
-	@OneToMany
-	@JoinColumn(name = "tagging")
-	@ToString.Exclude
-	private Member taggingMid;
-	@OneToMany
-	@JoinColumn(name = "bno")
-	@ToString.Exclude
-	private Board bno;
+	private String tagger;
+	private String tagging;
+	private Long bno;
 	
 }

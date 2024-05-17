@@ -25,17 +25,8 @@ public class WelfareEmployNotice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
 	private Long wno;
-	
-	@OneToMany
-	@NotNull
-	@JoinColumn(name = "enno")
-	@ToString.Exclude
-	private EmployNotice enno;
-
-	@Column(name = "wname")
-	@NotNull
+	private Long enno;
 	private String wname;
 	
 }

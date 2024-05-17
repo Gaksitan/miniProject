@@ -4,14 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
@@ -22,7 +18,7 @@ public class SubscribeCompany {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long sno;
-	private Member mid;
-	private Company cno;
+	private String mid;
+	private String cno;
 	
 }
