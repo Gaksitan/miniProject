@@ -31,8 +31,7 @@ public class ScoreComMem {
 	private int scmscore;
 	private String scmreview;
 	
-	@CreatedDate
 	private LocalDateTime scmregdate;
-	private Member mid;
-	private Company cno;
+	private String mid;
+	private String cno;
 }

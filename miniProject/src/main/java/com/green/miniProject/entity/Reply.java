@@ -24,17 +24,13 @@ public class Reply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long reno;
-	@ManyToOne
-	@JoinColumn(name = "mid")
-	@ToString.Exclude
-	private Member mid;
+	
+	private String mid;
 	private String recontent;
 	private LocalDate reregdate;
 	private LocalDate remoddate;
 	private Long relike;
-	@ManyToOne
-	@JoinColumn(name = "cno")
-	@ToString.Exclude
-	private Company cno;
+	
+	private String cno;
 	
 }
