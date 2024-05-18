@@ -43,11 +43,11 @@ height : 15px;
 			<c:forEach var="board" items="${list }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
-					<td>${board.btitle}</td>
+					<td><a href="communityDetail_KHJ?bno=${board.bno}">${board.btitle}</a></td>
 					<td>${board.mid}</td>
 					<td>${board.bregdate }</td>
 					<td>${board.blike }</td>
-				</tr> <!--<a href="view?btitle=${board.btitle}"></a>-->
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>

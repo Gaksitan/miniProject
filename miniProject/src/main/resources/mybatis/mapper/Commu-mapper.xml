@@ -10,6 +10,9 @@
 		SELECT * From board WHERE cno is not null
 	</select>
 	<select id="detailDao">
-		SELECT * FROM board WHERE bno = #{bno}
+		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, b.cmid, m.mname
+		FROM board b
+		LEFT JOIN member m ON b.`MID` = m.`MID`
+		WHERE b.bno = #{bno}
 	</select>
 </mapper>  

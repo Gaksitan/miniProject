@@ -11,6 +11,6 @@ public interface ICommuDao_KHJ {
 	
 	public List<Board> getAllWhenMember();
 	public List<Board> getAllWhenCompany();
-	public Board detailDao();
+	public List<Object> detailDao(long bno);
 	
 }
