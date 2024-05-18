@@ -20,10 +20,14 @@ public class CommuController_KHJ {
 	public String root(Model model) {
 
 		String id = "개인회원";
+
 		if (id.equals("개인회원")) {
 
 			model.addAttribute("list", dao.getAllWhenMember());
 
+		} else if (id.equals("기업회원")) {
+
+			model.addAttribute("list", dao.getAllWhenCompany());
 		}
 
 		return "community_KHJ";
