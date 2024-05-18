@@ -21,7 +21,7 @@ height : 15px;
 	<h1>community</h1>
 	<hr>
 	
-	<button type="button" onclick="location.href=communityMemInsert_KHJ">게시글 작성하기</button>
+	<button type="button" onclick="location.href='communityMemInsert_KHJ'">게시글 작성하기</button>
 	<input placeholder="작성자, 게시물 제목"></input><button type="submit" class="s1"><img src="/resources/img_KHJ/돋보기.png"/></button>
 	<select>
 		<!--<option value="">추천순</option> 클릭 많은 순 -->
@@ -43,11 +43,11 @@ height : 15px;
 			<c:forEach var="board" items="${list }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
-					<td><a href="view?btitle=${board.btitle}">${board.btitle}</a></td>
+					<td>${board.btitle}</td>
 					<td>${board.mid}</td>
 					<td>${board.bregdate }</td>
 					<td>${board.blike }</td>
-				</tr>
+				</tr> <!--<a href="view?btitle=${board.btitle}"></a>-->
 			</c:forEach>
 		</tbody>
 	</table>

@@ -20,11 +20,12 @@ public class CommuController_KHJ {
 	public String root(Model model) {
 
 		String id = "개인회원";
-
+		
 		if (id.equals("개인회원")) {
 
 			model.addAttribute("list", dao.getAllWhenMember());
-
+			System.out.println(model.addAttribute("list", dao.getAllWhenMember()));
+			
 		} else if (id.equals("기업회원")) {
 
 			model.addAttribute("list", dao.getAllWhenCompany());
@@ -33,13 +34,21 @@ public class CommuController_KHJ {
 		return "community_KHJ";
 	}
 
-	@RequestMapping("/view")
-	public String view(HttpServletRequest request, Model model) {
-
-		String btitle = request.getParameter("btitle");
-		model.addAttribute("list", dao.detailDao(btitle));
-		System.out.println(model.addAttribute("list", dao.detailDao(btitle)));
-		return "list";
+	@RequestMapping("/communityMemInsert_KHJ")
+	public String communityMemInsert_KHJ() {
+		
+		
+		
+		return "communityMemInsert_KHJ";
 	}
+	
+	//@RequestMapping("/view")
+//	public String view(HttpServletRequest request, Model model) {
+//
+//		String btitle = request.getParameter("btitle");
+//		model.addAttribute("list", dao.detailDao(btitle));
+//		System.out.println(model.addAttribute("list", dao.detailDao(btitle)));
+//		return "list";
+//	}
 
 }
