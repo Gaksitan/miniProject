@@ -17,4 +17,7 @@ public class CompanyManager {
 	private String cmtel;
 	private String cmemail;
 	private String cno;
+	
+	private String checkCmpw;
+	
 }
