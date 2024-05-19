@@ -11,7 +11,13 @@
 	footer{
 		display: flex;
 		justify-content: space-between;
-		background: green;
+		background: #d8a2fa;
+	}
+	div {
+		margin: 20px;
+	}
+	a{
+		margin: 20px;
 	}
 </style>
 
@@ -29,7 +35,7 @@
 				<span>사업자등록번호:XXX-XX-XXXX</span>
 			</p>
 		</div>
-		<a href="#">고객센터</a>
+		<a href="/service/main">고객센터</a>
 	</footer>
 </body>
 </html>

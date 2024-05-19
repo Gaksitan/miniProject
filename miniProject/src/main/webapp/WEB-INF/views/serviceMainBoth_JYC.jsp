@@ -19,11 +19,15 @@ main {
 	<%@ include file="./header_JYC.jsp"%>
 	<!-- 헤더부분 포함 -->
 	<main>
+		<c:if test="${cno == null }"> <!-- cno가 널이면 기업회원이 아니기 때문에 이 단락을 보여준다 -->
 		<h1>고객센터 메인</h1>
 		<input type="search" placeholder="FAQ 검색"> <input
 			type="submit" value="검색">
-		<button onclick="location.href='#'">문의하기</button>
+			<c:if test="${mid != null }"> <!-- mid가 널이 아니명 개인회원이기 때문에 문의하기 기능을 선택할 수 있다. -->	
+				<button onclick="location.href='/both/registQuestionForm'">문의하기</button>
+			</c:if>
 		<table>
+			<caption>개인.비회원용</caption>
 			<thead>
 				<tr>
 					<th>질문</th>
@@ -33,12 +37,38 @@ main {
 			<tbody>
 				<c:forEach var="service" items="${list }" varStatus="status">
 					<tr>
-						<td></td>
-						<td></td>
+						<td>${service.question }</td>
+						<td>${service.answer }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		</c:if>
+		<c:if test="${cno != null }"> <!-- cno가 널이 아니면 기업회원이기 때문에 이 단락을 보여준다 -->
+		<h1>고객센터 메인</h1>
+		<input type="search" placeholder="FAQ 검색"> <input
+			type="submit" value="검색">
+				<button onclick="location.href='/both/registQuestionForm'">문의하기</button>
+		<table>
+			<caption>기업용</caption>
+			<thead>
+				<tr>
+					<th>질문</th>
+					<th>답변</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="service" items="${list }" varStatus="status">
+					<tr>
+						<td>${service.question }</td>
+						<td>${service.answer }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</c:if>
+		
+
 	</main>
 	<%@ include file="./footer_JYC.jsp"%>
 	<!-- 푸터부분 포함 -->

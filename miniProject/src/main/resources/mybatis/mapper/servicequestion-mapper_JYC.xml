@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.green.miniProject.dao.IServiceQuestionDAO_JYC">
+
+  	<insert id="registServiceQuestionMem">
+  		INSERT INTO servicequestion (sqno, sqtitle, sqcontent, sqanswertf, sqregdate, mid, qcno) VALUES (NULL, #{sq.sqtitle}, #{sq.sqcontent}, DEFAULT, #{sq.sqregdate}, #{sq.mid}, #{sq.qcno})
+  	</insert>
+  		<insert id="registServiceQuestionCom">
+  		INSERT INTO servicequestion (sqno, sqtitle, sqcontent, sqanswertf, sqregdate, cno, qcno) VALUES (NULL, #{sq.sqtitle}, #{sq.sqcontent}, DEFAULT, #{sq.sqregdate}, #{sq.cno}, #{sq.qcno})
+  	</insert>
+  	
+  	
+  	
+  	
+</mapper>  
