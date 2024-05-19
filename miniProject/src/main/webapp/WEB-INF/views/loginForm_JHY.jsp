@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	boolean tf = (boolean)session.getAttribute("tf");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+	const tf = <%=tf %>
+	if(tf == true){
+		alert("로그인 성공");
+	}else{
+		alert("로그인 실패");
+	}
+</script>
 <body>
 <h1>로그인 페이지 개인회원용 헤더 위치</h1>
 <hr>

@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>개인회원용 헤더 위치</h1>
-<a href="regFormMem">회원가입</a>
+<a href="regFormMem">회원가입</a><br>
+<a href="loginForm">로그인</a>
 </body>
 </html>

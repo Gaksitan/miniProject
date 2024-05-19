@@ -30,7 +30,7 @@ public class Member {
 	
 	private Date mregDate;
 	
-	private int msate;
+	private int mstate;
 	
 	private char mgender;
 }

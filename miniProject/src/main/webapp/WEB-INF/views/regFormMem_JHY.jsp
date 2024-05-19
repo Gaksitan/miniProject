@@ -14,7 +14,7 @@
 </style>
 <body>
 <h1>개인회원용 헤더 위치</h1>
-<form action="login" method="post">
+<form action="regist" method="post">
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<th>비밀번호 확인</th>
-			<td><input type="password" name="mpw" placeholder="한번 더 비밀번호를 입력하세요."></td>
+			<td><input type="password" name="mpw2" placeholder="한번 더 비밀번호를 입력하세요."></td>
 		</tr>
 		<tr>
 			<th>이름</th>
@@ -67,7 +67,7 @@
 		</tr>
 		<tr>
 			<th>구직여부</th>
-			<td><select>
+			<td><select name="msate">
 				<option value="0">재직중</option>
 				<option value="1" selected="1">구직중</option>
 				<option value="2">관심없음</option>
