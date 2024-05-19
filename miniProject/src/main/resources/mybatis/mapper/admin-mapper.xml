@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.green.miniProject.dao.IAdminDao_MSI">
+	<select id="adminDao">
+		select * from admin where aid= #{param1}
+	</select>
+	<insert id="writeNotice">
+		insert into notice values(null, #{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
+</mapper>  
