@@ -1,0 +1,14 @@
+package com.green.miniProject.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.green.miniProject.domain.ServiceQuestion;
+
+@Mapper
+public interface IServiceQuestionDAO_JYC {
+
+	public void registServiceQuestionMem(@Param("sq") ServiceQuestion sq);
+	public void registServiceQuestionCom(@Param("sq") ServiceQuestion sq);
+	
+}
