@@ -10,6 +10,7 @@ import com.green.miniProject.domain.Board;
 public interface ICommuDao_KHJ {
 	
 	public List<Board> getAllWhenMember();
-	public Board detailDao(String btitle);
+	public List<Board> getAllWhenCompany();
+	public List<Object> detailDao(long bno);
 	
 }
