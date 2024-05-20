@@ -15,4 +15,8 @@ public interface IServiceQuestionDAO_JYC {
 
 	public List<ServiceQuestion> getServiceQuestionListForMem(@Param("mid") String mid);
 	public List<ServiceQuestion> getServiceQuestionListForCom(@Param("cno") String cno);
+
+	public ServiceQuestion getServiceQuestion(@Param("sqno") Long sqno);
+	
+	public void deleteServiceQuestion(@Param("sqno") Long sqno);
 }

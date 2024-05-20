@@ -37,10 +37,10 @@ main {
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="service" items="${list }" varStatus="status">
+				<c:forEach var="faq" items="${faqlist }" varStatus="status">
 					<tr>
-						<td>${service.question }</td>
-						<td>${service.answer }</td>
+						<td>${faq.question }</td>
+						<td>${faq.answer }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -63,10 +63,10 @@ main {
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="service" items="${list }" varStatus="status">
+				<c:forEach var="faq" items="${faqlist }" varStatus="status">
 					<tr>
-						<td>${service.question }</td>
-						<td>${service.answer }</td>
+						<td>${faq.question }</td>
+						<td>${faq.answer }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

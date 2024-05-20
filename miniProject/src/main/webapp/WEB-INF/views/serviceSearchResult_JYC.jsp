@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,28 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="./header_JYC.jsp" %>
-	
-	<c:if test="${cno == null }">
-		<form action="/service/searchMem">
-			<input type="search" placeholder="FAQ 검색" name="keyword">
-			<input type="submit" value="검색">
-		</form>
-	</c:if>
-	
-	<c:if test="${cno != null }">
-		<form action="/service/searchCom">
-			<input type="search" placeholder="FAQ 검색" name="keyword">
-			<input type="submit" value="검색">
-		</form>
-	</c:if>
-	
+	<%@ include file="./header_JYC.jsp"%>
 	<main>
+		<c:if test="${cno == null }">
+			<form action="/service/searchMem">
+				<input type="search" placeholder="FAQ 검색" name="keyword"> <input
+					type="submit" value="검색">
+			</form>
+		</c:if>
+		<c:if test="${cno != null }">
+			<form action="/service/searchCom">
+				<input type="search" placeholder="FAQ 검색" name="keyword"> <input
+					type="submit" value="검색">
+			</form>
+		</c:if>
+
 		<table>
 			<tbody>
-				<c:forEach var="faq" items="${faqlist }" varStatus="status">
+				<c:forEach var="faq" items="${faqlist }">
 					<tr>
-						<td>${faq.faqcategory }</td>
 						<td>${faq.faqquestion }</td>
 						<td>${faq.faqanswer }</td>
 					</tr>
@@ -36,7 +33,7 @@
 			</tbody>
 		</table>
 	</main>
-	
-	<%@ include file="./footer_JYC.jsp" %>
+
+	<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

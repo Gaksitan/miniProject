@@ -6,11 +6,17 @@
   
 <mapper namespace="com.green.miniProject.dao.IFAQDAO_JYC">
 
-	<select id="getFAQListTargetMem" resultType="com.green.miniProject.domain.FAQ">
-		SELECT * FROM faq WHERE (faqtitle LIKE CONCAT('%', #{keyword}, '%') OR faqcontent LIKE CONCAT('%', #{keyword}, '%')) AND faqtarget = mid;
+	<select id="searchFAQListTargetMem" resultType="com.green.miniProject.domain.FAQ">
+		SELECT * FROM faq WHERE (faqtitle LIKE CONCAT('%', #{keyword}, '%') OR faqanswer LIKE CONCAT('%', #{keyword}, '%')) AND faqtarget = 'member';
 	</select>  
-	<select id="getFAQListTargetCom" resultType="com.green.miniProject.domain.FAQ">
-		SELECT * FROM faq WHERE (faqtitle LIKE CONCAT('%', #{keyword}, '%') OR faqcontent LIKE CONCAT('%', #{keyword}, '%')) AND faqtarget = cno;
+	<select id="searchFAQListTargetCom" resultType="com.green.miniProject.domain.FAQ">
+		SELECT * FROM faq WHERE (faqtitle LIKE CONCAT('%', #{keyword}, '%') OR faqanswer LIKE CONCAT('%', #{keyword}, '%')) AND faqtarget = 'company';
 	</select> 	
   	
+  	<select id="getFAQListTargetMem" resultType="com.green.miniProject.domain.FAQ">
+  		SELECT * FROM faq;
+  	</select>
+  	<select id="getFAQListTargetCom" resultType="com.green.miniProject.domain.FAQ">
+  		SELECT * FROM faq;
+  	</select>
 </mapper>  

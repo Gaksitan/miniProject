@@ -40,12 +40,25 @@
 					<c:forEach var="en" items="${enlist }" varStatus="status">
 						<tr>
 							<td>${status.count }</td>
-							<td>${en.entitle }</td>
+							<c:if test="${mid == null && cno == null }">
+							<td><a href="/employnotice/detailNoneMem?enno=${en.enno }">${en.entitle }</a></td>
+							</c:if>
+							<c:if test="${mid != null }">
+							<td><a href="/employnotice/detailMem?enno=${en.enno }">${en.entitle }</a></td>
+							</c:if>
+							<c:if test="${cno != null }">
+							<td><a href="/employnotice/detailCom?enno=${eno.enno }">${en.entitle }</a></td>
+							</c:if>
 							<td>${en.cno }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			<form action="">
+				<c:forEach begin="1" end="${encount }" varStatus="status">
+				<input type="button" value="${status.count }">
+				</c:forEach>
+			</form>
 		</div>
 		<div>
 			<div class="top">
@@ -62,7 +75,15 @@
 					<c:forEach var="com" items="${comlist }" varStatus="status">
 						<tr>
 							<td>${status.count }</td>
-							<td>${com.cname }</td>
+							<c:if test="${mid == null && cno == null }">
+							<td><a href="/company/detailNoneMem?cno=${com.cno }">${com.cname }</a></td>
+							</c:if>
+							<c:if test="${mid != null }">
+							<td><a href="/company/detailMem?cno=${com.cno }">${com.cname }</a></td>
+							</c:if>
+							<c:if test="${cno != null }">
+							<td><a href="/company/detailCom?cno=${com.cno }">${com.cname }</a></td>
+							</c:if>
 							<td>${com.ctel }</td>
 						</tr>
 					</c:forEach>
@@ -85,7 +106,15 @@
 					<c:forEach var="mem" items="${memlist }" varStatus="status">
 						<tr>
 							<td>${status.count }</td>
-							<td>${mem.mid }</td>
+							<c:if test="${mid == null && cno == null }">
+							<td><a href="#">${mem.mid }</a></td>
+							</c:if>
+							<c:if test="${mid != null }">
+							<td><a href="#">${mem.mid }</a></td>
+							</c:if>
+							<c:if test="${cno != null }">
+							<td><a href="#">${mem.mid }</a></td>
+							</c:if>
 							<td></td>
 						</tr>
 					</c:forEach>
