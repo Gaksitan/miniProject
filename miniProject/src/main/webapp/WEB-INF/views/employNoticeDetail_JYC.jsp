@@ -11,9 +11,14 @@
 	
 	<main>
 	<h1><a href="/company/detail?cno=${company.cno }">${company.cname }</a></h1>
-	<form action="#" method="post">
-		<input type="button" value="스크랩">
-	</form>
+	<c:if test="${mid != null }">
+	<c:if test="${scraptf == true }">
+	<input style="background:grey; color:black;" type="button" id="scrap" value="스크랩" onclick="location.href='/employnotice/deleteScrap?enno=${enno}'">
+	</c:if>
+	<c:if test="${scraptf == false }">
+	<input style="background:yellow;color:black;" type="button" id="scrap" value="스크랩" onclick="location.href='/employnotice/scrap?enno=${enno}'">
+	</c:if>
+	</c:if>
 	<h2>${employNoticeDto.entitle }</h2>
 	<p>${employNoticeDto.enintro }</p>
 	<table>
@@ -64,5 +69,8 @@
 	</main>
 	
 	<%@ include file="./footer_JYC.jsp" %>
+	
+<script type="text/javascript">
+</script>
 </body>
 </html>

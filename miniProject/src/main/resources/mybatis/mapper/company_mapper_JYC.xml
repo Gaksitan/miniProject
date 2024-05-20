@@ -10,5 +10,7 @@
 	<select id="getCompany" resultType="com.green.miniProject.domain.Company">
 		SELECT * From company WHERE cno = #{cno};
 	</select>
-	
+	<select id="count">
+		SELECT IFNULL(COUNT(cno), 0) FROM company;
+	</select>
 </mapper>  

@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FAQ {
+public class CompanySectorAndCompany {
 	
-	private Long faqno;
-	private String faqtitle;
-	private String faqquestion;
-	private String faqanswer;
-	private Long qcno;
-	private String faqtarget;
+	private Long scno;
+	private String cno;
+	private String scname;
+	private String cname;
 }

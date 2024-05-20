@@ -11,4 +11,5 @@ import com.green.miniProject.domain.Company;
 public interface ICompanyDAO_JYC {
 	public List<Company> getCompanyList(@Param("keyword") String keyword);
 	public Company getCompany(@Param("cno") String cno);
+	public int count();
 }
