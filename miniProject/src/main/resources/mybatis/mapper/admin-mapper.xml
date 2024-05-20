@@ -11,4 +11,10 @@
 	<insert id="writeNotice">
 		insert into notice values(null, #{param1}, #{param2}, #{param3}, #{param4})
 	</insert>
+	<delete id="deleteNotice">
+		delete from notice where nno= #{nno}
+	</delete>
+	<update id="updateNotice">
+		update notice set ano= #{notice.ano}, ntitle= #{notice.ntitle}, ncontent= #{notice.ncontent}, nregdate= #{notice.nregdate} where nno = #{notice.nno}
+	</update>
 </mapper>  

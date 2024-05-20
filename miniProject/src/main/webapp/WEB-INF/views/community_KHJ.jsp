@@ -29,6 +29,36 @@ height : 15px;
 		<option value="">인기순</option> <!-- 좋아요 많은 순 -->
 		<option value="">최신순</option>
 	</select>
+	
+	
+	
+	
+	<!-- 공지사항 테이블 추가 -->
+	
+	<table border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+		<thead>
+			<tr>
+				<th>공지번호</th>
+				<th>공지제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+				<th>좋아요</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="notice" items="${noticeList }" varStatus="status">
+				<tr>
+					<td>${status.count }</td>
+					<td><a href="/commu/communityNotice_MSI?nno=${notice.nno}">${notice.ntitle}</a></td>
+					<td>${notice.ano}</td>
+					<td>${notice.nregdate}</td>
+					<td></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	
+
 	<table border="1">
 		<thead>
 			<tr>
