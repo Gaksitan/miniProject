@@ -17,7 +17,7 @@
     <div class="container">
 	    <h1>게시글 작성 페이지</h1>
 	    <hr>
-        <form action="contentInsert" method="get">
+        <form action="/commu/contentInsert" method="get">
         <div class="form-group">
         <label for="title">게시글 제목</label>
         <input type="text" id="title" class="form-control" placeholder="제목을 입력하세요." name="title" maxlength="100" required="required">
