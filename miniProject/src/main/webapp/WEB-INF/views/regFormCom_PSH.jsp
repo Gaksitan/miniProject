@@ -14,12 +14,12 @@
     <table width="500" cellpadding="0" cellspacing="0" border="1">
     <form action="signUpCom" method="post">
         <tr>
-            <td>기업형태</td>
-            <td><input type="text" name="ctype" size="50" placeholder="기업 형태를 입력하세요. (ex. 대기업)"></td>
-        </tr>
         <tr>
             <td>사업자번호</td>
             <td><input type="text" name="cno" size="50" placeholder="사업자번호를 입력하세요."></td>
+        </tr>
+            <td>기업형태</td>
+            <td><input type="text" name="ctype" size="50" placeholder="기업 형태를 입력하세요. (ex. 대기업)"></td>
         </tr>
         <tr>
             <td>회사명</td>
@@ -27,12 +27,12 @@
         </tr>
         <tr>
             <td>회사주소</td>
-            <td><input type="text" name="caddr" size="50" placeholder="회사 주소를 입력하세요."></td>
+            <td><input type="text" name="caddr1" size="50" placeholder="회사 주소를 입력하세요."></td>
         </tr>
         <tr>
             <td>사업자등록증명원발급번호</td>
             <td><input type="text" name="cdocnum" size="50" placeholder="사업자등록증명원발급번호를 입력하세요."></td>
-            <td><input type="button" name="gotogovkr" value="사업자등록증명원 발급하기"></td>
+            <td><input type="button" value="사업자등록증명원 발급하기" onClick="window.open('https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09002&CappBizCD=12100000016&tp_seq=01')"></td>
         </tr>
         <tr>
             <td>인사 담당자</td>

@@ -3,27 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.green.miniProject.dao.ICompayydao">
+  <mapper namespace="com.green.miniProject.dao.ICompanyDao_PSH">
 	
 	<insert id="insertCompany">
-	    INSERT INTO company (ctype, cno, cname, caddr, cdocnum) VALUES
-	    (#{com.ctype}, #{com.cno}, #{com.cname}, #{com.caddr}, #{com.cdocnum})
+	    INSERT INTO company (cno, ctype, cname, caddr1, cdocnum) VALUES
+	    (#{com.cno}, #{com.ctype}, #{com.cname}, #{com.caddr1}, #{com.cdocnum})
 	</insert>
 	
 	<insert id="insertCompanyManager">
-	    INSERT INTO companyManager (cmid, cmpw, cmemail, cmtel) VALUES
-	    (#{cm.cmid}, #{cm.cmpw}, #{cm.cmemail}, #{cm.cmtel})
+	    INSERT INTO companyManager (cmid, cmpw, cmemail, cmtel, cno) VALUES
+	    (#{cm.cmid}, #{cm.cmpw}, #{cm.cmemail}, #{cm.cmtel}, #{cm.cno})
 	</insert>
 
 	<select id="select">
 		SELECT * FROM companyManager WHERE cmid = #{cmid} AND cmpw = #{cmpw}
 	</select>
 	
+	<select id="getCompanyByCno" parameterType="java.lang.String" resultType="com.green.miniProject.domain.Company">
+    	SELECT * FROM company WHERE cno = #{cno}
+	</select>
+	
+	
 
     <update id="updateComInfo">
         UPDATE company
         SET cname = #{cname},
-            caddr = #{caddr},
+            caddr1 = #{caddr1},
             ctel = #{ctel},
             cfoundation = #{cfoundation},
             camount = #{camount},
@@ -32,7 +37,7 @@
         WHERE cno = #{cno}
     </update>
     
-        <update id="updateCMInfo">
+    <update id="updateCMinfo">
         UPDATE companyManager
         SET cmpw = #{cmpw},
             cmname = #{cmname},
@@ -41,8 +46,35 @@
         WHERE cmid = #{cmid}
     </update>
 	
-	   <insert id="enwrite">
-        INSERT INTO employnotice (title, intro, exp, skill, degree, welfare, salary, addr, ddate, position, cno)
-        VALUES (#{en.entitle}, #{en.enintro}, #{en.enexp}, #{en.enskill}, #{en.endegree}, #{en.enwelfare}, #{en.ensalary}, #{en.enaddr}, #{en.enddate}, #{en.enposition}, #{en.cno})
-    </insert>
+	<!-- employNoticeMapper.xml -->
+	<insert id="enwrite" parameterType="com.green.miniProject.domain.EmployNotice">
+	    INSERT INTO employnotice (entitle, enintro, ensalary, enaddr, enenddate, enposition, cno)
+	    VALUES (#{entitle}, #{enintro}, #{ensalary}, #{enaddr}, #{enenddate}, #{enposition}, #{cno})
+	</insert>
+	
+	<insert id="insertExperience" parameterType="com.green.miniProject.domain.ExperienceEmployNotice">
+	    INSERT INTO experienceEmployNotice (exname, exjoindate, exleavedate, exposition, exrank, enno)
+	    VALUES (#{exname}, #{exjoindate}, #{exleavedate}, #{exposition}, #{exrank}, #{enno})
+	</insert>
+	
+	<insert id="insertDegree" parameterType="com.green.miniProject.domain.DegreeEmployNotice">
+	    INSERT INTO degreeEmployNotice (dename, degraddate, demajor, dehighestlevel, enno)
+	    VALUES (#{dename}, #{degraddate}, #{demajor}, #{dehighestlevel}, #{enno})
+	</insert>
+	
+	<insert id="insertSkill" parameterType="com.green.miniProject.domain.SkillEmployNotice">
+	    INSERT INTO skillEmployNotice (skname, enno)
+	    VALUES (#{skname}, #{enno})
+	</insert>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   </mapper>
