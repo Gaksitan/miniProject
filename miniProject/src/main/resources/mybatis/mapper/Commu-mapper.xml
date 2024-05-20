@@ -15,4 +15,13 @@
 		LEFT JOIN member m ON b.`MID` = m.`MID`
 		WHERE b.bno = #{bno}
 	</select>
+	
+	
+	
+	<select id="getNoticeList">
+		select * from notice
+	</select>
+	<select id="getNoticeDetail">
+		select * from notice where nno= #{param1}
+	</select>
 </mapper>  

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.miniProject.dao.IAdminDao_MSI;
+import com.green.miniProject.dao.ICommuDao_KHJ;
 import com.green.miniProject.domain.Admin;
+import com.green.miniProject.domain.Notice;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +25,11 @@ import lombok.extern.log4j.Log4j2;
 public class AdminController_MSI {
 	
 	@Autowired
-	IAdminDao_MSI adminDao;
+	private IAdminDao_MSI adminDao;
+	
+	@Autowired
+	private ICommuDao_KHJ commuDao;
+	
 	
 	
 	@RequestMapping("/indexadmin")
@@ -74,17 +80,26 @@ public class AdminController_MSI {
 	
 	
 	@RequestMapping("/infoAdmin")
-	public String infoAdmin() {
+	public String infoAdmin(HttpServletRequest request, Model model) {
 		//관리자용 공지사항 작성,수정 페이지 이동
+		
+		String nno = request.getParameter("nno");
+		
+		if(nno != null) {
+			model.addAttribute("notice",commuDao.getNoticeDetail(nno));
+		}
+		
 		return "infoAdmin_MSI";
 	}
 	
 	
 	
+	
+	//공지사항 내용 테이블 삽입
 	@RequestMapping("/writeNotice")
 	public String writeNotice(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		//공지사항 내용 테이블 삽입
+		
 		String ano = (String)session.getAttribute("ano");
 		
 		LocalDate nregdate_ = LocalDate.now();
@@ -95,12 +110,54 @@ public class AdminController_MSI {
 		
 		
 		return "/admin/indexAdmin_MSI";
+		
 	}
 	
 	
 	
+	//공지사항 내용 테이블 수정
+	@RequestMapping("/updateNotice")
+	public String updateNotice(HttpServletRequest request) {
+		String nno_ = request.getParameter("nno");
+		Long nno = Long.parseLong(nno_);
+		
+		String ano = request.getParameter("ano");
+		String ntitle = request.getParameter("ntitle");
+		String ncontent = request.getParameter("ncontent");
+		
+		//수정된 현재 날짜
+		LocalDate nregdate = LocalDate.now();
+		
+		
+		Notice notice = new Notice(nno,ano,ntitle,ncontent,nregdate);
+		
+		int result = adminDao.updateNotice(notice);
+		
+		
+		if(result==1) {
+			System.out.println("공지 수정 성공");
+		}else {
+			System.out.println("공지 수정 실패");
+		}
+		
+		return "indexAdmin_MSI";
+	}
 	
 	
+	
+	//공지사항 내용 테이블 삭제
+	@RequestMapping("/deleteNotice")
+	public String deleteNotice(@RequestParam("nno")String nno) {
+		int result = adminDao.deleteNotice(nno);
+		
+		if(result==1) {
+			System.out.println("공지 삭제 성공");
+		}else {
+			System.out.println("공지 삭제 실패");
+		}
+		
+		return "indexAdmin_MSI";
+	}
 	
 	
 	
