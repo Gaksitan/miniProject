@@ -1,14 +1,17 @@
 package com.green.miniProject.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.green.miniProject.dao.IFAQDAO_JYC;
 import com.green.miniProject.dao.IQuestionCategoryDAO_JYC;
 import com.green.miniProject.dao.IServiceQuestionDAO_JYC;
 import com.green.miniProject.domain.ServiceQuestion;
@@ -27,6 +30,9 @@ public class ServiceController_JYC {
 	
 	@Autowired
 	private IServiceQuestionDAO_JYC sqdao;
+	
+	@Autowired
+	private IFAQDAO_JYC faqdao;
 	
 	@GetMapping("/main")
 	public String main() {
@@ -67,6 +73,44 @@ public class ServiceController_JYC {
 		sqdao.registServiceQuestionCom(sqBuilder);
 		
 		return "";
+	}
+	
+	@GetMapping("/searchMem")
+	public String searchMem(@RequestParam("keyword") String keyword, Model model) {
+		
+		model.addAttribute("faqlist", faqdao.getFAQListTargetMem("keyword"));
+		
+		return "serviceSearchResult_JYC.jsp";
+	}
+	
+	@GetMapping("/searchCom")
+	public String searchCom(@RequestParam("keyword") String keyword, Model model) {
+		
+		model.addAttribute("faqlist", faqdao.getFAQListTargetCom("keyword"));
+
+		return "serviceSearchResult_JYC.jsp";
+	}
+	
+	@GetMapping("/myQuestionMem")
+	public String myquestionMem(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String mid = (String)session.getAttribute("mid");
+		
+		model.addAttribute("serviceQuestionList", sqdao.getServiceQuestionListForMem(mid));
+		
+		return "myServiceQuestion_JYC.jsp";
+	}
+	
+	@GetMapping("/myQuestionCom")
+	public String myQuestionCom(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String cno = (String)session.getAttribute("cno");
+		
+		model.addAttribute("serviceQuestionList", sqdao.getServiceQuestionListForCom(cno));
+		
+		return "myServiceQuestion_JYC.jsp";
 	}
 
 }

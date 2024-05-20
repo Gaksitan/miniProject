@@ -1,5 +1,7 @@
 package com.green.miniProject.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,5 +12,7 @@ public interface IServiceQuestionDAO_JYC {
 
 	public void registServiceQuestionMem(@Param("sq") ServiceQuestion sq);
 	public void registServiceQuestionCom(@Param("sq") ServiceQuestion sq);
-	
+
+	public List<ServiceQuestion> getServiceQuestionListForMem(@Param("mid") String mid);
+	public List<ServiceQuestion> getServiceQuestionListForCom(@Param("cno") String cno);
 }

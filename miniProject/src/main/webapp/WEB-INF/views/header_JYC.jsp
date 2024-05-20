@@ -113,7 +113,7 @@ div img {
 						<option>${mid }님환영합니다</option>
 						<option value="#">내 정보 관리</option>
 						<option value="#">구독&amp;스크랩</option>
-						<option value="#">내 문의사항</option>
+						<option value="/service/myQuestionmEM">내 문의사항</option>
 						<option value="#" style="color: red">로그아웃</option>
 					</select>
 					</div>
