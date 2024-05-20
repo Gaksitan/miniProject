@@ -21,8 +21,10 @@ main {
 	<main>
 		<c:if test="${cno == null }"> <!-- cno가 널이면 기업회원이 아니기 때문에 이 단락을 보여준다 -->
 		<h1>고객센터 메인</h1>
-		<input type="search" placeholder="FAQ 검색"> <input
-			type="submit" value="검색">
+		<form action="/service/searchMem">
+		<input type="search" placeholder="FAQ 검색" name="keyword"> 
+		<input type="submit" value="검색">
+		</form>
 			<c:if test="${mid != null }"> <!-- mid가 널이 아니명 개인회원이기 때문에 문의하기 기능을 선택할 수 있다. -->	
 				<button onclick="location.href='/both/registQuestionForm'">문의하기</button>
 			</c:if>
@@ -44,11 +46,14 @@ main {
 			</tbody>
 		</table>
 		</c:if>
+		
 		<c:if test="${cno != null }"> <!-- cno가 널이 아니면 기업회원이기 때문에 이 단락을 보여준다 -->
 		<h1>고객센터 메인</h1>
-		<input type="search" placeholder="FAQ 검색"> <input
-			type="submit" value="검색">
-				<button onclick="location.href='/both/registQuestionForm'">문의하기</button>
+		<form action="/service/searchCom">
+		<input type="search" placeholder="FAQ 검색" name="keyword"> 
+		<input type="submit" value="검색">
+		</form>
+		<button onclick="location.href='/both/registQuestionForm'">문의하기</button>
 		<table>
 			<caption>기업용</caption>
 			<thead>

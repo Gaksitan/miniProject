@@ -11,7 +11,12 @@
   		<insert id="registServiceQuestionCom">
   		INSERT INTO servicequestion (sqno, sqtitle, sqcontent, sqanswertf, sqregdate, cno, qcno) VALUES (NULL, #{sq.sqtitle}, #{sq.sqcontent}, DEFAULT, #{sq.sqregdate}, #{sq.cno}, #{sq.qcno})
   	</insert>
-  	
+  	<select id="getServiceQuestionListForMem" resultType="com.green.miniProject.domain.ServiceQuestion">
+  		SELECT * FROM servicequestion WHERE mid = #{mid} ORDER BY sqregdate DESC;
+  	</select>
+  	<select id="getServiceQuestionListForCom" resultType="com.green.miniProject.domain.ServiceQuestion">
+  		SELECT * FROM servicequestion WHERE cno = #{cno} ORDER BY sqregdate DESC;
+  	</select>
   	
   	
   	
