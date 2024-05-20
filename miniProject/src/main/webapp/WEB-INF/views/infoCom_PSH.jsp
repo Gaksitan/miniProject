@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,25 +10,25 @@
 <hr>
 
 <div>
-	<form action="updatecominfo" method="post">
-		<p>사업자번호</p>
-		<input type="text" name="cno" readonly><br>
-		<p>회사명</p>
-		<input type="text" name="cname"><br>
-		<p>회사주소</p>
-		<input type="text" name="caddr"><br>
-		<p>회사 전화번호</p>
-		<input type="text" name="ctel"><br>
-		<p>설립연도</p>
-		<input type="text" name="cfoundation"><br>
-		<p>직원수</p>
-		<input type="text" name="camount"><br>
-		<p>회사소개</p>
-		<input type="text" name="cintro"><br>
-		<p>테마</p>
-		<input type="text" name="ctype"><br>
-		<input type="submit" value="저장">
-	</form>
+    <form action="${pageContext.request.contextPath}/updateComInfo" method="post">
+        <p>사업자번호</p>
+        <input type="text" name="cno" value="${sessionScope.company.cno}" readonly><br>
+        <p>회사명</p>
+        <input type="text" name="cname" value="${sessionScope.company.cname}"><br>
+        <p>회사주소</p>
+        <input type="text" name="caddr1" value="${sessionScope.company.caddr1}"><br>
+        <p>회사 전화번호</p>
+        <input type="text" name="ctel" value="${sessionScope.company.ctel}"><br>
+        <p>설립연도</p>
+        <input type="date" name="cfoundation" value="${sessionScope.company.cfoundation}"><br>
+        <p>직원수</p>
+        <input type="text" name="camount" value="${sessionScope.company.camount}"><br>
+        <p>회사소개</p>
+        <input type="text" name="cintro" value="${sessionScope.company.cintro}"><br>
+        <p>테마</p>
+        <input type="text" name="ctype" value="${sessionScope.company.ctype}"><br>
+        <input type="submit" value="저장">
+    </form>
 </div>
 </body>
 </html>

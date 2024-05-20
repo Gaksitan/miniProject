@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.green.miniProject.dao.ICompanyDao_PSH;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanyManager;
+import com.green.miniProject.domain.DegreeEmployNotice;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.ExperienceEmployNotice;
+import com.green.miniProject.domain.SkillEmployNotice;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +43,7 @@ public class ComController_PSH {
 	@Transactional
     @RequestMapping("/signUpCom")
     public String signUpCom(Company com, 
+    						@RequestParam("cno") String cno,
                             @RequestParam("cmid") String cmid,
                             @RequestParam("cmpw") String cmpw,
                             @RequestParam("cmpw2") String cmpw2,
@@ -58,11 +62,12 @@ public class ComController_PSH {
         cm.setCmpw(cmpw);
         cm.setCmemail(fullEmail);
         cm.setCmtel(cmtel);
+        cm.setCno(cno);
 
         dao.insertCompany(com);
         dao.insertCompanyManager(cm);
 
-        return "redirect:loginForm_PSH";
+        return "indexCom_PSH";
     }
 	
 	@RequestMapping("/loginFormCom")
@@ -71,7 +76,7 @@ public class ComController_PSH {
 		return "loginForm_PSH";
 	}
 	
-	@RequestMapping("/loginCom") //로그인 기능
+	@RequestMapping("/loginCom")
 	public String login(@RequestParam("cmid") String cmid, @RequestParam("cmpw") String cmpw, Model model) {
 						
 		CompanyManager cm = dao.select(cmid, cmpw);
@@ -82,11 +87,13 @@ public class ComController_PSH {
 			return "loginFormCom";
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("cmid",cm.getCmid());
-			session.setAttribute("cmpw",cm.getCmpw());
-			session.setAttribute("cmname",cm.getCmname());
 			
-			return "redirect:/";
+			session.setAttribute("companyManager", cm);
+			
+	        Company company = dao.getCompanyByCno(cm.getCno());
+	        session.setAttribute("company", company);
+			
+			return "redirect:indexCom";
 			
 		}
 	}
@@ -101,47 +108,55 @@ public class ComController_PSH {
 	
 	}
 	
-	@RequestMapping("/infoCom")
-	public String infoCom() {
-		
-		return "infoCom_PSH";
-	}
-	
-	@Transactional
-    @RequestMapping(value = "/updateComInfo", method = RequestMethod.POST)
-    public String updateComInfo(Company com) {
-        dao.updateComInfo(com);
-        return "redirect:infoCom_PSH?success";
-    }
-	
-	@RequestMapping("/infoCompanyManager")
-	public String infoCM() {
-		
-		return "infoCompanyManager_PSH";
-	}
-	
-    @RequestMapping(value = "/updateCMinfo", method = RequestMethod.POST)
-    public String updateCMInfo(CompanyManager cm) {
+	   @RequestMapping("/infoCom")
+	    public String infoCom() {
+	        return "infoCom_PSH";
+	    }
 
-    	if (cm.getCmpw().equals(cm.getCheckCmpw())) {
-            dao.updateCMInfo(cm);
-            return "redirect:infoCompanyManager_PSH?success";
-        } else {
-            return "redirect:infoCompanyManager_PSH?error";
-        }
-    }
+	    @Transactional
+	    @RequestMapping(value = "/updateComInfo", method = RequestMethod.POST)
+	    public String updateComInfo(Company com) {
+	        dao.updateComInfo(com);
+	        return "redirect:indexCom";
+	    }
 	
-	@RequestMapping("/employNoticeSave")
-	public String employNoticeSave() {
-		
-		return "employNoticeSave_PSH";
-	}
-	
-	@RequestMapping("/enwrite")
-	public String enWrite(EmployNotice em) {
-		
-		dao.enwrite(em);
-		
-		return "redirect:";
-	}
+	    @RequestMapping("/infoCM")
+	    public String infoCM() {
+	    	return "infoCompanyManager_PSH";
+	    }
+
+	    @Transactional
+	    @RequestMapping(value = "/updateCMinfo", method = RequestMethod.POST)
+	    public String updateCMInfo(CompanyManager cm) {
+	    	dao.updateCMinfo(cm);
+	    	return "redirect:indexCom";
+	    }
+
+	    
+	    @RequestMapping("/employNotice")
+		public String employNotice() {
+			
+			return "employNoticeSave_PSH";
+		}	
+	    
+	    
+	    @RequestMapping("/enwrite")
+	    public String enWrite(EmployNotice en, 
+	                           ExperienceEmployNotice experience,
+	                           DegreeEmployNotice degree,
+	                           SkillEmployNotice skill) {
+	    	
+	    	HttpSession session = request.getSession();
+	        Company company = (Company)session.getAttribute("company");
+	        
+	        String cno = company.getCno();
+	        
+	        en.setCno(cno);
+	        
+	        dao.enwrite(en);
+	        dao.insertExperience(experience);
+	        dao.insertDegree(degree);
+	        dao.insertSkill(skill);
+	        return "redirect:indexCom";
+	    }
 }

@@ -28,7 +28,7 @@
 		<p>주소</p>
 		<input type="text" name="enaddr"><br>
 		<p>마감일</p>
-		<input type="text" name="enddate"><br>
+		<input type="date" name="enenddate"><br>
 		<p>직무</p>
 		<input type="text" name="enposition"><br>
 		<input type="submit" value="저장">
