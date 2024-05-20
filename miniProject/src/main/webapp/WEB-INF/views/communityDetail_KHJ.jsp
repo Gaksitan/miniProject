@@ -12,17 +12,20 @@
 </style>
 </head>
 <body>
+	<%@ include file="./header_JYC.jsp" %>
 	<h1>커뮤니티 상세페이지</h1>
 	<hr>
-    <h3>${detail.btitle}</h3>
-    <img>좋아요 이미지(클릭시 좋아요 +1)
-    <img>싫어요 이미지(클릭시 좋아요 -1)
-    <span>작성자</span><span>${detail.mid}</span><!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
-    <p>${detail.bcontent}</p>
-    <p>태그가 와야함</p>
+    <h3>${boardDetail[0].btitle}</h3>
+    <img src="/resources_KHJ/img_KHJ/like.png" width="15" height="15"/> <!-- 클릭시 좋아요 +1 -->
+    <img src="/resources_KHJ/img_KHJ/dislike.png" width="15" height="15"/><!-- (클릭시 좋아요 -1)  -->
+    <span>작성자</span><span>${boardDetail[0].mid}</span><!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
+    <p>${boardDetail[0].bcontent}</p>
+    <c:forEach var="tags" items="${tagList }">
+    <span>${tags.value }</span>
+    </c:forEach>
     <label for="comment">댓글 작성하기</label>
-    <textarea id="comment" name="comment" placeholder="댓글 입력하기">
-    </textarea>
+    <input id="comment" name="comment" placeholder="댓글 입력하기">
+    </input>
     <table>
         <thead>
             <tr>

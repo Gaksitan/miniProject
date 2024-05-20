@@ -19,9 +19,8 @@ import lombok.ToString;
 @Builder
 public class Tag {
 	private Long tno;
-
 	private String tagger;
-	private String tagging;
+	private String value;
 	private Long bno;
 
 
