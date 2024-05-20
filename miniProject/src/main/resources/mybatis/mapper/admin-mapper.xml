@@ -17,4 +17,19 @@
 	<update id="updateNotice">
 		update notice set ano= #{notice.ano}, ntitle= #{notice.ntitle}, ncontent= #{notice.ncontent}, nregdate= #{notice.nregdate} where nno = #{notice.nno}
 	</update>
+	<select id="noAnswerList">
+		SELECT * FROM servicequestion WHERE sqanswertf=FALSE
+	</select>
+	<insert id="writeServiceAnswer">
+		insert into serviceAnswer values(null, #{sqno}, #{sacontent}, #{saregdate})
+	</insert>
+	<select id="getFaqList">
+		select * from faq
+	</select>
+	<insert id="writeFAQ">
+		insert into faq values(null, #{faq.faqtitle}, #{faq.faqquestion}, #{faq.faqanswer}, #{faq.qcno}, #{faq.faqtarget})
+	</insert>
+	
+	
+	
 </mapper>  

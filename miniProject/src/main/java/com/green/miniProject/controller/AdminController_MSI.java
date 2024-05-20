@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.green.miniProject.dao.IAdminDao_MSI;
 import com.green.miniProject.dao.ICommuDao_KHJ;
 import com.green.miniProject.domain.Admin;
+import com.green.miniProject.domain.FAQ;
 import com.green.miniProject.domain.Notice;
+import com.green.miniProject.domain.ServiceQuestion;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -160,5 +162,85 @@ public class AdminController_MSI {
 	}
 	
 	
+	//고객센터 답변없는 질문목록(리스트)
+	@RequestMapping("/serviceQuestionNoAnswer")
+	public String serviceQuestionNoAnswer(Model model) {
+		
+		List<ServiceQuestion> list = adminDao.noAnswerList();
+		model.addAttribute("list",list);
+		
+		return "serviceQuestionNoAnswer_MSI";
+	}
+	
+	
+	
+	//고객센터 질문 답변 작성 페이지
+	@RequestMapping("/serviceQuestionAnswer")
+	public String serviceQuestionAnswer() {
+	
+		return "serviceQuestionAnswer_MSI";
+	}
+	
+	
+	//고객센터 관리자 답변 등록
+	@RequestMapping("/serviceAnswer")
+	public String serviceAnswer(HttpServletRequest request) {
+		
+		String sqno = request.getParameter("sqno");
+		
+		String sacontent = request.getParameter("sacontent");
+		
+		LocalDate saregdate = LocalDate.now();
+
+		adminDao.writeServiceAnswer(sqno,sacontent,saregdate);
+		
+		return "serviceQuestionNoAnswer_MSI";
+	}
+	
+	
+	//FAQ 관리페이지
+	@RequestMapping("/serviceFAQ")
+	public String serviceFAQ(Model model) {
+		List<FAQ> faqList = adminDao.getFaqList();
+		
+		model.addAttribute("faqList",faqList);
+		//member, company
+		return "serviceFAQ_MSI";
+	}
+	
+	
+	//FAQ 작성 페이지
+	@RequestMapping("/serviceFAQWrite")
+	public String serviceFAQWrite() {
+		
+		return "serviceFAQWrite_MSI";
+	}
+	
+	//FAQ 테이블 삽입
+	@RequestMapping("/writeFAQ")
+	public String writeFAQ(HttpServletRequest request) {
+		String qcno_ = request.getParameter("qcno");
+		Long qcno = Long.parseLong(qcno_);
+		String faqtitle = request.getParameter("faqtitle");
+		String faqquestion = request.getParameter("faqquestion");
+		String faqanswer = request.getParameter("faqanswer");
+		String faqtarget = request.getParameter("faqtarget");
+		
+		FAQ faq = new FAQ(faqquestion,faqanswer,qcno,faqtitle,faqtarget);
+		int result = adminDao.writeFAQ(faq);
+		
+		return "redirect:/admin/serviceFAQ";
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
