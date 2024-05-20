@@ -31,7 +31,7 @@
 		<h2>내용</h2>
 		<textarea rows="5" cols="200" name="sqcontent" placeholder="내용을 입력하세요"></textarea>		
 		<input type="submit" value="저장">
-		<input type="button" value="취소" onclick="location.href='/service/main'">
+		<input type="button" value="취소" onclick="location.href='/service/mainCom'">
 		</form>
 		</c:if>
 			<c:if test="${mid != null }">
@@ -46,7 +46,7 @@
 		<h2>내용</h2>
 		<textarea rows="5" cols="200" name="sqcontent" placeholder="내용을 입력하세요"></textarea>		
 		<input type="submit" value="저장">
-		<input type="button" value="취소" onclick="location.href='/service/main'">
+		<input type="button" value="취소" onclick="location.href='/service/mainMem'">
 		</form>
 		</c:if>
 	</main>

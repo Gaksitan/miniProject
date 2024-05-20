@@ -17,7 +17,11 @@
   	<select id="getServiceQuestionListForCom" resultType="com.green.miniProject.domain.ServiceQuestion">
   		SELECT * FROM servicequestion WHERE cno = #{cno} ORDER BY sqregdate DESC;
   	</select>
-  	
-  	
+  	<select id="getServiceQuestion" resultType="com.green.miniProject.domain.ServiceQuestion">
+  		SELECT * FROM servicequestion WHERE sqno = #{sqno};
+  	</select>
+  	<delete id="deleteServiceQuestion">
+  		DELETE FROM servicequestion WHERE sqno = #{sqno};
+  	</delete>
   	
 </mapper>  

@@ -113,7 +113,7 @@ div img {
 						<option>${mid }님환영합니다</option>
 						<option value="#">내 정보 관리</option>
 						<option value="#">구독&amp;스크랩</option>
-						<option value="/service/myQuestionmEM">내 문의사항</option>
+						<option value="/service/myQuestionMem">내 문의사항</option>
 						<option value="#" style="color: red">로그아웃</option>
 					</select>
 					</div>
@@ -159,6 +159,7 @@ div img {
 						<option value="#">기업 정보 관리</option>
 						<option value="#">인사담당자 정보 관리</option>
 						<option value="#">관심 구직자</option>
+						<option value="/service/myQuestionCom">내 문의사항</option>
 						<option value="#" style="color: red">로그아웃</option>
 					</select>
 					</div>
@@ -180,6 +181,43 @@ div img {
 				</div>
 			</nav>
 		</header>
+	</c:if>
+	
+	<c:if test="${admin != null }">
+		<header>
+			<div id="top">
+
+				<div id="left">
+					<a href="#"> <img id="logo" alt="로고 사진"
+						src="/resources_JYC/images_JYC/logo.png">
+					</a> 
+					<form action="/both/searchResultAdmin" method="get"> <!-- 검색 -->
+					<input type="search" placeholder="검색" name="search"> <input
+						type="submit" value="검색">
+					</form>
+				</div>
+				<div id="mypage">
+					<img id="person" alt="익명 사진" src="/resources_JYC/images_JYC/ano.png"> 
+					<div>
+					<select
+						onchange="if(this.value) location.href=(this.value)">
+						<option>${admin.aid }님환영합니다</option>
+						<option value="#" style="color: red">로그아웃</option>
+					</select>
+					</div>
+				</div>
+			</div>
+			<nav id="menu">
+				<ul>
+					<li><a href="#">개인페이지</a></li>
+					<li><a href="#">기업페이지</a></li>
+					<li><a href="#">차단관리</a></li>
+					<li><a href="/service/mainAdmin">고객센터</a></li>
+				</ul>
+			</nav>
+		</header>
+	
+	
 	</c:if>
 
 </body>

@@ -26,6 +26,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class BothController_JYC {
 
+	private int startBlock = 1;
+	private int startPage = 1;
+
 	@Autowired
 	private IEmployNoticeDAO_JYC endao;
 
@@ -35,17 +38,16 @@ public class BothController_JYC {
 	@Autowired
 	private IMemberDAO_JYC memdao;
 	
-	@RequestMapping("/a")
+	@RequestMapping("/header")
 	public String header() {
 		return "header_JYC";
 	}
 	
-	@RequestMapping("/serviceMainBoth")
-	public String serviceMain(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("mid", "aaa");
-		return "serviceMainBoth_JYC";
+	@RequestMapping("/footer")
+	public String footer() {
+		return "footer_JYC";
 	}
+	
 	
 	@GetMapping("/searchResultNoMem")
 	public String searchResultMem(@RequestParam("search") String search, Model model) {
@@ -54,6 +56,7 @@ public class BothController_JYC {
 		model.addAttribute("comlist", comlist);
 		model.addAttribute("comcount", comlist.size());
 		
+		
 		List<EmployNotice> enlist = endao.searchEmployNoticeList(search);
 		model.addAttribute("enlist", enlist);
 		model.addAttribute("encount", enlist.size());
@@ -61,6 +64,7 @@ public class BothController_JYC {
 		List<Member> memlist = memdao.getMemberList(search);
 		model.addAttribute("memlist", memlist);
 		model.addAttribute("memcount", memlist.size());
+		
 		
 		return "searchResult_JYC";
 	}
@@ -79,7 +83,6 @@ public class BothController_JYC {
 		List<Member> memlist = memdao.getMemberList(search);
 		model.addAttribute("memlist", memlist);
 		model.addAttribute("memcount", memlist.size());
-		
 		
 		return "searchResult_JYC";
 	}
@@ -106,4 +109,5 @@ public class BothController_JYC {
 	public String registQuestionForm() {
 		return "registQuestionForm_JYC";
 	}
+	
 }

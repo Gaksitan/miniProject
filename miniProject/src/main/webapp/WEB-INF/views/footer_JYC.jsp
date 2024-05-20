@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +37,13 @@
 				<span>사업자등록번호:XXX-XX-XXXX</span>
 			</p>
 		</div>
-		<a href="/service/main">고객센터</a>
+		<c:if test="${cno == null }">
+		<a href="/service/mainMem">고객센터</a>
+		</c:if>
+		<c:if test="${cno != null }">
+		<a href="/service/mainCom">고객센터</a>
+		</c:if>
+
 	</footer>
 </body>
 </html>

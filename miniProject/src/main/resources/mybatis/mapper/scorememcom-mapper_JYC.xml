@@ -9,7 +9,4 @@
 		SELECT * FROM scorememcom WHERE cno = #{cno} ORDER BY smcregdate DESC; 
 	</select>
   	
-  	
-  	
-  	
 </mapper>  

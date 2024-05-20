@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.green.miniProject.dao.ICompanySectorDAO_JYC">
+	<select id="getCompanySectorNameList">
+		SELECT a.*, b.cno, b.cname FROM 
+		(SELECT * FROM companysector WHERE scname = (SELECT scname FROM companysector WHERE cno = 1111 LIMIT 1)) a 
+		INNER JOIN (SELECT * from company) b 
+		ON b.cno = a.cno;
+	</select>
+	
+</mapper>  
