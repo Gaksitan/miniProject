@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	boolean tf = (boolean)session.getAttribute("tf");
+	// boolean tf = (boolean)session.getAttribute("tf");
 	
 %>
 <!DOCTYPE html>
@@ -11,12 +11,7 @@
 <title>Insert title here</title>
 </head>
 <script>
-	const tf = <%=tf %>
-	if(tf == true){
-		alert("로그인 성공");
-	}else{
-		alert("로그인 실패");
-	}
+	
 </script>
 <body>
 <h1>로그인 페이지 개인회원용 헤더 위치</h1>
@@ -33,7 +28,7 @@
 			<th>비밀번호</th>
 			<td><input type="password" name="mpw" placeholder="비밀번호를 입력하세요."></td>
 			<td></td>
-			<td><a href="regForm">회원가입</a></td>
+			<td><a href="regFormMem">회원가입</a></td>
 		</tr>
 	</table>
 </form>

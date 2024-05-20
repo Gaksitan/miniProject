@@ -1,6 +1,6 @@
 package com.green.miniProject.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ public class Member {
 	
 	private String mtel;
 	
-	private Date mbirthDate;
+	private LocalDate mbirthDate;
 	
 	private String mname;
 	
@@ -28,7 +28,7 @@ public class Member {
 
 	private String maddr2;
 	
-	private Date mregDate;
+	private LocalDate mregDate;
 	
 	private int mstate;
 	

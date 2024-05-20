@@ -16,14 +16,14 @@
 <body>
 <h1>개인회원용 헤더</h1>
 <hr>
-<h2>내 이력서 관리<span><input type="button" value="이력서 작성"></span></h2>
+<h2>내 이력서 관리<span><input type="button" value="이력서 작성" onclick="writeResumePage()"></span></h2>
 <table border="1">
 	<tbody>
-	<c:forEach var="${resume }" items="${myResumeList }" varStatus="status">
+	<c:forEach var="resume" items="${myResumeList }" varStatus="status">
 		<tr>
 			<td>${resume.rregdate }</td>
 			<td><a href="myResumeDetail?rno=${resume.rno }">${resume.rtitle }
-			<c:if test="${resume.rmain == true }" >🔒</c:if>
+			<c:if test="${resume.rpublic == true }" >🔒</c:if>
 			</a></td>
 			<td><c:if test="${resume.rmain == true }" >
 			 	<input type="button" value="대표" id="main">
@@ -35,5 +35,10 @@
 	</c:forEach>
 	</tbody>
 </table>
+<script>
+	function writeResumePage(){
+		window.location.href = "myResumeDetail_JHY";
+	}
+</script>
 </body>
 </html>

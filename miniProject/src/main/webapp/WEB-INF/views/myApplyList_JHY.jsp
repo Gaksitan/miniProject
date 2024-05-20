@@ -1,14 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Áö¿ø ÇöÈ² ¸ñ·Ï ÆäÀÌÁö °³ÀÎÈ¸¿ø¿ë Çì´õ À§Ä¡</h1>
+<h1>ì§€ì› í˜„í™© ëª©ë¡ í˜ì´ì§€ ê°œì¸íšŒì›ìš© í—¤ë” ìœ„ì¹˜</h1>
 <hr>
-
+<h2>ì§€ì› í˜„í™© ëª©ë¡</h2>
+<table border="1">
+	<c:forEach var="applyResume" items="${myApplyList }" varStatus="status">
+		<tr>
+			<td>${applyResume.cname }</td>
+			<td>${applyResume.entitle }</td>
+			<td>${applyResume.applydate }</td>
+			<td><input type="button" name="scrap" value="ìŠ¤í¬ë©"></td>
+			<td>${applyResume.arpass }</td>
+			<td>${applyResume.ipass }</td>
+			<td><input type="button" name="score" value="í‰ì ì“°ê¸°"></td>
+		</tr>
+	</c:forEach>
+</table>
 </body>
 </html>

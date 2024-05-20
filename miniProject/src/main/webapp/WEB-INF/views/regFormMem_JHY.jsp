@@ -67,7 +67,7 @@
 		</tr>
 		<tr>
 			<th>구직여부</th>
-			<td><select name="msate">
+			<td><select name="mstate">
 				<option value="0">재직중</option>
 				<option value="1" selected="1">구직중</option>
 				<option value="2">관심없음</option>

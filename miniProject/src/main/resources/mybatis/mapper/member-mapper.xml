@@ -3,22 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.miniProject.dao.IMemberDao_JHY">
-	<!--
+	
 	<select id="loginCheck" resultType="com.green.miniProject.domain.Member">
     	select * from Member where mid = #{mid}
   	</select>
-  	 -->
-  	<!-- 
+  	
   	<select id="getResumeList" resultType="com.green.miniProject.domain.Resume">
-  		select * from resume
+  		select * from resume where mid = #{mid}
   	</select>
-  	 -->
   	
-  	<!-- 
-  	<insert id="" resultType="">
-  		insert into member values (member.mid, member.mpw, member.memail, member.mtel, member.mbirthDate, member.mname, member.maddr1, member.maddr2, member.mregDate, member.mstate, member.mgender)
+  	<select id="getResume" resultType="com.green.miniProject.domain.Resume">
+  		select * from resume where rno = #{rno}
+  	</select>
+  	
+  	<select id="getMember" resultType="com.green.miniProject.domain.Member">
+  		select * from Member where mid = #{mid}
+  	</select>
+  	
+  	<select id="applyResumeList">
+  		select c.cname, en.entitle, <!-- ar.applydate, --> ar.arpass, iv.ipass from employnotice en left join company c on c.cno = en.cno left join applyresume ar on ar.enno = en.enno left join interview iv on iv.arno = ar.arno left join resume r on r.rno = ar.rno left join member m on m.mid = r.mid 
+  		where m.mid = #{mid}
+  	</select>
+  	
+  	
+  	<insert id="regist">
+  		insert into member values (#{member.mid}, #{member.mpw}, #{member.memail}, #{member.mtel}, #{member.mbirthDate}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mregDate}, #{member.mstate}, #{member.mgender})
   	</insert>
-  	 -->
   	
+  	<insert id="writeResume">
+  		insert into resume values (null, #{resume.mid}, #{resume.rintro}, #{resume.rimgPath}, #{resume.rpublic}, #{resume.rtitle}, #{resume.rmain}, #{resume.rregdate})
+  	</insert>
+  	
+  	
+  	<update id="updateResume">
+  		update resume set rintro = #{resume.rintro}, rimgPath = #{resume.rimgPath}, rpublic = #{rpublic}, rtitle = #{resume.rtitle}, rmain = #{rmain}, rregdate = #{resume.rregdate} where rno = #{resume.rno}
+  	</update>
   	
 </mapper>  
