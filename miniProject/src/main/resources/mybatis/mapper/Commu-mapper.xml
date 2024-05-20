@@ -7,12 +7,29 @@
 		SELECT * From board WHERE mid is not null
 	</select>
 	<select id="getAllWhenCompany">
-		SELECT * From board WHERE cno is not null
+		SELECT * From board WHERE cmid is not null
 	</select>
 	<select id="detailDao">
-		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, b.cmid, m.mname
+		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, t.value
+		FROM board b
+		LEFT JOIN tag t ON b.bno = t.bno
+		WHERE b.bno = #{bno}
+<!--		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bregdate, b.bregdate, m.mname
 		FROM board b
 		LEFT JOIN member m ON b.`MID` = m.`MID`
-		WHERE b.bno = #{bno}
+		WHERE b.bno = #{bno}  -->
+	</select>
+	<insert id="insertContentWhenMem">
+		Insert into board values (null, #{mid}, #{title}, #{content}, 0, now(), now(), null)
+	</insert>
+	<select id="getBno">
+		SELECT bno FROM board where btitle = #{title} and bcontent = #{content}
+	</select>
+	<insert id="insertTagWhenMem">
+		Insert into tag values (null, #{mid}, #{tag}, #{bno})
+	</insert>
+	<select id="myList">
+		SELECT bno, btitle, blike, bregdate FROM board where mid = #{mid}
+		
 	</select>
 </mapper>  
