@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.green.miniProject.domain.Board;
+import com.green.miniProject.domain.BoardTag;
+import com.green.miniProject.domain.Notice;
 
 
 @Mapper
@@ -19,8 +21,6 @@ public interface ICommuDao_KHJ {
 	public Long getBno(@Param("title") String title, @Param("content") String content);
 	public int insertTagWhenMem(@Param("mid") String mid, @Param("tag") String tag, @Param("bno")Long bno);
 	public Board myList();
-
-	public List<Object> detailDao(long bno);
 	
 	//공지사항 관련 메서드
 	public List<Notice> getNoticeList(); 

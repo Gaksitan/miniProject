@@ -1,12 +1,8 @@
 package com.green.miniProject.controller;
 
 import java.lang.reflect.Type;
-import com.google.gson.reflect.TypeToken;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.green.miniProject.dao.ICommuDao_KHJ;
-import com.green.miniProject.domain.Board;
 import com.green.miniProject.domain.BoardTag;
-import com.green.miniProject.domain.Member;
-
+import com.green.miniProject.domain.Notice;
+import com.green.miniProject.domain.Tag;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import net.bytebuddy.description.type.TypeVariableToken;
 
 @Controller
 @RequestMapping("/commu")
