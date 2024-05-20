@@ -25,4 +25,6 @@ public class ServiceAnswer {
 	private String sqno;
 	private String sacontent;
 	private LocalDate saregdate;
+	
+
 }
