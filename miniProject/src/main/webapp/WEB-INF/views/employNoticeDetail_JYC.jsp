@@ -10,8 +10,16 @@
 	<%@ include file="./header_JYC.jsp" %>
 	
 	<main>
-	<h1><a href="/company/detail?cno=${company.cno }">${company.cname }</a></h1>
-	<c:if test="${mid != null }">
+	<c:if test="${mid == null && companyManager == null}">
+	<h1><a href="/company/detailNoneMem?cno=${company.cno }">${company.cname }</a></h1>
+	</c:if>
+	<c:if test="${mid != null}">
+	<h1><a href="/company/detailMem?cno=${company.cno }">${company.cname }</a></h1>
+	</c:if>
+	<c:if test="${companyManager != null}">
+	<h1><a href="/company/detailCom?cno=${company.cno }">${company.cname }</a></h1>
+	</c:if>
+	<c:if test="${companyManager != null }">
 	<c:if test="${scraptf == true }">
 	<input style="background:grey; color:black;" type="button" id="scrap" value="스크랩" onclick="location.href='/employnotice/deleteScrap?enno=${enno}'">
 	</c:if>

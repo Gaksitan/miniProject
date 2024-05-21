@@ -9,13 +9,13 @@
 <body>
 	<%@ include file="./header_JYC.jsp"%>
 	<main>
-		<c:if test="${cno == null }">
+		<c:if test="${companyManager == null }">
 			<form action="/service/searchMem">
 				<input type="search" placeholder="FAQ 검색" name="keyword"> <input
 					type="submit" value="검색">
 			</form>
 		</c:if>
-		<c:if test="${cno != null }">
+		<c:if test="${companyManager != null }">
 			<form action="/service/searchCom">
 				<input type="search" placeholder="FAQ 검색" name="keyword"> <input
 					type="submit" value="검색">
@@ -26,8 +26,8 @@
 			<tbody>
 				<c:forEach var="faq" items="${faqlist }">
 					<tr>
-						<td>${faq.faqquestion }</td>
-						<td>${faq.faqanswer }</td>
+						<td>${faq.qcname}</td>
+						<td><a href="/service/faqDetail?">${faq.faqquestion }</a></td>							
 					</tr>
 				</c:forEach>
 			</tbody>

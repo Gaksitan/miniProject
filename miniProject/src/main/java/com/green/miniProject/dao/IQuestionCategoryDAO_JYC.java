@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Param;
 public interface IQuestionCategoryDAO_JYC {
 
 	public Long getQcno(@Param("category") String category);
+	public String getQcname(@Param("qcno") Long qcno);
 }

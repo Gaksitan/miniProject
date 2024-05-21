@@ -10,5 +10,6 @@ import com.green.miniProject.domain.Member;
 
 @Mapper
 public interface IMemberDAO_JYC {
-	public List<Member> getMemberList(@Param("keyword") String keyword);
+	public List<Member> getMemberList(@Param("keyword") String keyword, @Param("page") Long page);
+	public int getCount(@Param("keyword") String keyword);
 }

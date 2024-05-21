@@ -5,12 +5,15 @@
 
 <mapper namespace="com.green.miniProject.dao.ICompanyDAO_JYC">
 	<select id="getCompanyList" resultType="com.green.miniProject.domain.Company">
-		SELECT * From company WHERE cname LIKE CONCAT('%', #{keyword}, '%');
+		SELECT * From company WHERE cname LIKE CONCAT('%', #{keyword}, '%') ORDER BY cname ASC LIMIT #{page}, 10;
 	</select>
 	<select id="getCompany" resultType="com.green.miniProject.domain.Company">
 		SELECT * From company WHERE cno = #{cno};
 	</select>
 	<select id="count">
 		SELECT IFNULL(COUNT(cno), 0) FROM company;
+	</select>
+	<select id="getCount">
+		SELECT COUNT(cno) FROM company WHERE cname LIKE CONCAT('%', #{keyword}, '%');
 	</select>
 </mapper>  

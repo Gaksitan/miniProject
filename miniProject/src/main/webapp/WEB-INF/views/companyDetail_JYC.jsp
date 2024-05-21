@@ -80,6 +80,7 @@
 				</tbody>
 			</table>
 		</c:if>
+		<c:if test="${mid != null }">
 		<form action="#" method="post">
 			<c:if test="${resumeList == null }">
 			<input type="button" onclick="alert('지원할 이력서가 존재하지 않습니다!');" value="지원하기">
@@ -88,6 +89,7 @@
 			<input type="button" onclick="apply()" value="지원하기">
 			</c:if>
 		</form>
+		</c:if>
 		<div id="application" style="background: black; display: none;">
 			<table>
 				<tbody>
@@ -101,6 +103,9 @@
 					</c:forEach>
 				</tbody>			
 			</table>
+			<form action="">
+				<input type="button" value="지원하기" onclick="">
+			</form>
 		</div>
 		<c:if test="${recommendList != null }">
 		<table>
