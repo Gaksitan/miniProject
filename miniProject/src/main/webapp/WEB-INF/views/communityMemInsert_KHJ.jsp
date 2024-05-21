@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<%@ include file="./header_JYC.jsp" %>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
    
@@ -50,5 +51,6 @@
 
 
     </script>
+    	<%@ include file="./footer_JYC.jsp" %>
 </body>
 </html>
