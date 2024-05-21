@@ -24,6 +24,8 @@ public interface IAdminDao_MSI {
 	
 	public List<ServiceQuestion> noAnswerList();
 	
+	public ServiceQuestion getQuestion(@Param("sqno")String sqno);
+	
 	public int writeServiceAnswer(@Param("sqno")String sqno, @Param("sacontent")String sacontent, @Param("saregdate")LocalDate saregdate);
 
 	public List<FAQ> getFaqList();

@@ -94,10 +94,15 @@ public class CommuController_KHJ {
 	public String communityMemInsert_KHJ(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 		
 		HttpSession session = request.getSession();
+		
 		String mid = (String)session.getAttribute("mid");
 		
 		Company company = (Company)session.getAttribute("company");
-        String cno = company.getCno();
+		String cno = null;
+		
+		if (company != null) {
+		    cno = company.getCno();
+		}
         
         
         if (userService.isUserBlacklisted(mid) || userService.isUserBlacklisted(cno) ) {

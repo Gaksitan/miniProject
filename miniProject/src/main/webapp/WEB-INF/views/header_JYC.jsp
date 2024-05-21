@@ -213,6 +213,7 @@ div img {
 					<li><a href="/indexCom">기업페이지</a></li>
 					<li><a href="/admin/blackList">차단관리</a></li>
 					<li><a href="/admin/serviceFAQ">고객센터</a></li>
+					<li><a href="/admin/infoAdmin">공지사항 관리</a></li>
 				</ul>
 			</nav>
 		</header>

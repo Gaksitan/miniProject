@@ -1,6 +1,7 @@
 package com.green.miniProject.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -37,8 +38,13 @@ public class AdminController_MSI {
 	
 	
 	@RequestMapping("/indexadmin")
-	public String indexadmin() {
+	public String indexadmin(Model model) {
 		//관리자용 인덱스 페이지
+		List<ServiceQuestion> list = adminDao.noAnswerList();
+		int count = list.size();
+		System.out.println(count);
+		model.addAttribute("count", count);
+		
 		return "indexAdmin_MSI";
 	}
 	
@@ -130,7 +136,7 @@ public class AdminController_MSI {
 		adminDao.writeNotice(ano,request.getParameter("ntitle"),request.getParameter("ncontent"), nregdate);
 		
 		
-		return "/admin/indexAdmin_MSI";
+		return "redirect:/commu";
 		
 	}
 	
@@ -161,7 +167,7 @@ public class AdminController_MSI {
 			System.out.println("공지 수정 실패");
 		}
 		
-		return "indexAdmin_MSI";
+		return "redirect:/commu";
 	}
 	
 	
@@ -177,7 +183,7 @@ public class AdminController_MSI {
 			System.out.println("공지 삭제 실패");
 		}
 		
-		return "indexAdmin_MSI";
+		return "redirect:/commu";
 	}
 	
 	
@@ -195,8 +201,13 @@ public class AdminController_MSI {
 	
 	//고객센터 질문 답변 작성 페이지
 	@RequestMapping("/serviceQuestionAnswer")
-	public String serviceQuestionAnswer() {
-	
+	public String serviceQuestionAnswer(HttpServletRequest request,Model model) {
+		String sqno = request.getParameter("sqno");
+		ServiceQuestion question = adminDao.getQuestion(sqno);
+
+		
+		model.addAttribute("question",question);
+		
 		return "serviceQuestionAnswer_MSI";
 	}
 	
@@ -213,7 +224,7 @@ public class AdminController_MSI {
 
 		adminDao.writeServiceAnswer(sqno,sacontent,saregdate);
 		
-		return "serviceQuestionNoAnswer_MSI";
+		return "redirect:/admin/serviceQuestionNoAnswer";
 	}
 	
 	
@@ -283,6 +294,15 @@ public class AdminController_MSI {
 	
 	
 	
+	
+	
+	@RequestMapping("/accountSearch")
+	public String accountSearch(HttpServletRequest request) {
+		String search = request.getParameter("search");
+		
+		
+		return "";
+	}
 	
 	
 	
