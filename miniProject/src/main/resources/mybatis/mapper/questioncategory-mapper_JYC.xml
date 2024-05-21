@@ -10,7 +10,9 @@
   	<select id="getQcname">
   		SELECT qcname FROM questioncategory WHERE qcno = #{qcno};
   	</select>
-  	
+  	<select id="getAllQuestionCategoryList" resultType="com.green.miniProject.domain.QuestionCategory">
+  		SELECT * FROM questioncategory;
+  	</select>
   	
   	
   	

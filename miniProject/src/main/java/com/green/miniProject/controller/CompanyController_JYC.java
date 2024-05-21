@@ -1,5 +1,7 @@
 package com.green.miniProject.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +29,7 @@ import com.green.miniProject.domain.Resume;
 import com.green.miniProject.domain.ScoreMemCom;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 
@@ -75,7 +80,7 @@ public class CompanyController_JYC {
 	}
 
 	@RequestMapping("/detailMem")
-	public String companyDetailMem(@RequestParam("cno") String cno, Model model, HttpServletRequest request) {
+	public String companyDetailMem(@RequestParam("cno") String cno, Model model, HttpSession session) {
 		Company company = comdao.getCompany(cno);
 		List<EmployNotice> enlist = endao.getEmployNoticeList(cno);
 		List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
@@ -88,7 +93,6 @@ public class CompanyController_JYC {
 			model.addAttribute("smclist", smclist);
 		}
 		
-		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mid");
 
 		List<Resume> resumeList = resumedao.getResumeList(mid);
@@ -107,18 +111,11 @@ public class CompanyController_JYC {
 		} catch (Exception e) {
 		}
 
-		
-		
-		try {
-			int count = subsdao.count(mid, cno);
-			if (count == 1) {
-				model.addAttribute("subscribetf", true);
-			} else {
-				model.addAttribute("subscribetf", false);
-			}
-
-		} catch (Exception e) {
-			model.addAttribute("subscribe", false);
+		int count = subsdao.count(mid, cno);
+		if(count >= 1) {
+			model.addAttribute("subscribetf", true);
+		}else {
+			model.addAttribute("subscribetf", false);
 		}
 
 		return "companyDetail_JYC";
@@ -148,23 +145,25 @@ public class CompanyController_JYC {
 		return "companyDetail_JYC";
 	}
 
-	@GetMapping("/subscribe")
-	public String subscribe(@RequestParam("cno") String cno, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String mid = (String) session.getAttribute("mid");
-
+	@PostMapping("/subscribe")
+	public void subscribe(@RequestBody Company company, HttpSession session, Model model, HttpServletResponse response) throws IOException {
+		String mid = (String)session.getAttribute("mid");
+		
+		String cno = company.getCno();
+		
 		subsdao.subscribeCompany(mid, cno);
-
-		return "redirect:/company/companyDetailMem";
+		
 	}
 
-	@GetMapping("/unsubscribe")
-	public String unsubscribe(@RequestParam("cno") String cno, HttpServletRequest request) {
+	@PostMapping("/unsubscribe")
+	public void unsubscribe(@RequestBody Company company, HttpSession session, Model model, HttpServletResponse response) throws IOException {
 
-		HttpSession session = request.getSession();
+		String cno = company.getCno();
+		
+		
 		String mid = (String) session.getAttribute("mid");
 
 		subsdao.unsubscribeCompany(mid, cno);
-		return "redirect:/company/companyDetailMem";
+		
 	}
 }

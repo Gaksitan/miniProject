@@ -7,7 +7,7 @@
 <mapper namespace="com.green.miniProject.dao.ISubscribeCompanyDAO_JYC">
 
 	<select id="count">
-		SELECT IFNULL(COUNT(sno), 0) FROM subscribecompany WHERE mid = #{mid} AND cno = #{cno} GROUP BY sno;
+		SELECT COUNT(sno) FROM subscribecompany WHERE mid = #{mid} AND cno = #{cno};
 	</select>
 	<insert id="subscribeCompany">
 		INSERT INTO subscribecompany VALUES (NULL, #{mid}, #{cno});

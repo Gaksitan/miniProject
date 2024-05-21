@@ -16,4 +16,6 @@ public interface IFAQDAO_JYC {
 
 	public List<FAQDetail> getFAQListTargetMem();
 	public List<FAQDetail> getFAQListTargetCom();
+	
+	public FAQDetail getFAQDetail(@Param("faqno") Long faqno);
 }

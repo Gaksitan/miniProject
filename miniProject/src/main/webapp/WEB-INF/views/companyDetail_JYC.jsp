@@ -10,16 +10,22 @@
 	<%@ include file="./header_JYC.jsp"%>
 	<main>
 		<h1>${company.cname }</h1>
+		<div id="unsubsDiv">
 		<c:if test="${subscribetf == true }">
 			<input type="button" value="구독"
 				style="color: black; background: red;"
-				onclick="location.href='/company/unsubcribe?cno=${company.cno}'">
+				onclick="unsubscribe(event)" id="unsbscribeBtn">
+				<!-- location.href='/company/unsubscribe?cno=${company.cno}' -->
 		</c:if>
+		</div>
+		<div id="subsDiv">
 		<c:if test="${subscribetf == false }">
 			<input type="button" value="구독"
 				style="color: black; background: gray;"
-				onclick="location.href='/company/subscribe?cno=${company.cno}'">
+				onclick="subscribe(event)" id="subscribeBtn">
+				<!-- location.href='/company/subscribe?cno=${company.cno}' -->
 		</c:if>
+		</div>
 		<p>${company.cintro }</p>
 		<input type="button" value="더보기">
 		<c:if test="${enlist != null }">
@@ -28,7 +34,15 @@
 					<c:forEach var="en" items="${enlist }" varStatus="status">
 						<tr>
 							<td>${status.count }</td>
-							<td>${en.entitle }</td>
+							<c:if test="${mid == null && companyManager == null }">
+							<td><a href="/employnotice/detailNoneMem?enno=${en.enno }">${en.entitle }</a></td>
+							</c:if>
+							<c:if test="${mid != null }">
+							<td><a href="/employnotice/detailMem?enno=${en.enno }">${en.entitle }</a></td>
+							</c:if>
+							<c:if test="${companyManager != null }">
+							<td><a href="/employnotice/detailNoneCom?enno=${en.enno }">${en.entitle }</a></td>
+							</c:if>
 							<td>${status.count }</td>
 						</tr>
 					</c:forEach>
@@ -90,14 +104,14 @@
 			</c:if>
 		</form>
 		</c:if>
-		<div id="application" style="background: black; display: none;">
+		<div id="application" style="display: none;">
 			<table>
 				<tbody>
 					<c:forEach var="resume" items="${resumeList }" varStatus="status">
-					<c:if test="${resume.rpublic == 1 }">
+					<c:if test="${resume.rpublic == true }">
 					<tr>
 						<td>${resume.rtitle }</td>
-						<td><input type="radio" name="checkReume"></td>
+						<td><input type="radio" name="checkResume"></td>
 					</tr>
 					</c:if>
 					</c:forEach>
@@ -127,6 +141,37 @@
 			const application = document.querySelector("#application");
 			application.style.display = 'block';
 		}
+		
+		function unsubscribe(event){
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', '/company/unsubscribe', true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onreadystatechange = function () {
+				location.href="/company/detailMem?cno=" + "${company.cno}";
+			};
+			const body = JSON.stringify({
+			 	cno: "${company.cno}"
+			});
+			
+			console.log("body : " + body)
+			console.log("cno : " + "${company.cno}")
+			xhr.send(body);
+		}
+		
+		function subscribe(event){
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', '/company/subscribe', true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onreadystatechange = function () {
+				location.href="/company/detailMem?cno=" + "${company.cno}";
+			};
+			
+			const body = JSON.stringify({
+			 	cno: "${company.cno}"
+			});
+			xhr.send(body);
+		}
+		
 	</script>
 
 </body>

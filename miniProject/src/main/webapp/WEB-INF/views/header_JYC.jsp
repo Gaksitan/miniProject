@@ -110,7 +110,7 @@ div img {
 					<div>
 					<select
 						onchange="if(this.value) location.href=(this.value)">
-						<option>${mid }님환영합니다</option>
+						<option value="#">${mid }님환영합니다</option>
 						<option value="/mem/updateMemberInfo">내 정보 관리</option>
 						<option value="/mem/subscribeAndScrapList">구독&amp;스크랩</option>
 						<option value="/service/myQuestionMem">내 문의사항</option>
@@ -121,7 +121,7 @@ div img {
 			</div>
 			<nav id="menu">
 				<ul>
-					<li><a href="/">채용공고</a></li>
+					<li><a href="/employnotice/list">채용공고</a></li>
 					<li><a href="/mem/myResumeList">내 이력서 관리</a></li>
 					<li><a href="/mem/myApplyList">지원현황</a></li>
 				</ul>
@@ -155,7 +155,7 @@ div img {
 					<div>
 					<select
 						onchange="if(this.value) location.href=(this.value)">
-						<option>${cno }님환영합니다</option>
+						<option value="#">${cno }님환영합니다</option>
 						<option value="/infoCom">기업 정보 관리</option>
 						<option value="/infoCM">인사담당자 정보 관리</option>
 						<option value="/subscribeComList">관심 구직자</option>
