@@ -44,9 +44,6 @@ public class CommuController_KHJ {
 
 	@Autowired
 	private LikeService service;
-
-	// 리퀘스트 매핑 수정 => /commu 입력 시 이동되게! (송이)
-
 	
 	@Autowired
 	private UserService userService;
@@ -202,11 +199,14 @@ public class CommuController_KHJ {
 	}
 
 	@RequestMapping("/replyInsert.do")
-	public String replyInsert(@RequestParam("bno") Long bno, @RequestParam("mid") String mid, @RequestParam("reply") String reply, Model model) {
+	public String replyInsert(@RequestParam("bno") Long bno, @RequestParam("reply") String reply, Model model, HttpSession session) {
+		
+		String mid = session.getAttribute("mid");
+		
 		System.out.println("bno = " + bno);
-		System.out.println("mid = " + mid);
 		System.out.println("reply = " + reply);
-		dao.insertReply(mid, reply, bno);
+		
+		dao.insertReplyWhenMem(mid, reply, bno);
 		
 		//return "redirect:/communityDetail_KHJ?bno=" + bno;
 		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;

@@ -30,8 +30,8 @@ public interface ICommuDao_KHJ {
 	
 	// 댓글 관련
 	public List<Reply> getAllReplyList(@Param("bno") long bno);
-	public void insertReply(@Param("mid") String mid, @Param("reply")String reply, @Param("bno")Long bno);
-	
+	public void insertReplyWhenMem(@Param("mid") String mid, @Param("reply")String reply, @Param("bno")Long bno);
+	public void insertReplyWhenCom(@Param("reply")String reply, @Param("cmid") String cmid, @Param("bno")Long bno);
 	
 	
 	//공지사항 관련 메서드
