@@ -45,8 +45,29 @@
 		Insert into tag values (null, #{mid}, #{tag}, #{bno})
 	</insert>
 	<select id="myList">
-		SELECT bno, btitle, blike, bregdate FROM board where mid = #{mid}
-		
+		SELECT bno, btitle, blike, bregdate FROM board where mid = #{mid}	
+	</select>
+	
+	<!-- 좋아요 관련 -->
+	<insert id="insertLikeMem">
+		Insert into Like_tb (lino, MID, bno) values (NULL, #{mid}, #{bno})
+	</insert>
+	<delete id="deleteLikeMem">
+		Delete from like_tb where mid = #{mid} and bno = #{bno}
+	</delete>
+	<update id="plusLikeOnBoard">
+		UPDATE board SET blike = blike + 1 WHERE bno = #{bno}
+	</update>
+	<update id="minusLikeOnBoard">
+		UPDATE board SET blike = blike - 1 WHERE bno = #{bno}		
+	</update>
+	
+	<!-- 댓글 관련 -->
+	<insert id="insertReply">
+		Insert into reply values (null, #{mid}, #{reply}, now(), now(), 0, null, #{bno})
+	</insert>
+	<select id="getAllReplyList">
+		SELECT * FROM reply where bno = #{bno}
 	</select>
 	
 	
