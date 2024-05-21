@@ -51,16 +51,23 @@ public class CommuController_KHJ {
 	//리퀘스트 매핑 수정 => /commu 입력 시 이동되게! (송이)
 
 	@RequestMapping("")
-	public String root(Model model) {
+	public String root(Model model, HttpSession session) {
 
-		String id = "개인회원";
-
-		if (id.equals("개인회원")) {
+		String mid = (String) session.getAttribute("mid");
+		
+		Company company = (Company) session.getAttribute("company");
+		String cno = null;
+		
+		if (company != null) {
+		    cno = company.getCno();
+		}
+        
+		if (mid != null) {
 
 			model.addAttribute("list", dao.getAllWhenMember());
 			System.out.println(model.addAttribute("list", dao.getAllWhenMember()));
 
-		} else if (id.equals("기업회원")) {
+		} else if (mid == null) {
 
 			model.addAttribute("list", dao.getAllWhenCompany());
 		}
