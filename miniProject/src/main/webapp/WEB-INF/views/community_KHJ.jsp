@@ -18,7 +18,8 @@ height : 15px;
 </style>
 </head>
 <body>
-	<h1>community</h1>
+	<%@ include file="./header_JYC.jsp" %>
+	<h1>community 게시판</h1>
 	<hr>
 	
 	<button type="button" onclick="location.href='/commu/communityMemInsert_KHJ'">게시글 작성하기</button>
@@ -81,5 +82,6 @@ height : 15px;
 			</c:forEach>
 		</tbody>
 	</table>
+		<%@ include file="./footer_JYC.jsp" %>
 </body>
 </html>
