@@ -34,16 +34,90 @@
     <!-- 관심 구직자 mapper -->
     
     
-    <select id="getApplyResumesByCompany" resultType="com.green.miniProject.domain.ApplyResume">
-        SELECT *
+        <resultMap id="ApplyResumeMap" type="com.green.miniProject.domain.ApplyResume">
+        <id property="arno" column="arno"/>
+        <result property="rno" column="rno"/>
+        <result property="enno" column="enno"/>
+        <result property="arpass" column="arpass"/>
+        <association property="member" javaType="com.green.miniProject.domain.Member">
+            <result property="mname" column="mname"/>
+            <result property="mstate" column="mstate"/>
+            <result property="mid" column="mid"/>
+        </association>
+        <association property="resume" javaType="com.green.miniProject.domain.Resume">
+            <result property="rtitle" column="rtitle"/>
+        </association>
+    </resultMap>
+    
+    <select id="getApplyResumesByCompany" resultMap="ApplyResumeMap">
+        SELECT ar.arno, ar.rno, ar.enno, ar.arpass,
+               m.mname, m.mstate, m.mid, 
+               r.rtitle
         FROM applyResume ar
+        JOIN RESUME r ON ar.rno = r.rno
+        JOIN MEMBER m ON r.MID = m.MID
         JOIN employNotice en ON ar.enno = en.enno
         WHERE en.cno = #{cno}
     </select>
+    
+    <!-- 지원받은 이력서 -->
+    
+    <select id="findInterestMember" resultType="com.green.miniProject.domain.InterestMember">
+        SELECT * FROM interestMember 
+        WHERE cno = #{cno} AND mid = #{mid}
+    </select>
+
+    <insert id="addInterestMember">
+        INSERT INTO interestMember (cno, mid) VALUES (#{cno}, #{mid})
+    </insert>
+
+    <delete id="deleteInterestMember">
+        DELETE FROM interestMember 
+        WHERE cno = #{cno} AND mid = #{mid}
+    </delete>
+    
+    <!-- 관심버튼 -->
     
     
     <select id="getEmployNoticesByCno" resultType="com.green.miniProject.domain.EmployNotice">
         SELECT * FROM employNotice WHERE cno = #{cno}
     </select>
     
+    <!-- 채용공고 리스트  -->
+    
+    <select id="getApplicantDetailByMid" resultType="com.green.miniProject.domain.Member">
+        SELECT *
+        FROM member
+        WHERE mid = #{mid}
+    </select>
+
+    <select id="getResumeListByMid" resultType="com.green.miniProject.domain.Resume">
+        SELECT *
+        FROM Resume
+        WHERE mid = #{mid}
+    </select>
+    
+    <select id="getSkillListByMid" resultType="com.green.miniProject.domain.Skill">
+        SELECT *
+        FROM Skill
+        WHERE mid = #{mid}
+    </select>
+    
+    <select id="getExperienceListByMid" resultType="com.green.miniProject.domain.Experience">
+        SELECT *
+        FROM Experience
+        WHERE mid = #{mid}
+    </select>
+    
+    <select id="getDegreeListByMid" resultType="com.green.miniProject.domain.Degree">
+        SELECT *
+        FROM Degree
+        WHERE mid = #{mid}
+    </select>
+    
+    <select id="getLinkListByMid" resultType="com.green.miniProject.domain.Link">
+        SELECT *
+        FROM Link
+        WHERE mid = #{mid}
+    </select>
 </mapper>

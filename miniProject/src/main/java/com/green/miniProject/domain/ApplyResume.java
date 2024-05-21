@@ -16,4 +16,7 @@ public class ApplyResume {
 	private Long rno;
 	private Long enno;
 	private int arpass;
+	
+    private Member member;
+    private Resume resume;
 }
