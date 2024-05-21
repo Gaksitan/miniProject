@@ -19,7 +19,7 @@
 	<main>
 		<h1>고객센터 질문 작성 페이지</h1>
 		
-		<c:if test="${cno != null }">
+		<c:if test="${companyManager != null }">
 		<form action="/service/registQuestionCom" method="post">
 		<select name="category">
 			<option>회원.계정</option>

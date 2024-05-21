@@ -94,12 +94,12 @@ table {
 					</c:forEach>
 				</tbody>
 			</table>
-			<c:forEach begin="1" end="${compage}" varStatus="status">
+			<c:forEach begin="1" end="${compage }" varStatus="status">
 				<input type="button" value="${status.count }" name="page"
 					onclick="location.href='/page/company?page=${status.count}&keyword=${keyword }&memcurrentpage=${memcurrentpage }&encurrentpage=${encurrentpage }'">
 			</c:forEach>
 		</div>
-		<c:if test="${cno == null }">
+		<c:if test="${companyManager == null }">
 			<div>
 				<div class="top">
 					<h2>사용자(${memcount })</h2>
@@ -128,7 +128,7 @@ table {
 						</c:forEach>
 					</tbody>
 				</table>
-				<c:forEach begin="1" end="${mempage}" varStatus="status">
+				<c:forEach begin="1" end="${mempage }" varStatus="status">
 				<input type="button" value="${status.count }" name="page"
 					onclick="location.href='/page/member?page=${status.count}&keyword=${keyword }&encurrentpage=${encurrentpage }&comcurrentpage=${comcurrentpage }'">
 			</c:forEach>

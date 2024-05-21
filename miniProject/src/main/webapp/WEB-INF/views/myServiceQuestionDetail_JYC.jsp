@@ -30,7 +30,7 @@
 	<input type="button" value="뒤로가기" style="color:blue" onclick="location.href='/service/myQuestionMem'">
 	<input type="button" value="삭제" style="color:red" onclick="location.href='/service/deleteServiceQuestionMem?sqno=${sq.sqno }'">
 	</c:if>
-	<c:if test="${cno != null }">
+	<c:if test="${companyManager != null }">
 	<input type="button" value="뒤로가기" style="color:blue" onclick="location.href='/service/myQuestionCom'">
 	<input type="button" value="삭제" style="color:red" onclick="location.href='/service/deleteServiceQuestionCom?sqno=${sq.sqno }'">
 	</c:if>
