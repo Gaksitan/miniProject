@@ -53,15 +53,15 @@ input[type="submit"]:hover {
 	<tbody>
 		<tr>
 			<td>카테고리</td>
-			<td>${qcno}</td>
+			<td>${question.qcname}</td>
 		</tr>
 		<tr>
 			<td>문의사항 제목</td>
-			<td>${sqtitle}</td>
+			<td>${question.sqtitle}</td>
 		</tr>
 		<tr>
 			<td>문의사항 내용</td>
-			<td>${sqcontent}</td>
+			<td>${question.sqcontent}</td>
 		</tr>
 				
 	</tbody>
@@ -69,7 +69,7 @@ input[type="submit"]:hover {
 
 
 <form action="/admin/serviceAnswer" method="post">
-	<input type="hidden" name="sqno" value=${sqno}><br>
+	<input type="hidden" name="sqno" value="${question.sqno}"><br>
 	<span>문의사항 답변 내용</span><br>
 	<textarea name="sacontent"></textarea><br>
 	<input type="submit" value="답변 등록">

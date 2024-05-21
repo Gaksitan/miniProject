@@ -79,7 +79,7 @@ section{
 	<div class="div4">
 		<h3>답변 안한 질문 수</h3>
 		<div id="circle">
-			<a href="/admin/serviceQuestionNoAnswer" id="circletext"><span>10건</span></a>
+			<a href="/admin/serviceQuestionNoAnswer" id="circletext"><span>${count}건</span></a>
 		</div>
 	</div>
 </section>

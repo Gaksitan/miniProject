@@ -35,6 +35,10 @@
 	<delete id="deleteBlackList">
 		delete from blackAccount where bano= #{bano}
 	</delete>
-	
+	<select id="getQuestion">
+		SELECT q.*, sq.qcname
+		FROM servicequestion q, questioncategory sq
+		WHERE q.qcno = sq.qcno AND sqno= #{sqno}
+	</select>
 	
 </mapper>  

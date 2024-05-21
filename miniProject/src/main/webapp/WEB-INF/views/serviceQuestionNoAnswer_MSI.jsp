@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,25 +27,21 @@
 		<tbody>
 			<c:forEach var="dto" items="${list}" varStatus="status">
 				<tr>
-					<td><a href="serviceQuestionDetail?sqno=${dto.sqno}">${dto.sqtitle}</a></td>
+					<td><a href="/admin/serviceQuestionAnswer?sqno=${dto.sqno}">${dto.sqtitle}</a></td>
 					<td>${dto.sqcontent}</td>
-					<c:choose>
-						<c:when test="${dto.mid != null}">
+					<c:if test="${dto.mid != null}">
 							<td>${dto.mid}</td>
-						</c:when>
-						<c:when test="${dto.cno != null}">
-							<td>${dto.cno}</td>
-						</c:when>
-					</c:choose>
+					</c:if>
+					<c:if test="${dto.cno != null}">
+						<td>${dto.cno}</td>
+					</c:if>		
 					<td>${dto.sqregdate}</td>
-					<c:choose>
-						<c:when test="${dto.mid != null}">
+					<c:if test="${dto.mid != null}">
 							<td>개인회원</td>
-						</c:when>
-						<c:when test="${dto.cno != null}">
-							<td>기업회원</td>
-						</c:when>
-					</c:choose>
+					</c:if>
+					<c:if test="${dto.cno != null}">
+						<td>기업회원</td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>

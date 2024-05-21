@@ -7,11 +7,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+input[type="text"] {
+    height: 15px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px; /* 테두리와 패딩을 제외한 실제 너비 */
+}
+
+
+/* 폼 그리드 스타일 */
+form {
+    max-width: 400px;
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px; /* 폼 주위의 간격 */
+    text-align :left;
+
+}
+
+</style>
 <body>
 <%@ include file="./header_JYC.jsp"%>
 
 
 <h1>블랙리스트 목록</h1>
+
+<form method="get" action="/admin/accountSearch">
+	계정 검색 : <input type="search" name="search" size="30"> 
+	<input type="submit" value="검색">
+</form>
+
 
 <h4>개인회원</h4>
 <table  border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">

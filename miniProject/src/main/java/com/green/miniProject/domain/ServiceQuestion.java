@@ -26,4 +26,20 @@ public class ServiceQuestion {
 	private String mid;
 	private String cno;
 	private Long qcno;
+	private String qcname;
+	
+	
+	public ServiceQuestion(Long sqno, String sqcontent, String sqtitle, boolean sqanswertf, LocalDateTime sqregdate,
+			String mid, String cno, Long qcno) {
+		this.sqno = sqno;
+		this.sqcontent = sqcontent;
+		this.sqtitle = sqtitle;
+		this.sqanswertf = sqanswertf;
+		this.sqregdate = sqregdate;
+		this.mid = mid;
+		this.cno = cno;
+		this.qcno = qcno;
+	}
+	
+	
 }
