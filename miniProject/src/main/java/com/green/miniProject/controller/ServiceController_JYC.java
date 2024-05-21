@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.miniProject.dao.IFAQDAO_JYC;
 import com.green.miniProject.dao.IQuestionCategoryDAO_JYC;
+import com.green.miniProject.dao.IServiceAnswerDAO_JYC;
 import com.green.miniProject.dao.IServiceQuestionDAO_JYC;
 import com.green.miniProject.domain.FAQ;
 import com.green.miniProject.domain.ServiceQuestion;
@@ -27,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
 public class ServiceController_JYC {
 	
 	@Autowired
-	private IQuestionCategoryDAO_JYC qc;
+	private IQuestionCategoryDAO_JYC qcdao;
 	
 	@Autowired
 	private IServiceQuestionDAO_JYC sqdao;
@@ -35,21 +36,21 @@ public class ServiceController_JYC {
 	@Autowired
 	private IFAQDAO_JYC faqdao;
 	
+	@Autowired
+	private IServiceAnswerDAO_JYC sadao;
+	
 	@GetMapping("/mainMem")
-	public String mainMem(HttpServletRequest request) {
+	public String mainMem(Model model) {
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("mid", "aaa");
-		
-		List<FAQ> faqlist = faqdao.getFAQListTargetMem();
+		model.addAttribute("faqlist", faqdao.getFAQListTargetMem());
 		
 		return "serviceMainBoth_JYC";
 	}
 	
 	@GetMapping("/mainCom")
-	public String mainCom() {
+	public String mainCom(Model model) {
 		
-		List<FAQ> faqlist = faqdao.getFAQListTargetCom();
+		model.addAttribute("faqlist", faqdao.getFAQListTargetCom());
 		
 		return "serviceMainBoth_JYC";
 	}
@@ -66,10 +67,9 @@ public class ServiceController_JYC {
 				.sqanswertf(false)
 				.sqregdate(LocalDateTime.now())
 				.mid((String)session.getAttribute("mid"))
-				.qcno(qc.getQcno(category)).build();
+				.qcno(qcdao.getQcno(category)).build();
 		sqdao.registServiceQuestionMem(sqBuilder);
 		
-		log.info(sqBuilder);
 		return "redirect:/service/myQuestionMem";
 	}
 	
@@ -84,7 +84,7 @@ public class ServiceController_JYC {
 				.sqanswertf(false)
 				.sqregdate(LocalDateTime.now())
 				.cno((String)session.getAttribute("cno"))
-				.qcno(qc.getQcno(category)).build();
+				.qcno(qcdao.getQcno(category)).build();
 		sqdao.registServiceQuestionCom(sqBuilder);
 		return "redirect:/service/myQuestionCom";
 	}
@@ -92,7 +92,9 @@ public class ServiceController_JYC {
 	@GetMapping("/searchMem")
 	public String searchMem(@RequestParam("keyword") String keyword, Model model) {
 		
-		model.addAttribute("faqlist", faqdao.searchFAQListTargetMem("keyword"));
+		model.addAttribute("faqlist", faqdao.searchFAQListTargetMem(keyword));
+		
+		log.info("faqlist : " + faqdao.searchFAQListTargetMem(keyword));
 		
 		return "serviceSearchResult_JYC";
 	}
@@ -100,7 +102,7 @@ public class ServiceController_JYC {
 	@GetMapping("/searchCom")
 	public String searchCom(@RequestParam("keyword") String keyword, Model model) {
 		
-		model.addAttribute("faqlist", faqdao.searchFAQListTargetCom("keyword"));
+		model.addAttribute("faqlist", faqdao.searchFAQListTargetCom(keyword));
 		return "serviceSearchResult_JYC";
 	}
 	
@@ -130,7 +132,14 @@ public class ServiceController_JYC {
 	@GetMapping("/serviceQuestionDetail")
 	public String serviceQuestionDetail(@RequestParam("sqno") Long sqno, Model model) {
 		
-		model.addAttribute("sq", sqdao.getServiceQuestion(sqno));
+		ServiceQuestion serviceQuestion = sqdao.getServiceQuestion(sqno);
+		
+		model.addAttribute("sq", serviceQuestion);
+		model.addAttribute("category", qcdao.getQcname(serviceQuestion.getQcno()));
+		
+		if (serviceQuestion.isSqanswertf()) {
+			model.addAttribute("answer", sadao.getSacontent(sqno));
+		}
 		
 		return "myServiceQuestionDetail_JYC";
 		

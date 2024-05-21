@@ -39,7 +39,11 @@ public class BothController_JYC {
 	private IMemberDAO_JYC memdao;
 	
 	@RequestMapping("/header")
-	public String header() {
+	public String header(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("companyManager", "1111");
+		
 		return "header_JYC";
 	}
 	
@@ -52,19 +56,36 @@ public class BothController_JYC {
 	@GetMapping("/searchResultNoMem")
 	public String searchResultMem(@RequestParam("search") String search, Model model) {
 		
-		List<Company> comlist = comdao.getCompanyList(search);
+		List<Company> comlist = comdao.getCompanyList(search, 0L);
 		model.addAttribute("comlist", comlist);
-		model.addAttribute("comcount", comlist.size());
+		model.addAttribute("comcount", comdao.getCount(search));
 		
+		double comcount = comdao.getCount(search);
+		double compage = Math.ceil(comcount / 10.0);
+		model.addAttribute("compage", compage);
 		
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(search);
+		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
 		model.addAttribute("enlist", enlist);
-		model.addAttribute("encount", enlist.size());
+		model.addAttribute("encount", endao.getCount(search));
 		
-		List<Member> memlist = memdao.getMemberList(search);
+		double encount = endao.getCount(search);
+		double enpage = Math.ceil(encount / 10.0);
+		
+		model.addAttribute("enpage", enpage);
+		model.addAttribute("keyword", search);
+		
+		List<Member> memlist = memdao.getMemberList(search, 0L);
 		model.addAttribute("memlist", memlist);
-		model.addAttribute("memcount", memlist.size());
+		model.addAttribute("memcount", memdao.getCount(search));
 		
+		double memcount = memdao.getCount(search);
+		double mempage = Math.ceil(memcount / 10.0);
+		
+		model.addAttribute("mempage", mempage);
+		
+		model.addAttribute("memcurrentpage", 1);
+		model.addAttribute("comcurrentpage", 1);
+		model.addAttribute("encurrentpage", 1);
 		
 		return "searchResult_JYC";
 	}
@@ -72,17 +93,36 @@ public class BothController_JYC {
 	@GetMapping("/searchResultMem")
 	public String searchResultMem(Model model, @RequestParam("search") String search) {
 		
-		List<Company> comlist = comdao.getCompanyList(search);
+		List<Company> comlist = comdao.getCompanyList(search, 0L);
 		model.addAttribute("comlist", comlist);
-		model.addAttribute("comcount", comlist.size());
+		model.addAttribute("comcount", comdao.getCount(search));
 		
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(search);
+		double comcount = comdao.getCount(search);
+		double compage = Math.ceil(comcount / 10.0);
+		model.addAttribute("compage", compage);
+		
+		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
 		model.addAttribute("enlist", enlist);
-		model.addAttribute("encount", enlist.size());
+		model.addAttribute("encount", endao.getCount(search));
 		
-		List<Member> memlist = memdao.getMemberList(search);
+		double encount = endao.getCount(search);
+		double enpage = Math.ceil(encount / 10.0);
+		
+		model.addAttribute("enpage", enpage);
+		model.addAttribute("keyword", search);
+		
+		List<Member> memlist = memdao.getMemberList(search, 0L);
 		model.addAttribute("memlist", memlist);
-		model.addAttribute("memcount", memlist.size());
+		model.addAttribute("memcount", memdao.getCount(search));
+		
+		model.addAttribute("memcurrentpage", 1);
+		model.addAttribute("comcurrentpage", 1);
+		model.addAttribute("encurrentpage", 1);
+		
+		double memcount = memdao.getCount(search);
+		double mempage = Math.ceil(memcount / 10.0);
+		
+		model.addAttribute("mempage", mempage);
 		
 		return "searchResult_JYC";
 	}
@@ -90,17 +130,36 @@ public class BothController_JYC {
 	@GetMapping("/searchResultCom")
 	public String searchResultCom(@RequestParam("search") String search, Model model) {
 		
-		List<Company> comlist = comdao.getCompanyList(search);
+		List<Company> comlist = comdao.getCompanyList(search, 0L);
 		model.addAttribute("comlist", comlist);
-		model.addAttribute("comcount", comlist.size());
+		model.addAttribute("comcount", comdao.getCount(search));
 		
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(search);
+		double comcount = comdao.getCount(search);
+		double compage = Math.ceil(comcount / 10.0);
+		model.addAttribute("compage", compage);
+		
+		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
 		model.addAttribute("enlist", enlist);
-		model.addAttribute("encount", enlist.size());
+		model.addAttribute("encount", endao.getCount(search));
 		
-		List<Member> memlist = memdao.getMemberList(search);
+		double encount = endao.getCount(search);
+		double enpage = Math.ceil(encount / 10.0);
+		
+		model.addAttribute("enpage", enpage);
+		model.addAttribute("keyword", search);
+		
+		List<Member> memlist = memdao.getMemberList(search, 0L);
 		model.addAttribute("memlist", memlist);
-		model.addAttribute("memcount", memlist.size());
+		model.addAttribute("memcount", memdao.getCount(search));
+		
+		double memcount = memdao.getCount(search);
+		double mempage = Math.ceil(memcount / 10.0);
+		
+		model.addAttribute("memcurrentpage", 1);
+		model.addAttribute("comcurrentpage", 1);
+		model.addAttribute("encurrentpage", 1);
+		
+		model.addAttribute("mempage", mempage);
 		
 		return "searchResult_JYC";
 	}

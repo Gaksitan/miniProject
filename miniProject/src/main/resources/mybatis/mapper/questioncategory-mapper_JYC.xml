@@ -7,6 +7,9 @@
 	<select id="getQcno">
 		SELECT qcno FROM questioncategory WHERE qcname = #{category};
   	</select>
+  	<select id="getQcname">
+  		SELECT qcname FROM questioncategory WHERE qcno = #{qcno};
+  	</select>
   	
   	
   	
