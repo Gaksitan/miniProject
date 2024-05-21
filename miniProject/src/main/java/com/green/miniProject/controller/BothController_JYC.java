@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.green.miniProject.dao.ICompanyDAO_JYC;
 import com.green.miniProject.dao.IEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.IMemberDAO_JYC;
+import com.green.miniProject.dao.IQuestionCategoryDAO_JYC;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.EmployNotice;
 import com.green.miniProject.domain.Member;
+import com.green.miniProject.domain.QuestionCategory;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -38,11 +40,14 @@ public class BothController_JYC {
 	@Autowired
 	private IMemberDAO_JYC memdao;
 	
+	@Autowired
+	private IQuestionCategoryDAO_JYC qcdao;
+	
 	@RequestMapping("/header")
 	public String header(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("companyManager", "1111");
+		session.setAttribute("mid", "aaa");
 		
 		return "header_JYC";
 	}
@@ -165,7 +170,12 @@ public class BothController_JYC {
 	}
 	
 	@GetMapping("/registQuestionForm")
-	public String registQuestionForm() {
+	public String registQuestionForm(Model model) {
+		
+		log.info("categoryList : " + qcdao.getAllQuestionCategoryList());
+		model.addAttribute("categoryList", qcdao.getAllQuestionCategoryList());
+		
+		
 		return "registQuestionForm_JYC";
 	}
 	

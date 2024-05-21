@@ -4,14 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.green.miniProject.dao.IEmployNoticeDAO_JYC">
+	<select id="getAllEmployNoticeList">
+		SELECT *, DATEDIFF(enenddate, NOW()) AS date_diff FROM employnotice ORDER BY date_diff ASC;
+	</select>
 	<select id="searchEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY enregdate DESC LIMIT #{page}, 10;
 	</select>
 	<select id="getEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE cno = #{cno};
 	</select>
-	<select id="getEmployNotice" resultType="com.green.miniProject.domain.EmployNotice">
-		SELECT * FROM employnotice WHERE cno = #{cno} AND enno = #{enno};
+	<select id="getEmployNotice" resultType="com.green.miniProject.domain.EmployNoticeDetail">
+		SELECT en.*, com.cname FROM employnotice en INNER JOIN company com ON en.cno = com.cno WHERE enno = #{enno};
 	</select>
 	<select id="getCount">
 		SELECT COUNT(enno) FROM employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%');

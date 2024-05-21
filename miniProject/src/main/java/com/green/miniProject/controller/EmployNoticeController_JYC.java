@@ -53,56 +53,97 @@ public class EmployNoticeController_JYC {
 	@Autowired
 	private IScrapEmployNoticeDAO_JYC scrapdao;
 	
-	@GetMapping("/detailNoneMem")
-	public String detailNoneMem(@RequestParam("cno") String cno, @RequestParam("enno") Long enno, Model model) {
+	@GetMapping("/list")
+	public String employNoticeList(Model model) {
 		
-		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(cno, enno));
-		model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
-		model.addAttribute("experienceEmployNoticeList", experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
-		model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
-		model.addAttribute("welfareEmployNoticeList", welfareEmployNoticeDao.getWelfareEmployNoticeList(enno));
-		model.addAttribute("preferenceEmployNoticeList", preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno));
-		model.addAttribute("certificateEmployNoticeList", certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
-		model.addAttribute("company", companyDao.getCompany(cno));
+		model.addAttribute("employNoticeList", employNoticeDao.getAllEmployNoticeList());
+		return "employNoticeList_JYC";
+	}
+	
+	@GetMapping("/detailNoneMem")
+	public String detailNoneMem(@RequestParam("enno") Long enno, Model model) {
+		
+		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
+		if(!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
+		}
+		if(!experienceEmployNoticeDao.getExperienceEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("experienceEmployNoticeList", experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
+		}
+		if (!skillEmployNoticeDao.getSkillEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
+		}
+		if (!welfareEmployNoticeDao.getWelfareEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("welfareEmployNoticeList", welfareEmployNoticeDao.getWelfareEmployNoticeList(enno));
+		}
+		if (!preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("preferenceEmployNoticeList", preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno));
+		}
+		if (!certificateEmployNoticeDao.getCertificateEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("certificateEmployNoticeList", certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
+		}
 		
 		return "employNoticeDetail_JYC";
 	}
 	
 	@GetMapping("/detailMem")
-	public String detailMem(@RequestParam("cno") String cno, @RequestParam("enno") Long enno, Model model, HttpServletRequest request) {
+	public String detailMem(@RequestParam("enno") Long enno, Model model, HttpServletRequest request) {
 		
-		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(cno, enno));
-		model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
-		model.addAttribute("experienceEmployNoticeList", experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
-		model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
-		model.addAttribute("welfareEmployNoticeList", welfareEmployNoticeDao.getWelfareEmployNoticeList(enno));
-		model.addAttribute("preferenceEmployNoticeList", preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno));
-		model.addAttribute("certificateEmployNoticeList", certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
-		model.addAttribute("company", companyDao.getCompany(cno));
+		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
+		if(!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
+		}
+		if(!experienceEmployNoticeDao.getExperienceEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("experienceEmployNoticeList", experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
+		}
+		if (!skillEmployNoticeDao.getSkillEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
+		}
+		if (!welfareEmployNoticeDao.getWelfareEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("welfareEmployNoticeList", welfareEmployNoticeDao.getWelfareEmployNoticeList(enno));
+		}
+		if (!preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("preferenceEmployNoticeList", preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno));
+		}
+		if (!certificateEmployNoticeDao.getCertificateEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("certificateEmployNoticeList", certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
+		}
 		
 		HttpSession session = request.getSession();
 		String mid = (String)session.getAttribute("mid");
 		
-		int count = scrapdao.count(enno, mid);
-		if(count == 1) {
+		try {
+			int count = scrapdao.count(enno, mid);
 			model.addAttribute("scraptf", true);
-		}else {
+			
+		}catch (Exception e) {
 			model.addAttribute("scraptf", false);
 		}
 		return "employNoticeDetail_JYC";
 	}
 	
 	@GetMapping("/detailCom")
-	public String detailCom(@RequestParam("cno") String cno, @RequestParam("enno") Long enno, Model model) {
+	public String detailCom(@RequestParam("enno") Long enno, Model model) {
 		
-		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(cno, enno));
-		model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
-		model.addAttribute("experienceEmployNoticeList", experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
-		model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
-		model.addAttribute("welfareEmployNoticeList", welfareEmployNoticeDao.getWelfareEmployNoticeList(enno));
-		model.addAttribute("preferenceEmployNoticeList", preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno));
-		model.addAttribute("certificateEmployNoticeList", certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
-		model.addAttribute("company", companyDao.getCompany(cno));
+		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
+		if(!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
+		}
+		if(!experienceEmployNoticeDao.getExperienceEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("experienceEmployNoticeList", experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
+		}
+		if (!skillEmployNoticeDao.getSkillEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
+		}
+		if (!welfareEmployNoticeDao.getWelfareEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("welfareEmployNoticeList", welfareEmployNoticeDao.getWelfareEmployNoticeList(enno));
+		}
+		if (!preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("preferenceEmployNoticeList", preferenceEmployNoticeDao.getPreferenceEmployNoticeList(enno));
+		}
+		if (!certificateEmployNoticeDao.getCertificateEmployNoticeList(enno).isEmpty()) {
+			model.addAttribute("certificateEmployNoticeList", certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
+		}
 		
 		return "employNoticeDetail_JYC";
 	}

@@ -37,14 +37,14 @@ main {
 			<thead>
 				<tr>
 					<th>카테고리</th>
-					<th>답변</th>
+					<th>질문</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="faq" items="${faqlist }" varStatus="status">
 					<tr>
 						<td>${faq.qcname }</td>
-						<td><a href="#">${faq.faqanswer }</a></td>
+						<td><a href="/service/faqDetail?faqno=${faq.faqno }">${faq.faqquestion }</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -70,7 +70,7 @@ main {
 				<c:forEach var="faq" items="${faqlist }" varStatus="status">
 					<tr>
 						<td>${faq.qcname }</td>
-						<td><a href="#">${faq.question }</a></td>
+						<td><a href="/service/faqDetail?faqno=${faq.faqno }">${faq.question }</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

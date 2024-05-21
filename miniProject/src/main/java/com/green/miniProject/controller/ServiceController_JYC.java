@@ -56,9 +56,10 @@ public class ServiceController_JYC {
 	}
 	
 	@PostMapping("/registQuestionMem")
-	public String registQuestionMem(ServiceQuestion sq, @RequestParam("category") String category, HttpServletRequest request) {
+	public String registQuestionMem(ServiceQuestion sq, @RequestParam("qcno") Long qcno, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
+		
 		
 		
 		ServiceQuestion sqBuilder = ServiceQuestion.builder()
@@ -67,7 +68,8 @@ public class ServiceController_JYC {
 				.sqanswertf(false)
 				.sqregdate(LocalDateTime.now())
 				.mid((String)session.getAttribute("mid"))
-				.qcno(qcdao.getQcno(category)).build();
+				.qcno(qcno)
+				.build();
 		sqdao.registServiceQuestionMem(sqBuilder);
 		
 		return "redirect:/service/myQuestionMem";
@@ -159,6 +161,15 @@ public class ServiceController_JYC {
 		sqdao.deleteServiceQuestion(sqno);
 		
 		return "redirect:/service/myQuestionCom";
+	}
+	
+	@GetMapping("/faqDetail")
+	public String faqDetail(@RequestParam("faqno") Long faqno, Model model) {
+		
+		model.addAttribute("faqDto" , faqdao.getFAQDetail(faqno));
+		
+		return "faqDetail_JYC";
+		
 	}
 	
 

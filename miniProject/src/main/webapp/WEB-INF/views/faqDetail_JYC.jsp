@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="./header_JYC.jsp"%>
+	
+	<%@ include file="./header_JYC.jsp" %>
+	
 	<main>
+		
 		<c:if test="${companyManager == null }">
 			<form action="/service/searchMem">
 				<input type="search" placeholder="FAQ 검색" name="keyword"> <input
@@ -21,19 +24,14 @@
 					type="submit" value="검색">
 			</form>
 		</c:if>
-
-		<table>
-			<tbody>
-				<c:forEach var="faq" items="${faqlist }">
-					<tr>
-						<td>${faq.qcname}</td>
-						<td><a href="/service/faqDetail?faqno=${faq.faqno }">${faq.faqquestion }</a></td>							
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		
+		<h2>${faqDto.faqquestion }</h2>
+		<span>${faqDto.qcname }</span>	
+		<p>${faqDto.faqanswer }
+		
 	</main>
-
-	<%@ include file="./footer_JYC.jsp"%>
+	
+	<%@ include file="./footer_JYC.jsp" %>
+	
 </body>
 </html>
