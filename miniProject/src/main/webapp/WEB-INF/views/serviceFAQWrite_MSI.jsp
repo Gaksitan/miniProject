@@ -59,6 +59,9 @@ input[type="submit"]:hover , input[type="button"]:hover {
 
 </style>
 <body>
+
+<%@ include file="./header_JYC.jsp"%>
+
 <h1>FAQ작성페이지</h1>
 
 <form action="/admin/writeFAQ" method="post" style="width: 400px;">
@@ -91,6 +94,6 @@ input[type="submit"]:hover , input[type="button"]:hover {
 
 
 
-
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

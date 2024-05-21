@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="./header_JYC.jsp"%>
+
+
 <h1>공지사항 상세페이지</h1>
 
 <div>
@@ -45,6 +48,6 @@
     </div>
 </c:if>
 
-
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

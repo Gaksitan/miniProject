@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%@ include file="./header_JYC.jsp"%>
+
 <h1>FAQ 관리페이지</h1>
 
 <table  border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
@@ -56,6 +59,6 @@
 	<a href="/admin/serviceQuestionNoAnswer">미답변 질문 확인하기</a>
 </div>
 
-
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

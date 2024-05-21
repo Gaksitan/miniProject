@@ -59,6 +59,7 @@ section{
 
 </style>
 <body>
+<%@ include file="./header_JYC.jsp"%>
 
 <h1>Admin IndexPage</h1>
 
@@ -163,6 +164,8 @@ section{
 	  }
 	});
 </script>
+
+<%@ include file="./footer_JYC.jsp"%>
 
 </body>
 </html>

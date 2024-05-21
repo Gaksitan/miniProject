@@ -73,6 +73,9 @@ input[type="submit"]:hover , input[type="button"]:hover {
 
 
 <body>
+
+<%@ include file="./header_JYC.jsp"%>
+
 <h1>공지사항 작성,수정 폼</h1>
 
 <!-- <form action="/admin/writeNotice" method="get" style="width: 400px;">
@@ -118,6 +121,8 @@ input[type="submit"]:hover , input[type="button"]:hover {
         </form>
     </c:otherwise>
 </c:choose>
+
+<%@ include file="./footer_JYC.jsp"%>
 
 </body>
 </html>
