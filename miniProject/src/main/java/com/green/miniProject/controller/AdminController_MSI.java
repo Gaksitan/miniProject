@@ -38,8 +38,13 @@ public class AdminController_MSI {
 	
 	
 	@RequestMapping("/indexadmin")
-	public String indexadmin() {
+	public String indexadmin(Model model) {
 		//관리자용 인덱스 페이지
+		List<ServiceQuestion> list = adminDao.noAnswerList();
+		int count = list.size();
+		System.out.println(count);
+		model.addAttribute("count", count);
+		
 		return "indexAdmin_MSI";
 	}
 	
@@ -289,6 +294,15 @@ public class AdminController_MSI {
 	
 	
 	
+	
+	
+	@RequestMapping("/accountSearch")
+	public String accountSearch(HttpServletRequest request) {
+		String search = request.getParameter("search");
+		
+		
+		return "";
+	}
 	
 	
 	
