@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ include file="./header_JYC.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +31,8 @@
   <tbody>
     <c:forEach items="${allList}" var="item">
         <tr>
-            <td><a href="applicantDetail">${item.member.mname}</a></td>
-            <td><a href="applyResumeDetail">${item.resume.rtitle}</a></td>
+            <td><a href="applicantDetail?mid=${item.mid}">${item.member.mname}</a></td>
+            <td><a href="applyResumeDetail?mid=${item.mid}">${item.resume.rtitle}</a></td>
             <td><input type="button" value="관심" onclick="removeInterest(${item.imno})"></td>
             <td>${item.member.mstate}</td>
         </tr>
@@ -41,3 +41,4 @@
   </table>
 </body>
 </html>
+<%@ include file="./footer_JYC.jsp" %>

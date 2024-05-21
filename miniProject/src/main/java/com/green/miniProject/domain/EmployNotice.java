@@ -27,4 +27,7 @@ public class EmployNotice {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enregdate;
     private String cno;
+    
+    private Long applicant_count;
+    
 }
