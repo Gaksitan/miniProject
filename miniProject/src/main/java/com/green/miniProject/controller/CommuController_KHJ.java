@@ -10,17 +10,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.green.miniProject.dao.ICommuDao_KHJ;
 import com.green.miniProject.domain.Board;
 import com.green.miniProject.domain.BoardTag;
+
 import com.green.miniProject.domain.Like;
+
+import com.green.miniProject.domain.Company;
+
 import com.green.miniProject.domain.Notice;
 import com.green.miniProject.domain.Reply;
 import com.green.miniProject.domain.Tag;
+
 import com.green.miniProject.service.LikeService;
+
+import com.green.miniProject.service.UserService;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -32,10 +41,18 @@ public class CommuController_KHJ {
 	@Autowired
 	private ICommuDao_KHJ dao;
 
+
 	@Autowired
 	private LikeService service;
 
 	// 리퀘스트 매핑 수정 => /commu 입력 시 이동되게! (송이)
+
+	
+	@Autowired
+	private UserService userService;
+	
+	//리퀘스트 매핑 수정 => /commu 입력 시 이동되게! (송이)
+
 	@RequestMapping("")
 	public String root(Model model) {
 
@@ -67,11 +84,36 @@ public class CommuController_KHJ {
 
 	}
 
-	@RequestMapping("/communityMemInsert_KHJ")
-	public String communityMemInsert_KHJ() {
 
+
+	
+	
+	//차단계정은 게시물 작성할수없게 수정하였음
+
+	@RequestMapping("/communityMemInsert_KHJ")
+	public String communityMemInsert_KHJ(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+		
+		HttpSession session = request.getSession();
+		String mid = (String)session.getAttribute("mid");
+		
+		Company company = (Company)session.getAttribute("company");
+        String cno = company.getCno();
+        
+        
+        if (userService.isUserBlacklisted(mid) || userService.isUserBlacklisted(cno) ) {
+            redirectAttributes.addFlashAttribute("errorMessage", "차단된 해당 ID는 게시글을 작성할 수 없습니다.");
+            return "redirect:/commu";
+        }
+        
+		
 		return "communityMemInsert_KHJ";
 	}
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping("/communityDetail_KHJ")
 	public String communityDetail_KHJ(@RequestParam("bno") Long bno, Model model) {

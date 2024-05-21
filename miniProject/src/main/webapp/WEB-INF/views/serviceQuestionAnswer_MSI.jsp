@@ -45,6 +45,8 @@ input[type="submit"]:hover {
 
 </style>
 <body>
+<%@ include file="./header_JYC.jsp"%>
+
 <h1>고객센터 질문 답변 작성 페이지</h1>
 
 <table width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
@@ -72,6 +74,9 @@ input[type="submit"]:hover {
 	<textarea name="sacontent"></textarea><br>
 	<input type="submit" value="답변 등록">
 </form>
+
+<%@ include file="./footer_JYC.jsp"%>
+
 </body>
 </html>
 

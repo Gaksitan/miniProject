@@ -5,7 +5,7 @@
   
 
 <mapper namespace="com.green.miniProject.dao.IAdminDao_MSI">
-	<select id="adminDao">
+	<select id="getAdminDao">
 		select * from admin where aid= #{param1}
 	</select>
 	<insert id="writeNotice">
@@ -29,7 +29,12 @@
 	<insert id="writeFAQ">
 		insert into faq values(null, #{faq.faqtitle}, #{faq.faqquestion}, #{faq.faqanswer}, #{faq.qcno}, #{faq.faqtarget})
 	</insert>
-	
+	<select id="getBlackList">
+		select * from blackAccount
+	</select>
+	<delete id="deleteBlackList">
+		delete from blackAccount where bano= #{bano}
+	</delete>
 	
 	
 </mapper>  

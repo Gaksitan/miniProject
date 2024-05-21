@@ -209,10 +209,10 @@ div img {
 			</div>
 			<nav id="menu">
 				<ul>
-					<li><a href="mem/indexMem">개인페이지</a></li>
+					<li><a href="/mem/indexMem">개인페이지</a></li>
 					<li><a href="/indexCom">기업페이지</a></li>
 					<li><a href="/admin/blackList">차단관리</a></li>
-					<li><a href="/service/mainAdmin">고객센터</a></li>
+					<li><a href="/admin/serviceFAQ">고객센터</a></li>
 				</ul>
 			</nav>
 		</header>

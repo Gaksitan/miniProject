@@ -22,6 +22,16 @@ height : 15px;
 	<h1>community 게시판</h1>
 	<hr>
 	
+	
+	<!-- 세션ID가 블랙리스트에 있는 ID라면 게시글 작성하기 버튼을 누르면 알림창이 뜨면서 작성페이지로 이동못하게 함 -->
+	<c:if test="${not empty errorMessage}">
+        <script>
+            alert('${errorMessage}');
+        </script>
+    </c:if>
+    
+    
+	
 	<button type="button" onclick="location.href='/commu/communityMemInsert_KHJ'">게시글 작성하기</button>
 	<input placeholder="작성자, 게시물 제목"></input><button type="submit" class="s1"><img src="/resources/img_KHJ/돋보기.png"/></button>
 	<select>
@@ -75,7 +85,17 @@ height : 15px;
 				<tr>
 					<td>${status.count }</td>
 					<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}</a></td>
-					<td>${board.mid}</td>
+					<c:choose>
+					    <c:when test="${board.mid != null}">
+					        <td>${board.mid}</td>
+					    </c:when>
+					    <c:when test="${board.cmid != null}">
+					        <td>${board.cmid}</td>
+					    </c:when>
+					    <c:otherwise>
+					        <td>No ID available</td>
+					    </c:otherwise>
+					</c:choose>
 					<td>${board.bregdate }</td>
 					<td>${board.blike }</td>
 				</tr>

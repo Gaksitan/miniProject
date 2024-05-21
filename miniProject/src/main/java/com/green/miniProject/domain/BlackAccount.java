@@ -23,4 +23,5 @@ public class BlackAccount {
 	private String cno;
 	private String ano;
 	private LocalDate bregdate;
+	private String cmid;
 }
