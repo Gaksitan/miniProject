@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="./header_JYC.jsp"%>
 
 <h1>질문 미답변 리스트</h1>
 
@@ -47,5 +48,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+<%@ include file="./footer_JYC.jsp"%>	
 </body>
 </html>

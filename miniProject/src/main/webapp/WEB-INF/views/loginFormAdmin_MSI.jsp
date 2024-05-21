@@ -47,6 +47,8 @@ div {
 
 </style>
 <body>
+<%@ include file="./header_JYC.jsp"%>
+
 <h2>관리자 로그인 화면</h2>
 <div>
 	<form method="get" action="/admin/login">
@@ -63,7 +65,18 @@ div {
 	</form>
 </div>
 
+<%
+    // errorMessage가 존재하고 빈 문자열이 아닌 경우에만 alert 창을 띄움
+    String errorMessage = (String)request.getAttribute("errorMessage");
+    if (errorMessage != null && !errorMessage.trim().isEmpty()) {
+%>
+<script>
+    alert("<%= errorMessage %>");
+</script>
+<%
+    }
+%>
 
-
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

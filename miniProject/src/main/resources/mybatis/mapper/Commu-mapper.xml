@@ -4,10 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.miniProject.dao.ICommuDao_KHJ">
 	<select id="getAllWhenMember">
-		SELECT * From board WHERE mid is not null
+		<!-- SELECT * From board WHERE mid is not null -->
+		<!-- 차단당한 mid, cmid는 글이 안뜨게끔 쿼리 수정 -->
+		SELECT b.*
+		FROM board b
+		LEFT JOIN blackAccount ba 
+		ON b.mid = ba.mid
+		LEFT JOIN blackAccount bc
+		ON b.cmid = bc.cmid
+		WHERE ba.mid IS NULL AND bc.cmid IS NULL and b.mid is not null
 	</select>
 	<select id="getAllWhenCompany">
-		SELECT * From board WHERE cmid is not null
+		<!-- SELECT * From board WHERE cmid is not null -->
+		<!-- 차단당한 mid, cmid는 글이 안뜨게끔 쿼리 수정 -->
+		SELECT b.*
+		FROM board b
+		LEFT JOIN blackAccount ba 
+		ON b.mid = ba.mid
+		LEFT JOIN blackAccount bc
+		ON b.cmid = bc.cmid
+		WHERE ba.mid IS NULL AND bc.cmid IS NULL and b.cmid is not null
 	</select>
 	<select id="detailDao">
 		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, t.value

@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.green.miniProject.dao.IAdminDao_MSI;
 import com.green.miniProject.dao.ICommuDao_KHJ;
 import com.green.miniProject.domain.Admin;
+import com.green.miniProject.domain.BlackAccount;
 import com.green.miniProject.domain.FAQ;
 import com.green.miniProject.domain.Notice;
 import com.green.miniProject.domain.ServiceQuestion;
@@ -49,7 +51,7 @@ public class AdminController_MSI {
 	
 	
 	@RequestMapping("/login")
-	public String login(HttpServletRequest request, Model model) {
+	public String login(HttpServletRequest request, Model model,RedirectAttributes redirectAttributes) {
 		//관리자용 로그인 기능
 		String ano = request.getParameter("ano");
 		String aid = request.getParameter("aid");
@@ -57,25 +59,42 @@ public class AdminController_MSI {
 		
 		HttpSession session = request.getSession();
 		
-		//어드민 계정 데이터 가져오기
-		List<Admin> admin = adminDao.adminDao(aid);
-		String aAno = admin.get(0).getAno();
-		String aAid = admin.get(0).getAid();
-		String aApw = admin.get(0).getApw();
+		List<Admin> adminList = adminDao.getAdminDao(aid);
 		
-		
-		if(aAno.equals(ano)&&aAid.equals(aid)&&aApw.equals(apw)) {
-			session.setAttribute("admin", admin);
-			session.setAttribute("ano", ano);
-			session.setAttribute("aid", aid);
-			
-			System.out.println(admin.toString());
-			//로그인 성공 시 관리자용 인덱스 페이지 이동
-			return "indexAdmin_MSI";
-		}else{
-			model.addAttribute("계정 로그인이 틀렸습니다. 다시 입력해주세요");
-			return "loginFormAdmin_MSI";
-		}
+        // 입력 값 검증
+        if (ano == null || aid == null || apw == null || ano.isEmpty() || aid.isEmpty() || apw.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "모든 필드를 입력해주세요.");
+            return "redirect:/admin/loginFormAdmin";
+        }
+
+
+        // 어드민 계정 데이터 가져오기
+        if (adminList.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "존재하지 않는 관리자 ID입니다.");
+            return "redirect:/admin/loginFormAdmin";
+        }
+        
+        
+        
+        Admin admin = adminList.get(0);
+        String aAno = admin.getAno();
+        String aAid = admin.getAid();
+        String aApw = admin.getApw();
+
+        // 비밀번호 검증
+        if (aAno.equals(ano) && aAid.equals(aid) && aApw.equals(apw)) {
+            session.setAttribute("admin", admin);
+            session.setAttribute("ano", ano);
+            session.setAttribute("aid", aid);
+
+            System.out.println(admin.toString());
+            // 로그인 성공 시 관리자용 인덱스 페이지 이동
+            return "indexAdmin_MSI";
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "계정 로그인에 실패했습니다. 다시 입력해주세요");
+            return "redirect:/admin/loginFormAdmin";
+        }
+    
 		
 
 	}
@@ -216,6 +235,7 @@ public class AdminController_MSI {
 		return "serviceFAQWrite_MSI";
 	}
 	
+	
 	//FAQ 테이블 삽입
 	@RequestMapping("/writeFAQ")
 	public String writeFAQ(HttpServletRequest request) {
@@ -231,6 +251,42 @@ public class AdminController_MSI {
 		
 		return "redirect:/admin/serviceFAQ";
 	}
+	
+	
+	
+	//블랙리스트 데이터 불러오기
+	@RequestMapping("/blackList")
+	public String blackList(Model model) {
+		List<BlackAccount> blackList = adminDao.getBlackList();
+		model.addAttribute("blackList",blackList);
+		
+		return "blackList_MSI";
+	}
+	
+	
+	//블랙리스트 차단 해제
+	@RequestMapping("/unblock")
+	public String unblock(HttpServletRequest request) {
+		String bano = request.getParameter("bano");
+		
+		int result = adminDao.deleteBlackList(bano);
+		
+		if(result==1) {
+			System.out.println("블랙리스트 차단 해제 성공");
+		}else {
+			System.out.println("블랙리스트 차단 해제 실패");
+		}
+		
+		
+		return "redirect:/admin/blackList";
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
