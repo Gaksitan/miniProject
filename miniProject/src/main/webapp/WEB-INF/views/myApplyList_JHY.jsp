@@ -18,7 +18,9 @@
 			<td>${applyResume.entitle }</td>
 			<td>${applyResume.applydate }</td>
 			<td><input type="button" name="scrap" value="스크랩"></td>
-			<td>${applyResume.arpass }</td>
+			<td><c:if test="${applyResume.arpass == 0}">불합격</c:if>
+				<c:if test="${applyResume.arpass == 1}">합격</c:if>
+				<c:if test="${applyResume.arpass == 2}">심사중</c:if></td>
 			<td>${applyResume.ipass }</td>
 			<td><input type="button" name="score" value="평점쓰기"></td>
 		</tr>

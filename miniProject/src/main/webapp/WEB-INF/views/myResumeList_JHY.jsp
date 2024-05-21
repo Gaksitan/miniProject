@@ -37,7 +37,7 @@
 </table>
 <script>
 	function writeResumePage(){
-		window.location.href = "myResumeDetail_JHY";
+		window.location.href = "myResumeDetailWrite";
 	}
 </script>
 </body>

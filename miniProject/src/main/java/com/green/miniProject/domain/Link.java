@@ -19,6 +19,6 @@ public class Link {
 
 	private Long lno;
 	private Long rno;
-	private String cename;
+	private String lname;
 	
 }

@@ -6,11 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanySector {
-	private Long scno;
+@Builder
+public class CheckSubscribeCom {
+	private Long sno;
+	private String mid;
 	private String cno;
+	private String cname;
+	private String cintro;
 	private String csname;
 }

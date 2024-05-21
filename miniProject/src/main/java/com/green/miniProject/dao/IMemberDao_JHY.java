@@ -5,9 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.green.miniProject.domain.CheckScrapEN;
+import com.green.miniProject.domain.CheckSubscribeCom;
+import com.green.miniProject.domain.EmployNotice;
 import com.green.miniProject.domain.JoinApplyResumeList;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.SkillMatchingEN;
+import com.green.miniProject.domain.SkillMatchingMR;
 
 @Mapper
 public interface IMemberDao_JHY {
@@ -20,6 +25,11 @@ public interface IMemberDao_JHY {
 	public void writeResume(@Param("resume") Resume resume);
 	public void updateResume(@Param("resume") Resume resume);
 	public List<JoinApplyResumeList> applyResumeList(@Param("mid") String mid);
-	
+	public List<CheckSubscribeCom> checkSubscribe(@Param("mid") String mid);
+	public List<CheckScrapEN> checkScrap(@Param("mid") String mid);
+	public void updateMember(@Param("member") Member member);
+	public List<SkillMatchingEN> skillmatchingEN();  
+	public List<SkillMatchingMR> skillmatchingMR(@Param("mid") String mid);
+	public List<EmployNotice> employNotice();
 	
 }

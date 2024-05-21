@@ -2,8 +2,9 @@ package com.green.miniProject.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.miniProject.dao.IMemberDao_JHY;
+import com.green.miniProject.domain.CheckScrapEN;
+import com.green.miniProject.domain.CheckSubscribeCom;
 import com.green.miniProject.domain.JoinApplyResumeList;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.SkillMatchingEN;
+import com.green.miniProject.domain.SkillMatchingMR;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -27,8 +33,36 @@ public class MemController_JHY {
 	@Autowired
 	IMemberDao_JHY dao;
 	
+	// 스킬 매치 구현중
 	@RequestMapping("/indexMem")
-	public String indexMem() {
+	public String indexMem(HttpSession session, Model model) {
+		System.out.println(session.getAttribute("mid"));
+		if(session.getAttribute("mid") == null) {
+			
+		}else if(session.getAttribute("mid") != null) {
+			String mid = (String) session.getAttribute("mid");
+			Member member = dao.getMember(mid);
+			model.addAttribute("member", member);
+			Set<SkillMatchingEN> total = new HashSet<>();
+			List<SkillMatchingMR> list = dao.skillmatchingMR(mid);
+			List<SkillMatchingEN> list2 = dao.skillmatchingEN();
+			
+			
+			for(int i = 0; i < list.size(); i++) {
+				for(int j = 0; j < list2.size(); j++) {
+					if(list2.get(i).getSkname().equals( list.get(j).getSkname())) {
+						SkillMatchingEN en = new SkillMatchingEN();
+						en.setEnno(list2.get(j).getEnno());
+						en.setEntitle(list2.get(j).getEntitle());
+						en.setSkname(list2.get(j).getSkname());
+						total.add(en);
+						System.out.println(en.getEnno() + "/" + en.getEntitle() + "/" + total);
+					}
+				}
+				
+			}
+			model.addAttribute("total", total);
+		}
 		
 		return "indexMem_JHY";
 	}
@@ -39,12 +73,14 @@ public class MemController_JHY {
 		return "regFormMem_JHY";
 	}
 	
+	// 회원가입 버튼 클릭시 
 	@RequestMapping("/regist")
 	public String regist(HttpServletRequest request) {
 		String mid = request.getParameter("mid");
 		String mpw = request.getParameter("mpw");
 		String memail = request.getParameter("memail");
-		String mtel = request.getParameter("mtel2");
+		String mtel1 = request.getParameter("mtel1");
+		String mtel2 = request.getParameter("mtel2");
 		String mbirthDate_ = request.getParameter("mbirthDate");
 		LocalDate mbirthDate = LocalDate.parse(mbirthDate_, DateTimeFormatter.ISO_LOCAL_DATE);
 		String mname = request.getParameter("mname");
@@ -53,7 +89,7 @@ public class MemController_JHY {
 		LocalDate mregDate = LocalDate.now();
 		int mstate = Integer.parseInt(request.getParameter("mstate"));
 		char mgender = (request.getParameter("mgender")).charAt(0);
-		Member member = new Member(mid, mpw, memail, mtel, mbirthDate, mname, maddr1, maddr2, mregDate, mstate, mgender);
+		Member member = new Member(mid, mpw, memail, mtel1, mtel2, mbirthDate, mname, maddr1, maddr2, mregDate, mstate, mgender);
 		dao.regist(member);
 		
 		return "indexMem_JHY";
@@ -65,9 +101,9 @@ public class MemController_JHY {
 		return "loginForm_JHY";
 	}
 	
-	
+	// 로그인 버튼 클릭시
 	@RequestMapping("/login")
-	public String login(@RequestParam("mid") String mid, @RequestParam("mpw") String mpw, Model model, HttpServletRequest request) {
+	public String login(@RequestParam("mid") String mid, @RequestParam("mpw") String mpw, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		Member mem = dao.loginCheck(mid, mpw);
 		boolean tf = false;
@@ -121,6 +157,15 @@ public class MemController_JHY {
 		}
 		return "myResumeDetail_JHY";
 	}
+	
+	@RequestMapping("/myResumeDetailWrite")
+	public String myResumeDetailUpdate(HttpSession session, Model model) {
+		String mid = (String) session.getAttribute("mid");
+		Member mem = dao.getMember(mid);
+		model.addAttribute("member", mem);
+		return "myResumeDetail_JHY";
+	}
+	
 	
 	// 이력서 작성(rno == null)
 	@RequestMapping("/writeResume")
@@ -193,6 +238,45 @@ public class MemController_JHY {
 	}
 	
 	
+	@RequestMapping("/infoMem")
+	public String infoMem(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("mid");
+		Member mem = dao.getMember(mid);
+		model.addAttribute("member", mem);
+		
+		return "infoMem_JHY";
+	}
+	
+	
+	@RequestMapping("/updateMemberInfo")
+	public String updateMemberInfo(HttpServletRequest request, Model model) {
+		String mid = request.getParameter("mid");
+		String mpw = request.getParameter("mpw");
+		String mname = request.getParameter("mname");
+		String maddr1 = request.getParameter("maddr1");
+		String maddr2 = request.getParameter("maddr2");
+		String mtel1 = request.getParameter("mtel1");
+		String mtel2 = request.getParameter("mtel2");
+		int mstate = Integer.parseInt(request.getParameter("mstate"));
+		String mgender_ = request.getParameter("mgender");
+		char mgender = mgender_.charAt(0);
+		Member member = new Member(mid, mpw, mname, maddr1, maddr2, mtel1, mtel2, mstate, mgender);
+		dao.updateMember(member);
+		return "indexMem_JHY";
+	}
+	
+	
+	@RequestMapping("/subscribeAndScrapList")
+	public String subscribeAndScrapList(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("mid");
+		List<CheckSubscribeCom> list = dao.checkSubscribe(mid);
+		List<CheckScrapEN> list2 = dao.checkScrap(mid);
+		model.addAttribute("subscribeList", list);
+		model.addAttribute("scrapList", list2);
+		return "subscribeAndScrapList_JHY";
+	}
 	
 	
 	

@@ -25,6 +25,25 @@
   		where m.mid = #{mid}
   	</select>
   	
+  	<select id="checkSubscribe">
+  		SELECT sc.sno, sc.MID, sc.cno, c.cname, c.cintro, cs.csname FROM subscribecompany sc LEFT JOIN company c ON c.cno = sc.cno LEFT JOIN companysector cs ON cs.cno = c.cno
+  		where sc.mid = #{mid}
+  	</select>
+  	
+  	<select id="checkScrap">
+  		SELECT sen.senno, sen.enno, sen.MID, en.entitle, en.enintro, en.enposition, c.cname FROM scrapemploynotice sen LEFT JOIN employnotice en ON en.enno = sen.enno LEFT JOIN company c ON c.cno = en.cno
+		where sen.mid = #{mid}
+  	</select>
+  	
+  	<select id="skillmatchingEN">
+  		SELECT en.enno, en.entitle, sen.skname FROM employnotice en LEFT JOIN skillemploynotice sen ON sen.enno = en.enno WHERE sen.skname IS NOT NULL
+  	</select>
+  	
+  	<select id="skillmatchingMR">
+  		SELECT m.MID, r.rno, s.skno, s.skname FROM member m LEFT JOIN resume r ON m.mid = r.mid LEFT JOIN skill s ON s.rno = r.rno
+  		where m.mid = #{mid}
+  	</select>
+  	
   	
   	<insert id="regist">
   		insert into member values (#{member.mid}, #{member.mpw}, #{member.memail}, #{member.mtel}, #{member.mbirthDate}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mregDate}, #{member.mstate}, #{member.mgender})
@@ -37,6 +56,10 @@
   	
   	<update id="updateResume">
   		update resume set rintro = #{resume.rintro}, rimgPath = #{resume.rimgPath}, rpublic = #{rpublic}, rtitle = #{resume.rtitle}, rmain = #{rmain}, rregdate = #{resume.rregdate} where rno = #{resume.rno}
+  	</update>
+  	
+  	<update id="updateMember">
+  		update member set (mpw, mname, maddr1, maddr2, mtel1, mtel2, mstate, mgender) values (#{member.mpw}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mtel1}, #{member.mtel2}, #{member.mstate}, #{member.mgender}) where mid = ${member.mid}
   	</update>
   	
 </mapper>  

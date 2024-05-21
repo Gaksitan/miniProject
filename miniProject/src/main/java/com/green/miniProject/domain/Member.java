@@ -18,7 +18,9 @@ public class Member {
 	
 	private String memail;
 	
-	private String mtel;
+	private String mtel1;
+	
+	private String mtel2;
 	
 	private LocalDate mbirthDate;
 	
@@ -33,4 +35,19 @@ public class Member {
 	private int mstate;
 	
 	private char mgender;
+	
+	public Member(String mid, String mpw, String mname, String maddr1, String maddr2, String mtel1, String mtel2, int mstate, char mgender) {
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mname = mname;
+		this.maddr1 = maddr1;
+		this.maddr2 = maddr2;
+		this.mtel1 = mtel1;
+		this.mtel2 = mtel2;
+		this.mstate = mstate;
+		this.mgender = mgender;
+	}
+	
+	
+	
 }

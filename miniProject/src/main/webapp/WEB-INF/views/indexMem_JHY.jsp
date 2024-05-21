@@ -8,17 +8,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>개인회원용 헤더 위치</h1>
+<%@ include file="./header_JYC.jsp"%>
 <c:if test="${sessionScope.mid != null }">
-<h2>${sessionScope.mid }님 환영합니다.</h2>
+<p>이런 회사에서 ${mem.mname }(${mid })님을 필요로 하고 있어요 (스킬 매칭)</p>
+<div>
+	<table border="1">
+		<c:forEach var="total" items="${total }">
+			<tr>
+				<th><a href="/employnotice/detailMem?enno=${total.enno }">${total.entitle }</a></th>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
 </c:if>
-<hr>
 <c:if test="${sessionScope.mid == null }">
-<a href="regFormMem">회원가입</a><br>
-<a href="loginForm">로그인</a>
+<p>로그인 후 이용할 수 있는 기능입니다.</p>
 </c:if>
-<c:if test="${sessionScope.mid != null }">
-<a href="logout">로그아웃</a>
-</c:if>
+<div>
+	
+</div>
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>
