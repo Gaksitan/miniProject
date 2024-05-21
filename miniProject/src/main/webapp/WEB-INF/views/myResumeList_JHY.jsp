@@ -14,7 +14,7 @@
 	}
 </style>
 <body>
-<h1>개인회원용 헤더</h1>
+<%@ include file="./header_JYC.jsp"%>
 <hr>
 <h2>내 이력서 관리<span><input type="button" value="이력서 작성" onclick="writeResumePage()"></span></h2>
 <table border="1">
@@ -35,6 +35,7 @@
 	</c:forEach>
 	</tbody>
 </table>
+<%@ include file="./footer_JYC.jsp"%>
 <script>
 	function writeResumePage(){
 		window.location.href = "myResumeDetailWrite";

@@ -13,8 +13,11 @@
 <script>
 	
 </script>
+<style>
+	
+</style>
 <body>
-<h1>로그인 페이지 개인회원용 헤더 위치</h1>
+<%@ include file="./header_JYC.jsp"%>
 <hr>
 <form action="login" method="post">
 	<table>
@@ -32,5 +35,6 @@
 		</tr>
 	</table>
 </form>
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

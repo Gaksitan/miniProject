@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>지원 현황 목록 페이지 개인회원용 헤더 위치</h1>
+<%@ include file="./header_JYC.jsp"%>
 <hr>
 <h2>지원 현황 목록</h2>
 <table border="1">
@@ -26,5 +26,6 @@
 		</tr>
 	</c:forEach>
 </table>
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

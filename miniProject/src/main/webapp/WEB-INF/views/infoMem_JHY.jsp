@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>내 정보 관리 페이지 개인회원용 헤더 위치</h1>
+<%@ include file="./header_JYC.jsp"%>
 <hr>
 <h2>내 정보 관리</h2>
 <form action="updateMemberInfo" method="post">
@@ -76,6 +76,6 @@
 		</tr>
 	</table>
 </form>
-
+<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

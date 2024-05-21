@@ -92,7 +92,7 @@ public class MemController_JHY {
 		Member member = new Member(mid, mpw, memail, mtel1, mtel2, mbirthDate, mname, maddr1, maddr2, mregDate, mstate, mgender);
 		dao.regist(member);
 		
-		return "indexMem_JHY";
+		return "loginForm_JHY";
 	}
 	
 	@RequestMapping("/loginForm")
@@ -115,6 +115,7 @@ public class MemController_JHY {
 				session.setAttribute("mem", mem);
 				session.setAttribute("mid", mid);
 				session.setAttribute("mpw", mpw);
+				
 				return "indexMem_JHY";
 			}else {
 				

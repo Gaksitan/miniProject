@@ -13,12 +13,12 @@
 	}
 </style>
 <body>
-<h1>개인회원용 헤더 위치</h1>
+<%@ include file="./header_JYC.jsp"%>
 <form action="regist" method="post">
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="mid" placeholder="아이디를 입력하세요."><input type="button" name="midCheck" value="아이디 중복체크"></td>
+			<td><input type="text" name="mid" placeholder="아이디를 입력하세요."><input type="button" name="midCheck" value="아이디 중복체크" onclick="midCheck()"></td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
@@ -83,5 +83,17 @@
 		</tr>
 	</table>
 </form>
+<%@ include file="./footer_JYC.jsp"%>
+<script>
+	function midCheck() {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function() {
+		document.getElementById("demo").innerHTML =
+		this.responseText;
+	  }
+	  xhttp.open("GET", "ajax_info.txt");
+	  xhttp.send();
+	}
+</script>
 </body>
 </html>

@@ -7,8 +7,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	form {
+		display: flex;
+		
+        flex-direction: column;
+        align-items: center; /* 모든 자식 요소를 가로로 중앙 정렬 */
+        /*justify-content: center; /* 모든 자식 요소를 세로로 중앙 정렬 (필요에 따라 사용) */
+        width: 50%; /* 필요에 따라 조정 */
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+	}
+</style>
 <body>
-<h1>내 이력서 상세 페이지 개인회원용 헤더 위치</h1>
+<%@ include file="./header_JYC.jsp"%>
 <hr>
 <h3>이력서 상세페이지 관리</h2>
 <c:if test="${rno == null }">
@@ -68,19 +81,33 @@
 		<h3>링크 (link)</h3>
 		<input type="text" name="rlink" value="${resume.rlink }"><br>
 		<h3>병력 특혜(임시)</h3>
-		<label><input type="radio" name="militery" value="0">해당없음</label>
+		<c:if test="${resume.militery == 0 }">
+		<label><input type="radio" name="militery" value="0" selected>해당없음</label>
 		<label><input type="radio" name="militery" value="1">군필자</label>
 		<label><input type="radio" name="militery" value="2">미필자</label><br>
+		</c:if>
+		<c:if test="${resume.militery == 1 }">
+		<label><input type="radio" name="militery" value="0">해당없음</label>
+		<label><input type="radio" name="militery" value="1" selected>군필자</label>
+		<label><input type="radio" name="militery" value="2">미필자</label><br>
+		</c:if>
+		<c:if test="${resume.militery == 2 }">
+		<label><input type="radio" name="militery" value="0">해당없음</label>
+		<label><input type="radio" name="militery" value="1">군필자</label>
+		<label><input type="radio" name="militery" value="2" selected>미필자</label><br>
+		</c:if>
 		<h3>공개여부<label><input type="radio" name="rpublic" value="1">공개</label>
 			<label><input type="radio" name="rpublic" value="0">비공개</label></h3>
 		<label><input type="checkbox" name="rmain" value="1">대표 이력서로 설정</label><br>
 		<input type="submit" value="수정"><input type="button" value="취소" onclick="goBack()">
 	</form>
 </c:if>
+<%@ include file="./footer_JYC.jsp"%>
 <script>
 	function goBack(){
 		window.location.href = "myResumeList";
 	}
 </script>
+
 </body>
 </html>
