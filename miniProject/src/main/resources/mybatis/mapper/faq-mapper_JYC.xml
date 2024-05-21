@@ -6,17 +6,19 @@
   
 <mapper namespace="com.green.miniProject.dao.IFAQDAO_JYC">
 
-	<select id="searchFAQListTargetMem" resultType="com.green.miniProject.domain.FAQ">
-		SELECT * FROM faq WHERE (faqtitle LIKE CONCAT('%', #{keyword}, '%') OR faqanswer LIKE CONCAT('%', #{keyword}, '%')) AND faqtarget = 'member';
+	<select id="searchFAQListTargetMem" resultType="com.green.miniProject.domain.FAQDetail">
+		SELECT faq.*, qc.qcname FROM faq INNER JOIN questioncategory qc HAVING faqtarget = "member" AND faqquestion LIKE CONCAT('%', #{keyword}, '%');
+
 	</select>  
-	<select id="searchFAQListTargetCom" resultType="com.green.miniProject.domain.FAQ">
-		SELECT * FROM faq WHERE (faqtitle LIKE CONCAT('%', #{keyword}, '%') OR faqanswer LIKE CONCAT('%', #{keyword}, '%')) AND faqtarget = 'company';
+	<select id="searchFAQListTargetCom" resultType="com.green.miniProject.domain.FAQDetail">
+		SELECT faq.*, qc.qcname FROM faq INNER JOIN questioncategory qc HAVING faqtarget = "company" AND faqquestion LIKE CONCAT('%', #{keyword}, '%');
+
 	</select> 	
   	
-  	<select id="getFAQListTargetMem" resultType="com.green.miniProject.domain.FAQ">
-  		SELECT * FROM faq;
+  	<select id="getFAQListTargetMem" resultType="com.green.miniProject.domain.FAQDetail">
+  		SELECT faq.*, qc.qcname FROM faq INNER JOIN questioncategory qc WHERE faqtarget = "member";
   	</select>
-  	<select id="getFAQListTargetCom" resultType="com.green.miniProject.domain.FAQ">
-  		SELECT * FROM faq;
+  	<select id="getFAQListTargetCom" resultType="com.green.miniProject.domain.FAQDetail">
+  		SELECT faq.*, qc.qcname FROM faq INNER JOIN questioncategory qc WHERE faqtarget = "company";;
   	</select>
 </mapper>  

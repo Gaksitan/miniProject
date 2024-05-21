@@ -26,8 +26,8 @@
 			<tbody>
 				<c:forEach var="faq" items="${faqlist }">
 					<tr>
-						<td>${faq.faqquestion }</td>
-						<td>${faq.faqanswer }</td>
+						<td>${faq.qcname}</td>
+						<td><a href="#">${faq.faqquestion }</a></td>							
 					</tr>
 				</c:forEach>
 			</tbody>

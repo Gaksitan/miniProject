@@ -5,12 +5,15 @@
 
 <mapper namespace="com.green.miniProject.dao.IEmployNoticeDAO_JYC">
 	<select id="searchEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
-		SELECT * From employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%');
+		SELECT * From employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY enregdate DESC LIMIT #{page}, 10;
 	</select>
 	<select id="getEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE cno = #{cno};
 	</select>
 	<select id="getEmployNotice" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * FROM employnotice WHERE cno = #{cno} AND enno = #{enno};
+	</select>
+	<select id="getCount">
+		SELECT COUNT(enno) FROM employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%');
 	</select>
 </mapper>  

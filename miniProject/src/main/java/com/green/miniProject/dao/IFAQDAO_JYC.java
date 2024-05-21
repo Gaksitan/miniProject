@@ -6,13 +6,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.green.miniProject.domain.FAQ;
+import com.green.miniProject.domain.FAQDetail;
 
 @Mapper
 public interface IFAQDAO_JYC {
 
-	public List<FAQ> searchFAQListTargetMem(@Param("keyword") String keyword);
-	public List<FAQ> searchFAQListTargetCom(@Param("keyword") String keyword);
+	public List<FAQDetail> searchFAQListTargetMem(@Param("keyword") String keyword);
+	public List<FAQDetail> searchFAQListTargetCom(@Param("keyword") String keyword);
 
-	public List<FAQ> getFAQListTargetMem();
-	public List<FAQ> getFAQListTargetCom();
+	public List<FAQDetail> getFAQListTargetMem();
+	public List<FAQDetail> getFAQListTargetCom();
 }
