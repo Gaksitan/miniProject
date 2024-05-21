@@ -63,8 +63,11 @@
 	</update>
 	
 	<!-- 댓글 관련 -->
-	<insert id="insertReply">
+	<insert id="insertReplyWhenMem">
 		Insert into reply values (null, #{mid}, #{reply}, now(), now(), 0, null, #{bno})
+	</insert>
+	<insert id="insertReplyWhenCom">
+		Insert into reply values (null, null, #{reply}, now(), now(), 0, #{cmid}, #{bno})
 	</insert>
 	<select id="getAllReplyList">
 		SELECT * FROM reply where bno = #{bno}

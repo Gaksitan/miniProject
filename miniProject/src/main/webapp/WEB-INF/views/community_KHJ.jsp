@@ -81,6 +81,8 @@ height : 15px;
 			</tr>
 		</thead>
 		<tbody>
+		<c:choose>
+			<c:when test="${sessionScope.mid != null }">
 			<c:forEach var="board" items="${list }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
@@ -100,6 +102,29 @@ height : 15px;
 					<td>${board.blike }</td>
 				</tr>
 			</c:forEach>
+			</c:when>
+			<c:when test="${sessionScope.mid == null }">
+			<c:forEach var="board" items="${list }" varStatus="status">
+				<tr>
+					<td>${status.count }</td>
+					<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}</a></td>
+					<c:choose>
+					    <c:when test="${board.mid != null}">
+					        <td>${board.mid}</td>
+					    </c:when>
+					    <c:when test="${board.cmid != null}">
+					        <td>${board.cmid}</td>
+					    </c:when>
+					    <c:otherwise>
+					        <td>No ID available</td>
+					    </c:otherwise>
+					</c:choose>
+					<td>${board.bregdate }</td>
+					<td>${board.blike }</td>
+				</tr>
+			</c:forEach>
+			</c:when>
+		</c:choose>
 		</tbody>
 	</table>
 		<%@ include file="./footer_JYC.jsp" %>
