@@ -25,4 +25,7 @@ public class InterestMember {
 	
 	private String mid;
 	
+    private Member member;
+    private Resume resume;
+	
 }
