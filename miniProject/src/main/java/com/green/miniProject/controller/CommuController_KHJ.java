@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.green.miniProject.dao.ICommuDao_KHJ;
@@ -24,6 +25,7 @@ import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanyManager;
 import com.green.miniProject.domain.Notice;
 import com.green.miniProject.domain.Reply;
+import com.green.miniProject.domain.ReplyDetail;
 import com.green.miniProject.domain.Tag;
 import com.green.miniProject.domain.tagCom;
 import com.green.miniProject.domain.tagMem;
@@ -63,12 +65,42 @@ public class CommuController_KHJ {
 
 		if (mid != null) {
 
-			model.addAttribute("list", dao.getAllWhenMember());
-			System.out.println(model.addAttribute("list", dao.getAllWhenMember()));
+			List<Board> list = dao.getAllWhenMember();
+			List<ReplyDetail> replyDetails = new ArrayList<>();
+
+			for (Board board : list) {
+				Long bno = board.getBno();
+				replyDetails.add(dao.replyCount(bno));
+
+			}
+
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				String replyDetailsJson = mapper.writeValueAsString(replyDetails);
+				model.addAttribute("replyDetailsJson", replyDetailsJson);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// System.out.println(replyDetails);
+			model.addAttribute("list", list);
+			model.addAttribute("replyDetails", replyDetails);
+			// System.out.println(model.addAttribute("list", dao.getAllWhenMember()));
 
 		} else if (mid == null) {
 
-			model.addAttribute("list", dao.getAllWhenCompany());
+			List<Board> list = dao.getAllWhenCompany();
+			List<ReplyDetail> replyDetails = new ArrayList<>();
+
+			for (Board board : list) {
+				Long bno = board.getBno();
+				replyDetails.add(dao.replyCount(bno));
+				System.out.println(replyDetails);
+			}
+
+			model.addAttribute("list", list);
+			model.addAttribute("replyDetails", replyDetails);
+
 		}
 
 		// 공지사항 리스트 불러오기

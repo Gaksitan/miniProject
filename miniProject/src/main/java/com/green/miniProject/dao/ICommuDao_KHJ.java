@@ -10,13 +10,15 @@ import com.green.miniProject.domain.BoardTag;
 import com.green.miniProject.domain.Like;
 import com.green.miniProject.domain.Notice;
 import com.green.miniProject.domain.Reply;
+import com.green.miniProject.domain.ReplyDetail;
 
 
 @Mapper
 public interface ICommuDao_KHJ {
-	
+	//커뮤니티 메인화면 관련
 	public List<Board> getAllWhenMember();
 	public List<Board> getAllWhenCompany();
+	public ReplyDetail replyCount(@Param("bno") long bno);
 	
 	//게시글 등록 관련
 	public List<BoardTag>tagListWhenMem(@Param("bno") long bno);
