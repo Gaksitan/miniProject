@@ -376,6 +376,7 @@ public class CommuController_KHJ {
 	}
 
 	@RequestMapping("/replyInsert.do")
+
 	public String replyInsert(@RequestParam("bno") Long bno, @RequestParam("reply") String reply, Model model,
 			HttpSession session) {
 
@@ -408,6 +409,7 @@ public class CommuController_KHJ {
 		}
 
 		// return "redirect:/communityDetail_KHJ?bno=" + bno;
+
 		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;
 	}
 
