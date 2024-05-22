@@ -25,27 +25,43 @@
 		ON b.cmid = bc.cmid
 		WHERE ba.mid IS NULL AND bc.cmid IS NULL and b.cmid is not null
 	</select>
-	<select id="detailDao">
+	<select id="tagListWhenMem">
 		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, t.value
 		FROM board b
-		LEFT JOIN tag t ON b.bno = t.bno
+		LEFT JOIN tagmem t ON b.bno = t.bno
 		WHERE b.bno = #{bno}
 <!--		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bregdate, b.bregdate, m.mname
 		FROM board b
 		LEFT JOIN member m ON b.`MID` = m.`MID`
 		WHERE b.bno = #{bno}  -->
 	</select>
+	<select id="tagListWhenCom">
+		SELECT b.bno, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, b.cmid, t.value
+		FROM board b
+		LEFT JOIN tagcom t ON b.bno = t.bno
+		WHERE b.bno = #{bno}
+	
+	</select>
 	<insert id="insertContentWhenMem">
 		Insert into board values (null, #{mid}, #{title}, #{content}, 0, now(), now(), null)
+	</insert>
+	<insert id="insertContentWhenCom">
+		Insert into board value (null, null, #{title}, #{content}, 0, now(), now(), #{cmid})
 	</insert>
 	<select id="getBno">
 		SELECT bno FROM board where btitle = #{title} and bcontent = #{content}
 	</select>
 	<insert id="insertTagWhenMem">
-		Insert into tag values (null, #{mid}, #{tag}, #{bno})
+		Insert into tagMem values (null, #{mid}, #{tag}, #{bno})
 	</insert>
-	<select id="myList">
+	<insert id="insertTagWhenCom">
+		Insert into tagCom values (null, #{cmid}, #{tag}, #{bno})
+	</insert>
+	<select id="myListMem">
 		SELECT bno, btitle, blike, bregdate FROM board where mid = #{mid}	
+	</select>
+	<select id="myListCom">
+		SELECT bno, btitle, blike, bregdate FROM board where cmid = #{cmid}	
 	</select>
 	
 	<!-- 좋아요 관련 -->
@@ -55,12 +71,25 @@
 	<delete id="deleteLikeMem">
 		Delete from like_tb where mid = #{mid} and bno = #{bno}
 	</delete>
+	<insert id="insertLikeCom">
+		Insert into Like_tb (lino, cmid, bno) values (NULL, #{cmid}, #{bno})
+	</insert>
+	<delete id="deleteLikeCom">
+		Delete from like_tb where cmid = #{cmid} and bno = #{bno}
+	</delete>
 	<update id="plusLikeOnBoard">
 		UPDATE board SET blike = blike + 1 WHERE bno = #{bno}
 	</update>
 	<update id="minusLikeOnBoard">
 		UPDATE board SET blike = blike - 1 WHERE bno = #{bno}		
 	</update>
+	<select id="getLikeMem">
+		SELECT COUNT(mid) FROM like_tb WHERE bno = #{bno} AND mid = #{mid} 
+	</select>
+	<select id="getLikeCom">
+		SELECT COUNT(cmid) FROM like_tb WHERE bno = #{bno} AND cmid = #{cmid} 
+	</select>
+	
 	
 	<!-- 댓글 관련 -->
 	<insert id="insertReplyWhenMem">
