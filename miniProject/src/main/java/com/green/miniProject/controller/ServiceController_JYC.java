@@ -15,6 +15,7 @@ import com.green.miniProject.dao.IFAQDAO_JYC;
 import com.green.miniProject.dao.IQuestionCategoryDAO_JYC;
 import com.green.miniProject.dao.IServiceAnswerDAO_JYC;
 import com.green.miniProject.dao.IServiceQuestionDAO_JYC;
+import com.green.miniProject.domain.CompanyManager;
 import com.green.miniProject.domain.FAQ;
 import com.green.miniProject.domain.ServiceQuestion;
 
@@ -76,16 +77,16 @@ public class ServiceController_JYC {
 	}
 	
 	@PostMapping("/registQuestionCom")
-	public String registQuestionCom(ServiceQuestion sq, @RequestParam("category") String category, HttpServletRequest request) {
+	public String registQuestionCom(ServiceQuestion sq, @RequestParam("category") String category, HttpSession session) {
 		
-		HttpSession session = request.getSession();
+		CompanyManager companyManager = (CompanyManager)session.getAttribute("companyManager");
 		
 		ServiceQuestion sqBuilder = ServiceQuestion.builder()
 				.sqtitle(sq.getSqtitle())
 				.sqcontent(sq.getSqcontent())
 				.sqanswertf(false)
 				.sqregdate(LocalDateTime.now())
-				.cno((String)session.getAttribute("cno"))
+				.cno(companyManager.getCno())
 				.qcno(qcdao.getQcno(category)).build();
 		sqdao.registServiceQuestionCom(sqBuilder);
 		return "redirect:/service/myQuestionCom";
@@ -120,13 +121,12 @@ public class ServiceController_JYC {
 	}
 	
 	@GetMapping("/myQuestionCom")
-	public String myQuestionCom(HttpServletRequest request, Model model) {
+	public String myQuestionCom(HttpSession session, Model model) {
 		
 		
-		HttpSession session = request.getSession();
-		String cno = (String)session.getAttribute("cno");
+		CompanyManager companyManager = (CompanyManager)session.getAttribute("companyManager");
 		
-		model.addAttribute("serviceQuestionList", sqdao.getServiceQuestionListForCom(cno));
+		model.addAttribute("serviceQuestionList", sqdao.getServiceQuestionListForCom(companyManager.getCno()));
 		
 		return "myServiceQuestion_JYC";
 	}

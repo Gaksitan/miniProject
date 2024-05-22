@@ -11,7 +11,10 @@ import com.green.miniProject.domain.EmployNoticeDetail;
 @Mapper
 public interface IEmployNoticeDAO_JYC {
 
-	public List<EmployNotice> getAllEmployNoticeList();
+	public List<EmployNotice> getAllEmployNoticeListOrderByEnddateAsc();
+	public List<EmployNotice> getAllEmployNoticeListOrderByRegdateDesc();
+	public List<EmployNotice> getAllEmployNoticeListOrderByEnddateAscCno(@Param("cno") String cno);
+	public List<EmployNotice> getAllEmployNoticeListOrderByRegdateDescCno(@Param("cno") String cno);
 	public List<EmployNotice> searchEmployNoticeList(@Param("keyword") String keyword, @Param("page") Long page);
 	public List<EmployNotice> getEmployNoticeList(@Param("cno") String cno);
 	public EmployNoticeDetail getEmployNotice(@Param("enno") Long enno);

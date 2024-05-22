@@ -7,7 +7,7 @@
 <mapper namespace="com.green.miniProject.dao.IScrapEmployNoticeDAO_JYC">
 
 	<select id="count">
-		SELECT IFNULL(COUNT(senno), 0) FROM scrapemploynotice WHERE enno = #{enno} AND mid = #{mid} GROUP BY senno;
+		SELECT COUNT(senno) FROM scrapemploynotice WHERE enno = #{enno} AND mid = #{mid};
 	</select>
 	<insert id="scrapEmployNotice">
 		INSERT INTO scrapemploynotice VALUES (NULL, #{enno}, #{mid});
