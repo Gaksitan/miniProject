@@ -9,12 +9,46 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-main {
-	text-align: center;
-}
 
 #faqtable{
-	margin: 0;
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+#faqtable td, #faqtable th{
+	padding: 5px 20px;
+} 
+#faqtable a{
+	text-decoration: none;
+	color: black;
+}
+
+#faqtable a:hover{
+	text-decoration: underline;
+}
+#faqtable th{
+	background: #fcefa9;
+}
+h1{
+	margin: 20px;
+}
+
+#inputs{
+	margin: 20px auto;
+	width: fit-content;
+	display: flex;
+}
+
+#inputs [type="search"]{
+	padding: 5px 20px;
+	font-size: 1rem;
+	margin-right: 5px;
+}
+#inputs #subBtn{
+	padding: 3px 10px;
+	margin-right: 10px;
+}
+#inputs #regQBtn{
+	padding: -5px 10px;
 }
 </style>
 
@@ -24,16 +58,17 @@ main {
 	<!-- 헤더부분 포함 -->
 	<main>
 		<c:if test="${companyManager == null }"> <!-- cno가 널이면 기업회원이 아니기 때문에 이 단락을 보여준다 -->
-		<h1>고객센터 메인</h1>
-		<form action="/service/searchMem">
+		<h1>고객센터</h1>
+		<div id="inputs">
+		<form action="/service/searchMem" method="get">
 		<input type="search" placeholder="FAQ 검색" name="keyword"> 
-		<input type="submit" value="검색">
+		<input type="submit" value="검색" id="subBtn">
 		</form>
 			<c:if test="${mid != null }"> <!-- mid가 널이 아니명 개인회원이기 때문에 문의하기 기능을 선택할 수 있다. -->	
-				<button onclick="location.href='/both/registQuestionForm'">문의하기</button>
-			</c:if>
+				<input type="button" value="문의하기" id="regQBtn" onclick="location.href='/both/registQuestionForm'">
+			</c:if> 
+		</div>
 		<table border="1" id="faqtable">
-			<caption>개인.비회원용</caption>
 			<thead>
 				<tr>
 					<th>카테고리</th>

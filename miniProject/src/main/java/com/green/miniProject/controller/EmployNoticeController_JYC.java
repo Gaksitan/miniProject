@@ -2,6 +2,7 @@ package com.green.miniProject.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ import com.green.miniProject.dao.IScrapEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.ISkillEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.IWelfareEmployNoticeDAO_JYC;
 import com.green.miniProject.domain.ApplyResume;
+import com.green.miniProject.domain.CompanySectorAndCompany;
+import com.green.miniProject.domain.EmployNoticeDetail;
+import com.green.miniProject.entity.EmployNotice;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -110,6 +114,13 @@ public class EmployNoticeController_JYC {
 					certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
 		}
 
+		String enposition = employNoticeDao.getEmployNotice(enno).getEnposition();
+		List<EmployNoticeDetail> recommendList = employNoticeDao.getEmployNoticeListSamePosition(enno, enposition);
+		
+		if(recommendList.size() > 0) {
+			model.addAttribute("recommendList", recommendList);
+		}
+		
 		return "employNoticeDetail_JYC";
 	}
 
@@ -139,6 +150,13 @@ public class EmployNoticeController_JYC {
 					certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
 		}
 
+		String enposition = employNoticeDao.getEmployNotice(enno).getEnposition();
+		List<EmployNoticeDetail> recommendList = employNoticeDao.getEmployNoticeListSamePosition(enno, enposition);
+		
+		if(recommendList.size() > 0) {
+			model.addAttribute("recommendList", recommendList);
+		}
+		
 		String mid = (String) session.getAttribute("mid");
 
 		model.addAttribute("resume", resumedao.getMainResume(mid));
@@ -180,6 +198,13 @@ public class EmployNoticeController_JYC {
 					certificateEmployNoticeDao.getCertificateEmployNoticeList(enno));
 		}
 
+		String enposition = employNoticeDao.getEmployNotice(enno).getEnposition();
+		List<EmployNoticeDetail> recommendList = employNoticeDao.getEmployNoticeListSamePosition(enno, enposition);
+		
+		if(recommendList.size() > 0) {
+			model.addAttribute("recommendList", recommendList);
+		}
+		
 		return "employNoticeDetail_JYC";
 	}
 
@@ -236,7 +261,6 @@ public class EmployNoticeController_JYC {
 			model.addAttribute("employNoticeList", employNoticeDao.getAllEmployNoticeListOrderByRegdateDescCno(cno));
 		}
 		
-		System.out.println("bbbbbbbbbbbbbbb");
 		return "employNoticeList_JYC";
 	}
 

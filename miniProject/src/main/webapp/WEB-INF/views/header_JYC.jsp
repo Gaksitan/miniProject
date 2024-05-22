@@ -70,12 +70,26 @@ div img {
 	width: 100px;
 	height: 100px;
 }
+
+.selectBox{
+	color: #3d3d3d;
+	border: 2px solid black;
+	border-radius:4px;
+	width: 170px;
+	height: 35px;
+	padding: 5px;
+	font-size: 1rem;
+	font-weight: bold;
+}
+.options{
+	color: black;
+}
 </style>
 
 </head>
 <body>
 
-	<c:if test="${mid == null && companyManager == null }">
+	<c:if test="${mid == null && companyManager == null && admin == null }">
 		<!-- 만약 mid가 널이면서 cno가 널이면 비회원이기 때문에 이 헤더가 나온다 -->
 		<header id="top">
 			<a href="/mem/indexMem"> <img id="logo" alt="로고 사진"
@@ -119,12 +133,12 @@ div img {
 					<img id="person" alt="익명 사진"
 						src="/resources_JYC/images_JYC/ano.png">
 					<div>
-						<select onchange="if(this.value) location.href=(this.value)">
-							<option value="#">${mid }님환영합니다</option>
-							<option value="/mem/infoMem">내 정보 관리</option>
-							<option value="/mem/subscribeAndScrapList">구독&amp;스크랩</option>
-							<option value="/service/myQuestionMem">내 문의사항</option>
-							<option value="/logout" style="color: red">로그아웃</option>
+						<select onchange="if(this.value) location.href=(this.value)" class="selectBox">
+							<option class="options" value="#">${mid }님환영합니다</option>
+							<option class="options" value="/mem/infoMem">내 정보 관리</option>
+							<option class="options" value="/mem/subscribeAndScrapList">구독&amp;스크랩</option>
+							<option class="options" value="/service/myQuestionMem">내 문의사항</option>
+							<option class="options" value="/logout" style="color: red">로그아웃</option>
 						</select>
 					</div>
 				</div>
@@ -136,11 +150,11 @@ div img {
 					<li><a href="/mem/myApplyList">지원현황</a></li>
 				</ul>
 				<div>
-					<select onchange="if(this.value) location.href=(this.value)">
-						<option>-- 선택 --</option>
-						<option value="/commu">커뮤니티</option>
-						<option value="/commu/communityMyBoards_KHJ">MY 게시판</option>
-						<option value="/commu/communityMemInsert_KHJ">게시글 작성하기</option>
+					<select class="selectBox" onchange="if(this.value) location.href=(this.value)">
+						<option class="options">-- 선택 --</option>
+						<option class="options" value="/commu">커뮤니티</option>
+						<option class="options" value="/commu/communityMyBoards_KHJ">MY 게시판</option>
+						<option class="options" value="/commu/communityMemInsert_KHJ">게시글 작성하기</option>
 					</select>
 				</div>
 			</nav>
@@ -166,13 +180,13 @@ div img {
 					<img id="person" alt="익명 사진"
 						src="/resources_JYC/images_JYC/ano.png">
 					<div>
-						<select onchange="if(this.value) location.href=(this.value)">
-							<option value="#">${companyManager.cmid }님환영합니다</option>
-							<option value="/infoCom">기업 정보 관리</option>
-							<option value="/infoCM">인사담당자 정보 관리</option>
-							<option value="/subscribeComList">관심 구직자</option>
-							<option value="/service/myQuestionCom">내 문의사항</option>
-							<option value="/logout" style="color: red">로그아웃</option>
+						<select class="selectBox" onchange="if(this.value) location.href=(this.value)">
+							<option class="options" value="#">${companyManager.cmid }님환영합니다</option>
+							<option class="options" value="/infoCom">기업 정보 관리</option>
+							<option class="options" value="/infoCM">인사담당자 정보 관리</option>
+							<option  class="options" value="/subscribeComList">관심 구직자</option>
+							<option class="options" value="/service/myQuestionCom">내 문의사항</option>
+							<option class="options" value="/logout" style="color: red">로그아웃</option>
 						</select>
 					</div>
 				</div>
@@ -184,11 +198,11 @@ div img {
 				</ul>
 				<div>
 
-					<select onchange="if(this.value) location.href=(this.value)">
+					<select onchange="if(this.value) location.href=(this.value)" class="selectBox">
 						<option>-- 선택 --</option>
-						<option value="/commu">커뮤니티</option>
-						<option value="/commu/communityMyBoards_KHJ">MY 게시판</option>
-						<option value="/commu/communityMemInsert_KHJ">게시글 작성하기</option>
+						<option class="options" value="/commu">커뮤니티</option>
+						<option class="options" value="/commu/communityMyBoards_KHJ">MY 게시판</option>
+						<option class="options" value="/commu/communityMemInsert_KHJ">게시글 작성하기</option>
 					</select>
 				</div>
 			</nav>
@@ -213,9 +227,9 @@ div img {
 					<img id="person" alt="익명 사진"
 						src="/resources_JYC/images_JYC/ano.png">
 					<div>
-						<select onchange="if(this.value) location.href=(this.value)">
-							<option>${admin.aid }님환영합니다</option>
-							<option value="/logout" style="color: red">로그아웃</option>
+						<select onchange="if(this.value) location.href=(this.value)" class="selectBox">
+							<option class="options" value="#">${admin.aid }님환영합니다</option>
+							<option class="options" value="/logout" style="color: red">로그아웃</option>
 						</select>
 					</div>
 				</div>
@@ -228,7 +242,14 @@ div img {
 					<li><a href="/admin/serviceFAQ">고객센터</a></li>
 					<li><a href="/admin/infoAdmin">공지사항 관리</a></li>
 				</ul>
+				<select onchange="if(this.value) location.href=(this.value)" class="selectBox">
+						<option>-- 선택 --</option>
+						<option class="options" value="/commu">커뮤니티</option>
+						<option class="options" value="/commu/communityMyBoards_KHJ">MY 게시판</option>
+						<option class="options" value="/commu/communityMemInsert_KHJ">게시글 작성하기</option>
+					</select>
 			</nav>
+			
 		</header>
 
 
