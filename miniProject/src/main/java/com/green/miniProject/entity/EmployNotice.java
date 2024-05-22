@@ -23,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class EmployNotice {
-	
+	// 페이지네이션 진행하고 싶은 엔티티를 생성한다.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long enno;
