@@ -27,6 +27,7 @@ table {
   border-collapse: collapse;
   width: 800px;
   margin: 30px auto;
+  
   border: 1px solid #ddd;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
@@ -74,9 +75,12 @@ td:nth-child(1) {
 	padding : 10px;
 	font-weight: bold;
 	border : 1.5px solid darkgrey;
+	margin-right : 20px;
 }
 
-
+#tbl1{
+	margin-right : 30px;
+}
 
 </style>
 <body>
@@ -92,48 +96,48 @@ td:nth-child(1) {
 
 
 <div class="container">
-	<div class="tbl">
-	<h3>질문(개인)</h3>
-	<table border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
-		
-		<thead>
-			<tr>
-				<th>질문</th>
-				<th>답변</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="faq" items="${faqList}" >
-				<c:if test="${faq.faqtarget == 'member'}">
-					<tr>
-						<td>${faq.faqquestion}</td>
-						<td>${faq.faqanswer}</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
+	<div class="tbl" id="tbl1">
+		<h3>질문(개인)</h3>
+		<table border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+			
+			<thead>
+				<tr>
+					<th>질문</th>
+					<th>답변</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="faq" items="${faqList}" >
+					<c:if test="${faq.faqtarget == 'member'}">
+						<tr>
+							<td>${faq.faqquestion}</td>
+							<td>${faq.faqanswer}</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 	<div class="tbl">
-	<h3>질문(기업)</h3>
-	<table border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
-		<thead>
-			<tr>
-				<th>질문</th>
-				<th>답변</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="faq" items="${faqList}" >
-				<c:if test="${faq.faqtarget == 'company'}">
-					<tr>
-						<td>${faq.faqquestion}</td>
-						<td>${faq.faqanswer}</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
+		<h3>질문(기업)</h3>
+		<table border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+			<thead>
+				<tr>
+					<th>질문</th>
+					<th>답변</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="faq" items="${faqList}" >
+					<c:if test="${faq.faqtarget == 'company'}">
+						<tr>
+							<td>${faq.faqquestion}</td>
+							<td>${faq.faqanswer}</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>	
 	<div class="alink">
