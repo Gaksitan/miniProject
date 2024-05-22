@@ -15,10 +15,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 section{
 	width : 1500px;
-	margin: auto;
-	margin-top : 50px;
-	margin-bottom : 50px;
-	
+	margin: 50px auto 50px auto;
 	display:grid;
 	grid-template-columns: 1fr 1fr;
 	grid-row: auto auto;
@@ -26,6 +23,8 @@ section{
 	grid-row-gap: 80px;
 	justify-content:center;
 	align-items:center;
+	border : 2px solid darkgrey;
+	padding : 50px;
 }
 
 
@@ -53,7 +52,10 @@ section{
 	font-size:1.5em;
 }
 
-
+.container{
+	display : grid;
+	grid-template-columns: 200px 200px;
+}
 
 
 
@@ -61,27 +63,28 @@ section{
 <body>
 <%@ include file="./header_JYC.jsp"%>
 
-<h1>Admin IndexPage</h1>
 
 <section>
-	<div class="div1">
-	<canvas id="myChart1" style="width:100%; max-width:600px; height:400px"></canvas>
-	</div>
-	
-	<div class="div2">
-	<canvas id="myChart2" style="width:100%; max-width:600px; height:400px"></canvas>
-	</div>
-	
-	<div class="div3">
-	<canvas id="myChart3" style="width:100%; max-width:600px; height:400px"></canvas>
-	</div>
-	
-	<div class="div4">
-		<h3>답변 안한 질문 수</h3>
-		<div id="circle">
-			<a href="/admin/serviceQuestionNoAnswer" id="circletext"><span>${count}건</span></a>
+	<h1>ADMIN DASH BOARD</h1>
+	<hr>
+		<div class="div1">
+		<canvas id="myChart1" style="width:100%; max-width:600px; height:400px;"></canvas>
 		</div>
-	</div>
+		
+		<div class="div2">
+		<canvas id="myChart2" style="width:100%; max-width:600px; height:400px"></canvas>
+		</div>
+		
+		<div class="div3">
+		<canvas id="myChart3" style="width:100%; max-width:600px; height:400px"></canvas>
+		</div>
+		
+		<div class="div4">
+			<h3>답변 안한 질문 수</h3>
+			<div id="circle">
+				<a href="/admin/serviceQuestionNoAnswer" id="circletext"><span>${count}건</span></a>
+			</div>
+		</div>
 </section>
 
 
@@ -104,7 +107,7 @@ section{
 	    legend: {display: false},
 	    title: {
 	      display: true,
-	      text: "하루 총 사용자수"
+	      text: "하루 총 사용자수",
 	    }
 	  }
 	});

@@ -9,14 +9,24 @@
 <title>Insert title here</title>
 </head>
 <style>
+section{
+	margin : 50px;
+	height : 500px;
+}
 
 form{
 	display : flex;
 	flex-direction : column;
 	justify-content:center;
-
+	margin : 40px auto;
 }
 
+fieldset{
+	display : flex;
+	flex-direction : column;
+	justify-content:center;
+	align-items : center;
+}
 
 input[type="text"] {
     border: 1.5px rgb(68, 136, 244) solid;
@@ -30,7 +40,7 @@ input[type="text"] {
 textarea {
     border: 1.5px rgb(68, 136, 244) solid;
     width: 500px;
-    height: 400px;
+    height: 130px;
     border-radius: 5px;
     padding-left: 10px;
     padding-top: 10px;
@@ -60,6 +70,7 @@ input[type="submit"]:hover , input[type="button"]:hover {
     background-color: rgb(68, 136, 244);
 }
 
+
 </style>
 
 
@@ -76,7 +87,9 @@ input[type="submit"]:hover , input[type="button"]:hover {
 
 <%@ include file="./header_JYC.jsp"%>
 
-<h1>공지사항 작성,수정 폼</h1>
+<section>
+<h3>공지사항 작성,수정 폼</h3>
+<hr>
 
 <!-- <form action="/admin/writeNotice" method="get" style="width: 400px;">
     <fieldset>
@@ -91,36 +104,38 @@ input[type="submit"]:hover , input[type="button"]:hover {
 </form> -->
 
 
-<c:choose>
-    <c:when test="${not empty notice}">
-        <form id="noticeForm" method="post" style="width: 400px;">
-            <fieldset>
-                <legend>공지사항 수정 관리</legend>
-                <input type="hidden" name="nno" value="${notice.nno}"><!-- 공지사항 번호를 hidden으로 전달 -->
-                <input type="hidden" name="ano" value="${notice.ano}"><!-- 공지사항 작성자를 hidden으로 전달 -->
-                공지 제목<input type="text" name="ntitle" maxlength=100 value="${notice.ntitle}"><br>
-                공지 내용<textarea name="ncontent">${notice.ncontent}</textarea><br>
-                <div class="btns">
-                    <input type="button" value="수정" onclick="submitForm('/admin/updateNotice')">
-                    <input type="button" value="삭제" onclick="submitForm('/admin/deleteNotice')">
-                </div>
-            </fieldset>
-        </form>
-    </c:when>
-    <c:otherwise>
-        <form action="/admin/writeNotice" method="post" style="width: 400px;">
-            <fieldset>
-                <legend>공지사항 작성 관리</legend>
-                공지 제목<input type="text" name="ntitle" maxlength=100 placeholder="제목 입력"><br>
-                공지 내용<textarea name="ncontent" placeholder="내용 입력"></textarea><br>
-                <div class="btns">
-                    <input type="submit" value="등록" onclick="alert('등록이 완료되었습니다.')">
-                    <input type="button" value="취소" onclick="history.back()">
-                </div>
-            </fieldset>
-        </form>
-    </c:otherwise>
-</c:choose>
+	<c:choose>
+	    <c:when test="${not empty notice}">
+	        <form id="noticeForm" method="post" style="width: 400px;">
+	            <fieldset>
+	                <legend>공지사항 수정 관리</legend>
+	                <input type="hidden" name="nno" value="${notice.nno}"><!-- 공지사항 번호를 hidden으로 전달 -->
+	                <input type="hidden" name="ano" value="${notice.ano}"><!-- 공지사항 작성자를 hidden으로 전달 -->
+	                공지 제목<input type="text" name="ntitle" maxlength=100 value="${notice.ntitle}"><br>
+	                공지 내용<textarea name="ncontent">${notice.ncontent}</textarea><br>
+	                <div class="btns">
+	                    <input type="button" value="수정" onclick="submitForm('/admin/updateNotice')">
+	                    <input type="button" value="삭제" onclick="submitForm('/admin/deleteNotice')">
+	                </div>
+	            </fieldset>
+	        </form>
+	    </c:when>
+	    <c:otherwise>
+	        <form action="/admin/writeNotice" method="post" style="width: 400px;">
+	            <fieldset>
+	                <legend>공지사항 작성 관리</legend>
+	                공지 제목<input type="text" name="ntitle" maxlength=100 placeholder="제목 입력"><br>
+	                공지 내용<textarea name="ncontent" placeholder="내용 입력"></textarea><br>
+	                <div class="btns">
+	                    <input type="submit" value="등록" onclick="alert('등록이 완료되었습니다.')">
+	                    <input type="button" value="취소" onclick="history.back()">
+	                </div>
+	            </fieldset>
+	        </form>
+	    </c:otherwise>
+	</c:choose>
+</section>
+
 
 <%@ include file="./footer_JYC.jsp"%>
 

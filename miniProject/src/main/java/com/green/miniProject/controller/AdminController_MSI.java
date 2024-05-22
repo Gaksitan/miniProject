@@ -1,22 +1,31 @@
 package com.green.miniProject.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.green.miniProject.dao.IAdminDao_MSI;
 import com.green.miniProject.dao.ICommuDao_KHJ;
 import com.green.miniProject.domain.Admin;
 import com.green.miniProject.domain.BlackAccount;
+import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.FAQ;
+import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Notice;
 import com.green.miniProject.domain.ServiceQuestion;
 
@@ -275,6 +284,40 @@ public class AdminController_MSI {
 	}
 	
 	
+	@RequestMapping("block")
+	public String block(HttpServletRequest request) {
+		String mid = request.getParameter("mid");
+		String cno = request.getParameter("cno");
+		
+		String keyword = request.getParameter("keyword");
+		
+		HttpSession session = request.getSession();
+		String ano = (String)session.getAttribute("ano");
+		
+		//int result = 0;
+		
+		if(mid != null) {
+			adminDao.insertMemBlackList(mid,ano);
+		}
+		if(cno != null) {
+			adminDao.insertComBlackList(cno,ano);
+		}
+		
+		 // keyword 인코딩
+	    try {
+	        keyword = URLEncoder.encode(keyword, "UTF-8");
+	    } catch (UnsupportedEncodingException e) {
+	        e.printStackTrace();
+	        // 인코딩에 실패한 경우 적절한 오류 처리를 수행하거나 기본값을 설정합니다.
+	        keyword = "";
+	    }
+
+	    return "redirect:/admin/accountSearch?search=" + keyword;
+		 
+	}
+	
+	
+	
 	//블랙리스트 차단 해제
 	@RequestMapping("/unblock")
 	public String unblock(HttpServletRequest request) {
@@ -288,20 +331,92 @@ public class AdminController_MSI {
 			System.out.println("블랙리스트 차단 해제 실패");
 		}
 		
-		
 		return "redirect:/admin/blackList";
+		
+	}
+	
+	
+	//검색창 결과에서 블랙리스트 차단 해제
+	@RequestMapping("/unblock2")
+	public String unblock2(HttpServletRequest request) {
+		String bano = request.getParameter("bano");
+		String keyword = request.getParameter("keyword");
+		
+		int result = adminDao.deleteBlackList(bano);
+		
+		if(result==1) {
+			System.out.println("블랙리스트 차단 해제 성공");
+		}else {
+			System.out.println("블랙리스트 차단 해제 실패");
+		}
+		
+		 // keyword 인코딩
+	    try {
+	        keyword = URLEncoder.encode(keyword, "UTF-8");
+	    } catch (UnsupportedEncodingException e) {
+	        e.printStackTrace();
+	        // 인코딩에 실패한 경우 적절한 오류 처리를 수행하거나 기본값을 설정합니다.
+	        keyword = "";
+	    }
+		
+	    return "redirect:/admin/accountSearch?search=" + keyword;
 	}
 	
 	
 	
 	
-	
 	@RequestMapping("/accountSearch")
-	public String accountSearch(HttpServletRequest request) {
-		String search = request.getParameter("search");
+	public String accountSearch(HttpServletRequest request, Model model) {
+		String keyword = request.getParameter("search");
+		
+		List<Map<String, Object>> companyList = adminDao.searchComList(keyword);
+		List<Map<String, Object>> memberList = adminDao.searchMemList(keyword);
 		
 		
-		return "";
+		
+		for (Map<String, Object> member : memberList) {
+            // Map에서 값을 추출
+            String mid = (String) member.get("mid");
+            Date bregdate = (Date)member.get("bregdate"); 
+            String ano = (String) member.get("ano");
+            Long bano = (Long) member.get("bano");
+            
+            // 출력
+            System.out.println("Member ID: " + mid);
+            System.out.println("Black Account Registration Date: " + bregdate);
+            System.out.println("Black Account AdminNumber: " + ano);
+            System.out.println("Black Account Bano: " + bano);
+        }
+		
+		
+		for (Map<String, Object> company : companyList) {
+            // Map에서 값을 추출
+            String cno = (String) company.get("cno");
+            Date bregdate = (Date)company.get("bregdate"); 
+            String ano = (String) company.get("ano");
+            Long bano = (Long) company.get("bano");
+            
+            // 출력
+            System.out.println("Company ID: " + cno);
+            System.out.println("Black Account Registration Date: " + bregdate);
+            System.out.println("Black Account Number: " + ano);
+            System.out.println("Black Account Bano: " + bano);
+        }
+		
+		
+		
+		if(companyList != null) {
+			model.addAttribute("companyList",companyList);
+			model.addAttribute("keyword",keyword);
+		}
+		
+		if(memberList != null) {
+			model.addAttribute("memberList",memberList);
+			model.addAttribute("keyword",keyword);
+		}
+		
+		
+		return "serviceSearchAdmin_MSI";
 	}
 	
 	
