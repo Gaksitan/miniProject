@@ -17,11 +17,25 @@
 	<h1>커뮤니티 상세페이지</h1>
 	<hr>
 	<h3>${boardDetail[0].btitle}</h3>
-	<img src="/resources_KHJ/img_KHJ/emptyheart.png" id="like" width="15"
+	
+	<c:if test="${likeyesno == true }">
+		<img src="/resources_KHJ/img_KHJ/heart.png" id="like" width="15"
 		height="15" />
+	</c:if>
+	<c:if test="${likeyesno == false }">
+		<img src="/resources_KHJ/img_KHJ/emptyheart.png" id="like" width="15"
+		height="15" />
+	</c:if>
+
 	<span>작성자</span>
-	<span>${boardDetail[0].mid}</span>
-	<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
+	<c:if test="${mid != null }">
+		<span>${boardDetail[0].mid}</span>
+		<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
+	</c:if>
+	<c:if test="${cmid != null }">
+		<span>${boardDetail[0].cmid}</span>
+		<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
+	</c:if>
 	<p>${boardDetail[0].bcontent}</p>
 	<span>태그</span>
 	<c:forEach var="tags" items="${tagList }">
@@ -31,10 +45,10 @@
 	<br>
 	<form action="replyInsert.do" method="get">
 		<input type="hidden" name="bno" value="${boardDetail[0].bno}">
-		<input type="hidden" name="mid" value="${sessionScope.mid}"> <label
-			for="reply">댓글 작성하기</label> <input id="reply" name="reply"
+		<label for="reply">댓글 작성하기</label> <input id="reply" name="reply"
 			placeholder="댓글 입력하기"> <input type="submit" value="작성">
 	</form>
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -63,11 +77,12 @@
 			// 서버에서 전달된 값들을 JavaScript 변수에 할당
 			var bno = "${boardDetail[0].bno}";
 			var mid = "${sessionScope.mid}";
-			//var mid = "happy01";
+			var cmid = "${sessionScope.companyManager != null ? sessionScope.companyManager.getCmid() : null}";
 
 			// 콘솔에 출력하여 값이 제대로 할당되었는지 확인
 			console.log("bno: " + bno);
 			console.log("mid: " + mid);
+			console.log("cmid: " + cmid);
 
 			let like = $("#like");
 			like.on("click", f1);
@@ -77,27 +92,52 @@
 
 				if (like1 === "/resources_KHJ/img_KHJ/emptyheart.png") {
 					like.attr("src", "/resources_KHJ/img_KHJ/heart.png");
+					if (bno != "" && mid != "") {
+						$.ajax({
+							url : "/commu/likeInsertMem",
+							type : "post",
+							data : {
+								no : bno,
+								id : mid
+							}
+						});
+					} else if (bno != "" && cmid != "") {
+						//console.log("기업회원 조건문 안으로 들어옴");
+						$.ajax({
+							url : "/commu/likeInsertCom",
+							type : "post",
+							data : {
+								no : bno,
+								id : cmid
+							}
+						});
 
-					$.ajax({
-						url : "/commu/likeInsert.do",
-						type : "post",
-						data : {
-							no : bno,
-							id : mid
-						}
-					});
+					}
 
 				} else {
 					like.attr("src", "/resources_KHJ/img_KHJ/emptyheart.png");
+					if (bno != "" && mid != "") {
+						
+						$.ajax({
+							url : "/commu/likeDeleteMem",
+							type : "post",
+							data : {
+								no : bno,
+								id : mid
+							}
+						});
+					} else if (bno != "" && cmid != "") {
 
-					$.ajax({
-						url : "/commu/likeDelete.do",
-						type : "post",
-						data : {
-							no : bno,
-							id : mid
-						}
-					});
+						$.ajax({
+							url : "/commu/likeDeleteCom",
+							type : "post",
+							data : {
+								no : bno,
+								id : cmid
+							}
+						});
+
+					}
 				}
 			}
 
