@@ -8,44 +8,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<style type="text/css">
-
-	footer{
-		display: flex;
-		justify-content: space-between;
-		background: #C4D2E9;
-	}
-	div {
-		margin: 20px;
-	}
-	a{
-		margin: 20px;
-		color: 
-	}
-</style>
-
+ <link rel="stylesheet" href="../css/footer_css.css" />
 </head>
 <body>
 	<footer>
+		<img src="../resources_JYC/images_JYC/logo.png" alt="로고" style="width:110px; height:90px;">
 		<div>
-			<p>
-				<span>DEVJOB</span><span>|</span><span>홍길동</span>
-			</p>
-			<p>
-				<span>부산광역시 해운대구</span><span>|</span><span>XX-XXX-XXXX</span>
-			</p>
-			<p>
-				<span>사업자등록번호:XXX-XX-XXXX</span>
-			</p>
+			<ul class="menu">
+				<li><span>서비스소개</span></li>
+				<li><span>광고문의</span></li>
+				<li><a href="https://github.com/Gaksitan/miniProject.git">GitHub</a></li>
+				
+				<c:if test="${companyManager == null }">
+					<li><a href="/service/mainMem">고객센터</a></li>
+				</c:if>
+				<c:if test="${companyManager != null }">
+					<li><a href="/service/mainCom">고객센터</a></li>
+				</c:if>
+	
+			</ul>
+			
+			<div>
+				<p class="copyright">
+					<span>Copyright 2024. DEVJOB Co. All rights reserved.</span>
+				</p>
+			</div>
 		</div>
 		
-		
-		<c:if test="${companyManager == null }">
-		<a href="/service/mainMem">고객센터</a>
-		</c:if>
-		<c:if test="${companyManager != null }">
-		<a href="/service/mainCom">고객센터</a>
-		</c:if>
+		<div>
+			<ul class="info">
+				<li>만든이 : 4조</li>
+				<li>이메일 : aaa@gmail.com</li>
+				<li>전화번호 : XX-XXX-XXXX</li>
+			</ul>
+			
+			
+		</div>
 
 	</footer>
 </body>
