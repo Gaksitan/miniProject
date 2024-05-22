@@ -213,7 +213,7 @@ public class CommuController_KHJ {
 	@RequestMapping("/replyInsert.do")
 	public String replyInsert(@RequestParam("bno") Long bno, @RequestParam("reply") String reply, Model model, HttpSession session) {
 		
-		String mid = session.getAttribute("mid");
+		String mid = (String)session.getAttribute("mid");
 		
 		System.out.println("bno = " + bno);
 		System.out.println("reply = " + reply);
