@@ -9,6 +9,9 @@
 	<select id="count">
 		SELECT COUNT(senno) FROM scrapemploynotice WHERE enno = #{enno} AND mid = #{mid};
 	</select>
+	<select id="getScrapENDetail" resultType="com.green.miniProject.domain.ScrapEmployNoticeDetail">
+		SELECT se.*, en.* FROM scrapemploynotice se INNER JOIN employnotice en ON se.enno = en.enno WHERE MID = #{mid};
+	</select>
 	<insert id="scrapEmployNotice">
 		INSERT INTO scrapemploynotice VALUES (NULL, #{enno}, #{mid});
 	</insert>

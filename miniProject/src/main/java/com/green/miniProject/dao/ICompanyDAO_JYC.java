@@ -13,4 +13,5 @@ public interface ICompanyDAO_JYC {
 	public Company getCompany(@Param("cno") String cno);
 	public int count();
 	public int getCount(@Param("keyword") String keyword);
+	public String getCname(@Param("cno") String cno);
 }

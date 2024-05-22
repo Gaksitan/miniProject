@@ -12,4 +12,6 @@ public interface ICompanySectorDAO_JYC {
 
 	public List<CompanySectorAndCompany> getCompanySectorAndCompanyList(@Param("scname") String scname, @Param("cno") String cno);
 	public String getScname(@Param("cno") String cno);
+	public List<String> getScnameList(@Param("cno") String cno);
+	
 }
