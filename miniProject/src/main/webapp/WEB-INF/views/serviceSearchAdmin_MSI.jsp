@@ -7,78 +7,230 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+
+section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 800px; /* 화면 전체 높이 설정 */
+
+}
+
+.container{
+	display : flex;
+	flex-direction : column;
+	padding : 10px;
+
+}
+
+.memDiv{
+	display : flex;
+	flex-direction : row;
+	margin : 10px;
+}
+
+.comDiv{
+	display : flex;
+	flex-direction : row;
+	margin : 10px;
+}
+
+.mem1{
+	margin : 30px;
+}
+
+.mem2{
+	margin : 30px;
+}
+
+.com1{
+	margin : 30px;
+}
+
+.com2{
+	margin : 30px;
+}
+
+thead {
+  font-weight: bold;
+  color: #fff;
+  background: #5B85AC;
+  padding : 8px;
+}
+
+table {
+  border: 1px #a39485 solid;
+  font-size: 1em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+th,td{
+	padding : 8px;
+}
+
+a {
+  color: #FE2E64;
+  text-decoration: none;
+  font-weight : bold;
+}
+
+a:hover,a:focus {
+  text-decoration: underline;
+}
+
+
+input[type="search"] {
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px; /* 테두리와 패딩을 제외한 실제 너비 */
+}
+
+/* 폼 그리드 스타일 */
+form {
+    max-width: 400px;
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px; /* 폼 주위의 간격 */
+    text-align :left;
+}
+
+
+input[type="submit"] {
+    width: 60px;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    outline: 1.5px rgb(68, 136, 244) solid;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: rgb(164, 199, 255);
+}
+
+input[type="submit"]:hover {
+    width: 60px;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    outline: 1.5px rgb(27, 76, 155) solid;
+    padding-left: 10px;
+    background-color: rgb(68, 136, 244);
+}
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <body>
 
 <%@ include file="./header_JYC.jsp"%>
-<h1>아이디 조회 결과</h1>
-
-<h3>개인회원</h3>
-
-<table  id="blockTable" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
-	<tr>
-		<th>멤버아이디</th><th>차단</th>
-	</tr>
-	<c:forEach var="member" items="${memberList}">
-		<c:if test="${member.bregdate == null}">
-			<tr>
-				<td>${member.mid}</td>
-				<td><a href="/admin/block?mid=${member.mid}&keyword=${keyword}">차단하기</a></td>
-			</tr>
-		</c:if>
-	</c:forEach>	
-</table>
 
 
-<table id="unblockTable" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
-	<tr>
-		<th>멤버아이디</th><th>차단날짜</th><th>어드민아이디</th><th>차단해제</th>
-	</tr>
-	<c:forEach var="member" items="${memberList}">
-		<c:if test="${member.bregdate != null}">
-			<tr>
-				<td>${member.mid}</td>
-				<td>${member.bregdate}</td>
-				<td>${member.ano}</td>
-				<td><a href="/admin/unblock2?bano=${member.bano}&keyword=${keyword}">차단해제</a></td>
-			</tr>
-		</c:if>
-	</c:forEach>	
-</table>
+<section>
+<h1>아이디 검색조회 결과</h1>
+
+<div id="search">
+	<form method="get" action="/admin/accountSearch">
+		<img src="../resources_KHJ/img_KHJ/돋보기.png" style="width:30px; height:30px">
+		계정 검색  <input type="search" name="search" size="30"> 
+		<input type="submit" value="검색">
+	</form>
+</div>
 
 
-<h3>기업회원</h3>
+	<div class="container">
+	<h3>개인회원</h3>
+		<div class="memDiv">	
+			<div class="mem1">
+				<table  id="blockTable" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+					<thead>
+					<tr>
+						<th>멤버아이디</th><th>차단</th>
+					</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="member" items="${memberList}">
+							<c:if test="${member.bregdate == null}">
+								<tr>
+									<td>${member.mid}</td>
+									<td><a href="/admin/block?mid=${member.mid}&keyword=${keyword}">차단하기</a></td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>	
+				</table>
+			</div>
+			<div class="mem2">
+				<table id="unblockTable" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+					<thead>
+					<tr>
+						<th>멤버아이디</th><th>차단날짜</th><th>어드민아이디</th><th>차단해제</th>
+					</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="member" items="${memberList}">
+							<c:if test="${member.bregdate != null}">
+								<tr>
+									<td>${member.mid}</td>
+									<td>${member.bregdate}</td>
+									<td>${member.ano}</td>
+									<td><a href="/admin/unblock2?bano=${member.bano}&keyword=${keyword}">차단해제</a></td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>	
+				</table>
+			</div>
+		</div>
+		<h3>기업회원</h3>
+		<div class="comDiv">
+			<div class="com1">
+				<table id="blockTable.company" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+					<thead>
+					<tr>
+						<th>사업자번호</th><th>차단</th>
+					</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="company" items="${companyList}">
+							<c:if test="${company.bregdate == null}">
+								<tr>
+									<td>${company.cno}</td>
+									<td><a href="/admin/block?cno=${company.cno}&keyword=${keyword}">차단하기</a></td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>	
+				</table>
+			</div>
+			<div class="com2">
+				<table id="unblockTable.company" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+					<thead>
+					<tr>
+						<th>사업자번호</th><th>차단날짜</th><th>어드민아이디</th><th>차단해제</th>
+					</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="company" items="${companyList}">
+							<c:if test="${company.bregdate != null}">
+								<tr>
+									<td>${company.cno}</td>
+									<td>${company.bregdate}</td>
+									<td>${company.ano}</td>
+									<td><a href="/admin/unblock2?bano=${company.bano}&keyword=${keyword}">차단해제</a></td>
+								</tr>
+							</c:if>
+						</c:forEach>	
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
 
-<table id="blockTable.company" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
-	<tr>
-		<th>사업자번호</th><th>차단</th>
-	</tr>
-	<c:forEach var="company" items="${companyList}">
-		<c:if test="${company.bregdate == null}">
-			<tr>
-				<td>${company.cno}</td>
-				<td><a href="/admin/block?cno=${company.cno}&keyword=${keyword}">차단하기</a></td>
-			</tr>
-		</c:if>
-	</c:forEach>	
-</table>
-
-
-<table id="unblockTable.company" border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
-	<tr>
-		<th>사업자번호</th><th>차단날짜</th><th>어드민아이디</th><th>차단해제</th>
-	</tr>
-	<c:forEach var="company" items="${companyList}">
-		<c:if test="${company.bregdate != null}">
-			<tr>
-				<td>${company.cno}</td>
-				<td>${company.bregdate}</td>
-				<td>${company.ano}</td>
-				<td><a href="/admin/unblock2?bano=${company.bano}&keyword=${keyword}">차단해제</a></td>
-			</tr>
-		</c:if>
-	</c:forEach>	
-</table>
 
 
 <%@ include file="./footer_JYC.jsp"%>
