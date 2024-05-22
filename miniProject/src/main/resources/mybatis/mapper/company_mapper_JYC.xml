@@ -16,4 +16,7 @@
 	<select id="getCount">
 		SELECT COUNT(cno) FROM company WHERE cname LIKE CONCAT('%', #{keyword}, '%');
 	</select>
+	<select id="getCname">
+		SELECT cname FROM company WHERE cno = #{cno};
+	</select> 
 </mapper>  

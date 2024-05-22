@@ -11,5 +11,7 @@
 	<select id="getScname">
 		SELECT scname FROM companysector WHERE cno = #{cno} LIMIT 1;
 	</select>
-	
+	<select id="getScnameList">
+		SELECT scname FROM companysector WHERE cno = #{cno};
+	</select>
 </mapper>  
