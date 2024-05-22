@@ -19,8 +19,13 @@
 <body>
 <%@ include file="./header_JYC.jsp"%>
 <hr>
+<h1>개인회원 로그인</h1>
 <form action="login" method="post">
 	<table>
+		<tr>
+			<td><a href="/mem/loginForm">개인회원</a></td>
+			<td><a href="/loginFormCom">기업회원</a></td>
+		</tr>
 		<tr>
 			<th>아이디</th>
 			<td><input type="text" name="mid" placeholder="아이디를 입력하세요."></td>

@@ -34,9 +34,9 @@ public class Member {
 	
 	private int mstate;
 	
-	private char mgender;
+	private String mgender;
 	
-	public Member(String mid, String mpw, String mname, String maddr1, String maddr2, String mtel1, String mtel2, int mstate, char mgender) {
+	public Member(String mid, String mpw, String mname, String maddr1, String maddr2, String mtel1, String mtel2, int mstate, String mgender) {
 		this.mid = mid;
 		this.mpw = mpw;
 		this.mname = mname;

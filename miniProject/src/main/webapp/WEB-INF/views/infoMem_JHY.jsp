@@ -18,11 +18,15 @@
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" name="mpw"></td>
+			<td><input type="password" id="password" name="mpw"></td>
 		</tr>
 		<tr>
 			<th>비밀번호 확인</th>
-			<td><input type="password" name="mpw2"></td>
+			<td><input type="password" id="confirmPassword" name="mpw2"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="msg"></td>
 		</tr>
 		<tr>
 			<th>이름</th>
@@ -30,7 +34,11 @@
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td><input type="text" name="maddr"></td>
+			<td><input type="text" name="maddr1"></td>
+		</tr>
+		<tr>
+			<th>상세주소</th>
+			<td><input type="text" name="maddr2"></td>
 		</tr>
 		<tr>
 			<td><select name="mtel1">
@@ -43,11 +51,11 @@
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="mtel1"><input type="button" value="인증번호 받기" onclick="certificate()"></td>
+			<td><input type="text" name="mtel2"><input type="button" value="인증번호 받기" onclick="certificate()"></td>
 		</tr>
 		<tr>
 			<th>인증번호</th>
-			<td><input type="text" name="checkCertificate"></td>
+			<td><input type="text" id="certificateNum" name="checkCertificate"></td>
 		</tr>
 		<tr>
 			<th>생년월일</th>
@@ -65,17 +73,56 @@
 			</select><td>
 		</tr>
 		<tr>
-			<td>성별 <label><input type="radio" name="mgender">남</label>
-					<label><input type="radio" name="mgender">여</label></td>
+			<td>성별
+				<c:if test='${member.mgender == "M" }'>
+				<label><input type="radio" name="mgender" value="M" checked>남</label>
+				<label><input type="radio" name="mgender" value="F">여</label></c:if>
+				<c:if test='${member.mgender == "F" }'>
+				<label><input type="radio" name="mgender" value="M">남</label>
+				<label><input type="radio" name="mgender" value="F" checked>여</label></c:if>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
 			<input type="submit" value="수정">
-			<input type="button" value="회원탈퇴">
+			<input type="button" value="취소" onclick="Back()">
+			<input type="button" value="회원탈퇴" onclick="invalid()">
 			</td>
 		</tr>
 	</table>
 </form>
 <%@ include file="./footer_JYC.jsp"%>
+<script>
+	function certificate(){
+		let randomNum = Math.floor(Math.random()*1000000);
+		const certificateNum = document.querySelector("#certificateNum");
+		certificateNum.value = randomNum;
+	}
+	const password = document.querySelector("#password");
+	const confirmPassword = document.querySelector("#confirmPassword");
+	const msg = document.querySelector("#msg");
+	password.addEventListener("input", function(){
+		if(password.value.trim() == confirmPassword.value.trim()){
+			msg.textContent = "비밀번호가 일치합니다.";
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+		}
+	})
+	confirmPassword.addEventListener("input", function(){
+		if(password.value.trim() == confirmPassword.value.trim()){
+			msg.textContent = "비밀번호가 일치합니다.";
+			msg.classList.remove("invalid");
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+			msg.classList.add("invalid");
+		}
+	})
+	function Back(){
+		window.location.href = "indexMem";
+	}
+	function invalid(){
+		location.href = "deleteMemInfo";
+	}
+</script>
 </body>
 </html>

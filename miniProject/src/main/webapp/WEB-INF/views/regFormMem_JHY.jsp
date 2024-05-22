@@ -18,15 +18,24 @@
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="mid" placeholder="아이디를 입력하세요."><input type="button" name="midCheck" value="아이디 중복체크" onclick="midCheck()"></td>
+			<td><input type="text" name="mid" id="mid" placeholder="아이디를 입력하세요."></td>
+			<td><input type="button" name="midCheck" value="아이디 중복체크" onclick="checkMid()"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="demo">.</td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><input type="password" name="mpw" placeholder="비밀번호를 입력하세요."></td>
+			<td><input type="password" name="mpw" id="password" placeholder="비밀번호를 입력하세요."></td>
 		</tr>
 		<tr>
 			<th>비밀번호 확인</th>
-			<td><input type="password" name="mpw2" placeholder="한번 더 비밀번호를 입력하세요."></td>
+			<td><input type="password" name="mpw2" id="confirmPassword" placeholder="한번 더 비밀번호를 입력하세요."></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="demo2" class="demo2"></td>
 		</tr>
 		<tr>
 			<th>이름</th>
@@ -51,11 +60,12 @@
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="mtel2" placeholder="전화번호를 입력하세요"><input type="button" name="checkTel" value="인증번호받기"></td>
+			<td><input type="text" name="mtel2" placeholder="전화번호를 입력하세요">
+				<input type="button" name="checkTel" value="인증번호받기" onclick="certificate()"></td>
 		</tr>
 		<tr>
 			<th>인증번호</th>
-			<td><input type="text" name="certificationNum"></td>
+			<td><input type="text" id="certificateNum" name="certificationNum"></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
@@ -84,16 +94,57 @@
 	</table>
 </form>
 <%@ include file="./footer_JYC.jsp"%>
-<script>
-	function midCheck() {
+<script type="text/javascript">
+	// 아이디 중복 체크 메서드
+	
+	function checkMid() {
+		const mid = document.querySelector("#mid");
+		console.log("아이디 중복체크");
+		
 		const xhttp = new XMLHttpRequest();
 		xhttp.onload = function() {
-		document.getElementById("demo").innerHTML =
-		this.responseText;
+			document.getElementById("demo").innerHTML = this.responseText;
 	  }
-	  xhttp.open("GET", "ajax_info.txt");
+	  xhttp.open("GET", "/mem/regMidCheck?mid=" + mid.value, true);
 	  xhttp.send();
 	}
+	
+	function certificate(){
+		let randomNum = Math.floor(Math.random()*1000000) + 1;
+		const certificateNum = document.querySelector("#certificateNum");
+		console.log(randomNum);
+		certificateNum.value = randomNum;
+	}
+	const password = document.querySelector("#password");
+	const confirmPassword = document.querySelector("#confirmPassword");
+	const msg = document.querySelector("#demo2");
+	password.addEventListener("input", function(){
+		if(password.value.trim() == confirmPassword.value.trim()){
+			msg.textContent = "비밀번호가 일치합니다.";
+			msg.classList.remove("invalid");
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+			msg.classList.add("invalid");
+		}
+	});
+	confirmPassword.addEventListener("input", function(){
+		if(password.value.trim() == confirmPassword.value.trim()){
+			msg.textContent = "비밀번호가 일치합니다.";
+			msg.classList.remove("invalid");
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+			msg.classList.add("invalid");
+		}
+	});
+	/* function confirm(){
+		if(password.value == confirmPassword.value){
+			msg.textContent = "비밀번호가 일치합니다.";
+			msg.classList.remove("invalid");
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+			msg.classList.add("invalid");
+		}
+	} */
 </script>
 </body>
 </html>
