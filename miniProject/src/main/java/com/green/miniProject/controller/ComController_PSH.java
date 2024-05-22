@@ -151,61 +151,9 @@ public class ComController_PSH {
 	    }
 	    
 	    
-	    /*
-	    @RequestMapping("/enwrite")
-	    public String enWrite(EmployNotice en, @RequestParam("skname") List<String> sknames,
-	    						@RequestParam("wname") List<String> wnames,
-	    						@RequestParam(value = "newSknames", required = false) List<String> newSknames,
-								@RequestParam(value = "newWnames", required = false) List<String> newWnames,
-								HttpSession session) {
-	        Company company = (Company) session.getAttribute("company");
-	        String cno = company.getCno();
-	        en.setCno(cno);
-
-	        dao.enwrite(en);
-		    if (sknames != null) {
-		        for (String skname : sknames) {
-		            SkillEmployNotice skill = new SkillEmployNotice();
-		            skill.setEnno(en.getEnno());
-		            skill.setSkname(skname);
-		            dao.insertSkill(skill);
-		        }
-		    }
-	        
-		    if (newSknames != null) {
-		        for (String skname : newSknames) {
-		            SkillEmployNotice skill = new SkillEmployNotice();
-		            skill.setEnno(en.getEnno());
-		            skill.setSkname(skname);
-		            dao.insertSkill(skill);
-		        }
-		    }
-
-		    if (wnames != null) {
-		        for (String wname : wnames) {
-		        	WelfareEmployNotice welfare = new WelfareEmployNotice();
-		        	welfare.setEnno(en.getEnno());
-		        	welfare.setWname(wname);
-		            dao.insertWelfare(welfare);
-		        }
-		    }
-	        
-		    if (newWnames != null) {
-		        for (String wname : newWnames) {
-		            WelfareEmployNotice welfare = new WelfareEmployNotice();
-		            welfare.setEnno(en.getEnno());
-		            welfare.setWname(wname);
-		            dao.insertWelfare(welfare);
-		        }
-		    }
-
-
-	        return "redirect:employNoticeList";
-	    }
-	    */
 	    
 	    @RequestMapping("/employNoticeCreate")
-	    public String employNoticeCreate() {
+	    public String employNoticeCreate() {	
 	    	
 	    	return "employNoticeCreate_PSH";
 	    }

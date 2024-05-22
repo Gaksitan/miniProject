@@ -20,7 +20,13 @@
             <td><input type="text" name="cno" size="50" placeholder="사업자번호를 입력하세요."></td>
         </tr>
             <td>기업형태</td>
-            <td><input type="text" name="ctype" size="50" placeholder="기업 형태를 입력하세요. (ex. 대기업)"></td>
+	            <td>
+				<select name="ctype">
+					<option value="대기업">대기업</option>
+					<option value="중견기업">중견기업</option>
+					<option value="중소기업">중소기업</option>
+				</select>
+			</td>
         </tr>
         <tr>
             <td>회사명</td>
@@ -29,6 +35,10 @@
         <tr>
             <td>회사주소</td>
             <td><input type="text" name="caddr1" size="50" placeholder="회사 주소를 입력하세요."></td>
+        </tr>
+        <tr>
+        	<td></td>
+            <td><input type="text" name="caddr2" size="50" placeholder="상세 주소를 입력하세요."></td>
         </tr>
         <tr>
             <td>사업자등록증명원발급번호</td>

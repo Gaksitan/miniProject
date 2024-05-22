@@ -1,5 +1,8 @@
 package com.green.miniProject.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,11 @@ public class CompanyETCService_PSH {
     }
     //구독
     
+    public int calculateAge(LocalDate birthDate) {
+        LocalDate today = LocalDate.now();
+        return Period.between(birthDate, today).getYears();
+    }
+    
     public Member getApplicantDetailByMid(String mid) {
         return dao.getApplicantDetailByMid(mid);
     }
@@ -82,5 +90,12 @@ public class CompanyETCService_PSH {
     public List<Link> getLinkListByRno(String rno) {
         return dao.getLinkListByRno(rno);
     }
+    //////
+    
+    public void updateApplicationStatus(Long arno, int arg1) {
+        dao.updateApplicationStatus(arno, arg1);
+    }
+    
+    
     
 }
