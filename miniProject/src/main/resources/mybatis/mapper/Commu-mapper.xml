@@ -25,6 +25,11 @@
 		ON b.cmid = bc.cmid
 		WHERE ba.mid IS NULL AND bc.cmid IS NULL and b.cmid is not null
 	</select>
+	
+	<select id="replyCount">
+		SELECT b.bno, count(r.recontent) AS replycount FROM board b LEFT JOIN reply r ON b.bno = r.bno WHERE b.bno = #{bno}
+	</select>
+
 	<select id="tagListWhenMem">
 		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, t.value
 		FROM board b
