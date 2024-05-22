@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.green.miniProject.dao.ICommuDao_KHJ;
 import com.green.miniProject.domain.Board;
+import com.green.miniProject.domain.BoardReply;
 import com.green.miniProject.domain.BoardTag;
 
 import com.green.miniProject.domain.Like;
@@ -27,6 +28,7 @@ import com.green.miniProject.domain.Notice;
 import com.green.miniProject.domain.Reply;
 import com.green.miniProject.domain.ReplyDetail;
 import com.green.miniProject.domain.Tag;
+import com.green.miniProject.domain.TagBoard;
 import com.green.miniProject.domain.tagCom;
 import com.green.miniProject.domain.tagMem;
 import com.green.miniProject.service.LikeService;
@@ -77,7 +79,9 @@ public class CommuController_KHJ {
 			try {
 				ObjectMapper mapper = new ObjectMapper();
 				String replyDetailsJson = mapper.writeValueAsString(replyDetails);
+				System.out.println(replyDetailsJson);
 				model.addAttribute("replyDetailsJson", replyDetailsJson);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -296,7 +300,7 @@ public class CommuController_KHJ {
 		String mid = (String) session.getAttribute("mid");
 
 		CompanyManager cm = (CompanyManager) session.getAttribute("companyManager");
-		System.out.println("내 게시물 조회용 cm" + cm);
+		//System.out.println("내 게시물 조회용 cm" + cm);
 		String cmid = null;
 
 		if (cm != null) {
@@ -307,15 +311,30 @@ public class CommuController_KHJ {
 
 		if (mid != null) {
 
+			
 			List<Board> listmem = dao.myListMem(mid);
-			System.out.println("개인일때 가져온 내가 작성한 게시물 리스트" + listmem);
+			System.out.println("개인일때 가져온 내가 작성한 게시물 리스트" + listmem);			
+			List<BoardReply> replyList = dao.myReplyListMem(mid);
+			List<TagBoard> meTagList = dao.toMeListMem(mid);
+			List<Board> listILike = dao.getListILikeMem(mid);
 			model.addAttribute("myList", listmem);
+			model.addAttribute("replyList", replyList);
+			model.addAttribute("taggedList", meTagList);
+			model.addAttribute("likeList", listILike);
+
 
 		} else if (mid == null) {
-			System.out.println("cmid = " + cmid);
+			//System.out.println("cmid = " + cmid);
 			List<Board> listcom = dao.myListCom(cmid);
 			System.out.println("인사매니저일때 가져온 내가 작성한 게시물 리스트" + listcom);
+			
+			List<BoardReply> replyList = dao.myReplyListCom(cmid);
+			List<TagBoard> meTagList = dao.toMeListCom(cmid);
+			List<Board> listILike = dao.getListILikeCom(cmid);
 			model.addAttribute("myList", listcom);
+			model.addAttribute("replyList", replyList);
+			model.addAttribute("taggedList", meTagList);
+			model.addAttribute("likeList", listILike);
 
 		}
 
@@ -391,5 +410,6 @@ public class CommuController_KHJ {
 		// return "redirect:/communityDetail_KHJ?bno=" + bno;
 		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;
 	}
+
 
 }
