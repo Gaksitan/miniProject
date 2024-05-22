@@ -90,36 +90,36 @@ public class CompanyController_JYC {
 	}
 
 	@RequestMapping("/detailMem")
-	public String companyDetailMem(@RequestParam("cno") String cno, Model model, HttpSession session) {
-		Company company = comdao.getCompany(cno);
-		List<EmployNotice> enlist = endao.getEmployNoticeList(cno);
-		List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
+	public String companyDetailMem(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam("cno") String cno, HttpSession session) {
+		 Page<com.green.miniProject.entity.EmployNotice> paging = employNoticeService.getList(page);
+	        model.addAttribute("enlist", paging.getContent());
+	        model.addAttribute("totalPages", paging.getTotalPages());
+	        model.addAttribute("hasNext", paging.hasNext());
+	        model.addAttribute("hasPrevious", paging.hasPrevious());
+	        
+	        Company company = comdao.getCompany(cno);
+			List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
 
-		model.addAttribute("company", company);
-		if (!enlist.isEmpty()) {
-			model.addAttribute("enlist", enlist);
-		}
-		if (!smclist.isEmpty()) {
-			model.addAttribute("smclist", smclist);
-		}
+			model.addAttribute("company", company);
+			if (!smclist.isEmpty()) {
+				model.addAttribute("smclist", smclist);
+			}
+			
+			int comCount = comdao.count();
+			List<Company> comList = new ArrayList<>();
+
+			String scname = companySectorDao.getScname(cno);
+			List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
+					.getCompanySectorAndCompanyList(scname, cno);
+			if(companySectorAndCompanyList.size() > 0) {
+				model.addAttribute("recommendList", companySectorAndCompanyList);
+			}
 		
 		String mid = (String) session.getAttribute("mid");
-
 		List<Resume> resumeList = resumedao.getResumeList(mid);
 		
 		if(!resumeList.isEmpty()) {
 			model.addAttribute("resumeList", resumeList);
-		}
-		
-		int comCount = comdao.count();
-
-		List<Company> comList = new ArrayList<>();
-		
-		String scname = companySectorDao.getScname(cno);
-		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(scname, cno);
-		if(companySectorAndCompanyList.size() > 0) {
-			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
 		
 		int count = subsdao.count(mid, cno);
@@ -165,30 +165,33 @@ public class CompanyController_JYC {
 	}
 	
 	@RequestMapping("/detailCom")
-	public String companyDetailCom(@RequestParam("cno") String cno, Model model) {
-		Company company = comdao.getCompany(cno);
-		List<EmployNotice> enlist = endao.getEmployNoticeList(cno);
-		List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
+	public String companyDetailCom(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam("cno") String cno) {
+		 Page<com.green.miniProject.entity.EmployNotice> paging = employNoticeService.getList(page);
+	        model.addAttribute("enlist", paging.getContent());
+	        model.addAttribute("totalPages", paging.getTotalPages());
+	        model.addAttribute("hasNext", paging.hasNext());
+	        model.addAttribute("hasPrevious", paging.hasPrevious());
+	        
+	        
+	        Company company = comdao.getCompany(cno);
+			List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
 
-		model.addAttribute("company", company);
-		if (!enlist.isEmpty()) {
-			model.addAttribute("enlist", enlist);
-		}
-		if (!smclist.isEmpty()) {
-			model.addAttribute("smclist", smclist);
-		}
-		
-		
-		int comCount = comdao.count();
+			model.addAttribute("company", company);
+			if (!smclist.isEmpty()) {
+				model.addAttribute("smclist", smclist);
+			}
+			
 
-		List<Company> comList = new ArrayList<>();
-	
-		String scname = companySectorDao.getScname(cno);
-		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(scname, cno);
-		if(companySectorAndCompanyList.size() > 0) {
-			model.addAttribute("recommendList", companySectorAndCompanyList);
-		}
+			int comCount = comdao.count();
+			List<Company> comList = new ArrayList<>();
+
+			String scname = companySectorDao.getScname(cno);
+			List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
+					.getCompanySectorAndCompanyList(scname, cno);
+			if(companySectorAndCompanyList.size() > 0) {
+				model.addAttribute("recommendList", companySectorAndCompanyList);
+			}
+	        
 
 		return "companyDetail_JYC";
 	}

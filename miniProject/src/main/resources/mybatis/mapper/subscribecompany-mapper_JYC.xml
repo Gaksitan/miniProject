@@ -9,11 +9,16 @@
 	<select id="count">
 		SELECT COUNT(sno) FROM subscribecompany WHERE mid = #{mid} AND cno = #{cno};
 	</select>
+	
+	<select id="getSubComDetail" resultType="com.green.miniProject.domain.SubscribeCompanyDetail">
+		SELECT sc.*, com.* FROM subscribecompany sc INNER JOIN company com ON sc.cno = com.cno WHERE mid = #{mid};
+	</select>
 	<insert id="subscribeCompany">
 		INSERT INTO subscribecompany VALUES (NULL, #{mid}, #{cno});
 	</insert>
   	<delete id="unsubscribeCompany">
   		DELETE FROM subscribeCompany WHERE mid = #{mid} AND cno = #{cno};
   	</delete>
+  	
   	
 </mapper>  

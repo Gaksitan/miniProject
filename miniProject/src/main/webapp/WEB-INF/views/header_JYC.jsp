@@ -21,7 +21,7 @@
 }
 
 #top #logo {
-	height: 120px;
+	height: 70px;
 }
 
 #mypage {
@@ -31,7 +31,6 @@
 
 div img {
 	max-width: 100%;
-	border-radius: 50%;
 }
 
 #menu ul li a {
@@ -136,7 +135,7 @@ div img {
 						<select onchange="if(this.value) location.href=(this.value)" class="selectBox">
 							<option class="options" value="#">${mid }님환영합니다</option>
 							<option class="options" value="/mem/infoMem">내 정보 관리</option>
-							<option class="options" value="/mem/subscribeAndScrapList">구독&amp;스크랩</option>
+							<option class="options" value="/member/subscribeAndScrapList">구독&amp;스크랩</option>
 							<option class="options" value="/service/myQuestionMem">내 문의사항</option>
 							<option class="options" value="/logout" style="color: red">로그아웃</option>
 						</select>

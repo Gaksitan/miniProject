@@ -10,6 +10,10 @@
 	margin: 0 auto;
 	border-collapse: collapse;
 }
+
+faqtable 
+
+
 </style>
 
 

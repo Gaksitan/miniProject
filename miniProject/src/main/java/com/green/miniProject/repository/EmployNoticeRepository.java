@@ -10,4 +10,6 @@ import com.green.miniProject.entity.EmployNotice;
 public interface EmployNoticeRepository extends JpaRepository<EmployNotice, Long>{
 	
 	Page<EmployNotice> findAll(Pageable pageable);
+	
+	// 페이지네이션 하고 싶은 함수에 Pageable을 매개변수로 넣어준다
 }
