@@ -32,7 +32,7 @@
     <c:forEach items="${allList}" var="item">
         <tr>
             <td><a href="applicantDetail?mid=${item.mid}">${item.member.mname}</a></td>
-            <td><a href="applyResumeDetail?mid=${item.mid}">${item.resume.rtitle}</a></td>
+            <td><a href="applyResumeDetail?rno=${item.resume.rno}&mid=${item.mid}">${item.resume.rtitle}</a></td>
             <td><input type="button" value="관심" onclick="removeInterest(${item.imno})"></td>
             <td>${item.member.mstate}</td>
         </tr>

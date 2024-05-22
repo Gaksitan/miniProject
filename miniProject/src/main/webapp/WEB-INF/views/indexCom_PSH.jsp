@@ -15,7 +15,7 @@
 <a href="infoCom">기업정보수정</a>&nbsp;&nbsp;
 <a href="infoCM">인사담당자 정보수정</a><br>
 <hr>
-<a href="employNotice">채용공고 작성하기</a><br>
+<a href="employNoticeCreate">채용공고 작성하기</a><br>
 <hr>
 <a href="subscribeComList">관심구직자</a>&nbsp;&nbsp;
 <a href="applicantList">지원받은이력서</a>&nbsp;&nbsp;

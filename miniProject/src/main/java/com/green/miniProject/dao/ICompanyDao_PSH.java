@@ -1,14 +1,16 @@
 package com.green.miniProject.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanyManager;
-import com.green.miniProject.domain.DegreeEmployNotice;
 import com.green.miniProject.domain.EmployNotice;
-import com.green.miniProject.domain.ExperienceEmployNotice;
+import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillEmployNotice;
+import com.green.miniProject.domain.WelfareEmployNotice;
 
 @Mapper
 public interface ICompanyDao_PSH {
@@ -26,10 +28,20 @@ public interface ICompanyDao_PSH {
 	// 정보수정
 	
 	public void enwrite(EmployNotice en);
-	public void insertExperience(ExperienceEmployNotice experience);
-	public void insertDegree(DegreeEmployNotice degree);
 	public void insertSkill(SkillEmployNotice skill);
+	public void insertWelfare(WelfareEmployNotice welfare);
+	public EmployNotice getEmployNoticeById(Long enno);
+	public List<SkillEmployNotice> getSkillsByEnno(Long enno);
 	//채용공고 작성
-
-
+	
+	public void updateEmployNotice(EmployNotice en);	
+	public List<SkillEmployNotice> getSkillsByEmployNoticeId(Long enno);
+	public List<WelfareEmployNotice> getWelfaresByEmployNoticeId(Long enno);
+	
+	public void updateSkill(SkillEmployNotice skill);
+	public void updateWelfare(WelfareEmployNotice welfare);
+	
+	public void deleteEmployNotice(Long enno);
+	public void deleteSkillsByEmployNoticeId(Long enno);
+	public void deleteWelfaresByEmployNoticeId(Long enno);
 }

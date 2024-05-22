@@ -15,13 +15,14 @@
         </association>
         <association property="resume" javaType="com.green.miniProject.domain.Resume">
             <result property="rtitle" column="rtitle"/>
+            <result property="rno" column="rno"/>
         </association>
     </resultMap>
 
     <select id="getAllInterestMembers" resultMap="InterestMemberMap">
         SELECT im.imno, im.cno, im.mid, 
                m.mname, m.mstate, 
-               r.rtitle
+               r.rtitle, r.rno
         FROM interestMember im
         JOIN MEMBER m ON im.MID = m.MID
         JOIN resume r ON im.MID = r.MID
@@ -97,27 +98,53 @@
         WHERE mid = #{mid}
     </select>
     
-    <select id="getSkillListByMid" resultType="com.green.miniProject.domain.Skill">
+    <select id="getResumeByRno" resultType="com.green.miniProject.domain.Resume">
         SELECT *
-        FROM Skill
-        WHERE mid = #{mid}
+        FROM Resume
+        WHERE rno = #{rno}
     </select>
     
-    <select id="getExperienceListByMid" resultType="com.green.miniProject.domain.Experience">
-        SELECT *
-        FROM Experience
-        WHERE mid = #{mid}
+    <select id="getSkillListByRno" resultType="com.green.miniProject.domain.Skill">
+        SELECT 
+			s.*
+		FROM 
+		    RESUME r
+		JOIN 
+		    skill s ON r.rno = s.rno
+		WHERE 
+		    r.rno = #{rno}
     </select>
     
-    <select id="getDegreeListByMid" resultType="com.green.miniProject.domain.Degree">
-        SELECT *
-        FROM Degree
-        WHERE mid = #{mid}
+    <select id="getExperienceListByRno" resultType="com.green.miniProject.domain.Experience">
+        SELECT 
+			e.*
+		FROM 
+		    RESUME r
+		JOIN 
+		    experience e ON r.rno = e.rno
+		WHERE 
+		    r.rno = #{rno}
     </select>
     
-    <select id="getLinkListByMid" resultType="com.green.miniProject.domain.Link">
-        SELECT *
-        FROM Link
-        WHERE mid = #{mid}
+    <select id="getDegreeListByRno" resultType="com.green.miniProject.domain.Degree">
+        SELECT 
+			d.*
+		FROM 
+		    RESUME r
+		JOIN 
+		    degree d ON r.rno = d.rno
+		WHERE 
+		    r.rno = #{rno}
+    </select>
+    
+    <select id="getLinkListByRno" resultType="com.green.miniProject.domain.Link">
+        SELECT 
+			l.*
+		FROM 
+		    RESUME r
+			JOIN 
+		    link l ON r.rno = l.rno
+		WHERE 
+		    r.rno = #{rno}
     </select>
 </mapper>
