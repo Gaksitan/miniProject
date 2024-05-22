@@ -3,6 +3,8 @@ package com.green.miniProject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,7 +107,10 @@ public class CompanyETCController_PSH {
         Member applicantDetail = service.getApplicantDetailByMid(mid);
         List<Resume> resumeList = service.getResumeListByMid(mid);
 
+        int age = service.calculateAge(applicantDetail.getMbirthDate());
+        
         model.addAttribute("item", applicantDetail);
+        model.addAttribute("age", age);
         model.addAttribute("resumeList", resumeList);
 
         return "applicantDetail_PSH";
@@ -135,5 +140,12 @@ public class CompanyETCController_PSH {
 		return "applyResumeDetail_PSH";
 	}
 	//이력서 상세보기
+    
+    @GetMapping("/updateApplicationStatus")
+    public ResponseEntity<String> updateApplicationStatus(@RequestParam("arno") Long arno, @RequestParam("arg1") int arg1) {
+        service.updateApplicationStatus(arno, arg1);
+        
+        return new ResponseEntity<>("Status updated successfully", HttpStatus.OK);
+    }
 
 }

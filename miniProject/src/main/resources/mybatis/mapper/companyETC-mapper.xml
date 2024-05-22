@@ -147,4 +147,12 @@
 		WHERE 
 		    r.rno = #{rno}
     </select>
+    
+    
+    <update id="updateApplicationStatus">
+	    UPDATE applyResume
+	    SET arpass = #{arg1}
+	    WHERE arno = #{arno}
+	</update>
+    
 </mapper>

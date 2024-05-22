@@ -18,6 +18,7 @@
         <input type="text" name="cname" value="${sessionScope.company.cname}"><br>
         <p>회사주소</p>
         <input type="text" name="caddr1" value="${sessionScope.company.caddr1}"><br>
+        <input type="text" name="caddr2" value="${sessionScope.company.caddr2}"><br>
         <p>회사 전화번호</p>
         <input type="text" name="ctel" value="${sessionScope.company.ctel}"><br>
         <p>설립연도</p>

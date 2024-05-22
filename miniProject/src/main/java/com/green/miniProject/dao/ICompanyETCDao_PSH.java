@@ -37,7 +37,7 @@ public interface ICompanyETCDao_PSH {
 	//채용공고 리스트
 	
 	Member getApplicantDetailByMid(@Param("mid") String mid);
-
+	
     List<Resume> getResumeListByMid(@Param("mid") String mid);
     
     Resume getResumeByRno(@Param("rno") String rno);
@@ -46,4 +46,8 @@ public interface ICompanyETCDao_PSH {
     List<Experience> getExperienceListByRno(@Param("rno") String rno);
     List<Degree> getDegreeListByRno(@Param("rno") String rno);
     List<Link> getLinkListByRno(@Param("rno") String rno);
+    
+    /////////////////////////////////
+    
+    void updateApplicationStatus(Long arno, int arg1);
 }
