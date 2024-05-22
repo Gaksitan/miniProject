@@ -22,6 +22,7 @@ public class Reply {
 	private LocalDate reregdate;
 	private LocalDate remoddate;
 	private Long relike;
-	private String cno;
+	private String cmid;
+	private Long bno;
 	
 }

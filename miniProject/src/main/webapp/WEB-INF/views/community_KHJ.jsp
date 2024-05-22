@@ -81,8 +81,7 @@ height : 15px;
 			</tr>
 		</thead>
 		<tbody>
-		<c:choose>
-			<c:when test="${sessionScope.mid != null }">
+			<c:if test="${mid != null }">
 			<c:forEach var="board" items="${list }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
@@ -102,8 +101,8 @@ height : 15px;
 					<td>${board.blike }</td>
 				</tr>
 			</c:forEach>
-			</c:when>
-			<c:when test="${sessionScope.mid == null }">
+			</c:if>
+			<c:if test="${companyManager != null }">
 			<c:forEach var="board" items="${list }" varStatus="status">
 				<tr>
 					<td>${status.count }</td>
@@ -123,8 +122,7 @@ height : 15px;
 					<td>${board.blike }</td>
 				</tr>
 			</c:forEach>
-			</c:when>
-		</c:choose>
+			</c:if>
 		</tbody>
 	</table>
 		<%@ include file="./footer_JYC.jsp" %>

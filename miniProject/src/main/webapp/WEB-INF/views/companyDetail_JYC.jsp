@@ -11,20 +11,20 @@
 	<main>
 		<h1>${company.cname }</h1>
 		<div id="unsubsDiv">
-		<c:if test="${subscribetf == true }">
-			<input type="button" value="구독"
-				style="color: black; background: red;"
-				onclick="unsubscribe(event)" id="unsbscribeBtn">
+			<c:if test="${subscribetf == true }">
+				<input type="button" value="구독"
+					style="color: black; background: red;" onclick="unsubscribe(event)"
+					id="unsbscribeBtn">
 				<!-- location.href='/company/unsubscribe?cno=${company.cno}' -->
-		</c:if>
+			</c:if>
 		</div>
 		<div id="subsDiv">
-		<c:if test="${subscribetf == false }">
-			<input type="button" value="구독"
-				style="color: black; background: gray;"
-				onclick="subscribe(event)" id="subscribeBtn">
+			<c:if test="${subscribetf == false }">
+				<input type="button" value="구독"
+					style="color: black; background: gray;" onclick="subscribe(event)"
+					id="subscribeBtn">
 				<!-- location.href='/company/subscribe?cno=${company.cno}' -->
-		</c:if>
+			</c:if>
 		</div>
 		<p>${company.cintro }</p>
 		<input type="button" value="더보기">
@@ -35,19 +35,42 @@
 						<tr>
 							<td>${status.count }</td>
 							<c:if test="${mid == null && companyManager == null }">
-							<td><a href="/employnotice/detailNoneMem?enno=${en.enno }">${en.entitle }</a></td>
+								<td><a href="/employnotice/detailNoneMem?enno=${en.enno }">${en.entitle }</a></td>
 							</c:if>
 							<c:if test="${mid != null }">
-							<td><a href="/employnotice/detailMem?enno=${en.enno }">${en.entitle }</a></td>
+								<td><a href="/employnotice/detailMem?enno=${en.enno }">${en.entitle }</a></td>
 							</c:if>
 							<c:if test="${companyManager != null }">
-							<td><a href="/employnotice/detailNoneCom?enno=${en.enno }">${en.entitle }</a></td>
+								<td><a href="/employnotice/detailNoneCom?enno=${en.enno }">${en.entitle }</a></td>
 							</c:if>
 							<td>${status.count }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+
+			<c:if test="${!paging.isEmpty() }">
+				<ul class="pagination justify-content-center"></ul>
+				<c:if test="${hasPrevious == true }">
+           		<li class="page-item"> 
+           		<a class="page-link"
+						href="/page/companyEmployNotice?page=${currentPage-1}&cno=${company.cno}"><span>이전</span> 
+					</a>
+					</li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages }" varStatus="status">
+							<a href="/page/companyEmployNotice?page=${status.count }&cno=${company.cno}">${status.count }</a>
+					</c:forEach>
+				<c:if test="${hasNext == true }">
+            	<li class="page-item">
+            	<a class="page-link"
+						href="/page/companyEmployNotice?page=${currentPage+1}&cno=${company.cno}"> <span>다음</span> 
+					</a>
+					</li>
+				</c:if>
+			</c:if>
+
+
 		</c:if>
 		<table>
 			<tbody>
@@ -94,84 +117,59 @@
 				</tbody>
 			</table>
 		</c:if>
-		<c:if test="${mid != null }">
-		<form action="#" method="post">
-			<c:if test="${resumeList == null }">
-			<input type="button" onclick="alert('지원할 이력서가 존재하지 않습니다!');" value="지원하기">
-			</c:if>
-			<c:if test="${resumeList != null }">
-			<input type="button" onclick="apply()" value="지원하기">
-			</c:if>
-		</form>
-		</c:if>
-		<div id="application" style="display: none;">
-			<table>
-				<tbody>
-					<c:forEach var="resume" items="${resumeList }" varStatus="status">
-					<c:if test="${resume.rpublic == true }">
-					<tr>
-						<td>${resume.rtitle }</td>
-						<td><input type="radio" name="checkResume"></td>
-					</tr>
-					</c:if>
-					</c:forEach>
-				</tbody>			
-			</table>
-			<form action="">
-				<input type="button" value="지원하기" onclick="">
-			</form>
-		</div>
+		<input type="button" value="지원하기"
+			onclick="location.href='/employnotice/employNoticeList?cno=${company.cno}'">
 		<c:if test="${recommendList != null }">
-		<table>
-			<caption>기업 추천</caption>
-			<tbody>
-				<c:forEach var="recommend" items="${recommendList }"
-					varStatus="status">
-					<tr>
-						<td>${recommend.cname }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+			<table>
+				<caption>기업 추천</caption>
+				<tbody>
+					<c:forEach var="recommend" items="${recommendList }"
+						varStatus="status">
+						<tr>
+							<c:if test="${mid == null && companyManager == null }">
+								<td><a href="/company/detailNoneMem">${recommend.cname }</a></td>
+							</c:if>
+							<c:if test="${mid != null}">
+								<td><a href="/company/Mem">${recommend.cname }</a></td>
+							</c:if>
+							<c:if test="${companyManager != null }">
+								<td><a href="/company/detailCom">${recommend.cname }</a></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</c:if>
 	</main>
 	<%@ include file="./footer_JYC.jsp"%>
 	<script type="text/javascript">
-		function apply() {
-			const application = document.querySelector("#application");
-			application.style.display = 'block';
-		}
-		
-		function unsubscribe(event){
+		function unsubscribe(event) {
 			const xhr = new XMLHttpRequest();
 			xhr.open('POST', '/company/unsubscribe', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.onreadystatechange = function () {
-				location.href="/company/detailMem?cno=" + "${company.cno}";
+			xhr.onreadystatechange = function() {
+				location.href = "/company/detailMem?cno=" + "${company.cno}";
 			};
 			const body = JSON.stringify({
-			 	cno: "${company.cno}"
+				cno : "${company.cno}"
 			});
-			
-			console.log("body : " + body)
-			console.log("cno : " + "${company.cno}")
+
 			xhr.send(body);
 		}
-		
-		function subscribe(event){
+
+		function subscribe(event) {
 			const xhr = new XMLHttpRequest();
 			xhr.open('POST', '/company/subscribe', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.onreadystatechange = function () {
-				location.href="/company/detailMem?cno=" + "${company.cno}";
+			xhr.onreadystatechange = function() {
+				location.href = "/company/detailMem?cno=" + "${company.cno}";
 			};
-			
+
 			const body = JSON.stringify({
-			 	cno: "${company.cno}"
+				cno : "${company.cno}"
 			});
 			xhr.send(body);
 		}
-		
 	</script>
 
 </body>

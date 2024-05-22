@@ -8,7 +8,9 @@
 	<select id="getResumeList">
 		SELECT * FROM resume WHERE mid = #{mid};
   	</select>
-  	
+  	<select id="getMainResume">
+  		SELECT * FROM resume WHERE rmain = 1;
+  	</select>
   	
   	
   	

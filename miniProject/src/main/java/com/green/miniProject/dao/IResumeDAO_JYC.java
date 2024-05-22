@@ -11,4 +11,5 @@ import com.green.miniProject.domain.Resume;
 public interface IResumeDAO_JYC {
 
 	public List<Resume> getResumeList(@Param("mid") String mid);
+	public Resume getMainResume(@Param("mid") String mid);
 }
