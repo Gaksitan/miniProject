@@ -5,7 +5,13 @@
 
 <mapper namespace="com.green.miniProject.dao.IEmployNoticeDAO_JYC">
 	<select id="getAllEmployNoticeList">
-		SELECT *, DATEDIFF(enenddate, NOW()) AS date_diff FROM employnotice ORDER BY date_diff ASC;
+		<!-- 블랙리스트에 있는 기업은 채용공고 안뜨게 쿼리 수정하였음!! -->
+		SELECT e.*, DATEDIFF(e.enenddate, NOW()) AS date_diff 
+		FROM employnotice e
+		left JOIN blackaccount ba
+		ON ba.cno = e.cno 
+		WHERE ba.cno IS NULL
+		ORDER BY date_diff ASC
 	</select>
 	<select id="searchEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY enregdate DESC LIMIT #{page}, 10;

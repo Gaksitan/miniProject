@@ -40,5 +40,35 @@
 		FROM servicequestion q, questioncategory sq
 		WHERE q.qcno = sq.qcno AND sqno= #{sqno}
 	</select>
-	
+	<select id="searchMemList">
+		SELECT m.mid, b.bregdate, b.ano, b.bano
+		FROM member m
+		LEFT JOIN blackaccount b
+		ON m.mid = b.mid
+		WHERE m.mid LIKE CONCAT('%', #{keyword}, '%') 
+	</select>
+	<select id="searchComList">
+		SELECT c.cno, b.bregdate, b.ano, b.bano
+		FROM company c
+		LEFT JOIN blackaccount b
+		ON c.cno = b.cno
+		WHERE c.cno LIKE CONCAT('%', #{keyword}, '%') 
+	</select>
+	<insert id="insertMemBlackList">
+		insert into blackAccount(mid,ano,bregdate) values(#{mid},#{ano},default)
+	</insert>
+	<insert id="insertComBlackList">
+		insert into blackAccount(cno,ano,bregdate) values(#{cno},#{ano},default)
+	</insert>
 </mapper>  
+
+
+
+
+
+
+
+
+
+
+

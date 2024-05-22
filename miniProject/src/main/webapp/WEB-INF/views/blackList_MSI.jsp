@@ -40,7 +40,7 @@ form {
 
 
 <h4>개인회원</h4>
-<table  border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
+<table border="1" width="500" cellpadding="0" cellspacing="0" style="text-align: center;">
 	<thead>
 	<tr>
 		<th>멤버아이디</th><th>차단날짜</th><th>관리자아이디</th><th>차단해제</th>
