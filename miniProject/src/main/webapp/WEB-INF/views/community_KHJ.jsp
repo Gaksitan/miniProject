@@ -179,7 +179,7 @@ img {
 		function findReplyCount(bno){
 	
 			for(let i = 0; i < replyDetails.length; i++){
-				console.log("bno" + replyDetails[i].bno) // 모르겠다.
+				console.log("이건 무슨 숫자일까 ---> " + replyDetails[i].bno) // 모르겠다.
 				if(replyDetails[i].bno == bno){
 					
 					return replyDetails[i].replycount;
