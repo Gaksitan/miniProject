@@ -40,8 +40,10 @@ public interface ICompanyETCDao_PSH {
 
     List<Resume> getResumeListByMid(@Param("mid") String mid);
     
-    List<Skill> getSkillListByMid(@Param("mid") String mid);
-    List<Experience> getExperienceListByMid(@Param("mid") String mid);
-    List<Degree> getDegreeListByMid(@Param("mid") String mid);
-    List<Link> getLinkListByMid(@Param("mid") String mid);
+    Resume getResumeByRno(@Param("rno") String rno);
+    
+    List<Skill> getSkillListByRno(@Param("rno") String rno);
+    List<Experience> getExperienceListByRno(@Param("rno") String rno);
+    List<Degree> getDegreeListByRno(@Param("rno") String rno);
+    List<Link> getLinkListByRno(@Param("rno") String rno);
 }

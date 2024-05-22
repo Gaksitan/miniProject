@@ -1,6 +1,7 @@
 package com.green.miniProject.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +29,9 @@ public class EmployNotice {
     private LocalDate enregdate;
     private String cno;
     
-    private Long applicant_count;
+    private String enexp;	
+    private String endegree;
     
+    private List<SkillEmployNotice> skills;
+    private List<WelfareEmployNotice> welfares;
 }

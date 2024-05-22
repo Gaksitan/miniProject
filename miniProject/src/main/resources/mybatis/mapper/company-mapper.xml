@@ -22,8 +22,6 @@
 	<select id="getCompanyByCno" parameterType="java.lang.String" resultType="com.green.miniProject.domain.Company">
     	SELECT * FROM company WHERE cno = #{cno}
 	</select>
-	
-	
 
     <update id="updateComInfo">
         UPDATE company
@@ -47,34 +45,68 @@
     </update>
 	
 	<!-- employNoticeMapper.xml -->
-	<insert id="enwrite" parameterType="com.green.miniProject.domain.EmployNotice">
-	    INSERT INTO employnotice (entitle, enintro, ensalary, enaddr, enenddate, enposition, cno)
-	    VALUES (#{entitle}, #{enintro}, #{ensalary}, #{enaddr}, #{enenddate}, #{enposition}, #{cno})
-	</insert>
-	
-	<insert id="insertExperience" parameterType="com.green.miniProject.domain.ExperienceEmployNotice">
-	    INSERT INTO experienceEmployNotice (exname, exjoindate, exleavedate, exposition, exrank, enno)
-	    VALUES (#{exname}, #{exjoindate}, #{exleavedate}, #{exposition}, #{exrank}, #{enno})
-	</insert>
-	
-	<insert id="insertDegree" parameterType="com.green.miniProject.domain.DegreeEmployNotice">
-	    INSERT INTO degreeEmployNotice (dename, degraddate, demajor, dehighestlevel, enno)
-	    VALUES (#{dename}, #{degraddate}, #{demajor}, #{dehighestlevel}, #{enno})
+	<insert id="enwrite" parameterType="com.green.miniProject.domain.EmployNotice" useGeneratedKeys="true" keyProperty="enno">
+	    INSERT INTO employnotice (entitle, enintro, ensalary, enaddr, enenddate, enposition, cno, enexp, endegree)
+	    VALUES (#{entitle}, #{enintro}, #{ensalary}, #{enaddr}, #{enenddate}, #{enposition}, #{cno}, #{enexp}, #{endegree})
 	</insert>
 	
 	<insert id="insertSkill" parameterType="com.green.miniProject.domain.SkillEmployNotice">
 	    INSERT INTO skillEmployNotice (skname, enno)
 	    VALUES (#{skname}, #{enno})
 	</insert>
+	
+	<insert id="insertWelfare" parameterType="com.green.miniProject.domain.WelfareEmployNotice">
+	    INSERT INTO welfareemploynotice (wname, enno)
+	    VALUES (#{wname}, #{enno})
+	</insert>
+	
+	 <update id="updateEmployNotice">
+        UPDATE employnotice
+        SET entitle = #{entitle},
+            enintro = #{enintro},
+            ensalary = #{ensalary},
+            enaddr = #{enaddr},
+            enenddate = #{enenddate},
+            enposition = #{enposition},
+            enexp = #{enexp},
+            endegree = #{endegree}
+        WHERE enno = #{enno}
+    </update>
+	
+    <select id="getEmployNoticeById" resultType="com.green.miniProject.domain.EmployNotice">
+    	SELECT * FROM employnotice WHERE enno = #{enno}
+	</select>
+	
+	<select id="getSkillsByEmployNoticeId" resultType="com.green.miniProject.domain.SkillEmployNotice">
+    	SELECT * FROM skillEmployNotice WHERE enno = #{enno}
+	</select>
+    
+    <select id="getWelfaresByEmployNoticeId" resultType="com.green.miniProject.domain.WelfareEmployNotice">
+	    SELECT * FROM welfareemploynotice WHERE enno = #{enno}
+	</select>
+    
+    <update id="updateSkill">
+        UPDATE skillEmployNotice
+        SET skname = #{skname}
+        WHERE skno = #{skno}
+    </update>
+    
+    <update id="updateWelfare">
+        UPDATE welfareemploynotice
+        SET wname = #{wname}
+        WHERE wno = #{wno}
+    </update>
+    
+    <delete id="deleteEmployNotice">
+        DELETE FROM employnotice WHERE enno = #{enno}
+    </delete>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <delete id="deleteSkillsByEmployNoticeId">
+        DELETE FROM skillEmployNotice WHERE enno = #{enno}
+    </delete>
+
+    <delete id="deleteWelfaresByEmployNoticeId">
+        DELETE FROM welfareemploynotice WHERE enno = #{enno}
+    </delete>
     
   </mapper>

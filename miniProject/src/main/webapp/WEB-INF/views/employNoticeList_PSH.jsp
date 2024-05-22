@@ -26,7 +26,7 @@
 <body>
 <h1>채용공고관리 페이지</h1>
 <hr>
-<button onclick="location.href='employNotice'">채용공고 작성</button>
+<button onclick="location.href='employNoticeCreate'">채용공고 작성</button>
 <table border="1">
   <thead>
 	  <tr>
@@ -39,7 +39,7 @@
   <tbody>
     <c:forEach items="${employNoticeList}" var="notice">
         <tr>
-			<td><a href="employNotice?cno">${notice.entitle}</a></td>
+			<td><a href="employNotice?enno=${notice.enno}">${notice.entitle}</a></td>
             <td>${notice.enregdate}~${notice.enenddate }</td>
             <td><script>document.write(calculateDDay('${notice.enenddate}'))</script></td>
             <td>notice.applicantCount</td>

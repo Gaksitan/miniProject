@@ -8,73 +8,167 @@
 		<!-- 차단당한 mid, cmid는 글이 안뜨게끔 쿼리 수정 -->
 		SELECT b.*
 		FROM board b
-		LEFT JOIN blackAccount ba 
+		LEFT JOIN blackAccount ba
 		ON b.mid = ba.mid
-		LEFT JOIN blackAccount bc
+		LEFT
+		JOIN blackAccount bc
 		ON b.cmid = bc.cmid
-		WHERE ba.mid IS NULL AND bc.cmid IS NULL and b.mid is not null
+		WHERE
+		ba.mid IS NULL AND bc.cmid
+		IS NULL and b.mid is not null
 	</select>
 	<select id="getAllWhenCompany">
 		<!-- SELECT * From board WHERE cmid is not null -->
 		<!-- 차단당한 mid, cmid는 글이 안뜨게끔 쿼리 수정 -->
 		SELECT b.*
 		FROM board b
-		LEFT JOIN blackAccount ba 
+		LEFT JOIN blackAccount ba
 		ON b.mid = ba.mid
-		LEFT JOIN blackAccount bc
+		LEFT
+		JOIN blackAccount bc
 		ON b.cmid = bc.cmid
-		WHERE ba.mid IS NULL AND bc.cmid IS NULL and b.cmid is not null
+		WHERE
+		ba.mid IS NULL AND bc.cmid
+		IS NULL and b.cmid is not null
 	</select>
-	<select id="detailDao">
-		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bmoddate, t.value
+
+	<select id="replyCount">
+		SELECT b.bno, count(r.recontent) AS replycount FROM
+		board b LEFT JOIN reply r ON b.bno = r.bno WHERE b.bno = #{bno}
+	</select>
+
+
+	<!-- 게시글 등록 관련 -->
+
+	<select id="tagListWhenMem">
+		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate,
+		b.bmoddate, t.value
 		FROM board b
-		LEFT JOIN tag t ON b.bno = t.bno
+		LEFT JOIN tagmem t ON b.bno = t.bno
 		WHERE b.bno = #{bno}
-<!--		SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, b.bregdate, b.bregdate, m.mname
+		<!-- SELECT b.bno, b.`MID`, b.btitle, b.bcontent, b.blike, b.bregdate, 
+			b.bregdate, b.bregdate, m.mname FROM board b LEFT JOIN member m ON b.`MID` 
+			= m.`MID` WHERE b.bno = #{bno} -->
+	</select>
+	<select id="tagListWhenCom">
+		SELECT b.bno, b.btitle, b.bcontent, b.blike,
+		b.bregdate, b.bmoddate, b.cmid, t.value
 		FROM board b
-		LEFT JOIN member m ON b.`MID` = m.`MID`
-		WHERE b.bno = #{bno}  -->
+		LEFT JOIN tagcom t
+		ON b.bno = t.bno
+		WHERE b.bno = #{bno}
+
 	</select>
 	<insert id="insertContentWhenMem">
-		Insert into board values (null, #{mid}, #{title}, #{content}, 0, now(), now(), null)
+		Insert into board values (null, #{mid}, #{title},
+		#{content}, 0, now(), now(), null)
+	</insert>
+	<insert id="insertContentWhenCom">
+		Insert into board value (null, null, #{title},
+		#{content}, 0, now(), now(), #{cmid})
 	</insert>
 	<select id="getBno">
-		SELECT bno FROM board where btitle = #{title} and bcontent = #{content}
+		SELECT bno FROM board where btitle = #{title} and
+		bcontent = #{content}
 	</select>
 	<insert id="insertTagWhenMem">
-		Insert into tag values (null, #{mid}, #{tag}, #{bno})
+		Insert into tagMem values (null, #{mid}, #{tag},
+		#{bno})
 	</insert>
-	<select id="myList">
-		SELECT bno, btitle, blike, bregdate FROM board where mid = #{mid}	
+	<insert id="insertTagWhenCom">
+		Insert into tagCom values (null, #{cmid}, #{tag},
+		#{bno})
+	</insert>
+
+	<!-- 내 게시글 조회 관련 -->
+	<select id="myListMem">
+		SELECT bno, btitle, blike, bregdate FROM board where
+		mid = #{mid}
 	</select>
-	
+	<select id="myListCom">
+		SELECT bno, btitle, blike, bregdate FROM board where
+		cmid = #{cmid}
+	</select>
+	<select id="myReplyListMem">
+		SELECT r.*, b.btitle FROM reply r LEFT JOIN board b
+		ON r.bno = b.bno WHERE r.MID = #{mid};
+	</select>
+	<select id="myReplyListCom">
+		SELECT r.*, b.btitle FROM reply r LEFT JOIN board b
+		ON r.bno = b.bno WHERE r.cmid = #{cmid};
+	</select>
+	<select id="toMeListMem">
+		SELECT b.bno, b.btitle, b.bregdate, b.`MID`, b.blike,
+		t.value FROM board b Left JOIN tagmem t ON b.bno = t.bno
+		WHERE t.VALUE = #{mid}
+	</select>
+	<select id="toMeListCom">
+		SELECT b.bno, b.btitle, b.bregdate, b.cmid, b.blike,
+		t.value
+		FROM board b
+		Left JOIN tagcom t ON b.bno = t.bno
+		WHERE t.VALUE = #{cmid}
+	</select>
+	<select id="getListILikeMem">
+		SELECT b.bno, b.btitle, b.bregdate, b.mid, b.blike FROM board b
+		LEFT JOIN like_tb l ON b.bno = l.bno
+		WHERE l.`MID` = #{mid}
+	</select>
+	<select id="getListILikeCom">
+		SELECT b.bno, b.btitle, b.bregdate, b.cmid, b.blike
+		FROM board b
+		LEFT JOIN like_tb l ON b.bno = l.bno
+		WHERE l.cmid = #{cmid}
+
+	</select>
 	<!-- 좋아요 관련 -->
 	<insert id="insertLikeMem">
-		Insert into Like_tb (lino, MID, bno) values (NULL, #{mid}, #{bno})
+		Insert into Like_tb (lino, MID, bno) values (NULL,
+		#{mid}, #{bno})
 	</insert>
 	<delete id="deleteLikeMem">
-		Delete from like_tb where mid = #{mid} and bno = #{bno}
+		Delete from like_tb where mid = #{mid} and bno =
+		#{bno}
+	</delete>
+	<insert id="insertLikeCom">
+		Insert into Like_tb (lino, cmid, bno) values (NULL,
+		#{cmid}, #{bno})
+	</insert>
+	<delete id="deleteLikeCom">
+		Delete from like_tb where cmid = #{cmid} and bno =
+		#{bno}
 	</delete>
 	<update id="plusLikeOnBoard">
 		UPDATE board SET blike = blike + 1 WHERE bno = #{bno}
 	</update>
 	<update id="minusLikeOnBoard">
-		UPDATE board SET blike = blike - 1 WHERE bno = #{bno}		
+		UPDATE board SET blike = blike - 1 WHERE bno = #{bno}
 	</update>
-	
+	<select id="getLikeMem">
+		SELECT COUNT(mid) FROM like_tb WHERE bno = #{bno} AND
+		mid = #{mid}
+	</select>
+	<select id="getLikeCom">
+		SELECT COUNT(cmid) FROM like_tb WHERE bno = #{bno}
+		AND cmid = #{cmid}
+	</select>
+
+
 	<!-- 댓글 관련 -->
 	<insert id="insertReplyWhenMem">
-		Insert into reply values (null, #{mid}, #{reply}, now(), now(), 0, null, #{bno})
+		Insert into reply values (null, #{mid}, #{reply},
+		now(), now(), 0, null, #{bno})
 	</insert>
 	<insert id="insertReplyWhenCom">
-		Insert into reply values (null, null, #{reply}, now(), now(), 0, #{cmid}, #{bno})
+		Insert into reply values (null, null, #{reply},
+		now(), now(), 0, #{cmid}, #{bno})
 	</insert>
 	<select id="getAllReplyList">
 		SELECT * FROM reply where bno = #{bno}
 	</select>
-	
-	
-	
+
+
+
 	<select id="getNoticeList">
 		select * from notice
 	</select>

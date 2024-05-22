@@ -1,21 +1,19 @@
 package com.green.miniProject.domain;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Reply {
-
+@Data
+public class BoardReply {
+	
 	private Long reno;
 	private String mid;
 	private String recontent;
@@ -24,5 +22,5 @@ public class Reply {
 	private Long relike;
 	private String cmid;
 	private Long bno;
-	
+	private String btitle;
 }

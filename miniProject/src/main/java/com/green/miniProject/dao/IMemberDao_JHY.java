@@ -7,8 +7,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.green.miniProject.domain.CheckScrapEN;
 import com.green.miniProject.domain.CheckSubscribeCom;
+import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.EmployNotice;
 import com.green.miniProject.domain.JoinApplyResumeList;
+import com.green.miniProject.domain.JoinEmployNoticeAndCompany;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
 import com.green.miniProject.domain.SkillMatchingEN;
@@ -31,5 +33,7 @@ public interface IMemberDao_JHY {
 	public List<SkillMatchingEN> skillmatchingEN();  
 	public List<SkillMatchingMR> skillmatchingMR(@Param("mid") String mid);
 	public List<EmployNotice> employNotice();
-	
+	public void deleteMember(@Param("mid") String mid);
+	public List<JoinEmployNoticeAndCompany> getEmployNotice();
+	public List<Company> getCompanyList();
 }

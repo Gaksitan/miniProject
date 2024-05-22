@@ -63,20 +63,24 @@ public class CompanyETCService_PSH {
         return dao.getResumeListByMid(mid);
     }
     
-    public List<Skill> getSkillListByMid(String mid) {
-        return dao.getSkillListByMid(mid);
+    public Resume getResumeByRno(String rno) {
+    	return dao.getResumeByRno(rno);
     }
     
-    public List<Experience> getExperienceListByMid(String mid) {
-        return dao.getExperienceListByMid(mid);
+    public List<Skill> getSkillListByRno(String rno) {
+        return dao.getSkillListByRno(rno);
     }
     
-    public List<Degree> getDegreeListByMid(String mid) {
-        return dao.getDegreeListByMid(mid);
+    public List<Experience> getExperienceListByRno(String rno) {
+        return dao.getExperienceListByRno(rno);
     }
     
-    public List<Link> getLinkListByMid(String mid) {
-        return dao.getLinkListByMid(mid);
+    public List<Degree> getDegreeListByRno(String rno) {
+        return dao.getDegreeListByRno(rno);
+    }
+    
+    public List<Link> getLinkListByRno(String rno) {
+        return dao.getLinkListByRno(rno);
     }
     
 }

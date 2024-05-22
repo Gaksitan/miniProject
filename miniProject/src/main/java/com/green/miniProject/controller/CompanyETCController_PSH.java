@@ -115,15 +115,17 @@ public class CompanyETCController_PSH {
 
 
     @GetMapping("/applyResumeDetail")
-	public String applyResumeDetail(@RequestParam("mid") String mid, Model model) {
+	public String applyResumeDetail(@RequestParam("rno") String rno, @RequestParam("mid") String mid, Model model) {
     	Member applicantDetail = service.getApplicantDetailByMid(mid);
-        List<Skill> skillList = service.getSkillListByMid(mid);
-        List<Experience> expList = service.getExperienceListByMid(mid);
-        List<Degree> degreeList = service.getDegreeListByMid(mid);
-        List<Link> linkList = service.getLinkListByMid(mid);
+    	Resume resumeDetail = service.getResumeByRno(rno);
+        List<Skill> skillList = service.getSkillListByRno(rno);
+        List<Experience> expList = service.getExperienceListByRno(rno);
+        List<Degree> degreeList = service.getDegreeListByRno(rno);
+        List<Link> linkList = service.getLinkListByRno(rno);
         
 
         model.addAttribute("item", applicantDetail);
+        model.addAttribute("resume", resumeDetail);
         model.addAttribute("skillList", skillList);
         model.addAttribute("expList", expList);
         model.addAttribute("degreeList", degreeList);
