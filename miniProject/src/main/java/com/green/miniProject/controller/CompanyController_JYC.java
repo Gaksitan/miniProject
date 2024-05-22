@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import com.green.miniProject.domain.CompanySectorAndCompany;
 import com.green.miniProject.domain.EmployNotice;
 import com.green.miniProject.domain.Resume;
 import com.green.miniProject.domain.ScoreMemCom;
+import com.green.miniProject.service.EmployNoticeService_jyc;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -55,27 +57,35 @@ public class CompanyController_JYC {
 	
 	@Autowired
 	private IResumeDAO_JYC resumedao;
+	
+	@Autowired
+	private EmployNoticeService_jyc employNoticeService;
 
-	@RequestMapping("/detailNoneMem")
+	// @RequestMapping("/detailNoneMem")
 	public String companyDetailNoneMem(@RequestParam("cno") String cno, Model model) {
 		Company company = comdao.getCompany(cno);
 		List<EmployNotice> enlist = endao.getEmployNoticeList(cno);
 		List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
 
 		model.addAttribute("company", company);
-		model.addAttribute("enlist", enlist);
-		model.addAttribute("smclist", smclist);
+		if (!enlist.isEmpty()) {
+			model.addAttribute("enlist", enlist);
+		}
+		if (!smclist.isEmpty()) {
+			model.addAttribute("smclist", smclist);
+		}
+		
 
 		int comCount = comdao.count();
-
 		List<Company> comList = new ArrayList<>();
-		try {
-			List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-					.getCompanySectorAndCompanyList(cno);
-			model.addAttribute("recommendList", companySectorAndCompanyList);
-		} catch (Exception e) {
 
+		String scname = companySectorDao.getScname(cno);
+		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
+				.getCompanySectorAndCompanyList(scname, cno);
+		if(companySectorAndCompanyList.size() > 0) {
+			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
+		
 		return "companyDetail_JYC";
 	}
 
@@ -104,13 +114,14 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 
 		List<Company> comList = new ArrayList<>();
-		try {
-			List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-					.getCompanySectorAndCompanyList(cno);
+		
+		String scname = companySectorDao.getScname(cno);
+		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
+				.getCompanySectorAndCompanyList(scname, cno);
+		if(companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
-		} catch (Exception e) {
 		}
-
+		
 		int count = subsdao.count(mid, cno);
 		if(count >= 1) {
 			model.addAttribute("subscribetf", true);
@@ -121,6 +132,38 @@ public class CompanyController_JYC {
 		return "companyDetail_JYC";
 	}
 
+	@RequestMapping("/detailNoneMem")
+	    public String list(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam("cno") String cno) {
+	        Page<com.green.miniProject.entity.EmployNotice> paging = employNoticeService.getList(page);
+	        model.addAttribute("enlist", paging.getContent());
+	        model.addAttribute("totalPages", paging.getTotalPages());
+	        model.addAttribute("hasNext", paging.hasNext());
+	        model.addAttribute("hasPrevious", paging.hasPrevious());
+	        
+	        
+	        Company company = comdao.getCompany(cno);
+			List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
+
+			model.addAttribute("company", company);
+			if (!smclist.isEmpty()) {
+				model.addAttribute("smclist", smclist);
+			}
+			
+
+			int comCount = comdao.count();
+			List<Company> comList = new ArrayList<>();
+
+			String scname = companySectorDao.getScname(cno);
+			List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
+					.getCompanySectorAndCompanyList(scname, cno);
+			if(companySectorAndCompanyList.size() > 0) {
+				model.addAttribute("recommendList", companySectorAndCompanyList);
+			}
+	        
+	        
+	        return "companyDetail_JYC";
+	}
+	
 	@RequestMapping("/detailCom")
 	public String companyDetailCom(@RequestParam("cno") String cno, Model model) {
 		Company company = comdao.getCompany(cno);
@@ -128,18 +171,23 @@ public class CompanyController_JYC {
 		List<ScoreMemCom> smclist = smcdao.getScoreMemComList(cno);
 
 		model.addAttribute("company", company);
-		model.addAttribute("enlist", enlist);
-		model.addAttribute("smclist", smclist);
-
+		if (!enlist.isEmpty()) {
+			model.addAttribute("enlist", enlist);
+		}
+		if (!smclist.isEmpty()) {
+			model.addAttribute("smclist", smclist);
+		}
+		
+		
 		int comCount = comdao.count();
 
 		List<Company> comList = new ArrayList<>();
-		try {
-			List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(cno);
+	
+		String scname = companySectorDao.getScname(cno);
+		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
+				.getCompanySectorAndCompanyList(scname, cno);
+		if(companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
-		} catch (Exception e) {
-			
 		}
 
 		return "companyDetail_JYC";
@@ -152,18 +200,14 @@ public class CompanyController_JYC {
 		String cno = company.getCno();
 		
 		subsdao.subscribeCompany(mid, cno);
-		
 	}
 
 	@PostMapping("/unsubscribe")
 	public void unsubscribe(@RequestBody Company company, HttpSession session, Model model, HttpServletResponse response) throws IOException {
-
 		String cno = company.getCno();
-		
 		
 		String mid = (String) session.getAttribute("mid");
 
 		subsdao.unsubscribeCompany(mid, cno);
-		
 	}
 }

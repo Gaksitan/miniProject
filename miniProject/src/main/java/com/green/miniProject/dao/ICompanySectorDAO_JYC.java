@@ -10,5 +10,6 @@ import com.green.miniProject.domain.CompanySectorAndCompany;
 @Mapper
 public interface ICompanySectorDAO_JYC {
 
-	public List<CompanySectorAndCompany> getCompanySectorAndCompanyList(@Param("cno") String cno);
+	public List<CompanySectorAndCompany> getCompanySectorAndCompanyList(@Param("scname") String scname, @Param("cno") String cno);
+	public String getScname(@Param("cno") String cno);
 }

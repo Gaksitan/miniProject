@@ -95,7 +95,19 @@
 		<span>${employNoticeDto.ensalary }</span>
 		<h2>상세주소</h2>
 		<span>${employNoticeDto.enaddr }</span>
-
+		<c:if test="${resume == null }">
+		<input type="button" value="지원하기" onclick="alert('지원하실 대표 이력서가 없습니다!');">
+		</c:if>
+		<c:if test="${resume != null }">
+		<input type="button" value="지원하기" onclick="applyResume()">
+		</c:if>
+		<c:if test="${recommendList != null }">
+		<c:forEach var="" items="${recommendList }" varStatus="status">
+		<ul>
+			<li></li>
+		</ul>
+		</c:forEach>
+		</c:if>
 	</main>
 
 	<%@ include file="./footer_JYC.jsp"%>
@@ -103,5 +115,22 @@
 	<script type="text/javascript">
 		
 	</script>
+	
+<script type="text/javascript">
+	function applyResume(){
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', '/employnotice/applyResume', true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function(){
+			alert(this.responseText);
+		}
+		const data = JSON.stringify({
+		 	enno: '${employNoticeDto.enno }',
+		 	rno:'${resume.rno}'
+		});
+		xhr.send(data);
+	}
+	
+</script>
 </body>
 </html>

@@ -38,6 +38,8 @@
 				<span>사업자등록번호:XXX-XX-XXXX</span>
 			</p>
 		</div>
+		
+		
 		<c:if test="${companyManager == null }">
 		<a href="/service/mainMem">고객센터</a>
 		</c:if>

@@ -4,9 +4,20 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.green.miniProject.dao.IEmployNoticeDAO_JYC">
-	<select id="getAllEmployNoticeList">
+	<select id="getAllEmployNoticeListOrderByEnddateAsc" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT *, DATEDIFF(enenddate, NOW()) AS date_diff FROM employnotice ORDER BY date_diff ASC;
 	</select>
+	<select id="getAllEmployNoticeListOrderByRegdateDesc" resultType="com.green.miniProject.domain.EmployNotice">
+		SELECT * FROM employnotice ORDER BY enregdate DESC;
+	</select>
+	<select id="getAllEmployNoticeListOrderByEnddateAscCno" resultType="com.green.miniProject.domain.EmployNotice">
+		SELECT *, DATEDIFF(enenddate, NOW()) AS date_diff FROM employnotice WHERE cno = #{cno} ORDER BY date_diff ASC;
+	</select>
+	<select id="getAllEmployNoticeListOrderByRegdateDescCno" resultType="com.green.miniProject.domain.EmployNotice">
+		SELECT * FROM employnotice  WHERE cno = #{cno} ORDER BY enregdate DESC;
+	</select>
+	
+	
 	<select id="searchEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY enregdate DESC LIMIT #{page}, 10;
 	</select>

@@ -61,10 +61,12 @@ table {
 					</c:forEach>
 				</tbody>
 			</table>
+			<c:if test="${enpage > 1 }">
 			<c:forEach begin="1" end="${enpage}" varStatus="status">
 				<input type="button" value="${status.count }" name="page"
 					onclick="location.href='/page/employnotice?page=${status.count}&keyword=${keyword }&comcurrentpage=${comcurrentpage }&memcurrentpage=${memcurrentpage }'">
 			</c:forEach>
+			</c:if>
 		</div>
 		<div>
 			<div class="top">
@@ -94,10 +96,12 @@ table {
 					</c:forEach>
 				</tbody>
 			</table>
+			<c:if test="${compage > 1 }">
 			<c:forEach begin="1" end="${compage }" varStatus="status">
 				<input type="button" value="${status.count }" name="page"
 					onclick="location.href='/page/company?page=${status.count}&keyword=${keyword }&memcurrentpage=${memcurrentpage }&encurrentpage=${encurrentpage }'">
 			</c:forEach>
+			</c:if>
 		</div>
 		<c:if test="${companyManager == null }">
 			<div>
@@ -128,10 +132,12 @@ table {
 						</c:forEach>
 					</tbody>
 				</table>
+				<c:if test="${mempage > 1 }">
 				<c:forEach begin="1" end="${mempage }" varStatus="status">
 				<input type="button" value="${status.count }" name="page"
 					onclick="location.href='/page/member?page=${status.count}&keyword=${keyword }&encurrentpage=${encurrentpage }&comcurrentpage=${comcurrentpage }'">
 			</c:forEach>
+				</c:if>
 			</div>
 		</c:if>
 
