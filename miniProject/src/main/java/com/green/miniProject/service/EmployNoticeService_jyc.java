@@ -23,5 +23,6 @@ public class EmployNoticeService_jyc {
 		sorts.add(Sort.Order.asc("enenddate"));
 		PageRequest pageRequest = PageRequest.of(page - 1, 10, Sort.by(sorts));
 		return employNoticeRepository.findAll(pageRequest);
+		
 	}
 }

@@ -97,8 +97,6 @@ public class ServiceController_JYC {
 		
 		model.addAttribute("faqlist", faqdao.searchFAQListTargetMem(keyword));
 		
-		log.info("faqlist : " + faqdao.searchFAQListTargetMem(keyword));
-		
 		return "serviceSearchResult_JYC";
 	}
 	

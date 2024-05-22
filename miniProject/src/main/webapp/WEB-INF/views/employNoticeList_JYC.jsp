@@ -8,7 +8,9 @@
 <style type="text/css">
 #container {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	width: 80%;
+	margin: 0 auto;
+	grid-template-columns: repeat(4, 1fr);
 }
 
 .items ul li {
@@ -23,6 +25,11 @@
 	border: 1px solid black;
 	width: 200px;
 	height: 200px;
+}
+.items .imgs{
+	 height: 120px;
+	 border-bottom: 1px solid black;
+	 background: gray;
 }
 </style>
 </head>
@@ -48,6 +55,7 @@
 				varStatus="status">
 				<div class="items">
 					<ul>
+						<li class="imgs"></li>
 						<c:if test="${mid == null && companyManager == null }">
 							<li><a
 								href="/employnotice/detailNoneMem?enno=${employNotice.enno }">${employNotice.entitle }</a></li>

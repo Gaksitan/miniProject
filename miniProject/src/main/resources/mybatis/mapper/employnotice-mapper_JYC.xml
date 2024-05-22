@@ -25,7 +25,9 @@
 	<select id="getAllEmployNoticeListOrderByRegdateDescCno" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * FROM employnotice  WHERE cno = #{cno} ORDER BY enregdate DESC;
 	</select>
-	
+	<select id="getEmployNoticeListSamePosition" resultType="com.green.miniProject.domain.EmployNoticeDetail">
+		SELECT en.*, com.cname FROM employnotice en INNER JOIN company com ON en.cno = com.cno WHERE enposition = #{enposition} AND NOT enno IN (#{enno});
+	</select>
 	
 	<select id="searchEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY enregdate DESC LIMIT #{page}, 10;

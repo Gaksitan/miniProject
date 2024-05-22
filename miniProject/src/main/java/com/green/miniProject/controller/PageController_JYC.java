@@ -165,7 +165,7 @@ public class PageController_JYC {
 	}
 	
 	@RequestMapping("/companyEmployNotice")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam("cno") String cno) {
+    public String list(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam("cno") String cno) {
         Page<com.green.miniProject.entity.EmployNotice> paging = employNoticeService.getList(page);
         model.addAttribute("enlist", paging.getContent());
         model.addAttribute("totalPages", paging.getTotalPages());

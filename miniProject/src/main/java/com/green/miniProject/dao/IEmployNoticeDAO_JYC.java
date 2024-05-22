@@ -19,4 +19,5 @@ public interface IEmployNoticeDAO_JYC {
 	public List<EmployNotice> getEmployNoticeList(@Param("cno") String cno);
 	public EmployNoticeDetail getEmployNotice(@Param("enno") Long enno);
 	public int getCount(@Param("keyword") String keyword);
+	public List<EmployNoticeDetail> getEmployNoticeListSamePosition(@Param("enno") Long enno, @Param("enposition") String enposition);
 }

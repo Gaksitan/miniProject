@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#faqtable{
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+</style>
+
+
 </head>
 <body>
 	<%@ include file="./header_JYC.jsp"%>
@@ -22,7 +30,13 @@
 			</form>
 		</c:if>
 
-		<table>
+		<table id="faqtable" border="1">
+		 	<thead>
+		 		<tr>
+		 			<th>카테고리</th>
+		 			<th>질문</th>
+		 		</tr>
+		 	</thead>
 			<tbody>
 				<c:forEach var="faq" items="${faqlist }">
 					<tr>

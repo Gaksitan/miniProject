@@ -43,7 +43,6 @@
 							<c:if test="${companyManager != null }">
 								<td><a href="/employnotice/detailNoneCom?enno=${en.enno }">${en.entitle }</a></td>
 							</c:if>
-							<td>${status.count }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -127,13 +126,13 @@
 						varStatus="status">
 						<tr>
 							<c:if test="${mid == null && companyManager == null }">
-								<td><a href="/company/detailNoneMem">${recommend.cname }</a></td>
+								<td><a href="/company/detailNoneMem?cno=${recommend.cno }">${recommend.cname }</a></td>
 							</c:if>
 							<c:if test="${mid != null}">
-								<td><a href="/company/Mem">${recommend.cname }</a></td>
+								<td><a href="/company/Mem?cno=${recommend.cno }">${recommend.cname }</a></td>
 							</c:if>
 							<c:if test="${companyManager != null }">
-								<td><a href="/company/detailCom">${recommend.cname }</a></td>
+								<td><a href="/company/detailCom?cno=${recommend.cno }">${recommend.cname }</a></td>
 							</c:if>
 						</tr>
 					</c:forEach>
