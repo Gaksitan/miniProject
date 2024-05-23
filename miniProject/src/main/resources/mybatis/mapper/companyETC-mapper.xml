@@ -26,6 +26,7 @@
         FROM interestMember im
         JOIN MEMBER m ON im.MID = m.MID
         JOIN resume r ON im.MID = r.MID
+        WHERE im.cno = #{cno}
     </select>
     
     <delete id="removeInterest">
@@ -109,6 +110,7 @@
         FROM Resume
         WHERE rno = #{rno}
     </select>
+
     
     <select id="getSkillListByRno" resultType="com.green.miniProject.domain.Skill">
         SELECT 
@@ -154,6 +156,30 @@
 		    r.rno = #{rno}
     </select>
     
+        <resultMap id="ScoreComMemResultMap" type="com.green.miniProject.domain.ScoreComMem">
+        <id property="scmno" column="scmno"/>
+        <result property="mid" column="mid"/>
+        <result property="cno" column="cno"/>
+        <result property="scmscore" column="scmscore"/>
+        <result property="scmreview" column="scmreview"/>
+        <result property="scmregdate" column="scmregdate"/>
+        <association property="company" javaType="com.green.miniProject.domain.Company">
+            <id property="cno" column="cno"/>
+            <result property="cname" column="cname"/>
+        </association>
+    </resultMap>
+
+    <select id="getScoreComMemListByMid" resultMap="ScoreComMemResultMap">
+        SELECT 
+            s.*, c.cname
+        FROM 
+            ScoreComMem s
+        JOIN 
+            company c ON s.cno = c.cno
+        WHERE 
+            s.mid = #{mid}
+    </select>
+    
     
     <update id="updateApplicationStatus">
 	    UPDATE applyResume
@@ -162,11 +188,17 @@
 	</update>
 	
 	<insert id="insertScore">
-		INSERT INTO scoreComMem (MID, cno, scmscore, scmreview)
+		INSERT INTO scoreComMem (MID, cno, scmscore, scmreview, scmregdate)
             VALUES
-            (#{mid}, #{cno}, #{score}, #{review})
+            (#{mid}, #{cno}, #{score}, #{review}, now())
 	</insert>
+	<!-- 평점 삽입 -->
 	
+	<select id="getAverageScore" resultType="java.lang.Double">
+		SELECT AVG(scmscore)
+		FROM scoreComMem
+		WHERE MID = #{mid}
+	</select>
 	
     
 </mapper>

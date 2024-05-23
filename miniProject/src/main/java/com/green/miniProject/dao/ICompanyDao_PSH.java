@@ -51,9 +51,11 @@ public interface ICompanyDao_PSH {
 	public void deleteSkillsByEmployNoticeId(Long enno);
 	public void deleteWelfaresByEmployNoticeId(Long enno);
 	
+	
 	///////////////////////
 	
 	List<Skill> getSknameByCno(@Param("cno") String cno);
 
 	//스킬매칭
+	
 }

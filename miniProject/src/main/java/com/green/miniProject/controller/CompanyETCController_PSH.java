@@ -25,6 +25,7 @@ import com.green.miniProject.domain.InterestMember;
 import com.green.miniProject.domain.Link;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.ScoreComMem;
 import com.green.miniProject.domain.Skill;
 import com.green.miniProject.service.CompanyETCService_PSH;
 
@@ -44,9 +45,12 @@ public class CompanyETCController_PSH {
     private CompanyETCService_PSH service;
 
 	@RequestMapping("/subscribeComList")
-	public String subscribeComList(Model model) {
+	public String subscribeComList(Model model, HttpSession session) {
+		Company company = (Company)session.getAttribute("company");
+    	
+    	String cno = company.getCno();
 		
-		List<InterestMember> allList = service.getAllInterestMembers();
+		List<InterestMember> allList = service.getAllInterestMembers(cno);
 
         model.addAttribute("allList", allList);
 		
@@ -118,12 +122,14 @@ public class CompanyETCController_PSH {
     public String showApplicantDetail(@RequestParam("mid") String mid, Model model) {
         Member applicantDetail = service.getApplicantDetailByMid(mid);
         List<Resume> resumeList = service.getResumeListByMid(mid);
+        List<ScoreComMem> scoreList = service.getScoreComMemListByMid(mid);
 
         int age = service.calculateAge(applicantDetail.getMbirthDate());
         
         model.addAttribute("item", applicantDetail);
         model.addAttribute("age", age);
         model.addAttribute("resumeList", resumeList);
+        model.addAttribute("scoreList", scoreList);
 
         return "applicantDetail_PSH";
     }
@@ -144,8 +150,14 @@ public class CompanyETCController_PSH {
     }
     //평점 남기기
     
+    @PostMapping("/getAverageScore")
+    @ResponseBody
+    public Double getAverageScore(@RequestParam("mid") String mid) {
+        return service.getAverageScore(mid);
+    }
+    //평점 평균
     
-
+    
 
     @GetMapping("/applyResumeDetail")
 	public String applyResumeDetail(@RequestParam("rno") String rno, @RequestParam("mid") String mid, Model model) {
@@ -179,5 +191,6 @@ public class CompanyETCController_PSH {
         }
     }
     // 서류 평가
-
+    
+    
 }

@@ -20,4 +20,6 @@ public class ScoreComMem {
 	private LocalDateTime scmregdate;
 	private String mid;
 	private String cno;
+	
+	private Company company;
 }
