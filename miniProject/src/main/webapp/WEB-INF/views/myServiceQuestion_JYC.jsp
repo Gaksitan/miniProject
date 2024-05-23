@@ -5,6 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	table{
+		border-collapse: collapse;
+		margin: 0 auto;
+		
+	}
+	th{
+		background: #fcefa9;
+	}
+	th, td{
+		padding: 10px 20px;
+	}
+</style>
+
 </head>
 <body>
 	<%@ include file="./header_JYC.jsp" %>
@@ -12,7 +26,7 @@
 	<main>
 	
 	
-	<table>
+	<table border="1">
 		<thead>
 			<tr>
 				<th>문의사항 제목</th>
@@ -27,7 +41,12 @@
 					<td><a href="/service/serviceQuestionDetail?sqno=${sq.sqno }">${sq.sqtitle }</a></td>
 					<td>${sq.sqcontent }</td>
 					<td>${sq.sqregdate }</td>
-					<td>${sq.sqanswertf }</td>
+					<c:if test="${sq.sqanswertf == false }">
+					<td>X</td>
+					</c:if>
+					<c:if test="${sq.sqanswertf == true }">
+					<td>O</td>
+					</c:if>
 				</tr>			
 			</c:forEach>		
 		</tbody>

@@ -6,6 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	table{
+		border-collapse: collapse;
+		width: 1000px;
+		margin: 0 auto;
+	}
+	th, td{
+		padding: 5px 20px;
+	}
+	th{
+		background: #fcefa9;
+	}
+</style>
 </head>
 <body>
 <%@ include file="./header_JYC.jsp"%>
@@ -22,7 +35,7 @@
 	
 		<c:forEach var="subscribe" items="${subscribeList }" varStatus="status">
 			<tr id="subsTr${subscribe.sno }">
-				<td>${subscribe.cname }</td>
+				<td><a href="/company/detailMem?cno=${subscribe.cno }">${subscribe.cname }</a></td>
 				<td>${subscribe.ctype }</td>
 				<td>${subscribe.cno }</td>
 				<td>
@@ -41,6 +54,26 @@
 		</c:forEach>
 	</tbody>
 </table>
+<c:if test="${!paging.isEmpty() }">
+				<ul class="pagination justify-content-center"></ul>
+				<c:if test="${hasPrevious == true }">
+           		<li class="page-item"> 
+           		<a class="page-link"
+						href="/page/companyEmployNotice?page=${currentPage-1}&cno=${company.cno}"><span>이전</span> 
+					</a>
+					</li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages }" varStatus="status">
+							<a href="/page/companyEmployNotice?page=${status.count }&cno=${company.cno}">${status.count }</a>
+					</c:forEach>
+				<c:if test="${hasNext == true }">
+            	<li class="page-item">
+            	<a class="page-link"
+						href="/page/companyEmployNotice?page=${currentPage+1}&cno=${company.cno}"> <span>다음</span> 
+					</a>
+					</li>
+				</c:if>
+			</c:if>
 </c:if>
 <c:if test="${scrapList != null }">
 <table border="1">
@@ -53,8 +86,8 @@
 	<tbody>
 		<c:forEach var="scrap" items="${scrapList }">
 		<tr>
-			<td>${scrap.cname }</td>
-			<td>${scrap.entitle }</td>
+			<td><a href="/company/detailMem?cno=${scrap.cno }">${scrap.cname }</a></td>
+			<td><a href="/employnotice/detailMem?enno=${scrap.enno }">${scrap.entitle }</a></td>
 			<td>${scrap.enposition }</td>
 			<td><input type="button" value="스크랩" id="scrap${scrap.senno }" onclick="unscrap(event, ${scrap.senno}, ${scrap.enno })" style="background:rgb(252, 239, 169)"></td>
 		</tr>
@@ -63,6 +96,26 @@
 	<tbody>
 	</tbody>
 </table>
+<c:if test="${!paging.isEmpty() }">
+				<ul class="pagination justify-content-center"></ul>
+				<c:if test="${hasPrevious == true }">
+           		<li class="page-item"> 
+           		<a class="page-link"
+						href="/page/companyEmployNotice?page=${currentPage-1}&cno=${company.cno}"><span>이전</span> 
+					</a>
+					</li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages }" varStatus="status">
+							<a href="/page/companyEmployNotice?page=${status.count }&cno=${company.cno}">${status.count }</a>
+					</c:forEach>
+				<c:if test="${hasNext == true }">
+            	<li class="page-item">
+            	<a class="page-link"
+						href="/page/companyEmployNotice?page=${currentPage+1}&cno=${company.cno}"> <span>다음</span> 
+					</a>
+					</li>
+				</c:if>
+			</c:if>
 </c:if>
 <%@ include file="./footer_JYC.jsp"%>
 <script type="text/javascript">
