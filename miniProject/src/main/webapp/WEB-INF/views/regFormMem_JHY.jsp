@@ -6,14 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style>
+<!-- <style>
 	*{
 		margin: auto;
 		padding: auto;
 	}
-</style>
+</style> -->
+<link rel="stylesheet" href="../css/main.css" />
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
 <form action="regist" method="post">
 	<table>
 		<tr>
@@ -93,6 +95,7 @@
 		</tr>
 	</table>
 </form>
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 <script type="text/javascript">
 	// 아이디 중복 체크 메서드
