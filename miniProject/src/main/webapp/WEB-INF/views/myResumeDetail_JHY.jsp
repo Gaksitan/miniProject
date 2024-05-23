@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../../script/script.js"></script>
+<script src="../../script/script.js">console.log(${rno})</script>
 </head>
 <link rel="stylesheet" href="../css/main.css" />
 <!-- 
@@ -41,12 +41,12 @@
 		</ul><br>
 		<h3>자기소개</h3>
 		<input type="text" name="rintro"><br>
-		<h3>스킬 (skill)</h3>
+		<h3>스킬 (skill) 	<button type="button" onclick="addRskill()">추가</button>
+		</h3>
 		<div id="rskillContainer">
 			
 		</div>
-		<button type="button" onclick="addRskill()">추가</button>
-		<h3>경력</h3>
+		<h3>경력 <button type="button" onclick="addRexp()">추가</button></h3>
 		<div>
 			<table id="rexpContainer">
 				<thead>
@@ -57,22 +57,30 @@
 				
 			</table>
 		</div>
-		<button type="button" onclick="addRexp()">추가</button>
-		<h3>학력</h3>
-		<div id="rdegreeContainer">
-			
+		
+		<h3>학력 <button type="button" onclick="addRdegree()">추가</button></h3>
+		<div>
+			<table id="rdegreeContainer">
+				<thead>
+				<tr>
+					<th>학교명</th><th>졸업날짜</th><th>전공</th><th>최종학력</th>
+				</tr>
+				</thead>
+			</table>
 		</div>
-		<button type="button" onclick="addRdegree()">추가</button>
-		<h3>자격증</h3>
-		<div id="rcertificateContainer">
-			
+		<h3>자격증 <button type="button" onclick="addRcertificate()">추가</button></h3>
+		<div>
+			<table id="rcertificateContainer">
+				<thead>
+				<tr>
+					<th>자격증 이름</th><th>취득날짜</th><th>발급처</th>
+				</tr>
+				</thead>
+			</table>
 		</div>
-		<button type="button" onclick="addRcertificate()">추가</button>
-		<h3>링크 (link)</h3>
+		<h3>링크 (link) <button type="button" onclick="addRlink()">추가</button></h3>
 		<div id="rlinkContainer">
-			
 		</div>
-		<button type="button" onclick="addRlink()">추가</button>
 		
 		<h3>공개여부
 			<label><input type="radio" name="rpublic" value="1">공개</label>
@@ -84,7 +92,7 @@
 <c:if test="${resume.rno != null }">
 	<form id="updateResume" action="updateResume" method="post">
 		<input type="hidden" name="rno" value="${rno }">
-		<h2><input type="text" name="rtitle" value="${resume.rtitle }"><input type="image" name="rimgPath" src="" alt="증명사진"></h2>
+		<h2>제목 : <input type="text" name="rtitle" value="${resume.rtitle }"><input type="image" name="rimgPath" src="" alt="증명사진"></h2>
 		<ul>
 			<li>${member.mname }</li>
 			<li>${member.memail }</li>
@@ -92,14 +100,13 @@
 		</ul><br>
 		<h3>자기소개</h3>
 		<input type="text" name="rintro" value="${resume.rintro }"><br>
-		<h3>스킬 (skill)</h3>
+		<h3>스킬 (skill) <button type="button" onclick="addRskill()">추가</button></h3>
 		<div id="rskillContainer">
 			<c:forEach var="rskill" items="${skillList }">
 				<h5 id="shortbox">스킬명 : ${rskill.skname }<input type="hidden" name="rskill" value="${rskill.skname }"><button type="button" onclick="deleteData(event)">삭제</button></h5>
 			</c:forEach>
 		</div>
-		<button type="button" onclick="addRskill()">추가</button>
-		<h3>경력</h3>
+		<h3>경력 <button type="button" onclick="addRexp()">추가</button></h3>
 		<div>
 			<table id="rexpContainer">
 				<thead>
@@ -121,8 +128,7 @@
 				</tbody>
 			</table>
 		</div>
-		<button type="button" onclick="addRexp()">추가</button>
-		<h3>학력</h3>
+		<h3>학력 <button type="button" onclick="addRdegree()">추가</button></h3>
 		<div>
 			<table id="rdegreeContainer">
 				<thead>
@@ -143,8 +149,7 @@
 				</tbody>
 			</table>
 		</div>
-		<button type="button" onclick="addRdegree()">추가</button>
-		<h3>자격증</h3>
+		<h3>자격증 <button type="button" onclick="addRcertificate()">추가</button></h3>
 		<div>
 			<table id="rcertificateContainer">
 				<thead>
@@ -164,14 +169,12 @@
 				</tbody>
 			</table>
 		</div>
-		<button type="button" onclick="addRcertificate()">추가</button>
-		<h3>링크 (link)</h3>
+		<h3>링크 (link) <button type="button" onclick="addRlink()">추가</button></h3>
 		<div id="rlinkContainer">
 			<c:forEach var="rlink" items="${linkList }">
 				<h4>링크 : ${rlink.lname }<button type="button" onclick="deleteData(event)">삭제</button></h4>
 			</c:forEach>
 		</div>
-		<button type="button" onclick="addRlink()">추가</button>
 		
 		<h3>공개여부
 		<c:if test="${resume.rpublic == true }">

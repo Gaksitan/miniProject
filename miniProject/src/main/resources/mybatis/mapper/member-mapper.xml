@@ -103,6 +103,23 @@
   		update member set mpw = #{member.mpw}, mname = #{member.mname}, maddr1 = #{member.maddr1}, maddr2 = #{member.maddr2}, mtel1 = #{member.mtel1}, mtel2 = #{member.mtel2}, mstate = #{member.mstate}, mgender = #{member.mgender} 
   		where mid = #{member.mid}
   	</update>
+  	<update id="updateResumeSkill">
+  		update skill set skname = #{rskill.skname} where rno = #{rskill.rno}
+  	</update>
+  	<!-- 
+  	 <update id="writeResumeExp">
+  		
+  	</update>
+  	<update id="writeResumeDegree">
+  		
+  	</update>
+  	<update id="writeResumeCertificate">
+  		
+  	</update>
+  	<update id="writeResumeLink">
+  		
+  	</update>
+  	 -->
   	
   	
   	<delete id="deleteMember">
