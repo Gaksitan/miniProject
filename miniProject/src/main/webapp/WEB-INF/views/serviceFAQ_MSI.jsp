@@ -11,18 +11,24 @@
 
 section{
 	margin : 20px;
+
+
 	/* height : auto;
 	position: relative; */
-}
 
+}
 .container{
 	display : flex;
 	flex-direction : row;
 	margin : 50px auto;
 	justify-content: center;
+
+	width : 1200px;
+
 	/* width : 1200px;
 	height : 350px; */
 /* 	position: relative;  */
+
 }
 
 .tbl {
@@ -103,7 +109,10 @@ td:nth-child(1) {
 
 <h3>FAQ 관리페이지</h3>
 <hr>
-
+	<div class="alink">
+		<a id="ex1" href="/admin/serviceFAQWrite">FAQ 작성하기</a>
+		<a id="ex2" href="/admin/serviceQuestionNoAnswer">미답변 질문 확인하기</a>
+	</div>
 
 <div class="container">
 	<div class="tbl" id="tbl1">
@@ -150,10 +159,7 @@ td:nth-child(1) {
 		</table>
 	</div>
 </div>	
-	<div class="alinks">
-		<a id="ex1" href="/admin/serviceFAQWrite">FAQ 작성하기</a>
-		<a id="ex2" href="/admin/serviceQuestionNoAnswer">미답변 질문 확인하기</a>
-	</div>
+
 
 </section>
 

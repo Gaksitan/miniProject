@@ -17,6 +17,10 @@
 	th, td{
 		padding: 10px 20px;
 	}
+	p{
+		text-align: center;
+		color: red;
+	}
 </style>
 <link rel="stylesheet" href="../css/main.css" />
 
@@ -25,8 +29,10 @@
 	<%@ include file="./header_JYC.jsp" %>
 	
 	<main>
-	
-	
+	<c:if test="${serviceQuestionList != null }">
+	<c:if test="${mid != null }"> <!-- mid가 널이 아니명 개인회원이기 때문에 문의하기 기능을 선택할 수 있다. -->	
+		<input type="button" value="문의하기" id="regQBtn" onclick="location.href='/both/registQuestionForm'">
+	</c:if> 
 	<table border="1">
 		<thead>
 			<tr>
@@ -52,7 +58,13 @@
 			</c:forEach>		
 		</tbody>
 	</table>
-	
+	</c:if>
+	<c:if test="${serviceQuestionList == null }">
+	<p>작성한 문의사항이 없습니다.</p>
+	<c:if test="${mid != null }"> <!-- mid가 널이 아니명 개인회원이기 때문에 문의하기 기능을 선택할 수 있다. -->	
+		<input type="button" value="문의하기" id="regQBtn" onclick="location.href='/both/registQuestionForm'">
+	</c:if> 
+	</c:if>	
 	</main>
 	
 	<%@ include file="./footer_JYC.jsp" %>

@@ -77,15 +77,44 @@ public class EmployNoticeController_JYC {
 	@GetMapping("/list")
 	public String employNoticeList(Model model) {
 
-		model.addAttribute("employNoticeList", employNoticeDao.getAllEmployNoticeListOrderByEnddateAsc());
+		List<com.green.miniProject.domain.EmployNotice> employNoticeList = employNoticeDao.getAllEmployNoticeListOrderByEnddateAsc();
+		String str;
+		
+		for(int i = 0; i < employNoticeList.size(); i++) {
+			
+			if(employNoticeList.get(i).getEntitle().length() > 20) {				
+			str = employNoticeList.get(i).getEntitle().substring(0, 20);
+			employNoticeList.get(i).setEntitle(str);
+			}
+		}
+		
+		model.addAttribute("employNoticeList", employNoticeList);
+		
+		
+		
+		
+		
 		return "employNoticeList_JYC";
 	}
 
 	@GetMapping("/employNoticeList")
 	public String employNoticeList(@RequestParam("cno") String cno, Model model) {
 
-		model.addAttribute("employNoticeList", employNoticeDao.getEmployNoticeList(cno));
+
+		List<com.green.miniProject.domain.EmployNotice> employNoticeList = employNoticeDao.getAllEmployNoticeListOrderByEnddateAsc();
+		String str;
+		
+		for(int i = 0; i < employNoticeList.size(); i++) {
+			
+			if(employNoticeList.get(i).getEntitle().length() > 20) {				
+			str = employNoticeList.get(i).getEntitle().substring(0, 20);
+			employNoticeList.get(i).setEntitle(str);
+			}
+		}
+		
+		model.addAttribute("employNoticeList", employNoticeList);
 		model.addAttribute("cno", cno);
+		
 		return "employNoticeList_JYC";
 	}
 
@@ -93,6 +122,7 @@ public class EmployNoticeController_JYC {
 	public String detailNoneMem(@RequestParam("enno") Long enno, Model model) {
 
 		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
+		
 		if (!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
 			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
 		}

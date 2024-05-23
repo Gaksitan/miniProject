@@ -46,9 +46,6 @@ public class BothController_JYC {
 	@RequestMapping("/header")
 	public String header(HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("mid", "aaa");
-		
 		return "header_JYC";
 	}
 	

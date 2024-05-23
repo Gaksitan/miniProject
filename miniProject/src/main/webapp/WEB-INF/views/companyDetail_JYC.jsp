@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/main.css" />
+
 </head>
 <body>
 	<%@ include file="./header_JYC.jsp"%>
@@ -116,7 +118,7 @@
 				</tbody>
 			</table>
 		</c:if>
-		<input type="button" value="지원하기"
+		<input type="button" value="지원하러가기"
 			onclick="location.href='/employnotice/employNoticeList?cno=${company.cno}'">
 		<c:if test="${recommendList != null }">
 			<table>
