@@ -7,10 +7,34 @@
 <meta charset="UTF-8">
 <title>applyResumeDetail</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function updateApplicationStatus(status) {
+    var rno = $("#rno").val();
+
+    $.ajax({
+        url: '/updateApplicationStatus',
+        type: 'POST',
+        data: {
+            status: status,
+            rno: rno
+        },
+        success: function(response) {
+            alert('Status updated successfully');
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            alert('Error: ' + error);
+        }
+    });
+}
+</script>
+
 </head>
 <body>
 <h1>지원자 및 관심 구직자 이력서 상세보기 페이지</h1>
 <hr>
+<input type="hidden" id="rno" value="${resume.rno}">
+
 <c:set var="item" value="${item}" />
 <c:set var="resume" value="${resume}" />
 
@@ -104,9 +128,9 @@
 
 <div id="modal">
     <div class="modal_content">       
-        <button id="pass_btn_modal">합격</button>
-        <button id="fail_btn_modal">불합격</button>
-        <button type="button" id="modal_close_btn">모달 창 닫기</button>
+        <button onclick="updateApplicationStatus(1)">합격</button>
+        <button onclick="updateApplicationStatus(0)">불합격</button>
+        <button type="button" id="modal_close_btn">창 닫기</button>
     </div>
     <div class="modal_layer"></div>
 </div>
@@ -119,34 +143,6 @@
 
         $("#modal_close_btn").click(function() {
             $("#modal").hide();
-        });
-
-        function updateApplicationStatus(arno, arg1) {
-            $.ajax({
-                url: '/updateApplicationStatus',
-                type: 'GET',
-                data: {
-                    arno: arno,
-                    status: status
-                },
-                success: function(response) {
-                    alert(response);
-                    $("#modal").hide();
-                },
-                error: function(error) {
-                    alert('Failed to update status');
-                }
-            });
-        }
-
-        $("#pass_btn_modal").click(function() {
-            var arno = "${resume.rno}";
-            updateApplicationStatus(arno, 1);
-        });
-
-        $("#fail_btn_modal").click(function() {
-            var arno = "${resume.rno}";
-            updateApplicationStatus(arno, 0);
         });
     });
 </script>

@@ -37,9 +37,16 @@
             <c:forEach items="${allList}" var="item">
                 <tr>
                     <td><a href="applicantDetail?mid=${item.member.mid}">${item.member.mname}</a></td>
-                    <td><a href="applyResumeDetail?rno=${item.resume.rno }&mid=${item.member.mid}">${item.resume.rtitle}</a></td>
+                    <td><a href="applyResumeDetail?rno=${item.rno }&mid=${item.member.mid}">${item.resume.rtitle}</a></td>
                     <td><input type="button" value="관심" onclick="toggleInterest('${item.member.mid}')"></td>
-                    <td>${item.member.mstate}</td>
+                    <td>
+                    	<c:choose>
+                    		<c:when test="${item.member.mstate eq 1}">구직중</c:when>
+                    		<c:when test="${item.member.mstate eq 2}">재직중</c:when>
+                    		<c:when test="${item.member.mstate eq 3}">관심없음</c:when>
+                    		<c:otherwise>-</c:otherwise>
+                    	</c:choose>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>

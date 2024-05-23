@@ -1,6 +1,5 @@
 package com.green.miniProject.service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -38,6 +37,12 @@ public class CompanyETCService_PSH {
     public List<ApplyResume> getApplyResumesByCompany(String cno) {
         return dao.getApplyResumesByCompany(cno);
     }
+    
+    public int getApplyCountByEnno(Long enno) {
+        Integer count = dao.getApplyCountByEnno(enno);
+        return count != null ? count : 0; // null 체크
+    }
+    
     //지원받은 이력서 리스트
     
     
@@ -91,11 +96,6 @@ public class CompanyETCService_PSH {
         return dao.getLinkListByRno(rno);
     }
     //////
-    
-    public void updateApplicationStatus(Long arno, int arg1) {
-        dao.updateApplicationStatus(arno, arg1);
-    }
-    
     
     
 }

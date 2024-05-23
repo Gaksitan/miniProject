@@ -42,7 +42,8 @@
 			<td><a href="employNotice?enno=${notice.enno}">${notice.entitle}</a></td>
             <td>${notice.enregdate}~${notice.enenddate }</td>
             <td><script>document.write(calculateDDay('${notice.enenddate}'))</script></td>
-            <td>notice.applicantCount</td>
+            <td>${applicantCounts[notice.enno]}</td>
+            <td>${notice.enno}</td>
         </tr>
     </c:forEach>
   </tbody>

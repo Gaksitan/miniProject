@@ -61,6 +61,12 @@
         WHERE en.cno = #{cno}
     </select>
     
+    <select id="getApplyCountByEnno" resultType="com.green.miniProject.domain.ApplyResume">
+    	SELECT COALESCE(COUNT(*), 0) AS applicant_count
+    	FROM applyResume
+    	WHERE enno = #{enno}
+    </select>
+    
     <!-- 지원받은 이력서 -->
     
     <select id="findInterestMember" resultType="com.green.miniProject.domain.InterestMember">
@@ -151,8 +157,9 @@
     
     <update id="updateApplicationStatus">
 	    UPDATE applyResume
-	    SET arpass = #{arg1}
-	    WHERE arno = #{arno}
+	    SET arpass = #{status}
+	    WHERE rno = #{rno}
 	</update>
+
     
 </mapper>

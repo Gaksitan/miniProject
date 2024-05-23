@@ -1,6 +1,8 @@
 package com.green.miniProject.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -68,10 +70,20 @@ public class CompanyETCController_PSH {
     	    	    	
     	List<EmployNotice> employNoticeList = service.getEmployNoticesByCno(cno);
         
+        Map<Long, Integer> applicantCounts = employNoticeList.stream()
+                .collect(Collectors.toMap(
+                    EmployNotice::getEnno,
+                    notice -> {
+                        Integer count = service.getApplyCountByEnno(notice.getEnno());
+                        return count != null ? count : 0;
+                    }
+                ));
+    	
         model.addAttribute("employNoticeList", employNoticeList);
+        model.addAttribute("applicantCounts", applicantCounts);
         return "employNoticeList_PSH";
     }
-	
+    
 
 
     @GetMapping("/applicantList")
@@ -141,11 +153,15 @@ public class CompanyETCController_PSH {
 	}
 	//이력서 상세보기
     
-    @GetMapping("/updateApplicationStatus")
-    public ResponseEntity<String> updateApplicationStatus(@RequestParam("arno") Long arno, @RequestParam("arg1") int arg1) {
-        service.updateApplicationStatus(arno, arg1);
-        
-        return new ResponseEntity<>("Status updated successfully", HttpStatus.OK);
+    @PostMapping("/updateApplicationStatus")
+    public ResponseEntity<String> updateApplicationStatus(@RequestParam("status") int status, @RequestParam("rno") String rno) {
+        try {
+            dao.updateApplicationStatus(status, rno);
+            return ResponseEntity.ok("Status updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating status");
+        }
     }
+    // 서류 평가
 
 }
