@@ -11,6 +11,7 @@
 	width: 80%;
 	margin: 0 auto;
 	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
 }
 
 .items ul li {
@@ -22,6 +23,7 @@
 }
 
 .items {
+	border-radius: 5px;
 	border: 1px solid black;
 	width: 200px;
 	height: 200px;

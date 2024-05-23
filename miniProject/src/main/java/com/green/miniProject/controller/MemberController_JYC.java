@@ -51,6 +51,8 @@ public class MemberController_JYC {
 			scnameList.add(comSecDao.getScnameList(s.getCno()));
 		}
 		
+		
+		
 		if(scdlist.size() > 0) {
 			model.addAttribute("subscribeList", scdlist);
 		}

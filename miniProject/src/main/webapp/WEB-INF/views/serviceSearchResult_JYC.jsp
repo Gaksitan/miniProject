@@ -10,8 +10,28 @@
 	margin: 0 auto;
 	border-collapse: collapse;
 }
+#faqtable th{
+	background: rgb(252, 239, 169);
+}
+#faqtable th, #faqtable td{
+	padding: 5px 20px;
+}
+#faqtable a{
+	text-decoration: none;
+	color: black;
+}
 
-faqtable 
+form{
+	width: fit-content;
+	margin: 20px auto;
+	
+}
+form input[type="search"]{
+	padding: 5px 10px;
+}
+form input[type="submit"]{
+	padding: 0px 5px;
+}
 
 
 </style>
