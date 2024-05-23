@@ -13,63 +13,65 @@ img {
 	height: 15px;
 }
 </style>
+<link rel="stylesheet" href="../css/main.css" />
 </head>
 <body>
 	<%@ include file="./header_JYC.jsp"%>
-	<h1>community 게시판</h1>
-	<hr>
+	<main>
+		<h1>community 게시판</h1>
+		<hr>
 
 
-	<!-- 세션ID가 블랙리스트에 있는 ID라면 게시글 작성하기 버튼을 누르면 알림창이 뜨면서 작성페이지로 이동못하게 함 -->
-	<c:if test="${not empty errorMessage}">
-		<script>
+		<!-- 세션ID가 블랙리스트에 있는 ID라면 게시글 작성하기 버튼을 누르면 알림창이 뜨면서 작성페이지로 이동못하게 함 -->
+		<c:if test="${not empty errorMessage}">
+			<script>
             alert('${errorMessage}');
         </script>
-	</c:if>
+		</c:if>
 
 
 
-	<button type="button"
-		onclick="location.href='/commu/communityMemInsert_KHJ'">게시글
-		작성하기</button>
-	<input placeholder="작성자, 게시물 제목"></input>
-	<button type="submit" class="s1" value="찾기"></button>
-	<select id="sortOptions">
-		<!--<option value="">추천순</option> 클릭 많은 순 -->
-		<option value="reply">댓글순</option>
-		<option value="likes">인기순</option>
-		<!-- 좋아요 많은 순 -->
-		<option value="date">최신순</option>
-	</select>
+		<button type="button"
+			onclick="location.href='/commu/communityMemInsert_KHJ'">게시글
+			작성하기</button>
+		<input placeholder="작성자, 게시물 제목"></input>
+		<button type="submit" class="s1" value="찾기"></button>
+		<select id="sortOptions">
+			<!--<option value="">추천순</option> 클릭 많은 순 -->
+			<option value="reply">댓글순</option>
+			<option value="likes">인기순</option>
+			<!-- 좋아요 많은 순 -->
+			<option value="date">최신순</option>
+		</select>
 
 
 
 
-	<!-- 공지사항 테이블 추가 -->
+		<!-- 공지사항 테이블 추가 -->
 
-	<table border="1" width="500" cellpadding="0" cellspacing="0"
-		style="text-align: center;">
-		<thead>
-			<tr>
-				<th>공지번호</th>
-				<th>공지제목</th>
-				<th>작성자</th>
-				<th>등록일</th>
-				<th>좋아요</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="notice" items="${noticeList }" varStatus="status">
+		<table border="1" width="500" cellpadding="0" cellspacing="0"
+			style="text-align: center;">
+			<thead>
 				<tr>
-					<td>${status.count }</td>
-					<td><a href="/commu/communityNotice_MSI?nno=${notice.nno}">${notice.ntitle}</a></td>
-					<td>${notice.ano}</td>
-					<td>${notice.nregdate}</td>
-					<td></td>
+					<th>공지번호</th>
+					<th>공지제목</th>
+					<th>작성자</th>
+					<th>등록일</th>
+					<th>좋아요</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach var="notice" items="${noticeList }" varStatus="status">
+					<tr>
+						<td>${status.count }</td>
+						<td><a href="/commu/communityNotice_MSI?nno=${notice.nno}">${notice.ntitle}</a></td>
+						<td>${notice.ano}</td>
+						<td>${notice.nregdate}</td>
+						<td></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 
 		<!-- 커뮤니티 테이블 -->
 		<c:if test="${mid != null and !paging.isEmpty()}">
@@ -127,7 +129,7 @@ img {
 				</ul>
 			</c:if>
 		</c:if>
-	
+
 		<c:if test="${companyManager != null and !paging.isEmpty()}">
 			<table border="1" id="myTable">
 				<thead>
@@ -183,16 +185,16 @@ img {
 				</ul>
 			</c:if>
 		</c:if>
-	
-	
-	
 
 
 
 
 
 
-<!-- 
+
+
+
+		<!-- 
 	<c:if test="${companyManager != null and !paging.isEmpty()}">
 		<c:forEach var="board" items="${commuList }" varStatus="status">
 			<tr>
@@ -218,7 +220,7 @@ img {
 	</table>
  -->
 
-<!-- 	<c:if test="${companyManager != null and !paing.isEmpty()}">
+		<!-- 	<c:if test="${companyManager != null and !paing.isEmpty()}">
 		<ul class="pagination justify-content-center">
 			<c:if test="${hasPrevious == true }">
 				<li class="page-item"><a class="page-link"
@@ -236,8 +238,8 @@ img {
 	</c:if>
  -->
 
-	<%@ include file="./footer_JYC.jsp"%>
-	<script>
+		<%@ include file="./footer_JYC.jsp"%>
+		<script>
 	
 	// replyDetails 배열을 JSON 형식으로 변환하여 JavaScript 변수에 할당
     const replyDetails = JSON.parse('${replyDetailsJson}');
@@ -295,5 +297,6 @@ img {
 			
 		}
 	</script>
+	</main>
 </body>
 </html>
