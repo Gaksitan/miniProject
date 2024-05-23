@@ -7,21 +7,6 @@
 <title>관리자용 로그인화면</title>
 <style>
 
-html, body {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-}
-
-header, footer {
-    background-color: #C4D2E9; /* Adjust to match your header/footer */
-    padding: 20px;
-    text-align: center;
-    font-size: 1em;
-    color: #2E2E2E;
-}
 
 section {
     flex: 1;
@@ -29,6 +14,7 @@ section {
     justify-content: center;
     align-items: center;
     padding: 50px 0;
+    height : 800px;
 }
 
 .container {

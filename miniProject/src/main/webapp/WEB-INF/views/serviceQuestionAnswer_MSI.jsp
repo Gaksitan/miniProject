@@ -10,7 +10,7 @@
 <style>
 
 section{
-	margin : 50px;
+	margin : 20px;
 	height : 800px;
 }
 
@@ -55,7 +55,7 @@ td:nth-child(1) {
   width: 30%;
 }
 
-form{
+#form1{
 	display : flex;
 	flex-direction : column;
 	justify-content:center;
@@ -128,7 +128,7 @@ input[type="submit"]:hover  {
 		</table>
 
 
-		<form action="/admin/serviceAnswer" method="post">
+		<form action="/admin/serviceAnswer" method="post" id="form1">
 			<input type="hidden" name="sqno" value="${question.sqno}"><br>
 			<span>문의사항 답변 내용</span><br>
 			<textarea name="sacontent"></textarea><br>

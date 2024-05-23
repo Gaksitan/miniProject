@@ -10,8 +10,8 @@
 <style>
 
 section{
-	margin : 50px;
-	height : 600px;
+	margin : 20px;
+	height : 800px;
 }
 
 .container{
@@ -19,7 +19,6 @@ section{
 	flex-direction : row;
 	margin : 0 auto;
 	justify-content: center;
-	border : 2px solid darkgrey;
 	width : 1200px;
 	height : 350px;
 }
@@ -65,7 +64,6 @@ input[type="submit"]:hover {
 
 
 .tbl{
-	border : 1.2px solid darkgrey;
 	padding : 30px;
 	text-align: center;
 }
