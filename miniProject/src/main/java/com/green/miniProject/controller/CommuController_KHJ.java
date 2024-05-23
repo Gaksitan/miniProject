@@ -418,6 +418,8 @@ public class CommuController_KHJ {
 			List<BoardReply> replyList = dao.myReplyListMem(mid);
 			List<TagBoard> meTagList = dao.toMeListMem(mid);
 			List<Board> listILike = dao.getListILikeMem(mid);
+
+
 			model.addAttribute("myList", listmem);
 			model.addAttribute("replyList", replyList);
 			model.addAttribute("taggedList", meTagList);
@@ -431,6 +433,7 @@ public class CommuController_KHJ {
 			List<BoardReply> replyList = dao.myReplyListCom(cmid);
 			List<TagBoard> meTagList = dao.toMeListCom(cmid);
 			List<Board> listILike = dao.getListILikeCom(cmid);
+
 			model.addAttribute("myList", listcom);
 			model.addAttribute("replyList", replyList);
 			model.addAttribute("taggedList", meTagList);
@@ -513,7 +516,8 @@ public class CommuController_KHJ {
 	}
 
 	@RequestMapping("/deleteReply")
-	public String deleteReply(@RequestParam("reno") Long reno,@RequestParam("bno") Long bno, Model model, HttpSession session) {
+	public String deleteReply(@RequestParam("reno") Long reno, @RequestParam("bno") Long bno, Model model,
+			HttpSession session) {
 		System.out.println("deleteReply 접속");
 		String mid = (String) session.getAttribute("mid");
 		CompanyManager cm = (CompanyManager) session.getAttribute("companyManager");
@@ -526,7 +530,7 @@ public class CommuController_KHJ {
 		}
 
 		if (mid != null) {
-			
+
 			dao.deleteReplyMem(reno, mid);
 
 		} else if (mid == null) {

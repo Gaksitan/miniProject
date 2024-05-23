@@ -12,6 +12,18 @@ img {
 	width: 15px;
 	height: 15px;
 }
+
+button {
+	height: 50px;
+	width: 150px;
+}
+
+select {
+
+	margin-left : 1500px;
+
+}
+
 </style>
 <link rel="stylesheet" href="../css/main.css" />
 </head>
@@ -34,17 +46,8 @@ img {
 		<button type="button"
 			onclick="location.href='/commu/communityMemInsert_KHJ'">게시글
 			작성하기</button>
-		<input placeholder="작성자, 게시물 제목"></input>
-		<button type="submit" class="s1" value="찾기"></button>
-		<select id="sortOptions">
-			<!--<option value="">추천순</option> 클릭 많은 순 -->
-			<option value="reply">댓글순</option>
-			<option value="likes">인기순</option>
-			<!-- 좋아요 많은 순 -->
-			<option value="date">최신순</option>
-		</select>
-
-
+		<!-- 	<input placeholder="작성자, 게시물 제목"></input>
+		<button type="submit" class="s1" value="찾기"></button> -->
 
 
 		<!-- 공지사항 테이블 추가 -->
@@ -74,116 +77,122 @@ img {
 		</table>
 
 		<!-- 커뮤니티 테이블 -->
-		<c:if test="${mid != null and !paging.isEmpty()}">
-			<table border="1" id="myTable">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>게시물 제목</th>
-						<th>작성자</th>
-						<th>작성일자</th>
-						<th>좋아요</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="board" items="${commuList }" varStatus="status">
+			<select id="sortOptions">
+				<!--<option value="">추천순</option> 클릭 많은 순 -->
+				<option value="reply">댓글순</option>
+				<option value="likes">인기순</option>
+				<!-- 좋아요 많은 순 -->
+				<option value="date">최신순</option>
+			</select>
+			<c:if test="${mid != null and !paging.isEmpty()}">
+				<table border="1" id="myTable">
+					<thead>
 						<tr>
-							<td>${status.count }</td>
-							<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
-									<c:forEach var="replyDetail" items="${replyDetails }">
-										<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
-										</c:if>
-									</c:forEach>
-							</a></td>
-							<c:choose>
-								<c:when test="${board.mid != null}">
-									<td>${board.mid}</td>
-								</c:when>
-								<c:when test="${board.cmid != null}">
-									<td>${board.cmid}</td>
-								</c:when>
-								<c:otherwise>
-									<td>No ID available</td>
-								</c:otherwise>
-							</c:choose>
-							<td>${board.bregdate }</td>
-							<td>${board.blike }</td>
+							<th>번호</th>
+							<th>게시물 제목</th>
+							<th>작성자</th>
+							<th>작성일자</th>
+							<th>좋아요</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<c:if test="${!paging.isEmpty()}">
-				<ul class="pagination justify-content-center">
-					<c:if test="${hasPrevious == true }">
-						<li class="page-item"><a class="page-link"
-							href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
-					</c:if>
-					<c:forEach begin="1" end="${totalPages }" varStatus="status">
-						<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
-						</li>
-					</c:forEach>
-					<c:if test="${hasNext == true }">
-						<li class="page-item"><a class="page-link"
-							href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
-					</c:if>
-				</ul>
-			</c:if>
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${commuList }" varStatus="status">
+							<tr>
+								<td>${status.count }</td>
+								<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
+										<c:forEach var="replyDetail" items="${replyDetails }">
+											<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
+										</c:if>
+										</c:forEach>
+								</a></td>
+								<c:choose>
+									<c:when test="${board.mid != null}">
+										<td>${board.mid}</td>
+									</c:when>
+									<c:when test="${board.cmid != null}">
+										<td>${board.cmid}</td>
+									</c:when>
+									<c:otherwise>
+										<td>No ID available</td>
+									</c:otherwise>
+								</c:choose>
+								<td>${board.bregdate }</td>
+								<td>${board.blike }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+		<c:if test="${!paging.isEmpty()}">
+			<ul class="pagination justify-content-center">
+				<c:if test="${hasPrevious == true }">
+					<li class="page-item"><a class="page-link"
+						href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages }" varStatus="status">
+					<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${hasNext == true }">
+					<li class="page-item"><a class="page-link"
+						href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+				</c:if>
+			</ul>
 		</c:if>
-
-		<c:if test="${companyManager != null and !paging.isEmpty()}">
-			<table border="1" id="myTable">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>게시물 제목</th>
-						<th>작성자</th>
-						<th>작성일자</th>
-						<th>좋아요</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="board" items="${commuList }" varStatus="status">
+		</c:if>
+			<c:if test="${companyManager != null and !paging.isEmpty()}">
+				<table border="1" id="myTable">
+					<thead>
 						<tr>
-							<td>${status.count }</td>
-							<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
-									<c:forEach var="replyDetail" items="${replyDetails }">
-										<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
-										</c:if>
-									</c:forEach>
-							</a></td>
-							<c:choose>
-								<c:when test="${board.mid != null}">
-									<td>${board.mid}</td>
-								</c:when>
-								<c:when test="${board.cmid != null}">
-									<td>${board.cmid}</td>
-								</c:when>
-								<c:otherwise>
-									<td>No ID available</td>
-								</c:otherwise>
-							</c:choose>
-							<td>${board.bregdate }</td>
-							<td>${board.blike }</td>
+							<th>번호</th>
+							<th>게시물 제목</th>
+							<th>작성자</th>
+							<th>작성일자</th>
+							<th>좋아요</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<c:if test="${!paging.isEmpty()}">
-				<ul class="pagination justify-content-center">
-					<c:if test="${hasPrevious == true }">
-						<li class="page-item"><a class="page-link"
-							href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
-					</c:if>
-					<c:forEach begin="1" end="${totalPages }" varStatus="status">
-						<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
-						</li>
-					</c:forEach>
-					<c:if test="${hasNext == true }">
-						<li class="page-item"><a class="page-link"
-							href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
-					</c:if>
-				</ul>
-			</c:if>
+					</thead>
+					<tbody>
+						<c:forEach var="board" items="${commuList }" varStatus="status">
+							<tr>
+								<td>${status.count }</td>
+								<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
+										<c:forEach var="replyDetail" items="${replyDetails }">
+											<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
+										</c:if>
+										</c:forEach>
+								</a></td>
+								<c:choose>
+									<c:when test="${board.mid != null}">
+										<td>${board.mid}</td>
+									</c:when>
+									<c:when test="${board.cmid != null}">
+										<td>${board.cmid}</td>
+									</c:when>
+									<c:otherwise>
+										<td>No ID available</td>
+									</c:otherwise>
+								</c:choose>
+								<td>${board.bregdate }</td>
+								<td>${board.blike }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+		<c:if test="${!paging.isEmpty()}">
+			<ul class="pagination justify-content-center">
+				<c:if test="${hasPrevious == true }">
+					<li class="page-item"><a class="page-link"
+						href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+				</c:if>
+				<c:forEach begin="1" end="${totalPages }" varStatus="status">
+					<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+					</li>
+				</c:forEach>
+				<c:if test="${hasNext == true }">
+					<li class="page-item"><a class="page-link"
+						href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+				</c:if>
+			</ul>
+		</c:if>
 		</c:if>
 
 
@@ -237,9 +246,6 @@ img {
 		</ul>
 	</c:if>
  -->
-
-
-
 	</main>
 	<%@ include file="./footer_JYC.jsp"%>
 	<script>
