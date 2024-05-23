@@ -46,7 +46,7 @@
 	<form action="replyInsert.do" method="get">
 		<input type="hidden" name="bno" value="${boardDetail[0].bno}">
 		<label for="reply">댓글 작성하기</label> <input id="reply" name="reply"
-			placeholder="댓글 입력하기"> <input type="submit" value="작성">
+			placeholder="댓글 입력하기" required="required"> <input type="submit" value="작성">
 	</form>
 	<c:choose>
 		<c:when test="${not empty replyList }">

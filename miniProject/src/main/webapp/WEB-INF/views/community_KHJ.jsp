@@ -71,67 +71,171 @@ img {
 		</tbody>
 	</table>
 
+		<!-- 커뮤니티 테이블 -->
+		<c:if test="${mid != null and !paging.isEmpty()}">
+			<table border="1" id="myTable">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>게시물 제목</th>
+						<th>작성자</th>
+						<th>작성일자</th>
+						<th>좋아요</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="board" items="${commuList }" varStatus="status">
+						<tr>
+							<td>${status.count }</td>
+							<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
+									<c:forEach var="replyDetail" items="${replyDetails }">
+										<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
+										</c:if>
+									</c:forEach>
+							</a></td>
+							<c:choose>
+								<c:when test="${board.mid != null}">
+									<td>${board.mid}</td>
+								</c:when>
+								<c:when test="${board.cmid != null}">
+									<td>${board.cmid}</td>
+								</c:when>
+								<c:otherwise>
+									<td>No ID available</td>
+								</c:otherwise>
+							</c:choose>
+							<td>${board.bregdate }</td>
+							<td>${board.blike }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<c:if test="${!paging.isEmpty()}">
+				<ul class="pagination justify-content-center">
+					<c:if test="${hasPrevious == true }">
+						<li class="page-item"><a class="page-link"
+							href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+					</c:if>
+					<c:forEach begin="1" end="${totalPages }" varStatus="status">
+						<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+						</li>
+					</c:forEach>
+					<c:if test="${hasNext == true }">
+						<li class="page-item"><a class="page-link"
+							href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+					</c:if>
+				</ul>
+			</c:if>
+		</c:if>
+	
+		<c:if test="${companyManager != null and !paging.isEmpty()}">
+			<table border="1" id="myTable">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>게시물 제목</th>
+						<th>작성자</th>
+						<th>작성일자</th>
+						<th>좋아요</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="board" items="${commuList }" varStatus="status">
+						<tr>
+							<td>${status.count }</td>
+							<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
+									<c:forEach var="replyDetail" items="${replyDetails }">
+										<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
+										</c:if>
+									</c:forEach>
+							</a></td>
+							<c:choose>
+								<c:when test="${board.mid != null}">
+									<td>${board.mid}</td>
+								</c:when>
+								<c:when test="${board.cmid != null}">
+									<td>${board.cmid}</td>
+								</c:when>
+								<c:otherwise>
+									<td>No ID available</td>
+								</c:otherwise>
+							</c:choose>
+							<td>${board.bregdate }</td>
+							<td>${board.blike }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<c:if test="${!paging.isEmpty()}">
+				<ul class="pagination justify-content-center">
+					<c:if test="${hasPrevious == true }">
+						<li class="page-item"><a class="page-link"
+							href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+					</c:if>
+					<c:forEach begin="1" end="${totalPages }" varStatus="status">
+						<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+						</li>
+					</c:forEach>
+					<c:if test="${hasNext == true }">
+						<li class="page-item"><a class="page-link"
+							href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+					</c:if>
+				</ul>
+			</c:if>
+		</c:if>
+	
+	
+	
 
-	<table border="1" id="myTable">
-		<thead>
+
+
+
+
+
+<!-- 
+	<c:if test="${companyManager != null and !paging.isEmpty()}">
+		<c:forEach var="board" items="${commuList }" varStatus="status">
 			<tr>
-				<th>번호</th>
-				<th>게시물 제목</th>
-				<th>작성자</th>
-				<th>작성일자</th>
-				<th>좋아요</th>
+				<td>${status.count }</td>
+				<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}</a></td>
+				<c:choose>
+					<c:when test="${board.mid != null}">
+						<td>${board.mid}</td>
+					</c:when>
+					<c:when test="${board.cmid != null}">
+						<td>${board.cmid}</td>
+					</c:when>
+					<c:otherwise>
+						<td>No ID available</td>
+					</c:otherwise>
+				</c:choose>
+				<td>${board.bregdate }</td>
+				<td>${board.blike }</td>
 			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${mid != null }">
-				<c:forEach var="board" items="${list }" varStatus="status">
-					<tr>
-						<td>${status.count }</td>
-						<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}
-								<c:forEach var="replyDetail" items="${replyDetails }">
-									<c:if test="${replyDetail.bno == board.bno}">(${replyDetail.replycount})
-									</c:if>
-								</c:forEach>
-						</a></td>
-						<c:choose>
-							<c:when test="${board.mid != null}">
-								<td>${board.mid}</td>
-							</c:when>
-							<c:when test="${board.cmid != null}">
-								<td>${board.cmid}</td>
-							</c:when>
-							<c:otherwise>
-								<td>No ID available</td>
-							</c:otherwise>
-						</c:choose>
-						<td>${board.bregdate }</td>
-						<td>${board.blike }</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-			<c:if test="${companyManager != null }">
-				<c:forEach var="board" items="${list }" varStatus="status">
-					<tr>
-						<td>${status.count }</td>
-						<td><a href="/commu/communityDetail_KHJ?bno=${board.bno}">${board.btitle}</a></td>
-						<c:choose>
-							<c:when test="${board.mid != null}">
-								<td>${board.mid}</td>
-							</c:when>
-							<c:when test="${board.cmid != null}">
-								<td>${board.cmid}</td>
-							</c:when>
-							<c:otherwise>
-								<td>No ID available</td>
-							</c:otherwise>
-						</c:choose>
-						<td>${board.bregdate }</td>
-						<td>${board.blike }</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</tbody>
+		</c:forEach>
+	</c:if>
+	</tbody>
 	</table>
+ -->
+
+<!-- 	<c:if test="${companyManager != null and !paing.isEmpty()}">
+		<ul class="pagination justify-content-center">
+			<c:if test="${hasPrevious == true }">
+				<li class="page-item"><a class="page-link"
+					href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+			</c:if>
+			<c:forEach begin="1" end="${totalPages }" varStatus="status">
+				<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+				</li>
+			</c:forEach>
+			<c:if test="${hasNext == true }">
+				<li class="page-item"><a class="page-link"
+					href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+			</c:if>
+		</ul>
+	</c:if>
+ -->
+
 	<%@ include file="./footer_JYC.jsp"%>
 	<script>
 	
