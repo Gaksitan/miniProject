@@ -32,7 +32,7 @@ input[type="search"] {
 }
 
 /* 폼 그리드 스타일 */
-form {
+#searchForm {
     max-width: 400px;
     margin: 0 auto; /* 가운데 정렬 */
     padding: 20px; /* 폼 주위의 간격 */
@@ -112,7 +112,7 @@ a:focus {
 <hr>
 
 <div id="search">
-	<form method="get" action="/admin/accountSearch">
+	<form method="get" action="/admin/accountSearch" id="searchForm">
 		<img src="../resources_KHJ/img_KHJ/돋보기.png" style="width:30px; height:30px">
 		계정 검색  <input type="search" name="search" size="30"> 
 		<input type="submit" value="검색">

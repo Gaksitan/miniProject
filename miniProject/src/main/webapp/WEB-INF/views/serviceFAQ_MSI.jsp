@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <style>
+
 section{
 	margin : 20px;
-	height : 800px;
+	/* height : auto;
+	position: relative; */
 }
 
 .container{
@@ -18,10 +20,14 @@ section{
 	flex-direction : row;
 	margin : 50px auto;
 	justify-content: center;
-	width : 1200px;
-	height : 350px;
+	/* width : 1200px;
+	height : 350px; */
+/* 	position: relative;  */
 }
 
+.tbl {
+    margin-bottom: 50px; /* 테이블 아래 여백 추가 */
+}
 
 table {
   border-collapse: collapse;
@@ -33,6 +39,7 @@ table {
   box-shadow: 0 2px 5px rgba(0,0,0,.25);
   border-collapse: collapse;
   border-radius: 5px;
+  
 }
 
 /* 테이블 행 */
@@ -61,11 +68,14 @@ td:nth-child(1) {
   width: 50%;
 }
 
-.alink{
-	display : flex;
-	justify-content : center;
-	align-items : center;
-}
+ .alinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/*     bottom: -50px; /* 아래 여백 조절 */
+    left: 50%; /* 왼쪽 여백 조절 */ */
+    transform: translateX(-50%); /* 가운데 정렬 */
+} 
 
 #ex1, #ex2{
 	display: inline-block;
@@ -140,7 +150,7 @@ td:nth-child(1) {
 		</table>
 	</div>
 </div>	
-	<div class="alink">
+	<div class="alinks">
 		<a id="ex1" href="/admin/serviceFAQWrite">FAQ 작성하기</a>
 		<a id="ex2" href="/admin/serviceQuestionNoAnswer">미답변 질문 확인하기</a>
 	</div>
