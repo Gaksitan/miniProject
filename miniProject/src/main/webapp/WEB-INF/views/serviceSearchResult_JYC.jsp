@@ -35,6 +35,7 @@ form input[type="submit"]{
 
 
 </style>
+<link rel="stylesheet" href="../css/main.css" />
 
 
 </head>

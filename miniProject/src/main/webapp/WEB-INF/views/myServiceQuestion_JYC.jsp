@@ -18,6 +18,7 @@
 		padding: 10px 20px;
 	}
 </style>
+<link rel="stylesheet" href="../css/main.css" />
 
 </head>
 <body>
