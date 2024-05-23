@@ -28,6 +28,7 @@ import com.green.miniProject.dao.IWelfareEmployNoticeDAO_JYC;
 import com.green.miniProject.domain.ApplyResume;
 import com.green.miniProject.domain.CompanySectorAndCompany;
 import com.green.miniProject.domain.EmployNoticeDetail;
+import com.green.miniProject.domain.ScrapEmployNoticeDetail;
 import com.green.miniProject.entity.EmployNotice;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -262,6 +263,21 @@ public class EmployNoticeController_JYC {
 		}
 		
 		return "employNoticeList_JYC";
+	}
+	
+	@PostMapping("/unscrap2")
+	public String unscrap2(@RequestBody ScrapEmployNoticeDetail send, HttpSession session) {
+		String mid = (String) session.getAttribute("mid");
+
+		int count = scrapdao.count(send.getEnno(), mid);
+		
+		if(count > 0) {
+			scrapdao.unscrapEmployNotice(send.getEnno(), mid);
+		}else {
+			scrapdao.scrapEmployNotice(send.getEnno(), mid);
+		}
+
+		return "";
 	}
 
 }

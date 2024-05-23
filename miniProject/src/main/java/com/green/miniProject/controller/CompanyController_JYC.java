@@ -3,8 +3,10 @@ package com.green.miniProject.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.miniProject.dao.ICompanyDAO_JYC;
 import com.green.miniProject.dao.ICompanySectorDAO_JYC;
@@ -28,6 +31,8 @@ import com.green.miniProject.domain.CompanySectorAndCompany;
 import com.green.miniProject.domain.EmployNotice;
 import com.green.miniProject.domain.Resume;
 import com.green.miniProject.domain.ScoreMemCom;
+import com.green.miniProject.domain.SubscribeCompany;
+import com.green.miniProject.domain.SubscribeCompanyDetail;
 import com.green.miniProject.service.EmployNoticeService_jyc;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,6 +65,10 @@ public class CompanyController_JYC {
 	
 	@Autowired
 	private EmployNoticeService_jyc employNoticeService;
+	
+	@Autowired
+	private ICompanySectorDAO_JYC comSecDao;
+	
 
 	// @RequestMapping("/detailNoneMem")
 	public String companyDetailNoneMem(@RequestParam("cno") String cno, Model model) {
@@ -212,5 +221,21 @@ public class CompanyController_JYC {
 		String mid = (String) session.getAttribute("mid");
 
 		subsdao.unsubscribeCompany(mid, cno);
+	}
+	
+	@PostMapping("/unsubscribe2")
+	public @ResponseBody String unsubscribe2(@RequestBody SubscribeCompany sc, HttpSession session, HttpServletResponse response) {
+		
+		String mid = (String)session.getAttribute("mid");
+		
+		int count = subsdao.count(mid, sc.getCno());
+		
+		if(count > 0) {
+			subsdao.unsubscribeCompany(mid, sc.getCno());
+		}else {
+			subsdao.subscribeCompany(mid, sc.getCno());
+		}
+		
+		return "";
 	}
 }
