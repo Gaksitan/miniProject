@@ -238,8 +238,11 @@ img {
 	</c:if>
  -->
 
-		<%@ include file="./footer_JYC.jsp"%>
-		<script>
+
+
+	</main>
+	<%@ include file="./footer_JYC.jsp"%>
+	<script>
 	
 	// replyDetails 배열을 JSON 형식으로 변환하여 JavaScript 변수에 할당
     const replyDetails = JSON.parse('${replyDetailsJson}');
@@ -297,6 +300,5 @@ img {
 			
 		}
 	</script>
-	</main>
 </body>
 </html>

@@ -99,84 +99,85 @@
 				<p>댓글이 없습니다.</p>
 			</c:otherwise>
 		</c:choose>
-		<script>
-			$(document)
-					.ready(
-							function() {
-								// 서버에서 전달된 값들을 JavaScript 변수에 할당
-								var bno = "${boardDetail[0].bno}";
-								var mid = "${sessionScope.mid}";
-								var cmid = "${sessionScope.companyManager != null ? sessionScope.companyManager.getCmid() : null}";
 
-								// 콘솔에 출력하여 값이 제대로 할당되었는지 확인
-								console.log("bno: " + bno);
-								console.log("mid: " + mid);
-								console.log("cmid: " + cmid);
+	</main>
+	<%@ include file="./footer_JYC.jsp"%>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							// 서버에서 전달된 값들을 JavaScript 변수에 할당
+							var bno = "${boardDetail[0].bno}";
+							var mid = "${sessionScope.mid}";
+							var cmid = "${sessionScope.companyManager != null ? sessionScope.companyManager.getCmid() : null}";
 
-								let like = $("#like");
-								like.on("click", f1);
+							// 콘솔에 출력하여 값이 제대로 할당되었는지 확인
+							console.log("bno: " + bno);
+							console.log("mid: " + mid);
+							console.log("cmid: " + cmid);
 
-								function f1() {
-									let like1 = like.attr("src");
+							let like = $("#like");
+							like.on("click", f1);
 
-									if (like1 === "/resources_KHJ/img_KHJ/emptyheart.png") {
-										like
-												.attr("src",
-														"/resources_KHJ/img_KHJ/heart.png");
-										if (bno != "" && mid != "") {
-											$.ajax({
-												url : "/commu/likeInsertMem",
-												type : "post",
-												data : {
-													no : bno,
-													id : mid
-												}
-											});
-										} else if (bno != "" && cmid != "") {
-											//console.log("기업회원 조건문 안으로 들어옴");
-											$.ajax({
-												url : "/commu/likeInsertCom",
-												type : "post",
-												data : {
-													no : bno,
-													id : cmid
-												}
-											});
+							function f1() {
+								let like1 = like.attr("src");
 
-										}
+								if (like1 === "/resources_KHJ/img_KHJ/emptyheart.png") {
+									like.attr("src",
+											"/resources_KHJ/img_KHJ/heart.png");
+									if (bno != "" && mid != "") {
+										$.ajax({
+											url : "/commu/likeInsertMem",
+											type : "post",
+											data : {
+												no : bno,
+												id : mid
+											}
+										});
+									} else if (bno != "" && cmid != "") {
+										//console.log("기업회원 조건문 안으로 들어옴");
+										$.ajax({
+											url : "/commu/likeInsertCom",
+											type : "post",
+											data : {
+												no : bno,
+												id : cmid
+											}
+										});
 
-									} else {
-										like
-												.attr("src",
-														"/resources_KHJ/img_KHJ/emptyheart.png");
-										if (bno != "" && mid != "") {
+									}
 
-											$.ajax({
-												url : "/commu/likeDeleteMem",
-												type : "post",
-												data : {
-													no : bno,
-													id : mid
-												}
-											});
-										} else if (bno != "" && cmid != "") {
+								} else {
+									like
+											.attr("src",
+													"/resources_KHJ/img_KHJ/emptyheart.png");
+									if (bno != "" && mid != "") {
 
-											$.ajax({
-												url : "/commu/likeDeleteCom",
-												type : "post",
-												data : {
-													no : bno,
-													id : cmid
-												}
-											});
+										$.ajax({
+											url : "/commu/likeDeleteMem",
+											type : "post",
+											data : {
+												no : bno,
+												id : mid
+											}
+										});
+									} else if (bno != "" && cmid != "") {
 
-										}
+										$.ajax({
+											url : "/commu/likeDeleteCom",
+											type : "post",
+											data : {
+												no : bno,
+												id : cmid
+											}
+										});
+
 									}
 								}
+							}
 
-							});
-		</script>
-		<%@ include file="./footer_JYC.jsp"%>
-	</main>
+						});
+	</script>
+
 </body>
 </html>

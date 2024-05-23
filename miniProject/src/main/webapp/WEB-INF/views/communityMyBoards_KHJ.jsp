@@ -12,8 +12,9 @@
 <link rel="stylesheet" href="../css/main.css" />
 </head>
 <body>
+	<%@ include file="./header_JYC.jsp"%>
 	<main>
-		<%@ include file="./header_JYC.jsp"%>
+
 		<h1>내 게시글 페이지</h1>
 		<hr>
 		<h2>내가 쓴 게시글 목록</h2>
@@ -116,7 +117,8 @@
 			</tbody>
 
 		</table>
-		<%@ include file="./footer_JYC.jsp"%>
+
 	</main>
+	<%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>
