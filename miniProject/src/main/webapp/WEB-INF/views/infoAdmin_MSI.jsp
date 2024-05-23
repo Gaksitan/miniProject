@@ -11,7 +11,7 @@
 <style>
 section{
 	margin : 20px;
-	height : 800px;
+	
 }
 
 #noticeForm{

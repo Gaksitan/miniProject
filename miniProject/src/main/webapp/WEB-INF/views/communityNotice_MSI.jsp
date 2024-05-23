@@ -108,7 +108,7 @@ td:nth-child(3) {
 </div>
 
     <div id="div1">
-		<c:if test="${sessionScope.ano == 'ano1' or sessionScope.ano == 'ano2' or sessionScope.ano == 'ano3'}">
+		<c:if test="${sessionScope.ano != null}">
 		    <a id="alink" href="/admin/infoAdmin?nno=${notice.nno}">수정하기</a>
 		</c:if>
 	</div>
