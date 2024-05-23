@@ -109,4 +109,31 @@
         DELETE FROM welfareemploynotice WHERE enno = #{enno}
     </delete>
     
+    <!--  -->
+    <resultMap id="SkillResultMap" type="com.green.miniProject.domain.Skill">
+	    <id property="skno" column="skno"/>
+	    <result property="skname" column="skname"/>
+	    <association property="resume" javaType="com.green.miniProject.domain.Resume">
+	        <id property="rno" column="rno"/>
+	        <result property="rtitle" column="rtitle"/>
+	        <result property="rpublic" column="rpublic"/>
+	    </association>
+	    <association property="member" javaType="com.green.miniProject.domain.Member">
+	        <id property="mid" column="mid"/>
+	        <result property="mname" column="mname"/>
+	    </association>
+	</resultMap>
+	
+	<select id="getSknameByCno" resultMap="SkillResultMap">
+	    SELECT m.mname, m.mid,
+	           r.rtitle, r.rno, r.rpublic
+	    FROM skill s
+	    JOIN skillEmployNotice sen ON s.skname = sen.skname
+	    JOIN employnotice en ON sen.enno = en.enno
+	    JOIN resume r ON r.rno = s.rno
+	    JOIN member m ON r.mid = m.mid
+	    WHERE en.cno = #{cno}
+	</select>
+
+    
   </mapper>

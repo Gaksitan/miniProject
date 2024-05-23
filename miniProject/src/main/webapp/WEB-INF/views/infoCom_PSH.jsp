@@ -27,8 +27,34 @@
         <input type="text" name="camount" value="${sessionScope.company.camount}"><br>
         <p>회사소개</p>
         <input type="text" name="cintro" value="${sessionScope.company.cintro}"><br>
-        <p>테마</p>
-        <input type="text" name="ctype" value="${sessionScope.company.ctype}"><br>
+        <td>기업형태</td>
+		<td>
+		    <select name="ctype">
+		        <c:choose>
+		            <c:when test="${sessionScope.company.ctype == '대기업'}">
+		                <option value="대기업" selected>대기업</option>
+		                <option value="중견기업">중견기업</option>
+		                <option value="중소기업">중소기업</option>
+		            </c:when>
+		            <c:when test="${sessionScope.company.ctype == '중견기업'}">
+		                <option value="대기업">대기업</option>
+		                <option value="중견기업" selected>중견기업</option>
+		                <option value="중소기업">중소기업</option>
+		            </c:when>
+		            <c:when test="${sessionScope.company.ctype == '중소기업'}">
+		                <option value="대기업">대기업</option>
+		                <option value="중견기업">중견기업</option>
+		                <option value="중소기업" selected>중소기업</option>
+		            </c:when>
+		            <c:otherwise>
+		                <option value="대기업">대기업</option>
+		                <option value="중견기업">중견기업</option>
+		                <option value="중소기업">중소기업</option>
+		            </c:otherwise>
+		        </c:choose>
+		    </select>
+		</td>
+
         <input type="submit" value="저장">
     </form>
 </div>

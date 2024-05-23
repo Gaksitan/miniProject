@@ -6,24 +6,68 @@
 <head>
 <meta charset="UTF-8">
 <title>IndexCom</title>
+    <script>
+        function calculateDDay(enddate) {
+            var endDate = new Date(enddate);
+            var today = new Date();
+            var timeDiff = endDate.getTime() - today.getTime();
+            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            if (daysDiff > 0) {
+                return "D-" + daysDiff;
+            } else if (daysDiff === 0) {
+                return "D-Day";
+            } else {
+                return "마감";
+            }
+        }
+    </script>
+
 </head>
 <body>
-<h1>Company Index page</h1>
-<a href="loginFormCom">로그인</a>&nbsp;&nbsp;
 <a href="regFormCom">회원가입</a><br>
-<hr>
-<a href="infoCom">기업정보수정</a>&nbsp;&nbsp;
-<a href="infoCM">인사담당자 정보수정</a><br>
-<hr>
-<a href="employNoticeCreate">채용공고 작성하기</a><br>
-<hr>
-<a href="subscribeComList">관심구직자</a>&nbsp;&nbsp;
-<a href="applicantList">지원받은이력서</a>&nbsp;&nbsp;
-<a href="employNoticeList">채용공고관리</a>&nbsp;&nbsp;
-<hr>
-<a href="applicantDetail">지원자정보상세보기</a>
-<a href="applyResumeDetail">이력서상세보기</a>
 
+<h2>Company에서 올린 채용공고</h2>
+<table border="1">
+  <thead>
+	  <tr>
+		  <td>제목</td>
+		  <td>기간</td>
+		  <td>D-Day</td>
+	  </tr>
+  </thead>
+  <tbody>
+    <c:forEach items="${employNoticeList}" var="notice">
+        <tr>
+			<td><a href="employNotice?enno=${notice.enno}">${notice.entitle}</a></td>
+            <td>${notice.enregdate}~${notice.enenddate }</td>
+            <td><script>document.write(calculateDDay('${notice.enenddate}'))</script></td>
+        </tr>
+    </c:forEach>
+  </tbody>
+</table>
+
+<h2>스킬 매칭</h2>
+<table border="1">
+  <thead>
+	  <tr>
+		  <td>이력서 제목</td>
+		  <td>작성자</td>
+	  </tr>
+  </thead>
+  <tbody>
+  		<c:set var="previousTitle" value=""/>
+        <c:forEach items="${skNameList}" var="skname">
+            <c:if test="${skname.resume.rtitle != previousTitle && skname.resume.rpublic == true}">
+                <tr>
+                    <td><a href="applyResumeDetail?rno=${skname.resume.rno}&mid=${skname.member.mid}">${skname.resume.rtitle}</a></td>
+                    <td><a href="applicantDetail?mid=${skname.member.mid}">${skname.member.mname}</a></td>
+                </tr>
+                <c:set var="previousTitle" value="${skname.resume.rtitle}"/>
+            </c:if>
+        </c:forEach>
+  </tbody>
+</table>
 </body>
 </html>
 

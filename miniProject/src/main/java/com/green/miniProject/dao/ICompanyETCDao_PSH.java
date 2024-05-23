@@ -24,6 +24,8 @@ public interface ICompanyETCDao_PSH {
 	//관심 구직자
 	
 	 List<ApplyResume> getApplyResumesByCompany(String cno);
+	 
+	 Integer getApplyCountByEnno(Long enno);
 	//지원받은 이력서 리스트
 	
 	 //public void updateApplicantCount(Long enno);
@@ -49,5 +51,5 @@ public interface ICompanyETCDao_PSH {
     
     /////////////////////////////////
     
-    void updateApplicationStatus(Long arno, int arg1);
+    void updateApplicationStatus(@Param("status") int status, @Param("rno") String rno);
 }

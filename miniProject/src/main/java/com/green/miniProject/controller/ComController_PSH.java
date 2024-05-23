@@ -13,8 +13,10 @@ import com.green.miniProject.dao.ICompanyDao_PSH;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanyManager;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillEmployNotice;
 import com.green.miniProject.domain.WelfareEmployNotice;
+import com.green.miniProject.service.CompanyETCService_PSH;
 import com.green.miniProject.service.CompanyService_PSH;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,13 +33,27 @@ public class ComController_PSH {
 	CompanyService_PSH service;
 	
 	@Autowired
+	CompanyETCService_PSH serviceETC;
+	
+	@Autowired
 	HttpServletRequest request;
 	
-	@RequestMapping("/indexCom")
-	public String indexCom() {
-		
-		return "indexCom_PSH";
-	}
+    @RequestMapping("/indexCom")
+    public String indexCom(Model model, HttpSession session) {
+        Company company = (Company) session.getAttribute("company");
+
+        if (company != null) {
+            String cno = company.getCno();
+
+            List<EmployNotice> employNoticeList = serviceETC.getEmployNoticesByCno(cno);
+            List<Skill> skNameList = dao.getSknameByCno(cno);
+
+            model.addAttribute("employNoticeList", employNoticeList);
+            model.addAttribute("skNameList", skNameList);
+        }
+        
+        return "indexCom_PSH";
+    }
 	
 	@RequestMapping("/regFormCom")
 	public String regFormCom() {
