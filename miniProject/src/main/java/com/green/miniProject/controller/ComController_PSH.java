@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.miniProject.dao.ICompanyDao_PSH;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanyManager;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillEmployNotice;
 import com.green.miniProject.domain.WelfareEmployNotice;
@@ -70,7 +72,8 @@ public class ComController_PSH {
                             @RequestParam("cmpw2") String cmpw2,
                             @RequestParam("cmemail") String cmemail,
                             @RequestParam("cmemail2") String cmemail2,
-                            @RequestParam("cmtel") String cmtel) {
+                            @RequestParam("cmtel1") String cmtel1,
+    						@RequestParam("cmtel2") String cmtel2){
 
         if (!cmpw.equals(cmpw2)) {
             return "redirect:signUpComForm?error=passwordMismatch";
@@ -82,7 +85,8 @@ public class ComController_PSH {
         cm.setCmid(cmid);
         cm.setCmpw(cmpw);
         cm.setCmemail(fullEmail);
-        cm.setCmtel(cmtel);
+        cm.setCmtel1(cmtel1);
+        cm.setCmtel2(cmtel2);
         cm.setCno(cno);
 
         dao.insertCompany(com);
@@ -90,6 +94,46 @@ public class ComController_PSH {
 
         return "indexCom_PSH";
     }
+	
+	//회원가입
+	
+	@RequestMapping("/regCnoCheck")
+	public @ResponseBody String regCnoCheck(@RequestParam("cno") String cno) {
+		
+		String result = "";
+		
+		if(cno == null || cno.isEmpty()) {
+			result = "사업자번호를 입력해주세요.";
+		}else {
+			Company company = dao.getCompany(cno);
+			if(company == null) {
+				result = "사용 가능합니다.";
+			}else {
+				result = "이미 가입한 회사입니다.";
+			}
+		}
+		return result;
+	}
+	
+	@RequestMapping("/regCmidCheck")
+	public @ResponseBody String regCmidCheck(@RequestParam("cmid") String cmid) {
+	    
+	    String result = "";
+	    
+	    if(cmid == null || cmid.isEmpty()) {
+	        result = "ID를 입력해주세요.";
+	    } else {
+	        CompanyManager cm = dao.getCompanyManager(cmid);
+	        if(cm == null) {
+	            result = "사용가능한 ID입니다.";
+	        } else {
+	            result = "이미 사용중인 ID입니다.";
+	        }
+	    }
+	    
+	    return result;
+	}
+	//중복체크
 	
 	@RequestMapping("/loginFormCom")
 	public String loginCom() {
@@ -165,7 +209,6 @@ public class ComController_PSH {
 	        }
 	        return "employNoticeSave_PSH";
 	    }
-	    
 	    
 	    
 	    @RequestMapping("/employNoticeCreate")

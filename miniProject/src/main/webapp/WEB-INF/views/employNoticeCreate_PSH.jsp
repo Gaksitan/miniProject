@@ -26,7 +26,9 @@
     }
 </script>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>채용공고 상세페이지 관리 작성</h1>
 <hr>
 <div>
@@ -66,6 +68,7 @@
         <input type="button" value="취소" onclick="window.location.href = 'employNoticeList'">
     </form>
 </div>
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>

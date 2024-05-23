@@ -24,7 +24,9 @@
     </script>
 
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <a href="regFormCom">회원가입</a><br>
 
 <h2>Company에서 올린 채용공고</h2>
@@ -68,6 +70,7 @@
         </c:forEach>
   </tbody>
 </table>
+</main>
 </body>
 </html>
 

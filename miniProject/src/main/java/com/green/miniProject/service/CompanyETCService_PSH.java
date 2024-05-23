@@ -97,5 +97,7 @@ public class CompanyETCService_PSH {
     }
     //////
     
-    
+    public void submitScore(String mid, String cno, int score, String review) {
+        dao.insertScore(mid, cno, score, review);
+    }
 }

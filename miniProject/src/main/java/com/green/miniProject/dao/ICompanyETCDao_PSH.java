@@ -52,4 +52,10 @@ public interface ICompanyETCDao_PSH {
     /////////////////////////////////
     
     void updateApplicationStatus(@Param("status") int status, @Param("rno") String rno);
+
+    void insertScore(@Param("mid") String mid,
+            @Param("cno") String cno,
+            @Param("score") int score,
+            @Param("review") String review);
+
 }

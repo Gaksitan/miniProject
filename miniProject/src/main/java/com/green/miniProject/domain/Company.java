@@ -17,7 +17,6 @@ public class Company {
 	
 	private String cno;
 	private String cname;
-	private String ctel;
 	private String caddr1;
 	private String caddr2;
 	private String cemail;
@@ -27,4 +26,7 @@ public class Company {
 	private String cintro;
 	private String ctype;
 	private String cdocnum;
+	
+	private String ctel1;
+	private String ctel2;
 }

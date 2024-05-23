@@ -14,7 +14,8 @@ public class CompanyManager {
 	private String cmid;
 	private String cmpw;
 	private String cmname;
-	private String cmtel;
+	private String cmtel1;
+	private String cmtel2;
 	private String cmemail;
 	private String cno;
 	

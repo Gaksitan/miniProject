@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanyManager;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillEmployNotice;
 import com.green.miniProject.domain.WelfareEmployNotice;
@@ -23,8 +24,13 @@ public interface ICompanyDao_PSH {
 	public Company getCompanyByCno(String cno);
 	// 로그인
 	
+	public Company getCompany(@Param("cno") String cno);
+	public CompanyManager getCompanyManager(@Param("cmid") String cmid);
+	//중복체크
+	
 	public void updateComInfo(Company com);
 	public void updateCMinfo(CompanyManager cm);
+	public void deleteCM(CompanyManager cm);
 	// 정보수정
 	
 	public void enwrite(EmployNotice en);

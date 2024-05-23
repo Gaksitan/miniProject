@@ -21,7 +21,9 @@
         }
     </script>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
     <h1>지원받은 이력서 목록 페이지</h1>
     <hr>
     <table border="1">
@@ -51,6 +53,7 @@
             </c:forEach>
         </tbody>
     </table>
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>

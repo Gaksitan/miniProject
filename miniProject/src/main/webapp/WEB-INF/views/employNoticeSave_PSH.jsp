@@ -49,7 +49,9 @@
     }
 </script>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>채용공고 상세페이지 관리</h1>
 <hr>
 <div>
@@ -90,6 +92,7 @@
             <input type="button" value="삭제" onclick="deleteEmployNotice(${employNotice.enno})">
     </form>
 </div>
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>
