@@ -2,6 +2,7 @@ package com.green.miniProject.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +29,7 @@ import com.green.miniProject.domain.Resume;
 import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillMatchingEN;
 import com.green.miniProject.domain.SkillMatchingMR;
+import com.green.miniProject.domain.TempResume;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -203,18 +205,29 @@ public class MemController_JHY {
 		return "myResumeDetail_JHY";
 	}
 	
-	@RequestMapping("/myResumeDetailWrite")
-	public String myResumeDetailUpdate(HttpSession session, Model model) {
+	@RequestMapping("/myResumeListWrite")
+	public String myResumeListWrite(HttpSession session, Model model) {
 		String mid = (String) session.getAttribute("mid");
 		Member mem = dao.getMember(mid);
 		model.addAttribute("member", mem);
+		TempResume temp = new TempResume();
+		temp.setMid(mid);
+		
 		return "myResumeDetail_JHY";
 	}
 	
 	
-	// 이력서 작성(rno == null)
+	// 이력서 작성(rno == null) exposition, exrank
 	@RequestMapping("/writeResume")
-	public String writeResume(HttpServletRequest request, @RequestParam("rskill") List<Skill> rskill, @RequestParam("rexp") List<Experience> rexp) {
+	public String writeResume(HttpServletRequest request, @RequestParam("rskill") List<String> rskillList,
+			@RequestParam("exname") List<String> exnameList, @RequestParam("exjoindate") List<String> exjoindateList,
+			@RequestParam("exleavedate") List<String> exleavedateList, @RequestParam("exposition") List<String> expositionList,
+			@RequestParam("exrank") List<String> exrankList, @RequestParam("dename") List<String> denameList,
+			@RequestParam("degraddate") List<String> degraddateList, @RequestParam("demajor") List<String> demajorList,
+			@RequestParam("dehighestlevel") List<String> dehighestlevelList, @RequestParam("cename") List<String> cenameList,
+			@RequestParam("cedate") List<String> cedateList, @RequestParam("celocation") List<String> celocationList,
+			@RequestParam("rlink") List<String> rlinkList){
+		
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mid");
 		
@@ -227,8 +240,8 @@ public class MemController_JHY {
 		}else {
 			rpublic = false;
 		}
-		String rtitle = request.getParameter("rimgPath");
-		String rmain_ = request.getParameter("rimgPath");
+		String rtitle = request.getParameter("rtitle");
+		String rmain_ = request.getParameter("rmain");
 		boolean rmain;
 		if(rmain_ == "true") {
 			rmain = true;
@@ -238,6 +251,31 @@ public class MemController_JHY {
 		LocalDate rregdate = LocalDate.now();
 		Resume resume = new Resume(null, mid, rintro, rimgPath, rpublic, rtitle, rmain, rregdate);
 		dao.writeResume(resume);
+		// 리스트로 받아온 스킬이름을 스킬타입의 변수에 하나씩 넣어서 dao에 Insert Query 문을 실행. 하나씩 DB에 저장
+		
+		for(String skname : rskillList) {
+			Skill rskill = new Skill();
+			rskill.setRno(resume.getRno());
+			rskill.setSkname(skname);
+			dao.writeResumeSkill(rskill);
+		}
+		
+		for(String cename : rlinkList) {
+			Link rlink = new Link();
+			rlink.setRno(resume.getRno());
+			rlink.setLname(cename);
+			dao.writeResumeLink(rlink);
+		}
+		
+		List<Experience> expList = new ArrayList<>();
+		for(int i = 0; i < exnameList.size(); i++) {
+			Experience exp = new Experience();
+			exp.setExname(exnameList.get(i));
+			SimpleDateFormat formatter = new SimpleDateFormat()
+			exp.setExjoindate(LocalDate exjoindateList.get(i));
+			exp.setExleavedate()
+		}
+		
 		
 		return "myResumeList_JHY";
 	}

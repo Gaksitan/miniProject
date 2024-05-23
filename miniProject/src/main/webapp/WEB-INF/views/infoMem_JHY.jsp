@@ -6,8 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
 <hr>
 <h2>내 정보 관리</h2>
 <form action="updateMemberInfo" method="post">
@@ -91,6 +93,7 @@
 		</tr>
 	</table>
 </form>
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 <script>
 	function certificate(){

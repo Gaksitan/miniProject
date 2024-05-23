@@ -13,6 +13,7 @@
 		input.type = "text";
         input.name = "rskill";
         input.placeholder = "스킬명";
+        input.id = "shortbox";
         inputName.type = "hidden";
         inputName.name = "rskill"
         
@@ -45,6 +46,7 @@
 		var h5 = document.createElement("h5");
 		h5.name
 		h5.innerText = "스킬명 : " + value;
+		h5.id = "shortbox";
 		inputName.value = value;
 		var del = document.createElement("button");
 		del.type = "button";
@@ -85,7 +87,7 @@
         // 입력 값 넣을 필드 생성 - createInputCell(name) 함수 동작시 <td><input type="text" name="name(매개변수)"></td> 생성
         var exnameInput = createInputCell("exname");
         var exjoindateInput = createInputCell("exjoindate");
-        var exleavedateInput = createInputCell("leavedate");
+        var exleavedateInput = createInputCell("exleavedate");
         var expositionInput = createInputCell("exposition");
         var exrankInput = createInputCell("exrank"); 
         // 저장 및 취소 버튼
@@ -119,11 +121,11 @@
     
     function saveRexp(newRow, exnameInput, exjoindateInput, exleavedateInput, expositionInput, exrankInput){
 		newRow.innerHTML = `
-			<td>${exnameInput.querySelector('input').value}<input type="hidden" name="exname" value="${exnameInput.querySelector('input').value}"></td>
-			<td>${exjoindateInput.querySelector('input').value}<input type="hidden" name="exjoindate" value="${exjoindateInput.querySelector('input').value}"></td>
-			<td>${exleavedateInput.querySelector('input').value}<input type="hidden" name="exleavedate" value="${exleavedateInput.querySelector('input').value}"></td>
-			<td>${expositionInput.querySelector('input').value}<input type="hidden" name="exposition" value="${expositionInput.querySelector('input').value}"></td>
-			<td>${exrankInput.querySelector('input').value}<input type="hidden" name="exrank" value="${exrankInput.querySelector('input').value}"></td>
+			<td id="shortbox">${exnameInput.querySelector('input').value}<input type="hidden" name="exname" value="${exnameInput.querySelector('input').value}"></td>
+			<td id="shortbox">${exjoindateInput.querySelector('input').value}<input type="hidden" name="exjoindate" value="${exjoindateInput.querySelector('input').value}"></td>
+			<td id="shortbox">${exleavedateInput.querySelector('input').value}<input type="hidden" name="exleavedate" value="${exleavedateInput.querySelector('input').value}"></td>
+			<td id="shortbox">${expositionInput.querySelector('input').value}<input type="hidden" name="exposition" value="${expositionInput.querySelector('input').value}"></td>
+			<td id="shortbox">${exrankInput.querySelector('input').value}<input type="hidden" name="exrank" value="${exrankInput.querySelector('input').value}"></td>
 			<td><button type="button" onclick="deleteDataTable(event)">삭제</button></td>
 		`;
 	}

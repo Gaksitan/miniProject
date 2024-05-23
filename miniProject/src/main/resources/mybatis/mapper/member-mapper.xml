@@ -79,6 +79,21 @@
   	<insert id="writeResume">
   		insert into resume values (null, #{resume.mid}, #{resume.rintro}, #{resume.rimgPath}, #{resume.rpublic}, #{resume.rtitle}, #{resume.rmain}, #{resume.rregdate})
   	</insert>
+  	<insert id="writeResumeSkill">
+  		insert into skill values (null, #{rskill.rno}, #{rskill.skname})
+  	</insert>
+  	<insert id="writeResumeExp">
+  		
+  	</insert>
+  	<insert id="writeResumeDegree">
+  		
+  	</insert>
+  	<insert id="writeResumeCertificate">
+  		
+  	</insert>
+  	<insert id="writeResumeLink">
+  		
+  	</insert>
   	
   	
   	<update id="updateResume">

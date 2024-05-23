@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/main.css" />
 <style type="text/css">
 	table{
 		border-collapse: collapse;
@@ -22,6 +23,7 @@
 </head>
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
 <hr>
 <c:if test="${subscribeList != null }">
 <table border="1">
@@ -117,6 +119,7 @@
 				</c:if>
 			</c:if>
 </c:if>
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 <script type="text/javascript">
 	function unsubscribe(sno, event){

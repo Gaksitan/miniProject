@@ -7,8 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
 <hr>
 <h2>지원 현황 목록</h2>
 <table border="1">
@@ -26,6 +28,7 @@
 		</tr>
 	</c:forEach>
 </table>
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

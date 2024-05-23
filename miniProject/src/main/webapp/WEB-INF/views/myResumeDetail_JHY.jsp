@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <script src="../../script/script.js"></script>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
+<!-- 
 <style>
 	form {
 		display: flex;
@@ -21,8 +23,10 @@
         border: 1px solid #ccc;
 	}
 </style>
+ -->
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
 <hr>
 <h3>이력서 상세페이지 관리</h3>
 <c:if test="${resume.rno == null }">
@@ -39,37 +43,34 @@
 		<input type="text" name="rintro"><br>
 		<h3>스킬 (skill)</h3>
 		<div id="rskillContainer">
-			<c:forEach var="rskill" items="${skillList }">
-				스킬명 : <input type="text" name="rskill" value="${rskill.skname }"><br>
-			</c:forEach>
+			
 		</div>
 		<button type="button" onclick="addRskill()">추가</button>
 		<h3>경력</h3>
-		<div id="rexpContainer">
-			<c:forEach var="rexp" items="${experienceList }">
-				경력 : <input type="text" name="rexp" value="${rexp.exname }"><br>
-			</c:forEach>
+		<div>
+			<table id="rexpContainer">
+				<thead>
+					<tr>
+						<th>회사명</th><th>재직날짜</th><th>퇴직날짜</th><th>직무</th><th>직급</th>
+					</tr>
+				</thead>
+				
+			</table>
 		</div>
 		<button type="button" onclick="addRexp()">추가</button>
 		<h3>학력</h3>
 		<div id="rdegreeContainer">
-			<c:forEach var="rdegree" items="${degreeList }">
-				학력 : <input type="text" name="rdegree" value="${rdegree.dename }"><br>
-			</c:forEach>
+			
 		</div>
 		<button type="button" onclick="addRdegree()">추가</button>
 		<h3>자격증</h3>
 		<div id="rcertificateContainer">
-			<c:forEach var="rcertificate" items="${certificateList }">
-				스킬명 : <input type="text" name="rcertificate" value="${rcertificate.cename }"><br>
-			</c:forEach>
+			
 		</div>
 		<button type="button" onclick="addRcertificate()">추가</button>
 		<h3>링크 (link)</h3>
 		<div id="rlinkContainer">
-			<c:forEach var="rlink" items="${linkList }">
-				스킬명 : <input type="text" name="rlink" value="${rlink.lname }"><br>
-			</c:forEach>
+			
 		</div>
 		<button type="button" onclick="addRlink()">추가</button>
 		
@@ -94,7 +95,7 @@
 		<h3>스킬 (skill)</h3>
 		<div id="rskillContainer">
 			<c:forEach var="rskill" items="${skillList }">
-				<h5>스킬명 : ${rskill.skname }<input type="hidden" name="rskill" value="${rskill.skname }"><button type="button" onclick="deleteData(event)">삭제</button></h5>
+				<h5 id="shortbox">스킬명 : ${rskill.skname }<input type="hidden" name="rskill" value="${rskill.skname }"><button type="button" onclick="deleteData(event)">삭제</button></h5>
 			</c:forEach>
 		</div>
 		<button type="button" onclick="addRskill()">추가</button>
@@ -109,7 +110,7 @@
 				<tbody>
 				<c:forEach var="rexp" items="${experienceList }">
 					<tr>
-						<td>${rexp.exname }<input type="hidden" name=exname value="${rexp.exname }"></td>
+						<td>${rexp.exname }<input type="hidden" name="exname" value="${rexp.exname }"></td>
 						<td>${rexp.exjoindate }<input type="hidden" name="exjoindate" value="${rexp.exjoindate }"></td>
 						<td>${rexp.exleavedate }<input type="hidden" name="exleavedate" value="${rexp.exleavedate }"></td>
 						<td>${rexp.exposition }<input type="hidden" name="exposition" value="${rexp.exposition }"></td>
@@ -192,6 +193,7 @@
 		<input type="submit" value="수정"><input type="button" value="취소" onclick="location.href='/mem/myResumeList'">
 	</form>
 </c:if>
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>

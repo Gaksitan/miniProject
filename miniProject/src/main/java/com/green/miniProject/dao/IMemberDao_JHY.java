@@ -41,10 +41,16 @@ public interface IMemberDao_JHY {
 	public void deleteMember(@Param("mid") String mid);
 	public List<JoinEmployNoticeAndCompany> getEmployNotice();
 	public List<Company> getCompanyList();
+	
 	public List<Skill> getResumeSkillList(@Param("rno") Long rno);
 	public List<Degree> getResumeDegreeList(@Param("rno") Long rno);
 	public List<Experience> getResumeExperienceList(@Param("rno") Long rno);
 	public List<Certificate> getResumeCertificateList(@Param("rno") Long rno);
 	public List<Link> getResumeLinkList(@Param("rno") Long rno);
 	
+	public void writeResumeSkill(@Param("rskill") Skill rskill);
+	public void writeResumeExp(@Param("exp") Experience exp);
+	public void writeResumeDegree(@Param("degree") Degree degree);
+	public void writeResumeCertificate(@Param("certificate") Certificate cer);
+	public void writeResumeLink(@Param("rlink") Link rlink);
 }

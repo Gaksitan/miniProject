@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <style>
 	#main {
 		color: white;
@@ -15,6 +16,7 @@
 </style>
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
 <hr>
 <h2>내 이력서 관리<span><input type="button" value="이력서 작성" onclick="writeResumePage()"></span></h2>
 <table border="1">
@@ -35,10 +37,11 @@
 	</c:forEach>
 	</tbody>
 </table>
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 <script>
 	function writeResumePage(){
-		window.location.href = "myResumeDetailWrite";
+		window.location.href = "myResumeListWrite";
 	}
 </script>
 </body>
