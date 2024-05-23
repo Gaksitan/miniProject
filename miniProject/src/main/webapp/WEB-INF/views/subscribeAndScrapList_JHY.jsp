@@ -39,7 +39,6 @@
 			<tr id="subsTr${subscribe.sno }">
 				<td><a href="/company/detailMem?cno=${subscribe.cno }">${subscribe.cname }</a></td>
 				<td>${subscribe.ctype }</td>
-				<td>${subscribe.cno }</td>
 				<td>
 					<c:forEach var="scnames" items="${scnameList.get(status.index) }" varStatus="i">
 					<c:if test="${!i.last }">

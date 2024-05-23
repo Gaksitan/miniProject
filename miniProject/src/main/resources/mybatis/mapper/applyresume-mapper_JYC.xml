@@ -7,7 +7,7 @@
 <mapper namespace="com.green.miniProject.dao.IApplyResumeDAO_JYC">
 
   	<insert id="applyResume">
-		INSERT INTO applyresume VALUES(NULL, #{rno}, #{enno}, 2);
+		INSERT INTO applyresume VALUES(NULL, #{rno}, #{enno}, 2, NOW());
   	</insert>
   	<select id="getCount">
   		SELECT COUNT(arno) FROM applyresume WHERE rno = #{rno} AND enno = #{enno};

@@ -46,6 +46,9 @@ form input[type="submit"]{
 			<form action="/service/searchMem">
 				<input type="search" placeholder="FAQ 검색" name="keyword"> <input
 					type="submit" value="검색">
+				<c:if test="${mid != null }"> <!-- mid가 널이 아니명 개인회원이기 때문에 문의하기 기능을 선택할 수 있다. -->	
+				<input type="button" value="문의하기" id="regQBtn" onclick="location.href='/both/registQuestionForm'">
+			</c:if> 
 			</form>
 		</c:if>
 		<c:if test="${companyManager != null }">

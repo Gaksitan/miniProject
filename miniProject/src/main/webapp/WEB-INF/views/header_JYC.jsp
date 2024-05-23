@@ -9,6 +9,11 @@
 
 <link rel="stylesheet" href="../css/main.css" />
  <link rel="stylesheet" href="../css/header_css.css" />
+ <style type="text/css">
+ 	html, body {
+    height: 100%
+}
+ </style>
 </head>
 <body>
 
@@ -176,7 +181,7 @@
 						<img id="logo" alt="로고 사진" src="/resources_JYC/images_JYC/logo.png">
 					</a>
 					<div class="search">
-						<form action="/both/searchResultAdmin" method="get" id="searchForm">
+						<form action="/both/searchResultMem" method="get" id="searchForm">
 							<!-- 검색 -->
 							<img src="/resources_JYC/images_JYC/searchImg.png" style="width:30px; height:30px; margin:10px; transform: scaleX(-1);">
 							<input type="search" placeholder="검색" name="search" id="searchBox">
