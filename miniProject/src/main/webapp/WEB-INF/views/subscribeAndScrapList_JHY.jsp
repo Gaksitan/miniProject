@@ -18,11 +18,13 @@
 			<th>회사명</th><th>기업형태</th><th>업종</th><th>소개글</th><th>구독</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="subtable">
+	
 		<c:forEach var="subscribe" items="${subscribeList }" varStatus="status">
-			<tr>
+			<tr id="subsTr${subscribe.sno }">
 				<td>${subscribe.cname }</td>
 				<td>${subscribe.ctype }</td>
+				<td>${subscribe.cno }</td>
 				<td>
 					<c:forEach var="scnames" items="${scnameList.get(status.index) }" varStatus="i">
 					<c:if test="${!i.last }">
@@ -34,7 +36,7 @@
 					</c:forEach>
 				</td>
 				<td>${subscribe.cintro }</td>
-				<td><input type="button" value="구독" id="subscribeButton"></td>
+				<td><input type="button" value="구독" id="${subscribe.cno }" class="subs${subscribe.sno }" onclick="unsubscribe(${subscribe.sno}, event)" style="background:#fcefa9;"></td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -54,7 +56,7 @@
 			<td>${scrap.cname }</td>
 			<td>${scrap.entitle }</td>
 			<td>${scrap.enposition }</td>
-			<td><input type="button" value="스크랩" onclick=""></td>
+			<td><input type="button" value="스크랩" id="scrap${scrap.senno }" onclick="unscrap(event, ${scrap.senno}, ${scrap.enno })" style="background:rgb(252, 239, 169)"></td>
 		</tr>
 		</c:forEach>
 	</tbody>
@@ -63,5 +65,46 @@
 </table>
 </c:if>
 <%@ include file="./footer_JYC.jsp"%>
+<script type="text/javascript">
+	function unsubscribe(sno, event){
+		const xhr = new XMLHttpRequest();
+		xhr.open("POST", "/company/unsubscribe2" , true);		
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function(){
+			const subsClass = document.querySelector(".subs" + sno);
+			console.log(subsClass.style.background);
+			if(subsClass.style.background == "rgb(252, 239, 169)"){
+				subsClass.style.background = "gray";
+			}else {
+				subsClass.style.background = "#fcefa9";
+			}
+		}
+		const data = JSON.stringify({
+			sno : sno,
+			cno : event.target.id
+		})
+		console.log(data);
+		xhr.send(data);
+	}
+	
+	function unscrap(event, senno, enno){
+		const xhr = new XMLHttpRequest();
+		xhr.open("POST", "/employnotice/unscrap2" , true);		
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function(){
+			const scrap = document.querySelector("#scrap" + senno);
+			if(scrap.style.background == "rgb(252, 239, 169)"){
+				scrap.style.background = "gray";
+			}else {
+				scrap.style.background = "#fcefa9";
+			}
+		}
+		const data = JSON.stringify({
+			senno : senno,
+			enno : enno
+		})
+		xhr.send(data);
+	}
+</script>
 </body>
 </html>

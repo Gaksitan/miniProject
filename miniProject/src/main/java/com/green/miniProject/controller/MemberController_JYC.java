@@ -42,6 +42,8 @@ public class MemberController_JYC {
 		
 		String mid = (String)session.getAttribute("mid");
 		
+		
+		
 		List<SubscribeCompanyDetail> scdlist = subComDao.getSubComDetail(mid);
 		
 		List<Object> scnameList = new ArrayList<>();
