@@ -7,19 +7,15 @@
 	<select id="loginCheck" resultType="com.green.miniProject.domain.Member">
     	select * from Member where mid = #{mid}
   	</select>
-  	
   	<select id="getResumeList" resultType="com.green.miniProject.domain.Resume">
   		select * from resume where mid = #{mid}
   	</select>
-  	
   	<select id="getResume" resultType="com.green.miniProject.domain.Resume">
   		select * from resume where rno = #{rno}
   	</select>
-  	
   	<select id="getMember" resultType="com.green.miniProject.domain.Member">
   		select * from Member where mid = #{mid}
   	</select>
-  	
   	<select id="applyResumeList">
   		select c.cname, en.entitle, <!-- ar.applydate, --> ar.arpass, iv.ipass from employnotice en 
   		left join company c on c.cno = en.cno 
@@ -29,49 +25,57 @@
   		left join member m on m.mid = r.mid 
   		where m.mid = #{mid}
   	</select>
-  	
   	<select id="checkSubscribe">
   		SELECT sc.sno, sc.MID, sc.cno, c.cname, c.cintro, cs.csname FROM subscribecompany sc 
   		LEFT JOIN company c ON c.cno = sc.cno 
   		LEFT JOIN companysector cs ON cs.cno = c.cno
   		where sc.mid = #{mid}
   	</select>
-  	
   	<select id="checkScrap">
   		SELECT sen.senno, sen.enno, sen.MID, en.entitle, en.enintro, en.enposition, c.cname FROM scrapemploynotice sen 
   		LEFT JOIN employnotice en ON en.enno = sen.enno 
   		LEFT JOIN company c ON c.cno = en.cno
 		where sen.mid = #{mid}
   	</select>
-  	
   	<select id="skillmatchingEN">
   		SELECT en.enno, en.entitle, sen.skname FROM employnotice en 
   		LEFT JOIN skillemploynotice sen ON sen.enno = en.enno 
   		WHERE sen.skname IS NOT NULL
   	</select>
-  	
   	<select id="skillmatchingMR">
   		SELECT m.MID, r.rno, s.skno, s.skname FROM member m 
   		LEFT JOIN resume r ON m.mid = r.mid 
   		LEFT JOIN skill s ON s.rno = r.rno
   		where m.mid = #{mid}
   	</select>
-  	
   	<select id="getEmployNotice">
   		select en.enno, en.entitle, c.cname, datediff(en.enenddate, now()) enenddate from employnotice en 
   		left join company c on c.cno = en.cno order by enenddate asc
   	</select>
-  	
   	<select id="getCompanyList">
   		SELECT DISTINCT c.cno, c.cname FROM employnotice en 
   		RIGHT JOIN company c ON c.cno = en.cno
+  	</select>
+  	<select id="getResumeSkillList">
+  		select * from skill where rno = #{rno}
+  	</select>
+  	<select id="getResumeDegreeList">
+  		select * from degree where rno = #{rno}
+  	</select>
+  	<select id="getResumeExperienceList">
+  		select * from experience where rno = #{rno}
+  	</select>
+  	<select id="getResumeCertificateList">
+  		select * from certificate where rno = #{rno}
+  	</select>
+  	<select id="getResumeLinkList">
+  		select * from link where rno = #{rno}
   	</select>
   	
   	
   	<insert id="regist">
   		insert into member values (#{member.mid}, #{member.mpw}, #{member.memail}, #{member.mtel2}, #{member.mtel1}, #{member.mbirthDate}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mregDate}, #{member.mstate}, #{member.mgender})
   	</insert>
-  	
   	<insert id="writeResume">
   		insert into resume values (null, #{resume.mid}, #{resume.rintro}, #{resume.rimgPath}, #{resume.rpublic}, #{resume.rtitle}, #{resume.rmain}, #{resume.rregdate})
   	</insert>
@@ -80,7 +84,6 @@
   	<update id="updateResume">
   		update resume set rintro = #{resume.rintro}, rimgPath = #{resume.rimgPath}, rpublic = #{rpublic}, rtitle = #{resume.rtitle}, rmain = #{rmain}, rregdate = #{resume.rregdate} where rno = #{resume.rno}
   	</update>
-  	
   	<update id="updateMember">
   		update member set mpw = #{member.mpw}, mname = #{member.mname}, maddr1 = #{member.maddr1}, maddr2 = #{member.maddr2}, mtel1 = #{member.mtel1}, mtel2 = #{member.mtel2}, mstate = #{member.mstate}, mgender = #{member.mgender} 
   		where mid = #{member.mid}

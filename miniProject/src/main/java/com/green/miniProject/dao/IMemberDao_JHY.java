@@ -5,14 +5,19 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.green.miniProject.domain.Certificate;
 import com.green.miniProject.domain.CheckScrapEN;
 import com.green.miniProject.domain.CheckSubscribeCom;
 import com.green.miniProject.domain.Company;
+import com.green.miniProject.domain.Degree;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.Experience;
 import com.green.miniProject.domain.JoinApplyResumeList;
 import com.green.miniProject.domain.JoinEmployNoticeAndCompany;
+import com.green.miniProject.domain.Link;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillMatchingEN;
 import com.green.miniProject.domain.SkillMatchingMR;
 
@@ -36,4 +41,10 @@ public interface IMemberDao_JHY {
 	public void deleteMember(@Param("mid") String mid);
 	public List<JoinEmployNoticeAndCompany> getEmployNotice();
 	public List<Company> getCompanyList();
+	public List<Skill> getResumeSkillList(@Param("rno") Long rno);
+	public List<Degree> getResumeDegreeList(@Param("rno") Long rno);
+	public List<Experience> getResumeExperienceList(@Param("rno") Long rno);
+	public List<Certificate> getResumeCertificateList(@Param("rno") Long rno);
+	public List<Link> getResumeLinkList(@Param("rno") Long rno);
+	
 }

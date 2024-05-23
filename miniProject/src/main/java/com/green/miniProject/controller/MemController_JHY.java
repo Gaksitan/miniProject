@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.miniProject.dao.IMemberDao_JHY;
+import com.green.miniProject.domain.Certificate;
 import com.green.miniProject.domain.CheckScrapEN;
 import com.green.miniProject.domain.CheckSubscribeCom;
 import com.green.miniProject.domain.Company;
+import com.green.miniProject.domain.Degree;
+import com.green.miniProject.domain.Experience;
 import com.green.miniProject.domain.JoinApplyResumeList;
 import com.green.miniProject.domain.JoinEmployNoticeAndCompany;
+import com.green.miniProject.domain.Link;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillMatchingEN;
 import com.green.miniProject.domain.SkillMatchingMR;
 
@@ -182,7 +187,17 @@ public class MemController_JHY {
 			Member mem = dao.getMember(mid);
 			model.addAttribute("resume", resume);
 			model.addAttribute("member", mem);
-			System.out.println(rno + "//" + resume);
+			List<Skill> skill = dao.getResumeSkillList(rno);
+			List<Degree> degree = dao.getResumeDegreeList(rno);
+			List<Experience> experience = dao.getResumeExperienceList(rno);
+			List<Certificate> certificate = dao.getResumeCertificateList(rno);
+			List<Link> link = dao.getResumeLinkList(rno);
+			model.addAttribute("skillList", skill);
+			model.addAttribute("degreeList", degree);
+			model.addAttribute("experienceList", experience);
+			model.addAttribute("certificateList", certificate);
+			model.addAttribute("linkList", link);
+			System.out.println(rno + "//" + resume + "//" + skill + "//" + degree + "//" + experience + "//" + certificate + "//" + link);
 		}else {
 			
 		}
