@@ -9,8 +9,8 @@
 </head>
 <style>
 section{
-	margin : 50px;
-	height : 600px;
+	margin : 20px;
+	height : 800px;
 }
 
 .container{

@@ -15,7 +15,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 section{
 	width : 1500px;
-	margin: 50px auto 50px auto;
+	margin: 20px auto 50px auto;
 	display:grid;
 	grid-template-columns: 1fr 1fr;
 	grid-row: auto auto;

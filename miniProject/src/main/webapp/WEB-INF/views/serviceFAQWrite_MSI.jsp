@@ -7,17 +7,18 @@
 <title>Insert title here</title>
 </head>
 <style>
+
 section{
-	margin : 50px;
+	margin : 20px;
 	height : 800px;
 }
 
-form{
+#form1{
 	display : flex;
 	flex-direction : column;
 	justify-content:center;
 	margin : 30px auto;
-
+	
 }
 
 fieldset{
@@ -25,6 +26,7 @@ fieldset{
 	flex-direction : column;
 	justify-content:center;
 	align-items : center;
+	padding : 30px;
 }
 
 input[type="text"] {
@@ -80,7 +82,7 @@ input[type="submit"]:hover , input[type="button"]:hover {
 <h3>FAQ작성페이지</h3>
 <hr>
 
-<form action="/admin/writeFAQ" method="post" style="width: 400px;">
+<form action="/admin/writeFAQ" method="post" style="width: 400px;" id="form1">
     <fieldset>
         <legend>FAQ 작성 폼</legend>
         <div>

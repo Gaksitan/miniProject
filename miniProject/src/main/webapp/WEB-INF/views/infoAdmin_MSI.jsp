@@ -10,11 +10,11 @@
 </head>
 <style>
 section{
-	margin : 50px;
-	height : 500px;
+	margin : 20px;
+	height : 800px;
 }
 
-form{
+#noticeForm{
 	display : flex;
 	flex-direction : column;
 	justify-content:center;
@@ -26,6 +26,8 @@ fieldset{
 	flex-direction : column;
 	justify-content:center;
 	align-items : center;
+	padding : 80px;
+	margin: 30px auto;
 }
 
 input[type="text"] {
