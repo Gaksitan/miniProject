@@ -20,20 +20,16 @@ import com.green.miniProject.domain.Skill;
 @Mapper
 public interface ICompanyETCDao_PSH {
 		
-	List<InterestMember> getAllInterestMembers();
+	List<InterestMember> getAllInterestMembers(@Param("cno") String cno);
 	
 	void removeInterest(@Param("imno") Long imno);
 	//관심 구직자
 	
 	 List<ApplyResume> getApplyResumesByCompany(String cno);
 	 
-	 
-	 
 	 Integer getApplyCountByEnno(Long enno);
 	//지원받은 이력서 리스트
 	
-	 //public void updateApplicantCount(Long enno);
-	 
 	 InterestMember findInterestMember(@Param("cno") String cno, @Param("mid") String mid);
 	 void addInterestMember(@Param("cno") String cno, @Param("mid") String mid);
 	 void deleteInterestMember(@Param("cno") String cno, @Param("mid") String mid);

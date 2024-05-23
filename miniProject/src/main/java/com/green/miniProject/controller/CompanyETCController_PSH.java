@@ -45,9 +45,12 @@ public class CompanyETCController_PSH {
     private CompanyETCService_PSH service;
 
 	@RequestMapping("/subscribeComList")
-	public String subscribeComList(Model model) {
+	public String subscribeComList(Model model, HttpSession session) {
+		Company company = (Company)session.getAttribute("company");
+    	
+    	String cno = company.getCno();
 		
-		List<InterestMember> allList = service.getAllInterestMembers();
+		List<InterestMember> allList = service.getAllInterestMembers(cno);
 
         model.addAttribute("allList", allList);
 		

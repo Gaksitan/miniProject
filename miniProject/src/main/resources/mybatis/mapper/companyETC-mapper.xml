@@ -26,6 +26,7 @@
         FROM interestMember im
         JOIN MEMBER m ON im.MID = m.MID
         JOIN resume r ON im.MID = r.MID
+        WHERE im.cno = #{cno}
     </select>
     
     <delete id="removeInterest">

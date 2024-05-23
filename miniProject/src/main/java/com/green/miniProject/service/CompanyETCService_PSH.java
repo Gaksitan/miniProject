@@ -25,8 +25,8 @@ public class CompanyETCService_PSH {
 	@Autowired
 	private ICompanyETCDao_PSH dao;
 	
-	public List<InterestMember> getAllInterestMembers(){
-		return dao.getAllInterestMembers();
+	public List<InterestMember> getAllInterestMembers(String cno){
+		return dao.getAllInterestMembers(cno);
 	}
 	
     public void removeInterest(Long imno) {
