@@ -100,17 +100,20 @@
 	<select id="toMeListMem">
 		SELECT b.bno, b.btitle, b.bregdate, b.`MID`, b.blike,
 		t.value FROM board b Left JOIN tagmem t ON b.bno = t.bno
-		WHERE t.VALUE = #{mid}
+		WHERE t.VALUE
+		= #{mid}
 	</select>
 	<select id="toMeListCom">
 		SELECT b.bno, b.btitle, b.bregdate, b.cmid, b.blike,
 		t.value
 		FROM board b
 		Left JOIN tagcom t ON b.bno = t.bno
-		WHERE t.VALUE = #{cmid}
+		WHERE t.VALUE =
+		#{cmid}
 	</select>
 	<select id="getListILikeMem">
-		SELECT b.bno, b.btitle, b.bregdate, b.mid, b.blike FROM board b
+		SELECT b.bno, b.btitle, b.bregdate, b.mid, b.blike
+		FROM board b
 		LEFT JOIN like_tb l ON b.bno = l.bno
 		WHERE l.`MID` = #{mid}
 	</select>
@@ -166,9 +169,20 @@
 	<select id="getAllReplyList">
 		SELECT * FROM reply where bno = #{bno}
 	</select>
+	<delete id="deleteReplyMem">
+		DELETE FROM reply WHERE reno = #{reno} AND MID = #{mid}
+	</delete>
+	<delete id="deleteReplyCom">
+		DELETE FROM reply WHERE reno = #{reno} AND cmid = #{cmid}
+	</delete>
 
 
 
+
+
+
+
+	<!-- 공지사항 관련 -->
 	<select id="getNoticeList">
 		select * from notice
 	</select>

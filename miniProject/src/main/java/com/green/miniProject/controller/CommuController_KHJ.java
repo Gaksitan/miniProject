@@ -512,4 +512,27 @@ public class CommuController_KHJ {
 		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;
 	}
 
+	@RequestMapping("/deleteReply")
+	public String deleteReply(@RequestParam("reno") Long reno,@RequestParam("bno") Long bno, Model model, HttpSession session) {
+		System.out.println("deleteReply 접속");
+		String mid = (String) session.getAttribute("mid");
+		CompanyManager cm = (CompanyManager) session.getAttribute("companyManager");
+		String cmid = null;
+
+		if (cm != null) {
+
+			cmid = cm.getCmid();
+			System.out.println("cmid =" + cmid);
+		}
+
+		if (mid != null) {
+			
+			dao.deleteReplyMem(reno, mid);
+
+		} else if (mid == null) {
+			dao.deleteReplyCom(reno, cmid);
+		}
+
+		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;
+	}
 }

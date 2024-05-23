@@ -54,7 +54,8 @@ public interface ICommuDao_KHJ {
 	public List<Reply> getAllReplyList(@Param("bno") long bno);
 	public void insertReplyWhenMem(@Param("mid") String mid, @Param("reply")String reply, @Param("bno")Long bno);
 	public void insertReplyWhenCom(@Param("reply")String reply, @Param("cmid") String cmid, @Param("bno")Long bno);
-	
+	public void deleteReplyMem(@Param("reno") Long reno, @Param("mid") String mid);
+	public void deleteReplyCom(@Param("reno") Long reno, @Param("cmid") String cmid);
 	
 	//공지사항 관련 메서드
 	public List<Notice> getNoticeList(); 
