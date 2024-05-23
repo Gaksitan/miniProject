@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>LoginFormCom</title>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>기업 로그인</h1>
 
 <div>
@@ -18,6 +20,7 @@
 		<a href="regFormCom">회원가입</a>
 	</form>
 </div>
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>

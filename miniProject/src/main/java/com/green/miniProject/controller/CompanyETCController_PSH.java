@@ -128,7 +128,23 @@ public class CompanyETCController_PSH {
         return "applicantDetail_PSH";
     }
     //지원자 상세보기
-
+    
+    @PostMapping("/submitScore")
+    @ResponseBody
+    public String submitScore(@RequestParam("mid") String mid,
+                              @RequestParam("cno") String cno,
+                              @RequestParam("score") int score,
+                              @RequestParam("review") String review) {
+        try {
+            service.submitScore(mid, cno, score, review);
+            return "success";
+        } catch (Exception e) {
+            return "failure";
+        }
+    }
+    //평점 남기기
+    
+    
 
 
     @GetMapping("/applyResumeDetail")

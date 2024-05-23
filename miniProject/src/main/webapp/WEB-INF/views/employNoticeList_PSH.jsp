@@ -23,7 +23,9 @@
         }
     </script>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>채용공고관리 페이지</h1>
 <hr>
 <button onclick="location.href='employNoticeCreate'">채용공고 작성</button>
@@ -43,11 +45,11 @@
             <td>${notice.enregdate}~${notice.enenddate }</td>
             <td><script>document.write(calculateDDay('${notice.enenddate}'))</script></td>
             <td>${applicantCounts[notice.enno]}</td>
-            <td>${notice.enno}</td>
         </tr>
     </c:forEach>
   </tbody>
 </table>
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>

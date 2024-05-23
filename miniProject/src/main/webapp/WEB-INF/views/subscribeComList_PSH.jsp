@@ -16,7 +16,9 @@
 </script>
 
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>관심 구직자(이력서) 목록</h1>
 
 <table border="1">
@@ -39,6 +41,7 @@
     </c:forEach>
   </tbody>
   </table>
+  </main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>

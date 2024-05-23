@@ -61,7 +61,7 @@
         WHERE en.cno = #{cno}
     </select>
     
-    <select id="getApplyCountByEnno" resultType="com.green.miniProject.domain.ApplyResume">
+    <select id="getApplyCountByEnno" resultType="java.lang.Integer">
     	SELECT COALESCE(COUNT(*), 0) AS applicant_count
     	FROM applyResume
     	WHERE enno = #{enno}
@@ -160,6 +160,13 @@
 	    SET arpass = #{status}
 	    WHERE rno = #{rno}
 	</update>
-
+	
+	<insert id="insertScore">
+		INSERT INTO scoreComMem (MID, cno, scmscore, scmreview)
+            VALUES
+            (#{mid}, #{cno}, #{score}, #{review})
+	</insert>
+	
+	
     
 </mapper>

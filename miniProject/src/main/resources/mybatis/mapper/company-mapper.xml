@@ -6,15 +6,29 @@
   <mapper namespace="com.green.miniProject.dao.ICompanyDao_PSH">
 	
 	<insert id="insertCompany">
-	    INSERT INTO company (cno, ctype, cname, caddr1, cdocnum) VALUES
-	    (#{com.cno}, #{com.ctype}, #{com.cname}, #{com.caddr1}, #{com.cdocnum})
+	    INSERT INTO company (cno, ctype, cname, caddr1, caddr2, cdocnum) VALUES
+	    (#{com.cno}, #{com.ctype}, #{com.cname}, #{com.caddr1}, #{com.caddr2}, #{com.cdocnum})
 	</insert>
 	
 	<insert id="insertCompanyManager">
-	    INSERT INTO companyManager (cmid, cmpw, cmemail, cmtel, cno) VALUES
-	    (#{cm.cmid}, #{cm.cmpw}, #{cm.cmemail}, #{cm.cmtel}, #{cm.cno})
+	    INSERT INTO companyManager (cmid, cmpw, cmemail, cmtel1, cmtel2, cno) VALUES
+	    (#{cm.cmid}, #{cm.cmpw}, #{cm.cmemail}, #{cm.cmtel1}, #{cm.cmtel2}, #{cm.cno})
 	</insert>
-
+	
+	<!-- 회원가입 -->
+	
+	<select id="getCompany" resultType="com.green.miniProject.domain.Company">
+  		select * from Company where cno = #{cno}
+  	</select>
+  	
+  	<select id="getCompanyManager" resultType="com.green.miniProject.domain.CompanyManager">
+  		select * from CompanyManager where cmid = #{cmid}
+  	</select>
+  	
+  	<!-- 중복체크 -->
+	
+	
+	
 	<select id="select">
 		SELECT * FROM companyManager WHERE cmid = #{cmid} AND cmpw = #{cmpw}
 	</select>
@@ -27,7 +41,10 @@
         UPDATE company
         SET cname = #{cname},
             caddr1 = #{caddr1},
-            ctel = #{ctel},
+            caddr2 = #{caddr2},
+            ctel1 = #{ctel1},
+            ctel2 = #{ctel2},
+            cemail = #{cemail},
             cfoundation = #{cfoundation},
             camount = #{camount},
             cintro = #{cintro},
@@ -40,10 +57,11 @@
         SET cmpw = #{cmpw},
             cmname = #{cmname},
             cmemail = #{cmemail},
-            cmtel = #{cmtel}
+            cmtel1 = #{cmtel1},
+            cmtel2 = #{cmtel2}            
         WHERE cmid = #{cmid}
     </update>
-	
+    
 	<!-- employNoticeMapper.xml -->
 	<insert id="enwrite" parameterType="com.green.miniProject.domain.EmployNotice" useGeneratedKeys="true" keyProperty="enno">
 	    INSERT INTO employnotice (entitle, enintro, ensalary, enaddr, enenddate, enposition, cno, enexp, endegree)

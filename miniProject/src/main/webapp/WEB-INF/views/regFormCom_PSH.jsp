@@ -7,18 +7,25 @@
 <meta charset="UTF-8">
 <title>기업회원가입 Page</title>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>기업회원가입 Page</h1>
 <hr>
 <a href="regFormMem_JHY">개인회원</a>
 <div>
-    <table width="500" cellpadding="0" cellspacing="0" border="1">
+    <table>
     <form action="signUpCom" method="post">
         <tr>
         <tr>
             <td>사업자번호</td>
-            <td><input type="text" name="cno" size="50" placeholder="사업자번호를 입력하세요."></td>
+            <td><input type="text" name="cno" id="cno" size="50" placeholder="사업자번호를 입력하세요."></td>
+        	<td><input type="button" name="cnoCheck" value="사업자번호 중복체크" onclick="checkCno()"></td>
         </tr>
+        <tr>
+			<td></td>
+			<td id="demo">.</td>
+		</tr>
             <td>기업형태</td>
 	            <td>
 				<select name="ctype">
@@ -51,16 +58,25 @@
         </tr>
         <tr>
             <td>아이디</td>
-            <td><input type="text" name="cmid" size="50" placeholder="인사담당자 아이디를 입력하세요."></td>
+            <td><input type="text" name="cmid" id="cmid" size="50" placeholder="인사담당자 아이디를 입력하세요."></td>
+        	<td><input type="button" name="cmidCheck" value="아이디 중복체크" onclick="checkCmid()"></td>
         </tr>
         <tr>
+			<td></td>
+			<td id="demo3">.</td>
+		</tr>
+        <tr>
             <td>비밀번호</td>
-            <td><input type="password" name="cmpw" size="50" placeholder="비밀번호를 입력하세요."></td>
+            <td><input type="password" name="cmpw" size="50" id="password" placeholder="비밀번호를 입력하세요."></td>
         </tr>
         <tr>
             <td>비밀번호확인</td>
-            <td><input type="password" name="cmpw2" size="50" placeholder="비밀번호를 한 번 더 입력하세요."></td>
+            <td><input type="password" name="cmpw2" size="50" id="confirmPassword" placeholder="한 번 더 비밀번호를 입력하세요."></td>
         </tr>
+        <tr>
+			<td></td>
+			<td id="demo2" class="demo2"></td>
+		</tr>
         <tr>
             <td>이메일</td>
             <td><input type="text" name="cmemail" size="20" placeholder="이메일을 입력하세요."></td>
@@ -68,17 +84,22 @@
             <td><input type="text" name="cmemail2" size="20"></td>
         </tr>
         <tr>
-            <td>국제번호</td>
-            <td>대한민국 (+82)</td>
-        </tr>
+			<th><select name="cmtel1">
+				<option value="82">대한민국 (+82)</option>
+				<option value="81">일본 (+81)</option>
+				<option value="86">중국 (+86)</option>
+				<option value="1">미국 (+1)</option>
+				<option value="55">브라질 (+55)</option>
+			</select></th>
+		</tr>
         <tr>
             <td>전화번호</td>
-            <td><input type="text" name="cmtel" size="50" placeholder="전화번호를 입력하세요."></td>
-            <td><input type="button" name="ctelgetnum" value="인증번호받기"></td>
+            <td><input type="text" name="cmtel2" size="50" placeholder="전화번호를 입력하세요."></td>
+            <td><input type="button" name="checkTel" value="인증번호받기" onclick="certificate()"></td>
         </tr>
         <tr>
             <td>인증번호</td>
-            <td><input type="text" name="ctelverify" size="50" placeholder="인증번호를 입력하세요."></td>
+            <td><input type="text" name="ctelverify" id="certificateNum" size="50" placeholder="인증번호를 입력하세요."></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="회원가입"></td>
@@ -86,6 +107,76 @@
     </form>
     </table>
 </div>
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>
+
+<%@ include file="./footer_JYC.jsp"%>
+<script type="text/javascript">
+	
+	function checkCno() {
+	    const cnoElement = document.querySelector("#cno");
+	    const cno = cnoElement.value.trim();
+	    
+	    if (cno === "") {
+	        document.getElementById("demo").innerHTML = "사업자번호를 입력해주세요.";
+	        return;
+	    }
+	    
+	    const xhttp = new XMLHttpRequest();
+	    xhttp.onload = function() {
+	        document.getElementById("demo").innerHTML = this.responseText;
+	    }
+	    xhttp.open("GET", "/regCnoCheck?cno=" + encodeURIComponent(cno), true);
+	    xhttp.send();
+	}
+		
+	function certificate(){
+		let randomNum = Math.floor(Math.random()*1000000) + 1;
+		const certificateNum = document.querySelector("#certificateNum");
+		console.log(randomNum);
+		certificateNum.value = randomNum;
+	}
+	const password = document.querySelector("#password");
+	const confirmPassword = document.querySelector("#confirmPassword");
+	const msg = document.querySelector("#demo2");
+	password.addEventListener("input", function(){
+		if(password.value.trim() == confirmPassword.value.trim()){
+			msg.textContent = "비밀번호가 일치합니다.";
+			msg.classList.remove("invalid");
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+			msg.classList.add("invalid");
+		}
+	});
+	confirmPassword.addEventListener("input", function(){
+		if(password.value.trim() == confirmPassword.value.trim()){
+			msg.textContent = "비밀번호가 일치합니다.";
+			msg.classList.remove("invalid");
+		}else{
+			msg.textContent = "비밀번호가 일치하지 않습니다.";
+			msg.classList.add("invalid");
+		}
+	});
+	
+	function checkCmid() {
+	    const cmidElement = document.querySelector("#cmid");
+	    const cmid = cmidElement.value.trim();
+	    
+	    if (cmid === "") {
+	        document.getElementById("demo3").innerHTML = "ID를 입력해주세요.";
+	        return;
+	    }
+	    
+	    console.log("아이디 중복체크");
+	    
+	    const xhttp = new XMLHttpRequest();
+	    xhttp.onload = function() {
+	        document.getElementById("demo3").innerHTML = this.responseText;
+	    }
+	    xhttp.open("GET", "/regCmidCheck?cmid=" + encodeURIComponent(cmid), true);
+	    xhttp.send();
+	}
+
+</script>

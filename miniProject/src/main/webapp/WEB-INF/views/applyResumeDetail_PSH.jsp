@@ -30,7 +30,9 @@ function updateApplicationStatus(status) {
 </script>
 
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
+<main>
 <h1>지원자 및 관심 구직자 이력서 상세보기 페이지</h1>
 <hr>
 <input type="hidden" id="rno" value="${resume.rno}">
@@ -146,7 +148,7 @@ function updateApplicationStatus(status) {
         });
     });
 </script>
-
+</main>
 </body>
 </html>
 <%@ include file="./footer_JYC.jsp" %>
