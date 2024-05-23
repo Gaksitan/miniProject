@@ -7,8 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="../css/main.css" />
 <body>
 <%@ include file="./header_JYC.jsp"%>
+<main>
+
 <c:if test="${sessionScope.mid != null }">
 <c:if test="${listMR.get(0).rno != null  }"> 
 <p>이런 회사에서 ${mem.mname }(${mid })님을 필요로 하고 있어요 (스킬 매칭)</p>
@@ -58,6 +61,8 @@
 		</ul>
 	</c:forEach>
 </div>
+
+</main>
 <%@ include file="./footer_JYC.jsp"%>
 </body>
 </html>
