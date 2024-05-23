@@ -53,4 +53,10 @@ public interface IMemberDao_JHY {
 	public void writeResumeDegree(@Param("degree") Degree degree);
 	public void writeResumeCertificate(@Param("certificate") Certificate cer);
 	public void writeResumeLink(@Param("rlink") Link rlink);
+	
+	public void updateResumeSkill(@Param("rskill") Skill rskill);
+	public void updateResumeExp(@Param("exp") Experience exp);
+	public void updateResumeDegree(@Param("degree") Degree degree);
+	public void updateResumeCertificate(@Param("certificate") Certificate cer);
+	public void updateResumeLink(@Param("rlink") Link rlink);
 }

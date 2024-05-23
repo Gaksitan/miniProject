@@ -268,7 +268,6 @@ public class MemController_JHY {
 			dao.writeResumeLink(rlink);
 		}
 		
-		//List<Experience> expList = new ArrayList<>();
 		for(int i = 0; i < exnameList.size(); i++) {
 			Experience exp = new Experience();
 			exp.setExname(exnameList.get(i));
@@ -282,7 +281,6 @@ public class MemController_JHY {
 			dao.writeResumeExp(exp);
 		}
 		
-		//List<Degree> degreeList = new ArrayList<>();
 		for(int i = 0; i < denameList.size(); i++) {
 			Degree degree = new Degree();
 			degree.setDename(denameList.get(i));
@@ -299,6 +297,7 @@ public class MemController_JHY {
 			LocalDate date = LocalDate.parse(cedateList.get(i), DateTimeFormatter.ISO_DATE);
 			cer.setCedate(date);
 			cer.setCelocation(celocationList.get(i));
+			dao.writeResumeCertificate(cer);
 		}
 		
 		return "myResumeList_JHY";
@@ -306,7 +305,15 @@ public class MemController_JHY {
 	
 	// 이력서 수정(rno != null)
 	@RequestMapping("/updateResume")
-	public String updateResume(HttpServletRequest request) {
+	public String updateResume(HttpServletRequest request, @RequestParam("rskill") List<String> rskillList,
+			@RequestParam("exname") List<String> exnameList, @RequestParam("exjoindate") List<String> exjoindateList,
+			@RequestParam("exleavedate") List<String> exleavedateList, @RequestParam("exposition") List<String> expositionList,
+			@RequestParam("exrank") List<String> exrankList, @RequestParam("dename") List<String> denameList,
+			@RequestParam("degraddate") List<String> degraddateList, @RequestParam("demajor") List<String> demajorList,
+			@RequestParam("dehighestlevel") List<String> dehighestlevelList, @RequestParam("cename") List<String> cenameList,
+			@RequestParam("cedate") List<String> cedateList, @RequestParam("celocation") List<String> celocationList,
+			@RequestParam("rlink") List<String> rlinkList) {
+		
 		String rno_ = request.getParameter("rno");
 		Long rno = Long.parseLong(rno_);
 		Resume resume = dao.getResume(rno);
@@ -331,6 +338,55 @@ public class MemController_JHY {
 		LocalDate rregdate = LocalDate.now();
 		Resume updateResume = new Resume(rno, mid, rintro, rimgPath, rpublic, rtitle, rmain, rregdate);
 		dao.updateResume(updateResume);
+		
+		
+		for(String skname : rskillList) {
+			Skill rskill = new Skill();
+			rskill.setRno(resume.getRno());
+			rskill.setSkname(skname);
+			dao.updateResumeSkill(rskill);
+		}
+		
+		for(String cename : rlinkList) {
+			Link rlink = new Link();
+			rlink.setRno(resume.getRno());
+			rlink.setLname(cename);
+			dao.updateResumeLink(rlink);
+		}
+		
+		for(int i = 0; i < exnameList.size(); i++) {
+			Experience exp = new Experience();
+			exp.setExname(exnameList.get(i));
+			LocalDate date = LocalDate.parse(exjoindateList.get(i), DateTimeFormatter.ISO_DATE);
+			exp.setExjoindate(date);
+			LocalDate date2 = LocalDate.parse(exleavedateList.get(i), DateTimeFormatter.ISO_DATE);
+			exp.setExleavedate(date2);
+			exp.setExposition(expositionList.get(i));
+			exp.setExrank(exrankList.get(i));
+			//expList.add(exp);
+			dao.updateResumeExp(exp);
+		}
+		
+		for(int i = 0; i < denameList.size(); i++) {
+			Degree degree = new Degree();
+			degree.setDename(denameList.get(i));
+			LocalDate date = LocalDate.parse(degraddateList.get(i), DateTimeFormatter.ISO_DATE);
+			degree.setDegraddate(date);
+			degree.setDemajor(demajorList.get(i));
+			degree.setDehighestlevel(dehighestlevelList.get(i));
+			dao.updateResumeDegree(degree);
+		}
+		
+		for(int i = 0; i < cenameList.size(); i++) {
+			Certificate cer = new Certificate();
+			cer.setCename(cenameList.get(i));
+			LocalDate date = LocalDate.parse(cedateList.get(i), DateTimeFormatter.ISO_DATE);
+			cer.setCedate(date);
+			cer.setCelocation(celocationList.get(i));
+			dao.updateResumeCertificate(cer);
+		}
+		
+		
 		return "myResumeList_JHY";
 	}
 	

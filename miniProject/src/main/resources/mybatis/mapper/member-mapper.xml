@@ -83,16 +83,16 @@
   		insert into skill values (null, #{rskill.rno}, #{rskill.skname})
   	</insert>
   	<insert id="writeResumeExp">
-  		
+  		insert into experience values (null, #{exp.rno}, #{exp.exname}, #{exp.exjoindate}, #{exp.exleavedate}, #{exp.exposition}, #{exp.rank})
   	</insert>
   	<insert id="writeResumeDegree">
-  		
+  		insert into degree values (null, #{degree.rno}, #{degree.dename}, #{degree.degraddate}, #{degree.demajor}, #{degree.dehighestlevel})
   	</insert>
   	<insert id="writeResumeCertificate">
-  		
+  		insert into certificate values (null, #{certificate.rno}, #{certificate.cename}, #{certificate.cedate}, #{certificate.celocation})
   	</insert>
   	<insert id="writeResumeLink">
-  		
+  		insert into link values (null, #{link.rno}, #{link.cename})
   	</insert>
   	
   	
