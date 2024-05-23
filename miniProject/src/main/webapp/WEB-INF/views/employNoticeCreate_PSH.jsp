@@ -6,7 +6,26 @@
 <meta charset="UTF-8">
 <title>employNoticeSave</title>
 <script src="../../script/script.js"></script>
-
+<script>
+    function addSkillField() {
+        var container = document.getElementById("skillContainer");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "skname";
+        input.placeholder = "스킬명";
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+    }
+    function addWelfareField() {
+        var container = document.getElementById("welfareContainer");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = "wname";
+        input.placeholder = "복지명";
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+    }
+</script>
 </head>
 <link rel="stylesheet" href="../css/main.css" />
 <body>
