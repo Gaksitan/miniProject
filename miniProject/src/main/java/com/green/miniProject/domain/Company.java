@@ -26,7 +26,7 @@ public class Company {
 	private String cintro;
 	private String ctype;
 	private String cdocnum;
-	
+	private String ctel;
 	private String ctel1;
 	private String ctel2;
 }

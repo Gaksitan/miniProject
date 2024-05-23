@@ -116,6 +116,8 @@ public class CompanyController_JYC {
 			}
 		}
 
+		System.out.println(paging.getContent());
+		
 		model.addAttribute("enlist", paging.getContent());
 		model.addAttribute("totalPages", paging.getTotalPages());
 		model.addAttribute("hasNext", paging.hasNext());

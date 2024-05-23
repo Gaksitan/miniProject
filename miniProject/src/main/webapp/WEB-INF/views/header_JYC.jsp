@@ -7,11 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="../css/main.css" />
  <link rel="stylesheet" href="../css/header_css.css" />
  <style type="text/css">
  	html, body {
-    height: 100%
+    height: 100dvh;
 }
  </style>
 </head>
