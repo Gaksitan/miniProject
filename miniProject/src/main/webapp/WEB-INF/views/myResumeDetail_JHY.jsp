@@ -94,7 +94,7 @@
 		<h3>스킬 (skill)</h3>
 		<div id="rskillContainer">
 			<c:forEach var="rskill" items="${skillList }">
-				<h5>스킬명 : ${rskill.skname }<input type="hidden" name="rskill"><button type="button" onclick="deleteData(event)">삭제</button></h5>
+				<h5>스킬명 : ${rskill.skname }<input type="hidden" name="rskill" value="${rskill.skname }"><button type="button" onclick="deleteData(event)">삭제</button></h5>
 			</c:forEach>
 		</div>
 		<button type="button" onclick="addRskill()">추가</button>
@@ -109,11 +109,11 @@
 				<tbody>
 				<c:forEach var="rexp" items="${experienceList }">
 					<tr>
-						<td>${rexp.exname }</td>
-						<td>${rexp.exjoindate }</td>
-						<td>${rexp.leavedate }</td>
-						<td>${rexp.exposition }</td>
-						<td>${rexp.exrank }</td>
+						<td>${rexp.exname }<input type="hidden" name=exname value="${rexp.exname }"></td>
+						<td>${rexp.exjoindate }<input type="hidden" name="exjoindate" value="${rexp.exjoindate }"></td>
+						<td>${rexp.exleavedate }<input type="hidden" name="exleavedate" value="${rexp.exleavedate }"></td>
+						<td>${rexp.exposition }<input type="hidden" name="exposition" value="${rexp.exposition }"></td>
+						<td>${rexp.exrank }<input type="hidden" name="exrank" value="${rexp.exrank }"></td>
 						<td><button type="button" onclick="deleteDataTable(event)">삭제</button></td>
 					</tr>
 				</c:forEach>
