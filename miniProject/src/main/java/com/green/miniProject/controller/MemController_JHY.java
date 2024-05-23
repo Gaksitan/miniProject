@@ -1,5 +1,6 @@
 package com.green.miniProject.controller;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -267,15 +268,38 @@ public class MemController_JHY {
 			dao.writeResumeLink(rlink);
 		}
 		
-		List<Experience> expList = new ArrayList<>();
+		//List<Experience> expList = new ArrayList<>();
 		for(int i = 0; i < exnameList.size(); i++) {
 			Experience exp = new Experience();
 			exp.setExname(exnameList.get(i));
-			SimpleDateFormat formatter = new SimpleDateFormat()
-			exp.setExjoindate(LocalDate exjoindateList.get(i));
-			exp.setExleavedate()
+			LocalDate date = LocalDate.parse(exjoindateList.get(i), DateTimeFormatter.ISO_DATE);
+			exp.setExjoindate(date);
+			LocalDate date2 = LocalDate.parse(exleavedateList.get(i), DateTimeFormatter.ISO_DATE);
+			exp.setExleavedate(date2);
+			exp.setExposition(expositionList.get(i));
+			exp.setExrank(exrankList.get(i));
+			//expList.add(exp);
+			dao.writeResumeExp(exp);
 		}
 		
+		//List<Degree> degreeList = new ArrayList<>();
+		for(int i = 0; i < denameList.size(); i++) {
+			Degree degree = new Degree();
+			degree.setDename(denameList.get(i));
+			LocalDate date = LocalDate.parse(degraddateList.get(i), DateTimeFormatter.ISO_DATE);
+			degree.setDegraddate(date);
+			degree.setDemajor(demajorList.get(i));
+			degree.setDehighestlevel(dehighestlevelList.get(i));
+			dao.writeResumeDegree(degree);
+		}
+		
+		for(int i = 0; i < cenameList.size(); i++) {
+			Certificate cer = new Certificate();
+			cer.setCename(cenameList.get(i));
+			LocalDate date = LocalDate.parse(cedateList.get(i), DateTimeFormatter.ISO_DATE);
+			cer.setCedate(date);
+			cer.setCelocation(celocationList.get(i));
+		}
 		
 		return "myResumeList_JHY";
 	}
