@@ -197,7 +197,6 @@ public class MemController_JHY {
 			model.addAttribute("experienceList", experience);
 			model.addAttribute("certificateList", certificate);
 			model.addAttribute("linkList", link);
-			System.out.println(rno + "//" + resume + "//" + skill + "//" + degree + "//" + experience + "//" + certificate + "//" + link);
 		}else {
 			
 		}
@@ -215,12 +214,13 @@ public class MemController_JHY {
 	
 	// 이력서 작성(rno == null)
 	@RequestMapping("/writeResume")
-	public String writeResume(HttpServletRequest request) {
+	public String writeResume(HttpServletRequest request, @RequestParam("rskill") List<Skill> rskill, @RequestParam("rexp") List<Experience> rexp) {
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mid");
+		
 		String rintro = request.getParameter("rintro");
 		String rimgPath = request.getParameter("rimgPath");
-		String rpublic_ = request.getParameter("rimgPath");
+		String rpublic_ = request.getParameter("rpublic");
 		boolean rpublic;
 		if(rpublic_ == "true") {
 			rpublic = true;
