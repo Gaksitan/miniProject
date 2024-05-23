@@ -46,7 +46,8 @@
 	<form action="replyInsert.do" method="get">
 		<input type="hidden" name="bno" value="${boardDetail[0].bno}">
 		<label for="reply">댓글 작성하기</label> <input id="reply" name="reply"
-			placeholder="댓글 입력하기"> <input type="submit" value="작성">
+			placeholder="댓글 입력하기" required="required"> <input
+			type="submit" value="작성">
 	</form>
 	<c:choose>
 		<c:when test="${not empty replyList }">
@@ -63,7 +64,7 @@
 							<th>작성자</th>
 							<th>댓글내용</th>
 							<th>작성일자</th>
-							<th>수정버튼</th>
+							<!-- <th>수정버튼</th> -->
 							<th>삭제버튼</th>
 						</tr>
 					</thead>
@@ -80,8 +81,9 @@
 									<!--해당 mid의 name을 넣어야 할 것 같은데...-->
 									<td>${reply.recontent }</td>
 									<td>${reply.reregdate }</td>
-									<td><button>수정</button></td>
-									<td><button>삭제</button></td>
+									<!-- <td><button>수정</button></td>  -->
+									<td><a
+										href="/commu/deleteReply?reno=${reply.reno }&bno=${reply.bno}"><button>삭제</button></a></td>
 								</tr>
 							</c:if>
 						</c:forEach>

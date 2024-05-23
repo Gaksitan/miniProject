@@ -3,8 +3,10 @@ package com.green.miniProject.controller;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +33,8 @@ import com.green.miniProject.domain.Tag;
 import com.green.miniProject.domain.TagBoard;
 import com.green.miniProject.domain.tagCom;
 import com.green.miniProject.domain.tagMem;
+import com.green.miniProject.repository.BoardPagingRepository;
+import com.green.miniProject.service.BoardPaingService_KHJ;
 import com.green.miniProject.service.LikeService;
 
 import com.green.miniProject.service.UserService;
@@ -51,10 +55,26 @@ public class CommuController_KHJ {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private BoardPaingService_KHJ boardPagingService;
+
 	// 리퀘스트 매핑 수정 => /commu 입력 시 이동되게! (송이)
 
+//	@RequestMapping("/mainPagingMem")
+//	public String communityPaging(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam("mid") String mid) {
+//		
+//		Page<com.green.miniProject.entity.Board> paging = boardPagingService.getList(page);
+//		  model.addAttribute("commuList", paging.getContent());
+//	      model.addAttribute("totalPages", paging.getTotalPages());
+//	      model.addAttribute("hasNext", paging.hasNext());
+//	      model.addAttribute("hasPrevious", paging.hasPrevious());
+//		
+//		
+//	}
+//	
+
 	@RequestMapping("")
-	public String root(Model model, HttpSession session) {
+	public String root(Model model, HttpSession session, @RequestParam(value = "page", defaultValue = "1") int page) {
 
 		String mid = (String) session.getAttribute("mid");
 
@@ -66,14 +86,15 @@ public class CommuController_KHJ {
 		}
 
 		if (mid != null) {
+			// 페이징된 데이터 가져오기
+			Page<com.green.miniProject.entity.Board> paging = boardPagingService.getListForMember(page);
+			List<com.green.miniProject.entity.Board> commuList = paging.getContent();
 
-			List<Board> list = dao.getAllWhenMember();
+			// 댓글 정보 가져오기
 			List<ReplyDetail> replyDetails = new ArrayList<>();
-
-			for (Board board : list) {
+			for (com.green.miniProject.entity.Board board : commuList) {
 				Long bno = board.getBno();
 				replyDetails.add(dao.replyCount(bno));
-
 			}
 
 			try {
@@ -81,31 +102,112 @@ public class CommuController_KHJ {
 				String replyDetailsJson = mapper.writeValueAsString(replyDetails);
 				System.out.println(replyDetailsJson);
 				model.addAttribute("replyDetailsJson", replyDetailsJson);
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			// System.out.println(replyDetails);
-			model.addAttribute("list", list);
+			// 모델에 페이징 데이터와 관련 정보를 추가
+			model.addAttribute("commuList", commuList);
+			model.addAttribute("totalPages", paging.getTotalPages());
+			model.addAttribute("hasNext", paging.hasNext());
+			model.addAttribute("hasPrevious", paging.hasPrevious());
+			model.addAttribute("currentPage", paging.getNumber() + 1);
 			model.addAttribute("replyDetails", replyDetails);
-			// System.out.println(model.addAttribute("list", dao.getAllWhenMember()));
 
-		} else if (mid == null) {
+		} else if (cno != null) {
+			// 페이징된 데이터 가져오기
+			Page<com.green.miniProject.entity.Board> paging = boardPagingService.getListForCompany(page);
+			List<com.green.miniProject.entity.Board> commuList = paging.getContent();
 
-			List<Board> list = dao.getAllWhenCompany();
+			// 댓글 정보 가져오기
 			List<ReplyDetail> replyDetails = new ArrayList<>();
-
-			for (Board board : list) {
+			for (com.green.miniProject.entity.Board board : commuList) {
 				Long bno = board.getBno();
 				replyDetails.add(dao.replyCount(bno));
-				System.out.println(replyDetails);
 			}
 
-			model.addAttribute("list", list);
-			model.addAttribute("replyDetails", replyDetails);
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				String replyDetailsJson = mapper.writeValueAsString(replyDetails);
+				System.out.println(replyDetailsJson);
+				model.addAttribute("replyDetailsJson", replyDetailsJson);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
+			// 모델에 페이징 데이터와 관련 정보를 추가
+			model.addAttribute("commuList", commuList);
+			model.addAttribute("totalPages", paging.getTotalPages());
+			model.addAttribute("hasNext", paging.hasNext());
+			model.addAttribute("hasPrevious", paging.hasPrevious());
+			model.addAttribute("currentPage", paging.getNumber() + 1);
+			model.addAttribute("replyDetails", replyDetails);
 		}
+
+//		if (mid != null) {
+//
+//			List<Board> list = dao.getAllWhenMember();
+//			List<ReplyDetail> replyDetails = new ArrayList<>();
+//
+//			for (Board board : list) {
+//				Long bno = board.getBno();
+//				replyDetails.add(dao.replyCount(bno));
+//
+//			}
+//
+//			try {
+//				ObjectMapper mapper = new ObjectMapper();
+//				String replyDetailsJson = mapper.writeValueAsString(replyDetails);
+//				System.out.println(replyDetailsJson);
+//				model.addAttribute("replyDetailsJson", replyDetailsJson);
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			
+//			List<Board> filteredList = list.stream().filter(board -> board.getMid() != null)
+//                    .collect(Collectors.toList());
+//
+//			//페이지
+//			Page<com.green.miniProject.entity.Board> paging = boardPagingService.getList(page);
+//			  model.addAttribute("commuList", filteredList);
+//		      model.addAttribute("totalPages", paging.getTotalPages());
+//		      model.addAttribute("hasNext", paging.hasNext());
+//		      model.addAttribute("hasPrevious", paging.hasPrevious());
+//		      model.addAttribute("currentPage", paging.getNumber() + 1);
+//			
+//			// System.out.println(replyDetails);
+//			//model.addAttribute("list", list);
+//			model.addAttribute("replyDetails", replyDetails);
+//			// System.out.println(model.addAttribute("list", dao.getAllWhenMember()));
+//
+//		} else if (cno != null) {
+//
+//			List<Board> list = dao.getAllWhenCompany();
+//			List<ReplyDetail> replyDetails = new ArrayList<>();
+//
+//			for (Board board : list) {
+//				Long bno = board.getBno();
+//				replyDetails.add(dao.replyCount(bno));
+//				System.out.println(replyDetails);
+//			}
+//			
+//			List<Board> filteredList = list.stream().filter(board -> board.getCmid() != null)
+//                    .collect(Collectors.toList());
+//			
+//			
+//			//페이지
+//			Page<com.green.miniProject.entity.Board> paging = boardPagingService.getList(page);
+//			  model.addAttribute("commuList", filteredList);
+//		      model.addAttribute("totalPages", paging.getTotalPages());
+//		      model.addAttribute("hasNext", paging.hasNext());
+//		      model.addAttribute("hasPrevious", paging.hasPrevious());
+//			
+//
+//			//model.addAttribute("list", list);
+//			model.addAttribute("replyDetails", replyDetails);
+//
+//		}
 
 		// 공지사항 리스트 불러오기
 		List<Notice> noticeList = dao.getNoticeList();
@@ -300,7 +402,7 @@ public class CommuController_KHJ {
 		String mid = (String) session.getAttribute("mid");
 
 		CompanyManager cm = (CompanyManager) session.getAttribute("companyManager");
-		//System.out.println("내 게시물 조회용 cm" + cm);
+		// System.out.println("내 게시물 조회용 cm" + cm);
 		String cmid = null;
 
 		if (cm != null) {
@@ -311,9 +413,8 @@ public class CommuController_KHJ {
 
 		if (mid != null) {
 
-			
 			List<Board> listmem = dao.myListMem(mid);
-			System.out.println("개인일때 가져온 내가 작성한 게시물 리스트" + listmem);			
+			System.out.println("개인일때 가져온 내가 작성한 게시물 리스트" + listmem);
 			List<BoardReply> replyList = dao.myReplyListMem(mid);
 			List<TagBoard> meTagList = dao.toMeListMem(mid);
 			List<Board> listILike = dao.getListILikeMem(mid);
@@ -322,12 +423,11 @@ public class CommuController_KHJ {
 			model.addAttribute("taggedList", meTagList);
 			model.addAttribute("likeList", listILike);
 
-
 		} else if (mid == null) {
-			//System.out.println("cmid = " + cmid);
+			// System.out.println("cmid = " + cmid);
 			List<Board> listcom = dao.myListCom(cmid);
 			System.out.println("인사매니저일때 가져온 내가 작성한 게시물 리스트" + listcom);
-			
+
 			List<BoardReply> replyList = dao.myReplyListCom(cmid);
 			List<TagBoard> meTagList = dao.toMeListCom(cmid);
 			List<Board> listILike = dao.getListILikeCom(cmid);
@@ -376,7 +476,6 @@ public class CommuController_KHJ {
 	}
 
 	@RequestMapping("/replyInsert.do")
-
 	public String replyInsert(@RequestParam("bno") Long bno, @RequestParam("reply") String reply, Model model,
 			HttpSession session) {
 
@@ -413,5 +512,27 @@ public class CommuController_KHJ {
 		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;
 	}
 
+	@RequestMapping("/deleteReply")
+	public String deleteReply(@RequestParam("reno") Long reno,@RequestParam("bno") Long bno, Model model, HttpSession session) {
+		System.out.println("deleteReply 접속");
+		String mid = (String) session.getAttribute("mid");
+		CompanyManager cm = (CompanyManager) session.getAttribute("companyManager");
+		String cmid = null;
 
+		if (cm != null) {
+
+			cmid = cm.getCmid();
+			System.out.println("cmid =" + cmid);
+		}
+
+		if (mid != null) {
+			
+			dao.deleteReplyMem(reno, mid);
+
+		} else if (mid == null) {
+			dao.deleteReplyCom(reno, cmid);
+		}
+
+		return "redirect:/commu/communityDetail_KHJ?bno=" + bno;
+	}
 }
