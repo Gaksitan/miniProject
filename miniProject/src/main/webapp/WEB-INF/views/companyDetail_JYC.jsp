@@ -6,6 +6,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/main.css" />
+<style type="text/css">
+	.pages{
+		display : flex;
+		flex-direction : row;
+	}
+	
+	.enlists{
+		display : flex;
+		flex-direction : column;
+		align-items : center;
+		justify-content : center;
+	}
+	
+	ul li{
+		list-style: none;
+	}
+	ul li a{
+		margin: 5px;
+	}
+</style>
 
 </head>
 <body>
@@ -30,12 +50,13 @@
 		</div>
 		<p>${company.cintro }</p>
 		<input type="button" value="더보기">
+		
+		<div class="enlists">
 		<c:if test="${enlist != null }">
 			<table>
 				<tbody>
 					<c:forEach var="en" items="${enlist }" varStatus="status">
 						<tr>
-							<td>${status.count }</td>
 							<c:if test="${mid == null && companyManager == null }">
 								<td><a href="/employnotice/detailNoneMem?enno=${en.enno }">${en.entitle }</a></td>
 							</c:if>
@@ -51,28 +72,30 @@
 			</table>
 
 			<c:if test="${!paging.isEmpty() }">
-				<ul class="pagination justify-content-center"></ul>
+				<ul class="pages">
 				<c:if test="${hasPrevious == true }">
-           		<li class="page-item"> 
-           		<a class="page-link"
-						href="/page/companyEmployNotice?page=${currentPage-1}&cno=${company.cno}"><span>이전</span> 
-					</a>
+	           		<li class="page-item"> 
+	           			<a class="page-link"
+							href="/page/companyEmployNotice?page=${currentPage-1}&cno=${company.cno}"><span>이전</span> 
+						</a>
 					</li>
-				</c:if>
-				<c:forEach begin="1" end="${totalPages }" varStatus="status">
-							<a href="/page/companyEmployNotice?page=${status.count }&cno=${company.cno}">${status.count }</a>
+					</c:if>
+					<c:forEach begin="1" end="${totalPages }" varStatus="status">
+						<li><a href="/page/companyEmployNotice?page=${status.count }&cno=${company.cno}">${status.count }</a></li>
 					</c:forEach>
-				<c:if test="${hasNext == true }">
-            	<li class="page-item">
-            	<a class="page-link"
-						href="/page/companyEmployNotice?page=${currentPage+1}&cno=${company.cno}"> <span>다음</span> 
-					</a>
-					</li>
-				</c:if>
+					<c:if test="${hasNext == true }">
+		            	<li class="page-item">
+			            	<a class="page-link"
+									href="/page/companyEmployNotice?page=${currentPage+1}&cno=${company.cno}"> <span>다음</span> 
+							</a>
+						</li>
+					</c:if>
+				</ul>		
 			</c:if>
-
-
 		</c:if>
+		</div>
+		
+		
 		<table>
 			<tbody>
 				<tr>
@@ -118,8 +141,6 @@
 				</tbody>
 			</table>
 		</c:if>
-		<input type="button" value="지원하러가기"
-			onclick="location.href='/employnotice/employNoticeList?cno=${company.cno}'">
 		<c:if test="${recommendList != null }">
 			<table>
 				<caption>기업 추천</caption>
