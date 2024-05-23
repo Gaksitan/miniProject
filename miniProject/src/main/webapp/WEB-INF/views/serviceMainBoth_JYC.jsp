@@ -51,6 +51,7 @@ h1{
 	padding: -5px 10px;
 }
 </style>
+<link rel="stylesheet" href="../css/main.css" />
 
 </head>
 <body>
