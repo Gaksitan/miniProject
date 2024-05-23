@@ -5,26 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>employNoticeSave</title>
-<script>
-    function addSkillField() {
-        var container = document.getElementById("skillContainer");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "skname";
-        input.placeholder = "스킬명";
-        container.appendChild(input);
-        container.appendChild(document.createElement("br"));
-    }
-    function addWelfareField() {
-        var container = document.getElementById("welfareContainer");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "wname";
-        input.placeholder = "복지명";
-        container.appendChild(input);
-        container.appendChild(document.createElement("br"));
-    }
-</script>
+<script src="../../script/script.js"></script>
+
 </head>
 <link rel="stylesheet" href="../css/main.css" />
 <body>
@@ -41,12 +23,12 @@
         <p>경력</p>
         <input type="text" name="enexp" value="${employNotice.enexp}"><br>
         <p>스킬</p>
-        <div id="skillContainer">
+        <div id="rskillContainer">
             <c:forEach items="${employNotice.skills}" var="skill">
-                스킬명 : <input type="text" name="skname" value="${skill.skname}"><br>
+                스킬명 : <input type="text" name="rskill" value="${skill.skname}"><br>
             </c:forEach>
         </div>
-        <button type="button" onclick="addSkillField()">추가</button>
+        <button type="button" onclick="addRskill()">추가</button>
         <p>학력</p>
         최종학력 : <input type="text" name="endegree" value="${employNotice.endegree}"><br>
         <p>복지</p>

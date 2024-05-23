@@ -100,6 +100,16 @@
             }
         });
     }
+    
+    function updateAverageScore(mid) {
+        $.post("/getAverageScore", { mid: mid }, function(response) {
+            $("#average_score").text(response.toFixed(2));
+        });
+    }
+
+    // 초기 로드 시 평균 평점 업데이트
+    var mid = "${item.mid}";
+    updateAverageScore(mid);
 </script>
 </head>
 <body>
@@ -114,7 +124,7 @@
     <br>
     이름 : ${item.mname} <br>
     나이 : ${age}<br>
-    전화번호 : ${item.mtel1}, ${item.mtel2} <br>
+    전화번호 : ${item.mtel2} <br>
     이메일 : ${item.memail} <br>
     거주지 : ${item.maddr1} <br>
 
@@ -136,7 +146,29 @@
         </tbody>
     </table>
 
-    평점 :
+    평점 평균 : <span id="average_score"></span>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <td>평점</td>
+                <td>리뷰</td>
+                <td>작성자</td>
+                <td>작성일자</td>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${scoreList}" var="score">
+                <tr>
+                    <td>${score.scmscore}</td>
+                    <td>${score.scmreview}</td>
+                    <td>${score.company.cname}</td>
+                    <td>${score.scmregdate}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+    
 
     <div id="modal">
         <div class="modal_content">       

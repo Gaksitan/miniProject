@@ -49,6 +49,7 @@ function updateApplicationStatus(status) {
     <li>전화번호 : ${item.mtel2}</li>
 </ul>
 
+<div>${resume.rimgPath }</div>
 
 
 <h3>${resume.rintro}</h3>

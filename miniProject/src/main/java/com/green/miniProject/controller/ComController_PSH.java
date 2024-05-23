@@ -218,7 +218,7 @@ public class ComController_PSH {
 	    }
 	    
 	    @RequestMapping("/enwrite")
-	    public String enWrite(EmployNotice en, @RequestParam("skname") List<String> sknames,
+	    public String enWrite(EmployNotice en, @RequestParam("rskill") List<String> sknames,
 	    						@RequestParam("wname") List<String> wnames, HttpSession session) {
 	        Company company = (Company) session.getAttribute("company");
 	        String cno = company.getCno();
