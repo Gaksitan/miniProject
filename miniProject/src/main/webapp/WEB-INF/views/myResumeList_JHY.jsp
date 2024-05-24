@@ -11,7 +11,7 @@
 <style>
 	#main {
 		color: white;
-		background-color: yellow;
+		background-color: rgb(27, 76, 155) solid;
 	}
 </style>
 <body>

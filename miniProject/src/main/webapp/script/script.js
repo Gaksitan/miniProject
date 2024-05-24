@@ -84,6 +84,7 @@
 		var container = document.getElementById("rexpContainer");
         var newRow = document.createElement("tr");
         var td = document.createElement("td");
+        td.id = "shortbox";
         // 입력 값 넣을 필드 생성 - createInputCell(name) 함수 동작시 <td><input type="text" name="name(매개변수)"></td> 생성
         var exnameInput = createInputCell("exname");
         var exjoindateInput = createInputCell("exjoindate");
@@ -135,6 +136,7 @@
 		var container = document.getElementById("rdegreeContainer");
         var newRow = document.createElement("tr");
         var td = document.createElement("td");
+        td.id = "shortbox";
         // 입력 값 넣을 필드 생성
         var denameInput = createInputCell("dename");
         var degraddateInput = createInputCell("degraddate");
@@ -183,6 +185,7 @@
 		var container = document.getElementById("rcertificateContainer");
         var newRow = document.createElement("tr");
         var td = document.createElement("td");
+        td.id = "shortbox";
         // 입력 값 넣을 필드 생성
         var cenameInput = createInputCell("cename");
         var cedateInput = createInputCell("cedate");
@@ -226,6 +229,7 @@
 	function addRlink() {
 		var container = document.getElementById("rlinkContainer");
         var input = document.createElement("input");
+        input.id = "shortbox";
         var inputName = document.createElement("input");
         var cancelBtn = document.createElement("button");
         var saveBtn = document.createElement("button");
