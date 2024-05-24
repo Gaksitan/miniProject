@@ -31,6 +31,7 @@ import com.green.miniProject.domain.JoinEmployNoticeAndCompany;
 import com.green.miniProject.domain.Link;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.ScrapEmployNotice;
 import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillMatchingEN;
 import com.green.miniProject.domain.SkillMatchingMR;
@@ -155,7 +156,7 @@ public class MemController_JHY {
 	
 	// 로그인 버튼 클릭시
 	@RequestMapping("/login")
-	public String login(@RequestParam("mid") String mid, @RequestParam("mpw") String mpw, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String login(@RequestParam("mid") String mid, @RequestParam("mpw") String mpw, Model model, HttpServletRequest request) {
 		
 		Member mem = dao.loginCheck(mid, mpw);
 		boolean tf = false;
@@ -410,11 +411,22 @@ public class MemController_JHY {
 	public String myApplyList(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mid");
+		
 		List<JoinApplyResumeList> list = dao.applyResumeList(mid);
 		model.addAttribute("myApplyList", list);
 		
+		List<ScrapEmployNotice> scrapList = dao.getScrap(mid);
+		model.addAttribute("scrapList", scrapList);
 		
 		
+		for(JoinApplyResumeList a : list) {
+			System.out.println(a);
+		}
+		
+		
+		for(ScrapEmployNotice scrap : scrapList) {
+			System.out.println(scrap);
+		}
 		
 		return "myApplyList_JHY";
 	}
@@ -468,6 +480,8 @@ public class MemController_JHY {
 		return "subscribeAndScrapList_JHY";
 	}
 	
+	
+	
 	@ResponseBody
 	@RequestMapping("/scrap")
 	public Map<String, Object> scrap(@RequestParam("enno") Long enno, HttpSession session, Model model) {
@@ -477,6 +491,7 @@ public class MemController_JHY {
 		
 		Map<String, Object> result = new HashMap<>();
 	    result.put("scrapResult", true);
+	    model.addAttribute("scrapResult", true);
 
 	    return result;
 	}
@@ -486,14 +501,16 @@ public class MemController_JHY {
 	
 	@RequestMapping("/deleteScrap")
 	@ResponseBody
-	public Map<String, Object> deleteScrap(@RequestParam("enno") Long enno, HttpSession session) {
+	public Map<String, Object> deleteScrap(@RequestParam("enno") Long enno, HttpSession session , Model model) {
 	    String mid = (String) session.getAttribute("mid");
-	    System.out.println("스크랩 삭제 enno, id 출력" + enno + mid);
+	    //System.out.println("스크랩 삭제 enno, id 출력" + enno + mid);
 	    scrapdao.unscrapEmployNotice(enno, mid);
 
 	    Map<String, Object> result = new HashMap<>();
 	    result.put("deleteScrapResult", true);
-
+	    
+	    model.addAttribute("scrapResult", false);
+	    
 	    return result;
 	}
 	

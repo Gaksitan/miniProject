@@ -61,5 +61,5 @@ public interface IMemberDao_JHY {
 	public void updateResumeCertificate(@Param("certificate") Certificate cer);
 	public void updateResumeLink(@Param("rlink") Link rlink);
 	
-	public ScrapEmployNotice getScrap(@Param("mid")String mid, @Param("enno")Long enno);
+	public List<ScrapEmployNotice> getScrap(@Param("mid")String mid);
 }
