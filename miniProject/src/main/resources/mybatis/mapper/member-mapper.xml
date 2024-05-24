@@ -137,7 +137,17 @@
   		select * from scrapemploynotice where mid = #{mid} 
   	</select>
   	
-  	
-  	
+  	<insert id="insertScore">
+		INSERT INTO scoreMemCom (MID, cno, smcscore, smcreview, smcregdate)
+            VALUES
+            (#{mid}, #{cno}, #{score}, #{review}, now())
+	</insert>
+  	<select id="getcno">
+
+		SELECT e.cno 
+		FROM applyresume a, employnotice e
+		WHERE a.enno = e.enno AND e.enno=#{enno} 
+		
+  	</select>
   	
 </mapper>  
