@@ -80,7 +80,7 @@
   	
   	
   	<insert id="regist">
-  		insert into member values (#{member.mid}, #{member.mpw}, #{member.memail}, #{member.mtel2}, #{member.mtel1}, #{member.mbirthDate}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mregDate}, #{member.mstate}, #{member.mgender})
+  		insert into member values (#{member.mid}, #{member.mpw}, #{member.memail}, #{member.mtel1}, #{member.mtel2}, #{member.mbirthDate}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mregDate}, #{member.mstate}, #{member.mgender})
   	</insert>
   	<insert id="writeResume" useGeneratedKeys="true" keyProperty="rno">
   		insert into resume values (null, #{resume.mid}, #{resume.rintro}, #{resume.rimgPath}, #{resume.rpublic}, #{resume.rtitle}, #{resume.rmain}, #{resume.rregdate})
