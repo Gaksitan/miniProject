@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -301,6 +302,7 @@ public class MemController_JHY {
 			exp.setExleavedate(date2);
 			exp.setExposition(expositionList.get(i));
 			exp.setExrank(exrankList.get(i));
+			exp.setRno(resume.getRno());
 			//expList.add(exp);
 			dao.writeResumeExp(exp);
 		}
@@ -312,6 +314,7 @@ public class MemController_JHY {
 			degree.setDegraddate(date);
 			degree.setDemajor(demajorList.get(i));
 			degree.setDehighestlevel(dehighestlevelList.get(i));
+			degree.setRno(resume.getRno());
 			dao.writeResumeDegree(degree);
 		}
 		
@@ -321,6 +324,7 @@ public class MemController_JHY {
 			LocalDate date = LocalDate.parse(cedateList.get(i), DateTimeFormatter.ISO_DATE);
 			cer.setCedate(date);
 			cer.setCelocation(celocationList.get(i));
+			cer.setRno(resume.getRno());
 			dao.writeResumeCertificate(cer);
 		}
 		
@@ -542,7 +546,17 @@ public class MemController_JHY {
         }
     }
     
-	
+	@PostMapping("/main")
+	public @ResponseBody String main(@RequestBody Resume resume, HttpSession session) {
+		
+		String mid = (String)session.getAttribute("mid");
+		
+		dao.regMain(resume.getRno());
+		
+		dao.cancelMain(resume.getRno(), mid);
+		
+		return "";
+	}
 	
 	
 	

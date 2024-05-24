@@ -82,14 +82,14 @@
   	<insert id="regist">
   		insert into member values (#{member.mid}, #{member.mpw}, #{member.memail}, #{member.mtel2}, #{member.mtel1}, #{member.mbirthDate}, #{member.mname}, #{member.maddr1}, #{member.maddr2}, #{member.mregDate}, #{member.mstate}, #{member.mgender})
   	</insert>
-  	<insert id="writeResume">
+  	<insert id="writeResume" useGeneratedKeys="true" keyProperty="rno">
   		insert into resume values (null, #{resume.mid}, #{resume.rintro}, #{resume.rimgPath}, #{resume.rpublic}, #{resume.rtitle}, #{resume.rmain}, #{resume.rregdate})
   	</insert>
   	<insert id="writeResumeSkill">
   		insert into skill values (null, #{rskill.rno}, #{rskill.skname})
   	</insert>
   	<insert id="writeResumeExp">
-  		insert into experience values (null, #{exp.rno}, #{exp.exname}, #{exp.exjoindate}, #{exp.exleavedate}, #{exp.exposition}, #{exp.rank})
+  		insert into experience values (null, #{exp.rno}, #{exp.exname}, #{exp.exjoindate}, #{exp.exleavedate}, #{exp.exposition}, #{exp.exrank})
   	</insert>
   	<insert id="writeResumeDegree">
   		insert into degree values (null, #{degree.rno}, #{degree.dename}, #{degree.degraddate}, #{degree.demajor}, #{degree.dehighestlevel})
@@ -98,7 +98,7 @@
   		insert into certificate values (null, #{certificate.rno}, #{certificate.cename}, #{certificate.cedate}, #{certificate.celocation})
   	</insert>
   	<insert id="writeResumeLink">
-  		insert into link values (null, #{link.rno}, #{link.cename})
+  		insert into link values (null, #{rlink.rno}, #{rlink.lname})
   	</insert>
   	
   	
@@ -149,5 +149,12 @@
 		WHERE a.enno = e.enno AND e.enno=#{enno} 
 		
   	</select>
+  	
+  	<update id="regMain">
+  		UPDATE resume SET rmain = 1 WHERE rno = #{rno}
+  	</update>
+  	<update id="cancelMain">
+  		UPDATE resume SET rmain = 0 WHERE mid = #{mid} AND NOT rno = #{rno}
+  	</update>
   	
 </mapper>  
