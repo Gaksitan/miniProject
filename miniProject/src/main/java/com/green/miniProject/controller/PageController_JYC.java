@@ -19,6 +19,7 @@ import com.green.miniProject.dao.IScoreMemComDAO_JYC;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.CompanySectorAndCompany;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.EmployNoticeDetail;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.ScoreMemCom;
 import com.green.miniProject.repository.EmployNoticeRepository;
@@ -65,7 +66,7 @@ public class PageController_JYC {
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
 
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(keyword, ((encurrentpage - 1) * 10));
+		List<EmployNoticeDetail> enlist = endao.searchEmployNoticeList(keyword, ((encurrentpage - 1) * 10));
 
 		if (enlist.size() > 0) {
 			for (int i = 0; i < enlist.size(); i++) {
@@ -120,7 +121,7 @@ public class PageController_JYC {
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
 
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(keyword, ((encurrentpage - 1) * 10));
+		List<EmployNoticeDetail> enlist = endao.searchEmployNoticeList(keyword, ((encurrentpage - 1) * 10));
 		if (enlist.size() > 0) {
 			for (int i = 0; i < enlist.size(); i++) {
 				if (enlist.get(i).getEntitle().length() > 20) {
@@ -177,7 +178,7 @@ public class PageController_JYC {
 
 		Long enpage2 = (page - 1L) * 10L;
 
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(keyword, ((page - 1) * 10));
+		List<EmployNoticeDetail> enlist = endao.searchEmployNoticeList(keyword, ((page - 1) * 10));
 
 		if (enlist.size() > 0) {
 			for (int i = 0; i < enlist.size(); i++) {
@@ -221,6 +222,17 @@ public class PageController_JYC {
 	public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam("cno") String cno) {
 		Page<com.green.miniProject.entity.EmployNotice> paging = employNoticeService.getList(page);
+		
+		String str;
+
+		for (int i = 0; i < paging.getContent().size(); i++) {
+			if (paging.getContent().get(i).getEntitle().length() > 30) {
+				str = paging.getContent().get(i).getEntitle().substring(0, 30);
+				paging.getContent().get(i).setEntitle(str + "...");
+				
+			}
+		}
+		
 		model.addAttribute("enlist", paging.getContent());
 		model.addAttribute("totalPages", paging.getTotalPages());
 		model.addAttribute("hasNext", paging.hasNext());

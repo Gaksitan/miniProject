@@ -22,9 +22,18 @@
 	ul li{
 		list-style: none;
 	}
+	ul{
+		padding: 0;
+	}
 	.items{
 		width: 200px;
-		height: 200px;
+		height: 220px;
+		background: white;
+		border-radius: 5px;
+	}
+	.images{
+		height: 120px;
+		border-bottom: 1px solid black;
 		background: gray;
 	}
 </style>
@@ -167,6 +176,7 @@
 			<c:forEach var="recommend" items="${recommendList }"
 				varStatus="status">
 				<ul class="items">
+						<li class="images"></li>
 					<c:if test="${mid == null && companyManager == null }">
 						<li><a href="/employnotice/detailNoneMem?enno=${recommend.enno }">${recommend.entitle }</a></li>
 					</c:if>

@@ -17,6 +17,7 @@ import com.green.miniProject.dao.IServiceAnswerDAO_JYC;
 import com.green.miniProject.dao.IServiceQuestionDAO_JYC;
 import com.green.miniProject.domain.CompanyManager;
 import com.green.miniProject.domain.FAQ;
+import com.green.miniProject.domain.FAQDetail;
 import com.green.miniProject.domain.ServiceQuestion;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,7 +44,16 @@ public class ServiceController_JYC {
 	@GetMapping("/mainMem")
 	public String mainMem(Model model) {
 		
-		model.addAttribute("faqlist", faqdao.getFAQListTargetMem());
+		List<FAQDetail> faqlist = faqdao.getFAQListTargetMem();
+		String str;
+		for(int i = 0; i < faqlist.size(); i++) {
+			if(faqlist.get(i).getFaqquestion().length() > 30) {
+				str = faqlist.get(i).getFaqquestion().substring(0, 30);
+				faqlist.get(i).setFaqquestion(str + "...");
+			}
+		}
+		
+		model.addAttribute("faqlist", faqlist);
 		
 		return "serviceMainBoth_JYC";
 	}
@@ -51,7 +61,16 @@ public class ServiceController_JYC {
 	@GetMapping("/mainCom")
 	public String mainCom(Model model) {
 		
-		model.addAttribute("faqlist", faqdao.getFAQListTargetCom());
+		List<FAQDetail> faqlist = faqdao.getFAQListTargetCom();
+		String str;
+		for(int i = 0; i < faqlist.size(); i++) {
+			if(faqlist.get(i).getFaqquestion().length() > 30) {
+				str = faqlist.get(i).getFaqquestion().substring(0, 30);
+				faqlist.get(i).setFaqquestion(str + "...");
+			}
+		}
+		
+		model.addAttribute("faqlist", faqlist);
 		
 		return "serviceMainBoth_JYC";
 	}
@@ -60,8 +79,6 @@ public class ServiceController_JYC {
 	public String registQuestionMem(ServiceQuestion sq, @RequestParam("qcno") Long qcno, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		
-		
 		
 		ServiceQuestion sqBuilder = ServiceQuestion.builder()
 				.sqtitle(sq.getSqtitle())

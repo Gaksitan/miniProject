@@ -16,6 +16,7 @@ import com.green.miniProject.dao.IMemberDAO_JYC;
 import com.green.miniProject.dao.IQuestionCategoryDAO_JYC;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.EmployNotice;
+import com.green.miniProject.domain.EmployNoticeDetail;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.QuestionCategory;
 
@@ -68,7 +69,7 @@ public class BothController_JYC {
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
 
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
+		List<EmployNoticeDetail> enlist = endao.searchEmployNoticeList(search, 0L);
 
 		if (enlist.size() > 0) {
 
@@ -123,7 +124,7 @@ public class BothController_JYC {
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
 
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
+		List<EmployNoticeDetail> enlist = endao.searchEmployNoticeList(search, 0L);
 
 		if (enlist.size() > 0) {
 
@@ -179,7 +180,7 @@ public class BothController_JYC {
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
 
-		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
+		List<EmployNoticeDetail> enlist = endao.searchEmployNoticeList(search, 0L);
 
 		if (enlist.size() > 0) {
 

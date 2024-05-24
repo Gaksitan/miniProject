@@ -149,6 +149,15 @@ public class EmployNoticeController_JYC {
 		List<EmployNoticeDetail> recommendList = employNoticeDao.getEmployNoticeListSamePosition(enno, enposition);
 		
 		if(recommendList.size() > 0) {
+			
+			String str;
+			for(int i = 0; i < recommendList.size(); i++) {
+				if(recommendList.get(i).getEntitle().length() > 20) {
+					str = recommendList.get(i).getEntitle().substring(0, 20);
+					recommendList.get(i).setEntitle(str + "...");
+				}
+			}
+			
 			model.addAttribute("recommendList", recommendList);
 		}
 		
@@ -184,7 +193,17 @@ public class EmployNoticeController_JYC {
 		String enposition = employNoticeDao.getEmployNotice(enno).getEnposition();
 		List<EmployNoticeDetail> recommendList = employNoticeDao.getEmployNoticeListSamePosition(enno, enposition);
 		
+		
 		if(recommendList.size() > 0) {
+			
+			String str;
+			for(int i = 0; i < recommendList.size(); i++) {
+				if(recommendList.get(i).getEntitle().length() > 20) {
+					str = recommendList.get(i).getEntitle().substring(0, 20);
+					recommendList.get(i).setEntitle(str + "...");
+				}
+			}
+			
 			model.addAttribute("recommendList", recommendList);
 		}
 		
@@ -233,6 +252,15 @@ public class EmployNoticeController_JYC {
 		List<EmployNoticeDetail> recommendList = employNoticeDao.getEmployNoticeListSamePosition(enno, enposition);
 		
 		if(recommendList.size() > 0) {
+			
+			String str;
+			for(int i = 0; i < recommendList.size(); i++) {
+				if(recommendList.get(i).getEntitle().length() > 20) {
+					str = recommendList.get(i).getEntitle().substring(0, 20);
+					recommendList.get(i).setEntitle(str + "...");
+				}
+			}
+			
 			model.addAttribute("recommendList", recommendList);
 		}
 		
