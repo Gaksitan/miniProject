@@ -15,7 +15,7 @@ public interface IEmployNoticeDAO_JYC {
 	public List<EmployNotice> getAllEmployNoticeListOrderByRegdateDesc();
 	public List<EmployNotice> getAllEmployNoticeListOrderByEnddateAscCno(@Param("cno") String cno);
 	public List<EmployNotice> getAllEmployNoticeListOrderByRegdateDescCno(@Param("cno") String cno);
-	public List<EmployNotice> searchEmployNoticeList(@Param("keyword") String keyword, @Param("page") Long page);
+	public List<EmployNoticeDetail> searchEmployNoticeList(@Param("keyword") String keyword, @Param("page") Long page);
 	public List<EmployNotice> getEmployNoticeList(@Param("cno") String cno);
 	public EmployNoticeDetail getEmployNotice(@Param("enno") Long enno);
 	public int getCount(@Param("keyword") String keyword);

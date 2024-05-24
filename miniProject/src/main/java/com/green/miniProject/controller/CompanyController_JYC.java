@@ -113,6 +113,7 @@ public class CompanyController_JYC {
 			if (paging.getContent().get(i).getEntitle().length() > 30) {
 				str = paging.getContent().get(i).getEntitle().substring(0, 30);
 				paging.getContent().get(i).setEntitle(str + "...");
+				
 			}
 		}
 
