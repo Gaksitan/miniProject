@@ -7,12 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>게시;판 글 작성/수정</title>
+<title>게시판 글 작성/수정</title>
+<style>
+
+</style>
 <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css"
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="../css/main.css" />
 </head>
-
 <body>
 	<%@ include file="./header_JYC.jsp"%>
 	<main>
@@ -21,9 +23,10 @@
 		<script
 			src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
 
+		<h1>게시글 작성 페이지</h1>
+		<hr>
+
 		<div class="container">
-			<h1>게시글 작성 페이지</h1>
-			<hr>
 			<form action="/commu/contentInsert" method="get">
 				<div class="form-group">
 					<label for="title">게시글 제목</label> <input type="text" id="title"
@@ -38,7 +41,8 @@
 				</div>
 				<div class="form-group">
 					<label for="tag">태그할 사람</label> <input type="text"
-						class="form-control" id="tag" name="tag" placeholder="태그할 아이디">
+						class="form-control" id="tag" name="tag" placeholder="태그할 아이디"
+						size=60>
 					<button type="submit" class="searchBtn">추가</button>
 				</div>
 				<button type="submit" class="regist">등록</button>
@@ -46,7 +50,6 @@
 					onclick="window.location.href = document.referrer;">취소</button>
 			</form>
 		</div>
-
 	</main>
 	<%@ include file="./footer_JYC.jsp"%>
 	<script>
