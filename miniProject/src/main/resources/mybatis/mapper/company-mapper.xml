@@ -153,12 +153,12 @@
 	    WHERE en.cno = #{cno}
 	</select>
 
-    <delete id="deleteSkill" parameterType="int">
-        DELETE FROM SkillEmployNotice WHERE skno = #{id}
+    <delete id="deleteSkillBySkno">
+    	DELETE FROM SkillEmployNotice WHERE skno = #{skno}
     </delete>
 
-    <delete id="deleteWelfare" parameterType="int">
-        DELETE FROM WelfareEmployNotice WHERE wno = #{id}
+    <delete id="deleteWelfareByWno">
+        DELETE FROM WelfareEmployNotice WHERE wno = #{wno}
     </delete>
     
     

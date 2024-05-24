@@ -147,9 +147,9 @@ public class ComController_PSH {
 		CompanyManager cm = dao.select(cmid, cmpw);
 		String msg="";
 		if(cm == null) {
-			msg = "회원정보가 없습니다.";
+			msg = "id와 pw가 일치하지 않습니다.";
 			model.addAttribute("msg", msg);
-			return "loginFormCom";
+			return "loginForm_PSH";	
 		}else {
 			HttpSession session = request.getSession();
 			
@@ -168,7 +168,7 @@ public class ComController_PSH {
 
 	    session.invalidate();
 	    
-	    return "redirect:/";
+	    return "redirect:/mem/indexMem";
 		
 	
 	}
@@ -218,7 +218,7 @@ public class ComController_PSH {
 	    }
 	    
 	    @RequestMapping("/enwrite")
-	    public String enWrite(EmployNotice en, @RequestParam("rskill") List<String> sknames,
+	    public String enWrite(EmployNotice en, @RequestParam("skname") List<String> sknames,
 	    						@RequestParam("wname") List<String> wnames, HttpSession session) {
 	        Company company = (Company) session.getAttribute("company");
 	        String cno = company.getCno();
@@ -227,69 +227,89 @@ public class ComController_PSH {
 	        dao.enwrite(en);
 
 	        for (String skname : sknames) {
-	            SkillEmployNotice skill = new SkillEmployNotice();
-	            skill.setEnno(en.getEnno());
-	            skill.setSkname(skname);
-	            dao.insertSkill(skill);
+	        	if (skname != null && !skname.trim().isEmpty()) {
+		            SkillEmployNotice skill = new SkillEmployNotice();
+		            skill.setEnno(en.getEnno());
+		            skill.setSkname(skname);
+		            dao.insertSkill(skill);
+	        	}
 	        }
 	        
 	        for (String wname : wnames) {
-	        	WelfareEmployNotice welfare = new WelfareEmployNotice();
-	        	welfare.setEnno(en.getEnno());
-	        	welfare.setWname(wname);
-	            dao.insertWelfare(welfare);
+		        	if (wname != null && !wname.trim().isEmpty()) {
+		        	WelfareEmployNotice welfare = new WelfareEmployNotice();
+		        	welfare.setEnno(en.getEnno());
+		        	welfare.setWname(wname);
+		            dao.insertWelfare(welfare);
+		        }
 	        }
 
 	        return "redirect:employNoticeList";
 	    }
 
 	    @Transactional
-		@RequestMapping(value = "/updateEmployNotice", method = RequestMethod.POST)
-		public String updateEmployNotice(EmployNotice en,
-										 @RequestParam(value = "sknames", required = false) List<String> sknames,
-										 @RequestParam(value = "wnames", required = false) List<String> wnames,
-										 @RequestParam(value = "newSknames", required = false) List<String> newSknames,
-										 @RequestParam(value = "newWnames", required = false) List<String> newWnames) {
-		    dao.updateEmployNotice(en);
+	    @RequestMapping(value = "/updateEmployNotice", method = RequestMethod.POST)
+	    public String updateEmployNotice(EmployNotice en,
+	                                     @RequestParam(value = "sknames", required = false) List<String> sknames,
+	                                     @RequestParam(value = "wnames", required = false) List<String> wnames,
+	                                     @RequestParam(value = "newSknames", required = false) List<String> newSknames,
+	                                     @RequestParam(value = "newWnames", required = false) List<String> newWnames,
+	                                     @RequestParam(value = "deletedSkills", required = false) List<Long> deletedSkills,
+	                                     @RequestParam(value = "deletedWelfares", required = false) List<Long> deletedWelfares) {
+	        dao.updateEmployNotice(en);
 
-		    if (sknames != null) {
-		        List<SkillEmployNotice> skills = dao.getSkillsByEmployNoticeId(en.getEnno());
-		        for (int i = 0; i < sknames.size(); i++) {
-		        	SkillEmployNotice skill = skills.get(i);
-		            skill.setSkname(sknames.get(i));
-		            dao.updateSkill(skill);
-		        }
-		    }
+	        if (sknames != null) {
+	            List<SkillEmployNotice> skills = dao.getSkillsByEmployNoticeId(en.getEnno());
+	            for (int i = 0; i < sknames.size(); i++) {
+	                SkillEmployNotice skill = skills.get(i);
+	                skill.setSkname(sknames.get(i));
+	                dao.updateSkill(skill);
+	            }
+	        }
 
-		    if (newSknames != null) {
-		        for (String skname : newSknames) {
-		            SkillEmployNotice skill = new SkillEmployNotice();
-		            skill.setEnno(en.getEnno());
-		            skill.setSkname(skname);
-		            dao.insertSkill(skill);
-		        }
-		    }
+	        if (newSknames != null) {
+	            for (String skname : newSknames) {
+	                SkillEmployNotice skill = new SkillEmployNotice();
+	                skill.setEnno(en.getEnno());
+	                skill.setSkname(skname);	
+	                dao.insertSkill(skill);
+	            }
+	        }
 
-		    if (wnames != null) {
-		        List<WelfareEmployNotice> welfares = dao.getWelfaresByEmployNoticeId(en.getEnno());
-		        for (int i = 0; i < wnames.size(); i++) {
-		            WelfareEmployNotice welfare = welfares.get(i);
-		            welfare.setWname(wnames.get(i));
-		            dao.updateWelfare(welfare);
-		        }
-		    }
+	        if (deletedSkills != null) {
+	            for (Long skno : deletedSkills) {
+	                dao.deleteSkillBySkno(skno);
+	            }
+	        }
 
-		    if (newWnames != null) {
-		        for (String wname : newWnames) {
-		            WelfareEmployNotice welfare = new WelfareEmployNotice();
-		            welfare.setEnno(en.getEnno());
-		            welfare.setWname(wname);
-		            dao.insertWelfare(welfare);
-		        }
-		    }
+	        if (wnames != null) {
+	            List<WelfareEmployNotice> welfares = dao.getWelfaresByEmployNoticeId(en.getEnno());
+	            for (int i = 0; i < wnames.size(); i++) {
+	                WelfareEmployNotice welfare = welfares.get(i);
+	                welfare.setWname(wnames.get(i));
+	                dao.updateWelfare(welfare);
+	            }
+	        }
 
-		    return "redirect:employNoticeList";
-		}
+	        if (newWnames != null) {
+	            for (String wname : newWnames) {
+	                WelfareEmployNotice welfare = new WelfareEmployNotice();
+	                welfare.setEnno(en.getEnno());
+	                welfare.setWname(wname);
+	                dao.insertWelfare(welfare);
+	            }
+	        }
+
+	        if (deletedWelfares != null) {
+	            for (Long wno : deletedWelfares) {
+	                dao.deleteWelfareByWno(wno);
+	            }
+	        }
+
+	        return "redirect:employNoticeList";
+	    }
+
+
 	    
 	    @Transactional
 	    @RequestMapping(value = "/deleteEmployNotice", method = RequestMethod.POST)

@@ -29,47 +29,60 @@
 <main>
 <a href="regFormCom">회원가입</a><br>
 
-<h2>Company에서 올린 채용공고</h2>
-<table border="1">
-  <thead>
-	  <tr>
-		  <td>제목</td>
-		  <td>기간</td>
-		  <td>D-Day</td>
-	  </tr>
-  </thead>
-  <tbody>
-    <c:forEach items="${employNoticeList}" var="notice">
-        <tr>
-			<td><a href="employNotice?enno=${notice.enno}">${notice.entitle}</a></td>
-            <td>${notice.enregdate}~${notice.enenddate }</td>
-            <td><script>document.write(calculateDDay('${notice.enenddate}'))</script></td>
-        </tr>
-    </c:forEach>
-  </tbody>
-</table>
-
-<h2>스킬 매칭</h2>
-<table border="1">
-  <thead>
-	  <tr>
-		  <td>이력서 제목</td>
-		  <td>작성자</td>
-	  </tr>
-  </thead>
-  <tbody>
-  		<c:set var="previousTitle" value=""/>
-        <c:forEach items="${skNameList}" var="skname">
-            <c:if test="${skname.resume.rtitle != previousTitle && skname.resume.rpublic == true}">
+<h2>우리 회사에서 올린 채용공고</h2>
+<c:choose>
+    <c:when test="${empty company}">
+        <p>로그인 후 이용 가능한 기능입니다.</p>
+    </c:when>
+    <c:otherwise>
+        <table border="1">
+          <thead>
+              <tr>
+                  <td>제목</td>
+                  <td>기간</td>
+                  <td>D-Day</td>
+              </tr>
+          </thead>
+          <tbody>
+            <c:forEach items="${employNoticeList}" var="notice">
                 <tr>
-                    <td><a href="applyResumeDetail?rno=${skname.resume.rno}&mid=${skname.member.mid}">${skname.resume.rtitle}</a></td>
-                    <td><a href="applicantDetail?mid=${skname.member.mid}">${skname.member.mname}</a></td>
+                    <td><a href="employNotice?enno=${notice.enno}">${notice.entitle}</a></td>
+                    <td>${notice.enregdate}~${notice.enenddate }</td>
+                    <td><script>document.write(calculateDDay('${notice.enenddate}'))</script></td>
                 </tr>
-                <c:set var="previousTitle" value="${skname.resume.rtitle}"/>
-            </c:if>
-        </c:forEach>
-  </tbody>
-</table>
+            </c:forEach>
+          </tbody>
+        </table>
+    </c:otherwise>
+</c:choose>
+<h2>스킬 매칭</h2>
+<c:choose>
+    <c:when test="${empty company}">
+        <p>로그인 후 이용 가능한 기능입니다.</p>
+    </c:when>
+        <c:otherwise>
+        <table border="1">
+          <thead>
+              <tr>
+                  <td>이력서 제목</td>
+                  <td>작성자</td>
+              </tr>
+          </thead>
+          <tbody>
+                <c:set var="previousTitle" value=""/>
+                <c:forEach items="${skNameList}" var="skname">
+                    <c:if test="${skname.resume.rtitle != previousTitle && skname.resume.rpublic == true}">
+                        <tr>
+                            <td><a href="applyResumeDetail?rno=${skname.resume.rno}&mid=${skname.member.mid}">${skname.resume.rtitle}</a></td>
+                            <td><a href="applicantDetail?mid=${skname.member.mid}">${skname.member.mname}</a></td>
+                        </tr>	
+                        <c:set var="previousTitle" value="${skname.resume.rtitle}"/>
+                    </c:if>
+                </c:forEach>
+          </tbody>
+        </table>
+    </c:otherwise>
+</c:choose>
 </main>
 </body>
 </html>

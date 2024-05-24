@@ -7,41 +7,41 @@
 <title>applicantDetail</title>
 <style>
     #modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;	
+      transform: translate(-50%, -50%);
+      z-index: 1;
     }
-
+    
     #modal h2 {
-        margin: 0;
+      margin: 0;
     }
+    
     #modal button {
-        display: inline-block;
-        width: 100px;
-        margin-left: calc(100% - 100px - 10px);
+      display: inline-block;
+      width: 100px;
     }
-
-    #modal .modal_content {    
-        width: 300px;
-        margin: 100px auto;
-        padding: 20px 10px;
-        background: #fff;
-        border: 2px solid #666;
+    
+    #modal .modal_content {
+      width: 300px;
+      padding: 20px 10px;
+      background: #fff;
+      border: 2px solid #666;
     }
-
+    
     #modal .modal_layer {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-    }
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }   
+</style>
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

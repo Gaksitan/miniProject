@@ -168,6 +168,7 @@ public class CompanyETCController_PSH {
         List<Degree> degreeList = service.getDegreeListByRno(rno);
         List<Link> linkList = service.getLinkListByRno(rno);
         
+        //ApplyResume applyResume = service.getApplyResumeByRno(rno);
 
         model.addAttribute("item", applicantDetail);
         model.addAttribute("resume", resumeDetail);
@@ -175,6 +176,8 @@ public class CompanyETCController_PSH {
         model.addAttribute("expList", expList);
         model.addAttribute("degreeList", degreeList);
         model.addAttribute("linkList", linkList);
+        
+        //model.addAttribute("applyResume", applyResume);
     	
     	
 		return "applyResumeDetail_PSH";
@@ -191,6 +194,18 @@ public class CompanyETCController_PSH {
         }
     }
     // 서류 평가
-    
+    /*
+    @PostMapping("/updateApplicationStatus2")
+    public ResponseEntity<String> updateApplicationStatus2(@RequestParam("status") int status,
+    														@RequestParam("rno") String rno,
+    														@RequestParam("arno") String arno) {
+        try {
+            dao.updateApplicationStatus2(status, rno, arno);
+            return ResponseEntity.ok("Status updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating status");
+        }
+    }
+    */
     
 }

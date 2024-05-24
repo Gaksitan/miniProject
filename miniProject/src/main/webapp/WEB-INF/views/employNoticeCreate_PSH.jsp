@@ -5,26 +5,46 @@
 <head>
 <meta charset="UTF-8">
 <title>employNoticeSave</title>
-<script src="../../script/script.js"></script>
 <script>
-    function addSkillField() {
-        var container = document.getElementById("skillContainer");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "skname";
-        input.placeholder = "스킬명";
-        container.appendChild(input);
-        container.appendChild(document.createElement("br"));
-    }
-    function addWelfareField() {
-        var container = document.getElementById("welfareContainer");
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = "wname";
-        input.placeholder = "복지명";
-        container.appendChild(input);
-        container.appendChild(document.createElement("br"));
-    }
+	function addSkillField() {
+	    var container = document.getElementById("skillContainer");
+	    var div = document.createElement("div");
+	    var input = document.createElement("input");
+	    input.type = "text";
+	    input.name = "skname";
+	    input.placeholder = "스킬명";
+	    
+	    var removeButton = document.createElement("button");
+	    removeButton.type = "button";
+	    removeButton.innerText = "삭제";
+	    removeButton.onclick = function() {
+	        container.removeChild(div);
+	    };
+	    
+	    div.appendChild(input);
+	    div.appendChild(removeButton);
+	    container.appendChild(div);
+	}
+	
+	function addWelfareField() {
+	    var container = document.getElementById("welfareContainer");
+	    var div = document.createElement("div");
+	    var input = document.createElement("input");
+	    input.type = "text";
+	    input.name = "wname";
+	    input.placeholder = "복지명";
+	    
+	    var removeButton = document.createElement("button");
+	    removeButton.type = "button";
+	    removeButton.innerText = "삭제";
+	    removeButton.onclick = function() {
+	        container.removeChild(div);
+	    };
+	    
+	    div.appendChild(input);
+	    div.appendChild(removeButton);
+	    container.appendChild(div);
+	}
 </script>
 </head>
 <link rel="stylesheet" href="../css/main.css" />
@@ -42,18 +62,20 @@
         <p>경력</p>
         <input type="text" name="enexp" value="${employNotice.enexp}"><br>
         <p>스킬</p>
-        <div id="rskillContainer">
+        <div id="skillContainer">
             <c:forEach items="${employNotice.skills}" var="skill">
-                스킬명 : <input type="text" name="rskill" value="${skill.skname}"><br>
+                스킬명 : <input type="text" name="skname" value="${skill.skname}">
+                <button type="button" onclick="this.parentElement.remove()">삭제</button>
             </c:forEach>
         </div>
-        <button type="button" onclick="addRskill()">추가</button>
+        <button type="button" onclick="addSkillField()">추가</button>
         <p>학력</p>
         최종학력 : <input type="text" name="endegree" value="${employNotice.endegree}"><br>
         <p>복지</p>
         <div id="welfareContainer">
             <c:forEach items="${employNotice.welfares}" var="welfare">
                 복지명 : <input type="text" name="wname" value="${welfare.wname}"><br>
+                <button type="button" onclick="this.parentElement.remove()">삭제</button>
             </c:forEach>
         </div>
         <button type="button" onclick="addWelfareField()">추가</button>
