@@ -10,6 +10,19 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+
+.inline-block {
+
+	display: inline-block;
+	vertical-align: middle;
+
+}
+
+.inline-block img {
+
+	margin-right: 10px;
+
+}
 </style>
 <link rel="stylesheet" href="../css/main.css" />
 </head>
@@ -18,28 +31,32 @@
 	<main>
 		<h1>커뮤니티 상세페이지</h1>
 		<hr>
-		<h3>${boardDetail[0].btitle}</h3>
+		<fieldset>
+			<p>
+			<h3 class="inline-block">${boardDetail[0].btitle}</h3>
 
-		<c:if test="${likeyesno == true }">
-			<img src="/resources_KHJ/img_KHJ/heart.png" id="like" width="15"
-				height="15" />
-		</c:if>
-		<c:if test="${likeyesno == false }">
-			<img src="/resources_KHJ/img_KHJ/emptyheart.png" id="like" width="15"
-				height="15" />
-		</c:if>
+			<c:if test="${likeyesno == true }">
+				<img class="inline-block" src="/resources_KHJ/img_KHJ/heart.png" id="like" width="15"
+					height="15" />
+			</c:if>
+			<c:if test="${likeyesno == false }">
+				<img class="inline-block" src="/resources_KHJ/img_KHJ/emptyheart.png" id="like"
+					width="15" height="15" />
+			</c:if>
 
-		<span>작성자</span>
-		<c:if test="${mid != null }">
-			<span>${boardDetail[0].mid}</span>
-			<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
-		</c:if>
-		<c:if test="${cmid != null }">
-			<span>${boardDetail[0].cmid}</span>
-			<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
-		</c:if>
+			<span class="inline-block">작성자</span>
+			<c:if test="${mid != null }">
+				<span class="inline-block">${boardDetail[0].mid}</span>
+				<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
+			</c:if>
+			<c:if test="${cmid != null }">
+				<span class="inline-block">${boardDetail[0].cmid}</span>
+				<!--작성자 아이디가 아닌 이름이 와야할 것 같기도-->
+			</c:if>
+			</p>
+		</fieldset>
 		<p>${boardDetail[0].bcontent}</p>
-		<span>태그</span>
+		<span>태그 : </span>
 		<c:forEach var="tags" items="${tagList }">
 			<span>${tags.value }</span>
 		</c:forEach>
@@ -47,7 +64,7 @@
 		<form action="replyInsert.do" method="get">
 			<input type="hidden" name="bno" value="${boardDetail[0].bno}">
 			<label for="reply">댓글 작성하기</label> <input id="reply" name="reply"
-				placeholder="댓글 입력하기" required="required"> <input
+				placeholder="댓글 입력" required="required" size=30  maxlength=30> <input
 				type="submit" value="작성">
 		</form>
 		<c:choose>
