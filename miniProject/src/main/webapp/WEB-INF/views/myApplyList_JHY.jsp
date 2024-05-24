@@ -20,27 +20,30 @@
 			<td>${applyResume.entitle }</td>
 			<td>${applyResume.applydate }</td>
 			
-			<%-- <c:if test="${scrapResult == false || scrapResult == null}">
-				<td><a href="/mem/scrap?enno=${applyResume.enno}">스크랩</a></td>
-			</c:if>
-			<c:if test="${scrapResult }">
-				<td><a href="/mem/deleteScrap?enno=${applyResume.enno}">스크랩취소</a></td>
-			</c:if> --%>
-			
-			
-			<c:if test="${scrapResult == false || scrapResult == null}">
-			    <td id="scrap-link-${applyResume.enno}">
-			        <a href="javascript:void(0);" onclick="scrap(${applyResume.enno})">스크랩</a>
-			    </td>
-			</c:if>
-			<c:if test="${scrapResult}">
-			    <td id="scrap-link-${applyResume.enno}">
-			        <a href="javascript:void(0);" onclick="deleteScrap(${applyResume.enno})">스크랩취소</a>
-			    </td>
-			</c:if>
-			
-			
 
+			
+			
+			
+			 <c:set var="isScrap" value="false"/>
+	        <c:forEach var="scrap" items="${scrapList}">
+	            <c:if test="${scrap.enno == applyResume.enno}">
+	                <c:set var="isScrap" value="true"/>
+	            </c:if>
+	        </c:forEach>
+
+	        <td id="scrap-link-${applyResume.enno}">
+	            <c:choose>
+	                <c:when test="${isScrap}">
+	                    <a href="javascript:void(0);" onclick="deleteScrap(${applyResume.enno})">스크랩취소</a>
+	                </c:when>
+	                <c:otherwise>
+	                    <a href="javascript:void(0);" onclick="scrap(${applyResume.enno})">스크랩</a>
+	                </c:otherwise>
+	            </c:choose>
+	        </td>
+			
+			
+	
 			<td><c:if test="${applyResume.arpass == 0}">불합격</c:if>
 				<c:if test="${applyResume.arpass == 1}">합격</c:if>
 				<c:if test="${applyResume.arpass == 2}">심사중</c:if></td>
@@ -65,6 +68,7 @@ function scrap(enno) {
         data: { enno: enno },
         success: function(response) {
             if (response.scrapResult) {
+                // 스크랩 성공 시 스크랩취소로 표시
                 document.getElementById('scrap-link-' + enno).innerHTML = '<a href="javascript:void(0);" onclick="deleteScrap(' + enno + ')">스크랩취소</a>';
             }
         },
@@ -81,6 +85,7 @@ function deleteScrap(enno) {
         data: { enno: enno },
         success: function(response) {
             if (response.deleteScrapResult) {
+                // 스크랩 취소 성공 시 스크랩으로 표시
                 document.getElementById('scrap-link-' + enno).innerHTML = '<a href="javascript:void(0);" onclick="scrap(' + enno + ')">스크랩</a>';
             }
         },
@@ -90,9 +95,6 @@ function deleteScrap(enno) {
     });
 }
 </script>
-
-
-
 
 
 
