@@ -18,9 +18,6 @@ th, td {
 	padding: 5px 20px;
 }
 
-th {
-	background: #fcefa9;
-}
 </style>
 </head>
 <body>

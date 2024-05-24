@@ -17,7 +17,7 @@
 </head>
 <body>
 	<footer>
-		<img src="../resources_JYC/images_JYC/logo.png" alt="로고" style="width:110px; height:90px;">
+		<a href="#" onClick="javascript:window.scrollTo(0,0)"><img src="../resources_JYC/images_JYC/logo.png" alt="로고" style="width:110px; height:90px;"></a>
 		<div>
 			<ul class="menu">
 				<li><span>서비스소개</span></li>

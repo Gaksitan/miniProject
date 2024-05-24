@@ -62,4 +62,15 @@ public interface IMemberDao_JHY {
 	public void updateResumeLink(@Param("rlink") Link rlink);
 	
 	public List<ScrapEmployNotice> getScrap(@Param("mid")String mid);
+	
+	void insertScore(@Param("mid") String mid,
+            @Param("cno") String cno,
+            @Param("score") int score,
+            @Param("review") String review);
+	
+	public String getcno(@Param("enno")Long enno);
+	
+	
+	
 }
+

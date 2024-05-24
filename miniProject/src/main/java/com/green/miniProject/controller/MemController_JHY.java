@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,7 @@ import com.green.miniProject.domain.CheckScrapEN;
 import com.green.miniProject.domain.CheckSubscribeCom;
 import com.green.miniProject.domain.Company;
 import com.green.miniProject.domain.Degree;
+import com.green.miniProject.domain.EmployNotice;
 import com.green.miniProject.domain.Experience;
 import com.green.miniProject.domain.JoinApplyResumeList;
 import com.green.miniProject.domain.JoinEmployNoticeAndCompany;
@@ -36,6 +38,8 @@ import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillMatchingEN;
 import com.green.miniProject.domain.SkillMatchingMR;
 import com.green.miniProject.domain.TempResume;
+import com.green.miniProject.service.CompanyETCService_PSH;
+import com.green.miniProject.service.MemberScoreService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,6 +55,10 @@ public class MemController_JHY {
 	
 	@Autowired
 	private IScrapEmployNoticeDAO_JYC scrapdao;
+	
+	@Autowired
+    private MemberScoreService service;
+
 	
 	// 스킬 매치 구현중
 	@RequestMapping("/indexMem")
@@ -513,5 +521,32 @@ public class MemController_JHY {
 	    
 	    return result;
 	}
+	
+	//평점 남기기
+	@PostMapping("/submitScore")
+    @ResponseBody
+    public String submitScore(HttpServletRequest request,
+    						@RequestParam("enno") Long enno,
+                              @RequestParam("score") int score,
+                              @RequestParam("review") String review) {
+		HttpSession session = request.getSession();
+		String mid = (String) session.getAttribute("mid");
+		
+		String cno = dao.getcno(enno);
+		System.out.println("cno: " + cno);
+        try {
+            service.submitScore(mid, cno, score, review);
+            return "success";
+        } catch (Exception e) {
+            return "failure";
+        }
+    }
+    
+	
+	
+	
+	
+	
+	
 	
 }
