@@ -19,11 +19,45 @@ button {
 }
 
 select {
-
-	margin-left : 1500px;
-
+	margin-left: 1500px;
 }
 
+ul {
+	list-style-type: none;
+}
+
+.button1 {
+	outline: 1.5px rgb(68, 136, 244) solid;
+	border-radius: 5px;
+	border: 0;
+	background-color: rgb(164, 199, 255);
+}
+
+.pagination-container {
+	text-align: center;
+	margin-top: 20px; /* 테이블과 페이지네이션 사이의 간격 */
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.pagination .page-item {
+	display: inline-block; /*세로 정렬을 가로 정렬로 변경*/
+	margin: 0 5px; /*페이지 아이템 간의 간격 조정*/
+}
+
+.pagination .page-link {
+	color: black;
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 1px solid #ddd;
+	margin: 0 4px;
+}
+
+.pagination .page-link:hover {
+	background-color: #ddd;
+}
 </style>
 <link rel="stylesheet" href="../css/main.css" />
 </head>
@@ -44,8 +78,8 @@ select {
 
 
 		<button type="button"
-			onclick="location.href='/commu/communityMemInsert_KHJ'">게시글
-			작성하기</button>
+			onclick="location.href='/commu/communityMemInsert_KHJ'"
+			class="button1">게시글 작성하기</button>
 		<!-- 	<input placeholder="작성자, 게시물 제목"></input>
 		<button type="submit" class="s1" value="찾기"></button> -->
 
@@ -77,14 +111,19 @@ select {
 		</table>
 
 		<!-- 커뮤니티 테이블 -->
+		<div id="select-div">
 			<select id="sortOptions">
 				<!--<option value="">추천순</option> 클릭 많은 순 -->
-				<option value="reply">댓글순</option>
+				<!-- <option value="reply">댓글순</option>  -->
+				<!-- 댓글 순 작동 안해서 버림 -->
 				<option value="likes">인기순</option>
 				<!-- 좋아요 많은 순 -->
 				<option value="date">최신순</option>
+				<!-- 최신 게시글 순 -->
 			</select>
-			<c:if test="${mid != null and !paging.isEmpty()}">
+		</div>
+		<c:if test="${mid != null and !paging.isEmpty()}">
+			<div id="table1">
 				<table border="1" id="myTable">
 					<thead>
 						<tr>
@@ -122,24 +161,28 @@ select {
 						</c:forEach>
 					</tbody>
 				</table>
-		<c:if test="${!paging.isEmpty()}">
-			<ul class="pagination justify-content-center">
-				<c:if test="${hasPrevious == true }">
-					<li class="page-item"><a class="page-link"
-						href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
-				</c:if>
-				<c:forEach begin="1" end="${totalPages }" varStatus="status">
-					<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${hasNext == true }">
-					<li class="page-item"><a class="page-link"
-						href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
-				</c:if>
-			</ul>
+			</div>
+			<c:if test="${!paging.isEmpty()}">
+				<div id="table1page" class="pagination-container">
+					<ul class="pagination justify-content-center">
+						<c:if test="${hasPrevious == true }">
+							<li class="page-item"><a class="page-link"
+								href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+						</c:if>
+						<c:forEach begin="1" end="${totalPages }" varStatus="status">
+							<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+							</li>
+						</c:forEach>
+						<c:if test="${hasNext == true }">
+							<li class="page-item"><a class="page-link"
+								href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+						</c:if>
+					</ul>
+				</div>
+			</c:if>
 		</c:if>
-		</c:if>
-			<c:if test="${companyManager != null and !paging.isEmpty()}">
+		<c:if test="${companyManager != null and !paging.isEmpty()}">
+			<div id="table2">
 				<table border="1" id="myTable">
 					<thead>
 						<tr>
@@ -177,22 +220,25 @@ select {
 						</c:forEach>
 					</tbody>
 				</table>
-		<c:if test="${!paging.isEmpty()}">
-			<ul class="pagination justify-content-center">
-				<c:if test="${hasPrevious == true }">
-					<li class="page-item"><a class="page-link"
-						href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
-				</c:if>
-				<c:forEach begin="1" end="${totalPages }" varStatus="status">
-					<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${hasNext == true }">
-					<li class="page-item"><a class="page-link"
-						href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
-				</c:if>
-			</ul>
-		</c:if>
+			</div>
+			<c:if test="${!paging.isEmpty()}">
+				<div id="table2page" class="pagination-container">
+					<ul class="pagination justify-content-center">
+						<c:if test="${hasPrevious == true }">
+							<li class="page-item"><a class="page-link"
+								href="/commu?page=${currentPage -1}"><span>이전</span> </a></li>
+						</c:if>
+						<c:forEach begin="1" end="${totalPages }" varStatus="status">
+							<li class="page-item"><a href="/commu?page=${status.count }">${status.count }</a>
+							</li>
+						</c:forEach>
+						<c:if test="${hasNext == true }">
+							<li class="page-item"><a class="page-link"
+								href="/commu?page=${currentPage+1}"><span>다음</span></a></li>
+						</c:if>
+					</ul>
+				</div>
+			</c:if>
 		</c:if>
 
 
