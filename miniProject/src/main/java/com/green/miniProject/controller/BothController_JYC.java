@@ -36,147 +36,197 @@ public class BothController_JYC {
 
 	@Autowired
 	private ICompanyDAO_JYC comdao;
-	
+
 	@Autowired
 	private IMemberDAO_JYC memdao;
-	
+
 	@Autowired
 	private IQuestionCategoryDAO_JYC qcdao;
-	
+
 	@RequestMapping("/header")
 	public String header(HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("mid", "aaa");
-		
+
 		return "header_JYC";
 	}
-	
+
 	@RequestMapping("/footer")
 	public String footer() {
 		return "footer_JYC";
 	}
-	
-	
+
 	@GetMapping("/searchResultNoMem")
 	public String searchResultMem(@RequestParam("search") String search, Model model) {
-		
+
 		List<Company> comlist = comdao.getCompanyList(search, 0L);
-		model.addAttribute("comlist", comlist);
-		model.addAttribute("comcount", comdao.getCount(search));
-		
+		String str;
+		if (comlist.size() > 0) {
+			model.addAttribute("comlist", comlist);
+			model.addAttribute("comcount", comdao.getCount(search));
+		}
+
 		double comcount = comdao.getCount(search);
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
-		
+
 		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
-		model.addAttribute("enlist", enlist);
-		model.addAttribute("encount", endao.getCount(search));
-		
+
+		if (enlist.size() > 0) {
+
+			for (int i = 0; i < enlist.size(); i++) {
+				if (enlist.get(i).getEntitle().length() > 20) {
+					str = enlist.get(i).getEntitle().substring(0, 20);
+					enlist.get(i).setEntitle(str + "...");
+				}
+
+			}
+
+			model.addAttribute("enlist", enlist);
+			model.addAttribute("encount", endao.getCount(search));
+		}
+
 		double encount = endao.getCount(search);
 		double enpage = Math.ceil(encount / 10.0);
-		
+
 		model.addAttribute("enpage", enpage);
 		model.addAttribute("keyword", search);
-		
+
 		List<Member> memlist = memdao.getMemberList(search, 0L);
-		model.addAttribute("memlist", memlist);
-		model.addAttribute("memcount", memdao.getCount(search));
-		
+
+		if (memlist.size() > 0) {
+			model.addAttribute("memlist", memlist);
+			model.addAttribute("memcount", memdao.getCount(search));
+		}
+
 		double memcount = memdao.getCount(search);
 		double mempage = Math.ceil(memcount / 10.0);
-		
+
 		model.addAttribute("mempage", mempage);
-		
+
 		model.addAttribute("memcurrentpage", 1);
 		model.addAttribute("comcurrentpage", 1);
 		model.addAttribute("encurrentpage", 1);
-		
+
 		return "searchResult_JYC";
 	}
-	
+
 	@GetMapping("/searchResultMem")
 	public String searchResultMem(Model model, @RequestParam("search") String search) {
-		
+
 		List<Company> comlist = comdao.getCompanyList(search, 0L);
-		model.addAttribute("comlist", comlist);
-		model.addAttribute("comcount", comdao.getCount(search));
-		
+		String str;
+		if (comlist.size() > 0) {
+			model.addAttribute("comlist", comlist);
+			model.addAttribute("comcount", comdao.getCount(search));
+		}
+
 		double comcount = comdao.getCount(search);
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
-		
+
 		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
-		model.addAttribute("enlist", enlist);
-		model.addAttribute("encount", endao.getCount(search));
-		
+
+		if (enlist.size() > 0) {
+
+			for (int i = 0; i < enlist.size(); i++) {
+				if (enlist.get(i).getEntitle().length() > 20) {
+					str = enlist.get(i).getEntitle().substring(0, 20);
+					enlist.get(i).setEntitle(str + "...");
+				}
+
+			}
+
+			model.addAttribute("enlist", enlist);
+			model.addAttribute("encount", endao.getCount(search));
+		}
+
 		double encount = endao.getCount(search);
 		double enpage = Math.ceil(encount / 10.0);
-		
+
 		model.addAttribute("enpage", enpage);
 		model.addAttribute("keyword", search);
-		
+
 		List<Member> memlist = memdao.getMemberList(search, 0L);
-		model.addAttribute("memlist", memlist);
-		model.addAttribute("memcount", memdao.getCount(search));
-		
+
+		if (memlist.size() > 0) {
+			model.addAttribute("memlist", memlist);
+			model.addAttribute("memcount", memdao.getCount(search));
+		}
+
 		model.addAttribute("memcurrentpage", 1);
 		model.addAttribute("comcurrentpage", 1);
 		model.addAttribute("encurrentpage", 1);
-		
+
 		double memcount = memdao.getCount(search);
 		double mempage = Math.ceil(memcount / 10.0);
-		
+
 		model.addAttribute("mempage", mempage);
-		
+
 		return "searchResult_JYC";
 	}
-	
+
 	@GetMapping("/searchResultCom")
 	public String searchResultCom(@RequestParam("search") String search, Model model) {
-		
+
 		List<Company> comlist = comdao.getCompanyList(search, 0L);
-		model.addAttribute("comlist", comlist);
-		model.addAttribute("comcount", comdao.getCount(search));
-		
+		String str;
+
+		if (comlist.size() > 0) {
+			model.addAttribute("comlist", comlist);
+			model.addAttribute("comcount", comdao.getCount(search));
+		}
+
 		double comcount = comdao.getCount(search);
 		double compage = Math.ceil(comcount / 10.0);
 		model.addAttribute("compage", compage);
-		
+
 		List<EmployNotice> enlist = endao.searchEmployNoticeList(search, 0L);
-		model.addAttribute("enlist", enlist);
-		model.addAttribute("encount", endao.getCount(search));
-		
+
+		if (enlist.size() > 0) {
+
+			for (int i = 0; i < enlist.size(); i++) {
+				if (enlist.get(i).getEntitle().length() > 20) {
+					str = enlist.get(i).getEntitle().substring(0, 20);
+					enlist.get(i).setEntitle(str + "...");
+				}
+
+			}
+
+			model.addAttribute("enlist", enlist);
+			model.addAttribute("encount", endao.getCount(search));
+		}
+
 		double encount = endao.getCount(search);
 		double enpage = Math.ceil(encount / 10.0);
-		
+
 		model.addAttribute("enpage", enpage);
 		model.addAttribute("keyword", search);
-		
+
 		List<Member> memlist = memdao.getMemberList(search, 0L);
-		model.addAttribute("memlist", memlist);
-		model.addAttribute("memcount", memdao.getCount(search));
-		
-		double memcount = memdao.getCount(search);
-		double mempage = Math.ceil(memcount / 10.0);
-		
+
+		if (memlist.size() > 0) {
+			model.addAttribute("memlist", memlist);
+			model.addAttribute("memcount", memdao.getCount(search));
+		}
+
 		model.addAttribute("memcurrentpage", 1);
 		model.addAttribute("comcurrentpage", 1);
 		model.addAttribute("encurrentpage", 1);
-		
+
+		double memcount = memdao.getCount(search);
+		double mempage = Math.ceil(memcount / 10.0);
+
 		model.addAttribute("mempage", mempage);
-		
+
 		return "searchResult_JYC";
 	}
-	
+
 	@GetMapping("/registQuestionForm")
 	public String registQuestionForm(Model model) {
-		
+
 		log.info("categoryList : " + qcdao.getAllQuestionCategoryList());
 		model.addAttribute("categoryList", qcdao.getAllQuestionCategoryList());
-		
-		
+
 		return "registQuestionForm_JYC";
 	}
-	
+
 }

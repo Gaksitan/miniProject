@@ -113,7 +113,22 @@ public class ServiceController_JYC {
 		HttpSession session = request.getSession();
 		String mid = (String)session.getAttribute("mid");
 		
-		model.addAttribute("serviceQuestionList", sqdao.getServiceQuestionListForMem(mid));
+		List<ServiceQuestion> sqlist = sqdao.getServiceQuestionListForMem(mid);
+		String str;
+		if(!sqlist.isEmpty()) {
+			for(int i = 0; i < sqlist.size(); i++) {
+				if(sqlist.get(i).getSqtitle().length() > 10) {
+					str = sqlist.get(i).getSqtitle().substring(0, 10);
+					sqlist.get(i).setSqtitle(str + "...");
+				}
+				
+				if(sqlist.get(i).getSqcontent().length() > 20) {
+					str = sqlist.get(i).getSqcontent().substring(0, 20);
+					sqlist.get(i).setSqcontent(str + "...");
+				}
+			}
+			model.addAttribute("serviceQuestionList", sqlist);
+		}
 
 		return "myServiceQuestion_JYC";
 	}
@@ -124,7 +139,22 @@ public class ServiceController_JYC {
 		
 		CompanyManager companyManager = (CompanyManager)session.getAttribute("companyManager");
 		
-		model.addAttribute("serviceQuestionList", sqdao.getServiceQuestionListForCom(companyManager.getCno()));
+		List<ServiceQuestion> sqlist = sqdao.getServiceQuestionListForCom(companyManager.getCno());
+		String str;
+		if(!sqlist.isEmpty()) {
+			for(int i = 0; i < sqlist.size(); i++) {
+				if(sqlist.get(i).getSqtitle().length() > 10) {
+					str = sqlist.get(i).getSqtitle().substring(0, 10);
+					sqlist.get(i).setSqtitle(str + "...");
+				}
+				
+				if(sqlist.get(i).getSqcontent().length() > 20) {
+					str = sqlist.get(i).getSqcontent().substring(0, 20);
+					sqlist.get(i).setSqcontent(str + "...");
+				}
+			}
+			model.addAttribute("serviceQuestionList", sqlist);
+		}
 		
 		return "myServiceQuestion_JYC";
 	}

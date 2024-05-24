@@ -161,6 +161,7 @@
 		<c:if test="${resume != null }">
 			<input type="button" value="지원하기" onclick="applyResume()">
 		</c:if>
+		<h2>채용공고 추천</h2>
 		<c:if test="${recommendList != null }">
 				<div id="container">
 			<c:forEach var="recommend" items="${recommendList }"

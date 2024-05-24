@@ -16,6 +16,7 @@ import com.green.miniProject.domain.InterestMember;
 import com.green.miniProject.domain.Link;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.ScoreComMem;
 import com.green.miniProject.domain.Skill;
 
 @Service
@@ -24,8 +25,8 @@ public class CompanyETCService_PSH {
 	@Autowired
 	private ICompanyETCDao_PSH dao;
 	
-	public List<InterestMember> getAllInterestMembers(){
-		return dao.getAllInterestMembers();
+	public List<InterestMember> getAllInterestMembers(String cno){
+		return dao.getAllInterestMembers(cno);
 	}
 	
     public void removeInterest(Long imno) {
@@ -76,6 +77,10 @@ public class CompanyETCService_PSH {
         return dao.getResumeListByMid(mid);
     }
     
+    public List<ScoreComMem> getScoreComMemListByMid(String mid){
+    	return dao.getScoreComMemListByMid(mid);
+    }
+    
     public Resume getResumeByRno(String rno) {
     	return dao.getResumeByRno(rno);
     }
@@ -99,5 +104,10 @@ public class CompanyETCService_PSH {
     
     public void submitScore(String mid, String cno, int score, String review) {
         dao.insertScore(mid, cno, score, review);
+    }
+    // 평점 삽입
+    
+    public Double getAverageScore(String mid) {
+        return dao.getAverageScore(mid);
     }
 }

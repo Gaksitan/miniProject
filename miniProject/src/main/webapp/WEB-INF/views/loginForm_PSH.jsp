@@ -15,7 +15,7 @@
 <div>
 	<form action="loginCom" method="post">
 		아이디 : <input type="text" name="cmid" placeholder="담당자 아이디"><br>
-		비밀번호 : <input type="text" name="cmpw" placeholder="비밀번호"><br>
+		비밀번호 : <input type="password" name="cmpw" placeholder="비밀번호"><br>
 		<input type="submit" value="로그인">&nbsp;&nbsp;
 		<a href="regFormCom">회원가입</a>
 	</form>

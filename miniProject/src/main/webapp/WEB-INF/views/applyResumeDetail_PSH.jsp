@@ -41,7 +41,7 @@ function updateApplicationStatus(status) {
 <c:set var="resume" value="${resume}" />
 
 
-<h2>${resume.rtitle}</h2>
+<h1>${resume.rtitle}</h1>
 
 <ul>
     <li>이름 : ${item.mname}</li>
@@ -49,6 +49,7 @@ function updateApplicationStatus(status) {
     <li>전화번호 : ${item.mtel2}</li>
 </ul>
 
+<p><img src="${resume.rimgPath }" alt="증명사진" width="280px" /></p>
 
 
 <h3>${resume.rintro}</h3>

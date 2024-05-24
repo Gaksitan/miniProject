@@ -12,9 +12,11 @@
 	rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="../css/main.css" />
 </head>
+
 <body>
+	<%@ include file="./header_JYC.jsp"%>
 	<main>
-		<%@ include file="./header_JYC.jsp"%>
+
 		<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
@@ -44,16 +46,18 @@
 					onclick="window.location.href = document.referrer;">취소</button>
 			</form>
 		</div>
-		<script>
-			let input = document.querySelector("#tag")
-			let tagify = new Tagify(input);
 
-			tagify.on('add', function() {
-				console.log(tagify.value);
-
-			})
-		</script>
-		<%@ include file="./footer_JYC.jsp"%>
 	</main>
+	<%@ include file="./footer_JYC.jsp"%>
+	<script>
+		let input = document.querySelector("#tag")
+		let tagify = new Tagify(input);
+
+		tagify.on('add', function() {
+			console.log(tagify.value);
+
+		})
+	</script>
+
 </body>
 </html>

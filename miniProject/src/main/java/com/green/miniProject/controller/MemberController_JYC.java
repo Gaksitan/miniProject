@@ -42,24 +42,37 @@ public class MemberController_JYC {
 		
 		String mid = (String)session.getAttribute("mid");
 		
-		
-		
 		List<SubscribeCompanyDetail> scdlist = subComDao.getSubComDetail(mid);
+		List<ScrapEmployNoticeDetail> scrapList = scrapEnDao.getScrapENDetail(mid);
+		
+		String str;
 		
 		List<Object> scnameList = new ArrayList<>();
 		for(SubscribeCompanyDetail s : scdlist) {
 			scnameList.add(comSecDao.getScnameList(s.getCno()));
 		}
 		
-		
-		
 		if(scdlist.size() > 0) {
+			
+			for(int i = 0; i < scdlist.size(); i++) {
+				if(scdlist.get(i).getCintro().length() > 20) {
+					str = scdlist.get(i).getCintro().substring(0, 20);
+					scdlist.get(i).setCintro(str + "...");
+				}
+			}
+			
 			model.addAttribute("subscribeList", scdlist);
 		}
 		
-		List<ScrapEmployNoticeDetail> scrapList = scrapEnDao.getScrapENDetail(mid);
-
 		if(scnameList.size() > 0) {
+			
+			for(int i = 0; i < scrapList.size(); i++) {
+				if(scrapList.get(i).getEntitle().length() > 20) {
+					str = scrapList.get(i).getEntitle().substring(0, 20);
+					scrapList.get(i).setEntitle(str + "...");
+				}
+			}
+			
 			model.addAttribute("scnameList", scnameList);
 		}
 		

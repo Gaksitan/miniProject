@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 	width: 80%;
 	margin: 0 auto;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 10px;
+	gap: 20px;
 }
 
 .items ul li {
@@ -21,17 +22,26 @@
 .items ul {
 	padding: 0;
 }
-
+.items a{
+	text-decoration: none;
+	color: black;
+}
 .items {
 	border-radius: 5px;
 	border: 1px solid black;
 	width: 200px;
-	height: 200px;
+	height: 230px;
+	box-shadow: 1px 1px 1px black;
 }
 .items .imgs{
 	 height: 120px;
 	 border-bottom: 1px solid black;
 	 background: gray;
+}
+
+.enpositions{
+	margin: 5px 0;
+	border-top: 1px solid black;
 }
 </style>
 
@@ -62,17 +72,29 @@
 						<li class="imgs"></li>
 						<c:if test="${mid == null && companyManager == null }">
 							<li><a
-								href="/employnotice/detailNoneMem?enno=${employNotice.enno }">${employNotice.entitle }</a></li>
+								href="/employnotice/detailNoneMem?enno=${employNotice.enno }">${employNotice.entitle }
+								<c:if test="${fn:length(employNotice.entitle) == 20 }">
+								...
+								</c:if>
+								</a></li>
 						</c:if>
 						<c:if test="${mid != null }">
 							<li><a
-								href="/employnotice/detailMem?enno=${employNotice.enno }">${employNotice.entitle }</a></li>
+								href="/employnotice/detailMem?enno=${employNotice.enno }">${employNotice.entitle }
+								<c:if test="${fn:length(employNotice.entitle) == 20 }">
+								...
+								</c:if>
+								</a></li>
 						</c:if>
 						<c:if test="${companyManager != null }">
 							<li><a
-								href="/employnotice/detailCom?enno=${employNotice.enno }">${employNotice.entitle }</a></li>
+								href="/employnotice/detailCom?enno=${employNotice.enno }">${employNotice.entitle }
+								<c:if test="${employNotice.entitle.length == 20 }">
+								...
+								</c:if>
+								</a></li>
 						</c:if>
-						<li>${employNotice.enposition }</li>
+						<li class="enpositions">${employNotice.enposition }</li>
 						<li>${employNotice.enenddate }</li>
 					</ul>
 				</div>
