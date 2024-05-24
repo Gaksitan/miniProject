@@ -11,17 +11,7 @@
 <link rel="stylesheet" href="../css/main.css" />
 
 <style>
-	form {
-		display: flex;
-		
-        flex-direction: column;
-        align-items: center; /* 모든 자식 요소를 가로로 중앙 정렬 */
-        /*justify-content: center; /* 모든 자식 요소를 세로로 중앙 정렬 (필요에 따라 사용) */
-        width: 60%; /* 필요에 따라 조정 */
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-	}
+	
 </style>
 
 <body>
