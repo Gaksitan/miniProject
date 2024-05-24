@@ -83,6 +83,14 @@ public class MemController_JHY {
 		System.out.println(list4);
 		List<JoinEmployNoticeAndCompany> list3 = dao.getEmployNotice();
 		System.out.println(list3);
+		String str;
+		for(int i = 0; i < list3.size(); i++) {
+			if(list3.get(i).getEntitle().length() > 20) {
+				str = list3.get(i).getEntitle().substring(0, 20);
+				list3.get(i).setEntitle(str + "...");
+			}
+		}
+		
 		model.addAttribute("employNoticeList", list3);
 		model.addAttribute("companyList", list4);
 		
