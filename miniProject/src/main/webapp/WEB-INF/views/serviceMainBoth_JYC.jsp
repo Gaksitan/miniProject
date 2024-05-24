@@ -26,6 +26,7 @@
 	text-decoration: underline;
 }
 #faqtable th{
+	color: black;
 	background: #fcefa9;
 }
 h1{
@@ -69,6 +70,8 @@ h1{
 				<input type="button" value="문의하기" id="regQBtn" onclick="location.href='/both/registQuestionForm'">
 			</c:if> 
 		</div>
+		<c:if test="${faqlist != null }">
+		
 		<table border="1" id="faqtable">
 			<thead>
 				<tr>
@@ -85,6 +88,7 @@ h1{
 				</c:forEach>
 			</tbody>
 		</table>
+		</c:if>
 		</c:if>
 		
 		<c:if test="${companyManager != null }"> <!-- cno가 널이 아니면 기업회원이기 때문에 이 단락을 보여준다 -->

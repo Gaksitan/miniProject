@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.green.miniProject.dao.IApplyResumeDAO_JYC;
 import com.green.miniProject.dao.ICertificateEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.ICompanyDAO_JYC;
-import com.green.miniProject.dao.IDegreeEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.IEmployNoticeDAO_JYC;
-import com.green.miniProject.dao.IExperienceEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.IPreferenceEmployNoticeDAO_JYC;
 import com.green.miniProject.dao.IResumeDAO_JYC;
 import com.green.miniProject.dao.IScrapEmployNoticeDAO_JYC;
@@ -44,11 +42,6 @@ public class EmployNoticeController_JYC {
 	@Autowired
 	private IEmployNoticeDAO_JYC employNoticeDao;
 
-	@Autowired
-	private IDegreeEmployNoticeDAO_JYC degreeEmployNoticeDao;
-
-	@Autowired
-	private IExperienceEmployNoticeDAO_JYC experienceEmployNoticeDao;
 
 	@Autowired
 	private ISkillEmployNoticeDAO_JYC skillEmployNoticeDao;
@@ -123,13 +116,6 @@ public class EmployNoticeController_JYC {
 
 		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
 		
-		if (!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
-			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
-		}
-		if (!experienceEmployNoticeDao.getExperienceEmployNoticeList(enno).isEmpty()) {
-			model.addAttribute("experienceEmployNoticeList",
-					experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
-		}
 		if (!skillEmployNoticeDao.getSkillEmployNoticeList(enno).isEmpty()) {
 			model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
 		}
@@ -168,13 +154,6 @@ public class EmployNoticeController_JYC {
 	public String detailMem(@RequestParam("enno") Long enno, Model model, HttpSession session) {
 
 		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
-		if (!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
-			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
-		}
-		if (!experienceEmployNoticeDao.getExperienceEmployNoticeList(enno).isEmpty()) {
-			model.addAttribute("experienceEmployNoticeList",
-					experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
-		}
 		if (!skillEmployNoticeDao.getSkillEmployNoticeList(enno).isEmpty()) {
 			model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
 		}
@@ -226,13 +205,6 @@ public class EmployNoticeController_JYC {
 	public String detailCom(@RequestParam("enno") Long enno, Model model) {
 
 		model.addAttribute("employNoticeDto", employNoticeDao.getEmployNotice(enno));
-		if (!degreeEmployNoticeDao.getDegreeEmployNoticeList(enno).isEmpty()) {
-			model.addAttribute("degreeEmployNoticeList", degreeEmployNoticeDao.getDegreeEmployNoticeList(enno));
-		}
-		if (!experienceEmployNoticeDao.getExperienceEmployNoticeList(enno).isEmpty()) {
-			model.addAttribute("experienceEmployNoticeList",
-					experienceEmployNoticeDao.getExperienceEmployNoticeList(enno));
-		}
 		if (!skillEmployNoticeDao.getSkillEmployNoticeList(enno).isEmpty()) {
 			model.addAttribute("skillEmployNoticeList", skillEmployNoticeDao.getSkillEmployNoticeList(enno));
 		}

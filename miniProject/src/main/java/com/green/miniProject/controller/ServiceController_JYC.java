@@ -46,6 +46,8 @@ public class ServiceController_JYC {
 		
 		List<FAQDetail> faqlist = faqdao.getFAQListTargetMem();
 		String str;
+		if(faqlist.size() > 0) {
+			
 		for(int i = 0; i < faqlist.size(); i++) {
 			if(faqlist.get(i).getFaqquestion().length() > 30) {
 				str = faqlist.get(i).getFaqquestion().substring(0, 30);
@@ -54,6 +56,7 @@ public class ServiceController_JYC {
 		}
 		
 		model.addAttribute("faqlist", faqlist);
+		}
 		
 		return "serviceMainBoth_JYC";
 	}
@@ -63,6 +66,8 @@ public class ServiceController_JYC {
 		
 		List<FAQDetail> faqlist = faqdao.getFAQListTargetCom();
 		String str;
+		if(faqlist.size() > 0) {
+			
 		for(int i = 0; i < faqlist.size(); i++) {
 			if(faqlist.get(i).getFaqquestion().length() > 30) {
 				str = faqlist.get(i).getFaqquestion().substring(0, 30);
@@ -71,6 +76,7 @@ public class ServiceController_JYC {
 		}
 		
 		model.addAttribute("faqlist", faqlist);
+		}
 		
 		return "serviceMainBoth_JYC";
 	}
