@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="searchEmployNoticeList" resultType="com.green.miniProject.domain.EmployNoticeDetail">
-		SELECT en.*, com.* From employnotice en INNER JOIN company com WHERE en.entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY en.enregdate DESC LIMIT #{page}, 10;
+		SELECT en.*, com.* From employnotice en INNER JOIN company com ON en.cno = com.cno WHERE en.entitle LIKE CONCAT('%', #{keyword}, '%') ORDER BY en.enregdate DESC LIMIT #{page}, 10;
 	</select>
 	<select id="getEmployNoticeList" resultType="com.green.miniProject.domain.EmployNotice">
 		SELECT * From employnotice WHERE cno = #{cno};
