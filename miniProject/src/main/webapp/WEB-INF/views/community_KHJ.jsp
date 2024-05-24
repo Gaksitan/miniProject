@@ -18,9 +18,9 @@ button {
 	width: 150px;
 }
 
-select {
+/* select {
 	margin-left: 1500px;
-}
+} */
 
 ul {
 	list-style-type: none;
@@ -57,6 +57,26 @@ ul {
 
 .pagination .page-link:hover {
 	background-color: #ddd;
+}
+
+#commuTBL{
+	display : flex;
+	flex-direction : column;
+	justify-content : center;
+	
+}
+
+#select-div{
+	margin-left : 1300px;
+}
+
+#sortOptions{
+	height: 40px;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 150px; 
+
 }
 </style>
 <link rel="stylesheet" href="../css/main.css" />
@@ -111,6 +131,7 @@ ul {
 		</table>
 
 		<!-- 커뮤니티 테이블 -->
+	<div id="commuTBL">
 		<div id="select-div">
 			<select id="sortOptions">
 				<!--<option value="">추천순</option> 클릭 많은 순 -->
@@ -221,6 +242,7 @@ ul {
 					</tbody>
 				</table>
 			</div>
+	</div>
 			<c:if test="${!paging.isEmpty()}">
 				<div id="table2page" class="pagination-container">
 					<ul class="pagination justify-content-center">
@@ -240,7 +262,7 @@ ul {
 				</div>
 			</c:if>
 		</c:if>
-
+	
 
 
 
