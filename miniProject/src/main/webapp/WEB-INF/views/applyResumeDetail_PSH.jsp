@@ -19,7 +19,7 @@ function updateApplicationStatus(status) {
             rno: rno
         },
         success: function(response) {
-            alert('Status updated successfully');
+            alert('평가를 완료했습니다.');
             location.reload();
         },
         error: function(xhr, status, error) {
