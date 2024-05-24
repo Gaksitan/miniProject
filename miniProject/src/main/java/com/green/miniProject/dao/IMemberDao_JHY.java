@@ -17,6 +17,7 @@ import com.green.miniProject.domain.JoinEmployNoticeAndCompany;
 import com.green.miniProject.domain.Link;
 import com.green.miniProject.domain.Member;
 import com.green.miniProject.domain.Resume;
+import com.green.miniProject.domain.ScrapEmployNotice;
 import com.green.miniProject.domain.Skill;
 import com.green.miniProject.domain.SkillMatchingEN;
 import com.green.miniProject.domain.SkillMatchingMR;
@@ -59,4 +60,6 @@ public interface IMemberDao_JHY {
 	public void updateResumeDegree(@Param("degree") Degree degree);
 	public void updateResumeCertificate(@Param("certificate") Certificate cer);
 	public void updateResumeLink(@Param("rlink") Link rlink);
+	
+	public ScrapEmployNotice getScrap(@Param("mid")String mid, @Param("enno")Long enno);
 }

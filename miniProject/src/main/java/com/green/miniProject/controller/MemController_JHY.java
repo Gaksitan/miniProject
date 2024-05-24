@@ -4,18 +4,22 @@ import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.miniProject.dao.IMemberDao_JHY;
+import com.green.miniProject.dao.IScrapEmployNoticeDAO_JYC;
 import com.green.miniProject.domain.Certificate;
 import com.green.miniProject.domain.CheckScrapEN;
 import com.green.miniProject.domain.CheckSubscribeCom;
@@ -43,6 +47,9 @@ public class MemController_JHY {
 	
 	@Autowired
 	IMemberDao_JHY dao;
+	
+	@Autowired
+	private IScrapEmployNoticeDAO_JYC scrapdao;
 	
 	// 스킬 매치 구현중
 	@RequestMapping("/indexMem")
@@ -406,6 +413,9 @@ public class MemController_JHY {
 		List<JoinApplyResumeList> list = dao.applyResumeList(mid);
 		model.addAttribute("myApplyList", list);
 		
+		
+		
+		
 		return "myApplyList_JHY";
 	}
 	
@@ -458,8 +468,33 @@ public class MemController_JHY {
 		return "subscribeAndScrapList_JHY";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/scrap")
+	public Map<String, Object> scrap(@RequestParam("enno") Long enno, HttpSession session, Model model) {
+		String mid = (String) session.getAttribute("mid");
+
+		scrapdao.scrapEmployNotice(enno, mid);
+		
+		Map<String, Object> result = new HashMap<>();
+	    result.put("scrapResult", true);
+
+	    return result;
+	}
 	
+
+
 	
-	
+	@RequestMapping("/deleteScrap")
+	@ResponseBody
+	public Map<String, Object> deleteScrap(@RequestParam("enno") Long enno, HttpSession session) {
+	    String mid = (String) session.getAttribute("mid");
+	    System.out.println("스크랩 삭제 enno, id 출력" + enno + mid);
+	    scrapdao.unscrapEmployNotice(enno, mid);
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("deleteScrapResult", true);
+
+	    return result;
+	}
 	
 }
