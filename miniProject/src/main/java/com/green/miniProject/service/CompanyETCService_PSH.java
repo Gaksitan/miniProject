@@ -84,7 +84,11 @@ public class CompanyETCService_PSH {
     public Resume getResumeByRno(String rno) {
     	return dao.getResumeByRno(rno);
     }
-    
+    /*
+    public ApplyResume getApplyResumeByRno(String rno) {
+    	return dao.getApplyResumeByRno(rno);
+    }
+    */
     public List<Skill> getSkillListByRno(String rno) {
         return dao.getSkillListByRno(rno);
     }

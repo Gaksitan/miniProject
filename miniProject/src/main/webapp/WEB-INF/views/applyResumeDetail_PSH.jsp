@@ -55,11 +55,23 @@ function updateApplicationStatus(status) {
 <h3>${resume.rintro}</h3>
 
 <h3>스킬스텟</h3>
+<table border="1">
     <c:forEach items="${skillList}" var="skill">
             <td>${skill.skname}</td>
     </c:forEach>
-
+</table>
 <h3>경력</h3>
+<table border="1">
+<thead>
+	<tr>
+		<td>회사명</td>
+		<td>입사일자</td>
+		<td>퇴사일자</td>
+		<td>직무</td>
+		<td>직급</td>
+	</tr>
+</thead>
+<tbody>
     <c:forEach items="${expList}" var="exp">
         <tr>
             <td>${exp.exname}</td>
@@ -70,9 +82,21 @@ function updateApplicationStatus(status) {
         </tr>
         <br>
     </c:forEach>
+    </tbody>
+    </table>
 
 
 <h3>학력</h3>
+<table border="1">
+<thead>
+	<tr>
+		<td>학교명</td>
+		<td>졸업일자</td>
+		<td>전공</td>
+		<td>최종학력</td>
+	</tr>
+</thead>
+<tbody>
     <c:forEach items="${degreeList}" var="degree">
         <tr>
             <td>${degree.dename}</td>
@@ -81,7 +105,8 @@ function updateApplicationStatus(status) {
             <td>${degree.dehighestlevel}</td>
         </tr>
     </c:forEach>
-
+</tbody>
+</table>
 <h3>링크</h3>
     <c:forEach items="${linkList}" var="link">
         <tr>
@@ -92,42 +117,46 @@ function updateApplicationStatus(status) {
 <style>
     #modal {
       display: none;
-      position:relative;
-      width:100%;
-      height:100%;
-      z-index:1;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
     }
     
     #modal h2 {
-      margin:0;
+      margin: 0;
     }
+    
     #modal button {
-      display:inline-block;
-      width:100px;
+      display: inline-block;
+      width: 100px;
     }
     
     #modal .modal_content {
-      width:300px;
-      margin:100px auto;
-      padding:20px 10px;
-      background:#fff;
-      border:2px solid #666;
+      width: 300px;
+      padding: 20px 10px;
+      background: #fff;
+      border: 2px solid #666;
     }
     
     #modal .modal_layer {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0, 0, 0, 0.5);
-      z-index:-1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
     }   
 </style>
+
+
 
 <div id="root">
     <button type="button" id="modal_opne_btn">서류 평가</button>
 </div>
+
 
 <div id="modal">
     <div class="modal_content">       

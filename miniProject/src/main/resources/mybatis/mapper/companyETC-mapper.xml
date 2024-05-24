@@ -110,7 +110,13 @@
         FROM Resume
         WHERE rno = #{rno}
     </select>
-
+    <!-- 
+    <select id="getApplyResumeByRno" resultType="com.green.miniProject.domain.ApplyResume">
+        SELECT *
+        FROM ApplyResume
+        WHERE rno = #{rno}
+    </select>
+ -->
     
     <select id="getSkillListByRno" resultType="com.green.miniProject.domain.Skill">
         SELECT 
@@ -186,7 +192,18 @@
 	    SET arpass = #{status}
 	    WHERE rno = #{rno}
 	</update>
-	
+	<!-- 
+	<update id="updateApplicationStatus2">
+		UPDATE interview i
+		SET ipass = #{status}
+		WHERE EXISTS (
+		    SELECT ar.rno
+		    FROM applyresume ar
+		    WHERE ar.arno = #{arno}
+		        AND ar.rno = #{rno}
+		);
+	</update>
+	 -->
 	<insert id="insertScore">
 		INSERT INTO scoreComMem (MID, cno, scmscore, scmreview, scmregdate)
             VALUES

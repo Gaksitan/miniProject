@@ -12,7 +12,7 @@
 <main>
 <h1>기업회원가입 Page</h1>
 <hr>
-<a href="regFormMem_JHY">개인회원</a>
+<a href="mem/regFormMem">개인회원</a>
 <div>
     <table>
     <form action="signUpCom" method="post">

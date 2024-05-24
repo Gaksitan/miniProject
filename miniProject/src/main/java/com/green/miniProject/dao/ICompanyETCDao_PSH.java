@@ -51,9 +51,12 @@ public interface ICompanyETCDao_PSH {
     List<Degree> getDegreeListByRno(@Param("rno") String rno);
     List<Link> getLinkListByRno(@Param("rno") String rno);
     
+	//ApplyResume getApplyResumeByRno(@Param("rno") String rno);
+    
     /////////////////////////////////
     
     void updateApplicationStatus(@Param("status") int status, @Param("rno") String rno);
+    //void updateApplicationStatus2(@Param("status") int status, @Param("rno") String rno, @Param("arno") String arno);
 
     void insertScore(@Param("mid") String mid,
             @Param("cno") String cno,
