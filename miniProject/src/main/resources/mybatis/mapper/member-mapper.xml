@@ -134,7 +134,7 @@
   	
   	
   	<select id="getScrap">
-  		select * from scrapemploynotice where mid = #{mid} and enno = #{enno}
+  		select * from scrapemploynotice where mid = #{mid} 
   	</select>
   	
   	
