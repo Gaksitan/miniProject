@@ -251,7 +251,7 @@ public class PageController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String scname = companySectorDao.getCsname(cno);
+		String scname = companySectorDao.getScname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
 				.getCompanySectorAndCompanyList(scname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
