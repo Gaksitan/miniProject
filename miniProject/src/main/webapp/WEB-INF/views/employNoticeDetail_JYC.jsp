@@ -160,7 +160,7 @@
 			</table>
 		</c:if>
 		<h2>연봉</h2>
-		<span>${employNoticeDto.ensalary }</span>
+		<span>${employNoticeDto.ensalary }만원</span>
 		<h2>상세주소</h2>
 		<span>${employNoticeDto.enaddr }</span>
 		<c:if test="${resume == null }">
