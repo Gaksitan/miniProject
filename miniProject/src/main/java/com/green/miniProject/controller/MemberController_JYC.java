@@ -49,7 +49,7 @@ public class MemberController_JYC {
 		
 		List<Object> scnameList = new ArrayList<>();
 		for(SubscribeCompanyDetail s : scdlist) {
-			scnameList.add(comSecDao.getScnameList(s.getCno()));
+			scnameList.add(comSecDao.getCsnameList(s.getCno()));
 		}
 		
 		if(scdlist.size() > 0) {

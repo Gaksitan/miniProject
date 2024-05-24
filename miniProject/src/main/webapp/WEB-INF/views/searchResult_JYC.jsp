@@ -21,12 +21,14 @@
 }
 
 .page{
-	width: fit-content;
-	margin-top: 5px;
-	margin-bottom: 50px;
+	margin: 0 auto;
+	margin-bottom: 30px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+}
+.pagebtns {
+	margin: 0 5px;
 }
 </style>
 
@@ -63,7 +65,7 @@
 									<td><a
 										href="/employnotice/detailCom?enno=${eno.enno }&cno=${en.cno}">${en.entitle }</a></td>
 								</c:if>
-								<td>${en.cno }</td>
+								<td>${en.cname }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

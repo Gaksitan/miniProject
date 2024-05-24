@@ -6,12 +6,12 @@
   
 <mapper namespace="com.green.miniProject.dao.ICompanySectorDAO_JYC">
 	<select id="getCompanySectorAndCompanyList">
-		SELECT com.*, cs.scname FROM companysector cs INNER JOIN company com ON cs.cno = com.cno WHERE scname = #{scname} AND NOT cs.cno IN (#{cno});
+		SELECT com.*, cs.csname FROM companysector cs INNER JOIN company com ON cs.cno = com.cno WHERE csname = #{csname} AND NOT cs.cno IN (#{cno});
 	</select>
-	<select id="getScname">
-		SELECT scname FROM companysector WHERE cno = #{cno} LIMIT 1;
+	<select id="getCsname">
+		SELECT csname FROM companysector WHERE cno = #{cno} LIMIT 1;
 	</select>
-	<select id="getScnameList">
-		SELECT scname FROM companysector WHERE cno = #{cno};
+	<select id="getCsnameList">
+		SELECT csname FROM companysector WHERE cno = #{cno};
 	</select>
 </mapper>  
