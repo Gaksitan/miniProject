@@ -34,7 +34,6 @@ import com.green.miniProject.domain.ScoreMemCom;
 import com.green.miniProject.domain.SubscribeCompany;
 import com.green.miniProject.domain.SubscribeCompanyDetail;
 import com.green.miniProject.service.EmployNoticeService_jyc;
-import com.green.miniProject.service.SubscribeCompanyService_JYC;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -70,8 +69,6 @@ public class CompanyController_JYC {
 	@Autowired
 	private ICompanySectorDAO_JYC comSecDao;
 
-	@Autowired
-	private SubscribeCompanyService_JYC subscribeService;
 
 	// @RequestMapping("/detailNoneMem")
 	public String companyDetailNoneMem(@RequestParam("cno") String cno, Model model) {
@@ -264,14 +261,5 @@ public class CompanyController_JYC {
 		return "";
 	}
 
-	// @GetMapping("/subscribeAndScrap")
-	public String subscribeAndScrap(@RequestParam(value = "page", defaultValue = "1") int page) {
-
-		Page<com.green.miniProject.entity.SubscribeCompany> paging = subscribeService.getList(page);
-
-		System.out.println(paging.getContent());
-		System.out.println(paging.getContent().get(0));
-
-		return "";
-	}
+	
 }
