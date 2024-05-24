@@ -92,7 +92,7 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String csname = companySectorDao.getCsname(cno);
+		String csname = companySectorDao.getScname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
 				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
@@ -117,8 +117,6 @@ public class CompanyController_JYC {
 			}
 		}
 
-		System.out.println(paging.getContent());
-		
 		model.addAttribute("enlist", paging.getContent());
 		model.addAttribute("totalPages", paging.getTotalPages());
 		model.addAttribute("hasNext", paging.hasNext());
@@ -135,9 +133,9 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String csname = companySectorDao.getCsname(cno);
+		String scname = companySectorDao.getScname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(csname, cno);
+				.getCompanySectorAndCompanyList(scname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
@@ -170,7 +168,6 @@ public class CompanyController_JYC {
 			if (paging.getContent().get(i).getEntitle().length() > 30) {
 				str = paging.getContent().get(i).getEntitle().substring(0, 30);
 				paging.getContent().get(i).setEntitle(str + "...");
-				System.out.println(paging.getContent().get(i).getEntitle());
 			}
 		}
 
@@ -190,7 +187,7 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String csname = companySectorDao.getCsname(cno);
+		String csname = companySectorDao.getScname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
 				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
@@ -220,7 +217,7 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String csname = companySectorDao.getCsname(cno);
+		String csname = companySectorDao.getScname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
 				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
