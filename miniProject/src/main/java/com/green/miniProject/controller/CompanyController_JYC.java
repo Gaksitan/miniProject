@@ -92,9 +92,9 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String scname = companySectorDao.getScname(cno);
+		String csname = companySectorDao.getCsname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(scname, cno);
+				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
@@ -135,9 +135,9 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String scname = companySectorDao.getScname(cno);
+		String csname = companySectorDao.getCsname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(scname, cno);
+				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
@@ -190,9 +190,9 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String scname = companySectorDao.getScname(cno);
+		String csname = companySectorDao.getCsname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(scname, cno);
+				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
@@ -220,9 +220,9 @@ public class CompanyController_JYC {
 		int comCount = comdao.count();
 		List<Company> comList = new ArrayList<>();
 
-		String scname = companySectorDao.getScname(cno);
+		String csname = companySectorDao.getCsname(cno);
 		List<CompanySectorAndCompany> companySectorAndCompanyList = companySectorDao
-				.getCompanySectorAndCompanyList(scname, cno);
+				.getCompanySectorAndCompanyList(csname, cno);
 		if (companySectorAndCompanyList.size() > 0) {
 			model.addAttribute("recommendList", companySectorAndCompanyList);
 		}
