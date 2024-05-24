@@ -69,8 +69,8 @@ public interface IMemberDao_JHY {
             @Param("review") String review);
 	
 	public String getcno(@Param("enno")Long enno);
-	
-	
+	public void regMain(@Param("rno") Long rno);
+	public void cancelMain(@Param("rno") Long rno, @Param("mid") String mid);
 	
 }
 

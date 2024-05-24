@@ -28,10 +28,11 @@
 			<c:if test="${resume.rpublic == true }" >🔒</c:if>
 			</a></td>
 			<td><c:if test="${resume.rmain == true }" >
-			 	<input type="button" value="대표" id="main">
+			 	<input type="button" value="대표" id="main" onclick="main(event, ${resume.rno})">
 			 	</c:if>
 				<c:if test="${resume.rmain == false }"> 
-				<input type="button" value="대표" id="sub">
+				<input type="button" value="대표" id="sub" onclick="main(event, ${resume.rno})">
+				
 				</c:if></td>
 		</tr>
 	</c:forEach>
@@ -42,6 +43,17 @@
 <script>
 	function writeResumePage(){
 		window.location.href = "myResumeListWrite";
+	}
+	function main(event, rno){
+		const xhr = new XMLHttpRequest();
+		xhr.open("POST", "/mem/main" , true);		
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function(){
+		}
+		const data = JSON.stringify({
+			rno : rno,
+		})
+		xhr.send(data);
 	}
 </script>
 </body>

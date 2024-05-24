@@ -150,4 +150,11 @@
 		
   	</select>
   	
+  	<update id="regMain">
+  		UPDATE resume SET rmain = 1 WHERE rno = #{rno}
+  	</update>
+  	<update id="cancelMain">
+  		UPDATE resume SET rmain = 0 WHERE mid = #{mid} AND NOT rno = #{rno}
+  	</update>
+  	
 </mapper>  
