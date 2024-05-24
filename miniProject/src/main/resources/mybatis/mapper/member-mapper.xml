@@ -17,12 +17,18 @@
   		select * from Member where mid = #{mid}
   	</select>
   	<select id="applyResumeList">
-  		select c.cname, en.entitle, <!-- ar.applydate, --> ar.arpass, iv.ipass from employnotice en 
-  		left join company c on c.cno = en.cno 
-  		left join applyresume ar on ar.enno = en.enno 
-  		left join interview iv on iv.arno = ar.arno 
-  		left join resume r on r.rno = ar.rno 
-  		left join member m on m.mid = r.mid 
+  		select c.cname, en.enno, en.entitle ,ar.arpass, iv.ipass , ar.applydate, r.rno, m.mid 
+		from employnotice en 
+		left join company c 
+		on c.cno = en.cno 
+		left join applyresume ar 
+		on ar.enno = en.enno 
+		left join interview iv 
+		on iv.arno = ar.arno 
+		left join resume r 
+		on r.rno = ar.rno 
+		left join member m 
+		on m.mid = r.mid
   		where m.mid = #{mid}
   	</select>
   	<select id="checkSubscribe">
@@ -125,5 +131,13 @@
   	<delete id="deleteMember">
   		delete from member where mid = #{mid}
   	</delete>
+  	
+  	
+  	<select id="getScrap">
+  		select * from scrapemploynotice where mid = #{mid} and enno = #{enno}
+  	</select>
+  	
+  	
+  	
   	
 </mapper>  

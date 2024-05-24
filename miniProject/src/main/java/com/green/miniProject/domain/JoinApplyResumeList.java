@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class JoinApplyResumeList {
 	private String cname;
+	private Long enno;
 	private String entitle;
 	private LocalDate applydate;
 	private int arpass;
