@@ -137,12 +137,26 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${resumeList}" var="resume">
-                <tr>
-                    <td><a href="applyResumeDetail?rno=${resume.rno }&mid=${item.mid}">${resume.rtitle}</a></td>
-                    <td>${resume.rregdate}</td>
-                </tr>
-            </c:forEach>
+	        <c:forEach items="${resumeList}" var="resume">
+	            <c:if test="${resume.rmain == true}">
+	                <c:if test="${resume.rpublic == true}">
+	                    <tr>
+	                        <td><a href="applyResumeDetail?rno=${resume.rno}&mid=${item.mid}">${resume.rtitle}</a></td>
+	                        <td>${resume.rregdate}</td>
+	                    </tr>
+	                </c:if>
+	            </c:if>
+	        </c:forEach>
+	        <c:forEach items="${resumeList}" var="resume">
+	            <c:if test="${resume.rmain != true}">
+	                <c:if test="${resume.rpublic == true}">
+	                    <tr>
+	                        <td><a href="applyResumeDetail?rno=${resume.rno}&mid=${item.mid}">${resume.rtitle}</a></td>
+	                        <td>${resume.rregdate}</td>
+	                    </tr>
+	                </c:if>
+	            </c:if>
+	        </c:forEach>
         </tbody>
     </table>
 
