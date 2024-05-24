@@ -13,6 +13,11 @@
 	margin: auto;
 }
 
+.container a:link {
+	color: black; /*메인 css에서 color 가 blueblack으로 설정되어 있어서 black적용이 안됨*/
+	text-decoration: none;
+}
+
 article {
 	float: center;
 }
@@ -21,6 +26,10 @@ article {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+a:active {
+	color: green;
 }
 </style>
 <link rel="stylesheet" href="../css/main.css" />
@@ -54,7 +63,7 @@ article {
 											<tr>
 												<td>${status.count }</td>
 												<td><a
-													href="/commu/communityDetail_KHJ?bno=${list.bno}">${list.btitle }</td>
+													href="/commu/communityDetail_KHJ?bno=${list.bno}">${list.btitle }</a></td>
 												<td>${list.blike }</td>
 												<td>${list.bregdate }</td>
 											</tr>
@@ -91,7 +100,7 @@ article {
 											<tr>
 												<td>${replyList.btitle}</td>
 												<td><a
-													href="/commu/communityDetail_KHJ?bno=${replyList.bno}">${replyList.recontent }</td>
+													href="/commu/communityDetail_KHJ?bno=${replyList.bno}">${replyList.recontent }</a></td>
 												<td>${replyList.reregdate }</td>
 											</tr>
 										</c:forEach>
@@ -128,7 +137,8 @@ article {
 											varStatus="status">
 											<tr>
 												<td>${status.count }</td>
-												<td>${likeList.btitle }</td>
+												<td><a
+													href="/commu/communityDetail_KHJ?bno=${likeList.bno}">${likeList.btitle }</a></td>
 												<td>${likeList.bregdate }</td>
 												<c:if test="${likeList.mid != null}">
 													<td>${likeList.mid }</td>
@@ -145,7 +155,7 @@ article {
 						</c:if>
 					</c:when>
 					<c:otherwise>
-					<div class="box">
+						<div class="box">
 							<p>내가 좋아요한 게시글 목록이 없습니다.</p>
 						</div>
 					</c:otherwise>
