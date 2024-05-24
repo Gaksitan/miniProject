@@ -64,7 +64,7 @@
 		<form action="replyInsert.do" method="get">
 			<input type="hidden" name="bno" value="${boardDetail[0].bno}">
 			<label for="reply">댓글 작성하기</label> <input id="reply" name="reply"
-				placeholder="댓글 입력" required="required" size=30  maxlength=30> <input
+				placeholder="댓글 입력" required="required" width=30 height=20 maxlength=30> <input
 				type="submit" value="작성">
 		</form>
 		<c:choose>

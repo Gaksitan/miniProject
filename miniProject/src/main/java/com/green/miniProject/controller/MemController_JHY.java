@@ -63,13 +63,13 @@ public class MemController_JHY {
 			Member member = dao.getMember(mid);
 			model.addAttribute("member", member);
 			Set<SkillMatchingEN> total = new HashSet<>();
-			List<SkillMatchingMR> list = dao.skillmatchingMR(mid);
-			List<SkillMatchingEN> list2 = dao.skillmatchingEN();
+			List<SkillMatchingMR> list = dao.skillmatchingMR(mid); // 2
+			List<SkillMatchingEN> list2 = dao.skillmatchingEN(); // 5
 			
 			if(list.get(0).getRno() != null) {
 				for(int i = 0; i < list.size(); i++) {
 					for(int j = 0; j < list2.size(); j++) {
-						if(list2.get(i).getSkname().equals( list.get(j).getSkname())) {
+						if(list2.get(j).getSkname().equals( list.get(i).getSkname())) {
 							SkillMatchingEN en = new SkillMatchingEN();
 							en.setEnno(list2.get(j).getEnno());
 							en.setEntitle(list2.get(j).getEntitle());
