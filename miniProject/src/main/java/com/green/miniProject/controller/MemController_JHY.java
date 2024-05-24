@@ -301,6 +301,7 @@ public class MemController_JHY {
 			exp.setExleavedate(date2);
 			exp.setExposition(expositionList.get(i));
 			exp.setExrank(exrankList.get(i));
+			exp.setRno(resume.getRno());
 			//expList.add(exp);
 			dao.writeResumeExp(exp);
 		}
@@ -312,6 +313,7 @@ public class MemController_JHY {
 			degree.setDegraddate(date);
 			degree.setDemajor(demajorList.get(i));
 			degree.setDehighestlevel(dehighestlevelList.get(i));
+			degree.setRno(resume.getRno());
 			dao.writeResumeDegree(degree);
 		}
 		
@@ -321,6 +323,7 @@ public class MemController_JHY {
 			LocalDate date = LocalDate.parse(cedateList.get(i), DateTimeFormatter.ISO_DATE);
 			cer.setCedate(date);
 			cer.setCelocation(celocationList.get(i));
+			cer.setRno(resume.getRno());
 			dao.writeResumeCertificate(cer);
 		}
 		
