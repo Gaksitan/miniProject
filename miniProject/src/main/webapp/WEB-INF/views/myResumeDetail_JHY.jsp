@@ -183,7 +183,7 @@
 			<label><input type="checkbox" name="rmain" value="1" checked="1">대표 이력서로 설정</label>
 		</c:if>
 		<br>
-		<input type="submit" value="수정"><input type="button" value="취소" onclick="location.href='/mem/myResumeList'">
+		<input type="submit" value="수정"><input type="button" value="취소" onclick="location.href='/mem/myResumeList'"><input type="button" value="삭제" onclick="location.href='/mem/deleteMyResume?rno=${rno}'">
 	</form>
 </c:if>
 </main>

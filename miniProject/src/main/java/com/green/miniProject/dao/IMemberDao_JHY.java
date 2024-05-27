@@ -72,5 +72,6 @@ public interface IMemberDao_JHY {
 	public void regMain(@Param("rno") Long rno);
 	public void cancelMain(@Param("rno") Long rno, @Param("mid") String mid);
 	
+	public void deleteMyResume(@Param("rno") Long rno);
 }
 

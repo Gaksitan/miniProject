@@ -418,6 +418,15 @@ public class MemController_JHY {
 		return "myResumeList_JHY";
 	}
 	
+	@RequestMapping("/deleteMyResume")
+	public String deleteMyResume(@RequestParam("rno") Long rno) {
+		
+		dao.deleteMyResume(rno);
+		
+		return "redirect:/mem/myResumeList";
+	}
+	
+	
 	
 	@RequestMapping("/myApplyList")
 	public String myApplyList(HttpServletRequest request, Model model) {
