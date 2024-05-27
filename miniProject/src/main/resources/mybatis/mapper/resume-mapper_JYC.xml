@@ -8,8 +8,8 @@
 	<select id="getResumeList">
 		SELECT * FROM resume WHERE mid = #{mid};
   	</select>
-  	<select id="getMainResume">
-  		SELECT * FROM resume WHERE rmain = 1;
+  	<select id="getMainResume" resultType="com.green.miniProject.domain.Resume">
+  		SELECT * FROM resume WHERE rmain = 1 AND mid = #{mid};
   	</select>
   	
   	

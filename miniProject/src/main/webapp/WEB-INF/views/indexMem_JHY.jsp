@@ -71,7 +71,15 @@
 			<c:forEach var="en" items="${employNoticeList }" varStatus="status">
 				<tr>
 					<td>D-${en.enenddate }</td>
+					<c:if test="${mid == null && companyManager == null }">
 					<td><a href="/employnotice/detailNoneMem?enno=${en.enno }">${en.entitle }</td>
+					</c:if>
+					<c:if test="${mid != null }">
+					<td><a href="/employnotice/detailMem?enno=${en.enno }">${en.entitle }</td>
+					</c:if>
+					<c:if test="${companyManager != null }">
+					<td><a href="/employnotice/detailCom?enno=${en.enno }">${en.entitle }</td>
+					</c:if>
 					<td>${en.cname }</td>
 				</tr>
 			</c:forEach>
