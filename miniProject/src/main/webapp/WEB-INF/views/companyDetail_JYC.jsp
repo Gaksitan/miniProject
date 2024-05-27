@@ -35,7 +35,7 @@
 		<div id="unsubsDiv">
 			<c:if test="${subscribetf == true }">
 				<input type="button" value="구독"
-					style="color: black; background: red;" onclick="unsubscribe(event)"
+					style="color: black; background: red;" onclick="unsubscribe2(event)"
 					id="unsbscribeBtn">
 				<!-- location.href='/company/unsubscribe?cno=${company.cno}' -->
 			</c:if>
@@ -43,7 +43,7 @@
 		<div id="subsDiv">
 			<c:if test="${subscribetf == false }">
 				<input type="button" value="구독"
-					style="color: black; background: gray;" onclick="subscribe(event)"
+					style="color: black; background: gray;" onclick="unsubscribe2(event)"
 					id="subscribeBtn">
 				<!-- location.href='/company/subscribe?cno=${company.cno}' -->
 			</c:if>
@@ -165,9 +165,9 @@
 	</main>
 	<%@ include file="./footer_JYC.jsp"%>
 	<script type="text/javascript">
-		function unsubscribe(event) {
+		function unsubscribe2(event) {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', '/company/unsubscribe', true);
+			xhr.open('POST', '/company/unsubscribe2', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			xhr.onreadystatechange = function() {
 				location.href = "/company/detailMem?cno=" + "${company.cno}";
@@ -181,7 +181,7 @@
 
 		function subscribe(event) {
 			const xhr = new XMLHttpRequest();
-			xhr.open('POST', '/company/subscribe', true);
+			xhr.open('POST', '/company/unsubscribe2', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			xhr.onreadystatechange = function() {
 				location.href = "/company/detailMem?cno=" + "${company.cno}";

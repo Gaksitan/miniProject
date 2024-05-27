@@ -251,7 +251,9 @@ public class CompanyController_JYC {
 		String mid = (String) session.getAttribute("mid");
 
 		int count = subsdao.count(mid, sc.getCno());
-
+		System.out.println("===================");
+		System.out.println(subsdao.count(mid, sc.getCno()));
+		
 		if (count > 0) {
 			subsdao.unsubscribeCompany(mid, sc.getCno());
 		} else {
